@@ -1,0 +1,44 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:p="http://primefaces.org/ui"	
+	template="/WEB-INF/templates/default.xhtml">
+
+	<ui:define name="content">
+
+		<h:form id="fileDefinitionType">
+			<p:panel id="fileDefinitionTypePanel" styleClass="pPanel"
+				header="fp.fileDefinitionType.title.detail">
+
+				<p:formFormat id="idForm">
+					<p:outputText id="name" label="fp.fileDefinitionType.label.name"
+						title="fp.fileDefinitionType.title.name"
+						value="#{fileProcFileDefinitionType.fileDefinitionTypeConsole.name}" />
+
+					<p:outputText id="description"
+						label="fp.fileDefinitionType.label.description"
+						title="fp.fileDefinitionType.title.description"
+						value="#{fileProcFileDefinitionType.fileDefinitionTypeConsole.description}" />
+
+				</p:formFormat>
+
+				<div style="clear: both" />
+
+				<p:panelButton id="groupButton" align="right">
+					<p:commandButton id="cancel" styleClass="pButtonEnabled"
+						value="messages.common.cancelar" type="complex"
+						actionBean="#{fileProcFileDefinitionType}" action="cancel"
+						immediate="true" />
+				</p:panelButton>
+
+				<div style="clear: both" />
+
+			</p:panel>
+		</h:form>
+
+	</ui:define>
+</ui:composition>

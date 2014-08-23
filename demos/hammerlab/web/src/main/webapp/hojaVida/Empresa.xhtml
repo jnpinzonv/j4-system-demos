@@ -1,0 +1,127 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:p="http://primefaces.org/ui"	
+	template="/WEB-INF/templates/default.xhtml">
+   <ui:define name="content">
+      <h1>Welcome to JBoss!</h1>
+
+      <div>
+         <p>You have successfully deployed a Java EE 6 Enterprise Application.</p>        
+      </div>
+
+      <h:form id="reg">
+         <h2>CRUD de Empresa</h2>
+         <p>Desde esta pagina podra realizar: Modificación, Eliminación y Crear nuevos items</p>
+         <h:panelGrid columns="3" columnClasses="titleCell">
+              
+            
+           
+            
+           
+            <h:outputLabel for="razonSocial" value="razonSocial:"/>
+            <h:inputText id= "razonSocial" value="#{empresaController.newObject.razonSocial }" />
+            <h:message for="razonSocial" errorClass="invalid"/> 
+            
+            
+           
+            <h:outputLabel for="nit" value="nit:"/>
+            <h:inputText id= "nit" value="#{empresaController.newObject.nit }" />
+            <h:message for="nit" errorClass="invalid"/> 
+            
+            
+           
+            <h:outputLabel for="telefono" value="telefono:"/>
+            <h:inputText id= "telefono" value="#{empresaController.newObject.telefono }" />
+            <h:message for="telefono" errorClass="invalid"/> 
+            
+            
+           
+            <h:outputLabel for="direccion" value="direccion:"/>
+            <h:inputText id= "direccion" value="#{empresaController.newObject.direccion }" />
+            <h:message for="direccion" errorClass="invalid"/> 
+            
+            
+           
+            <h:outputLabel for="correoElectronico" value="correoElectronico:"/>
+            <h:inputText id= "correoElectronico" value="#{empresaController.newObject.correoElectronico }" />
+            <h:message for="correoElectronico" errorClass="invalid"/> 
+            
+            
+           
+            <h:outputLabel for="sitioWeb" value="correoElectronico:"/>
+            <h:inputText id= "sitioWeb" value="#{empresaController.newObject.sitioWeb }" />
+            <h:message for="sitioWeb" errorClass="invalid"/> 
+            
+            
+           
+         </h:panelGrid>
+
+         <p>
+            <h:panelGrid columns="2">
+               <h:commandButton id="register" action="#{empresaController.register}" value="Register" styleClass="register" rendered="#{!empresaController.editEmpresa}" />
+               
+                <h:commandButton id="edit" action="#{empresaController.actualizarEmpresa}" value="Editar" styleClass="register" rendered="#{empresaController.editEmpresa}" />
+               <h:messages styleClass="messages" errorClass="invalid" infoClass="valid" warnClass="warning"
+                           globalOnly="true"/>
+            </h:panelGrid>
+         </p>
+     
+      <h2>Empresa</h2>
+      <h:panelGroup rendered="#{empty empresaController.listaEmpresa}">
+         <em>No Empresa</em>
+      </h:panelGroup>
+      <h:dataTable var="_object" value="#{empresaController.listaEmpresa}" rendered="#{not empty empresaController.listaEmpresa}" styleClass="simpletablestyle">
+         
+        <h:column>
+            <f:facet name="header">id</f:facet>
+                #{_object.id}
+            </h:column>
+          
+        <h:column>
+            <f:facet name="header">razonSocial</f:facet>
+                #{_object.razonSocial}
+            </h:column>
+          
+        <h:column>
+            <f:facet name="header">nit</f:facet>
+                #{_object.nit}
+            </h:column>
+          
+        <h:column>
+            <f:facet name="header">telefono</f:facet>
+                #{_object.telefono}
+            </h:column>
+          
+        <h:column>
+            <f:facet name="header">direccion</f:facet>
+                #{_object.direccion}
+            </h:column>
+          
+        <h:column>
+            <f:facet name="header">correoElectronico</f:facet>
+                #{_object.correoElectronico}
+            </h:column>
+          
+        <h:column>
+            <f:facet name="header">sitioWeb</f:facet>
+                #{_object.sitioWeb}
+            </h:column>
+           
+         <h:column>
+            <f:facet name="header">Editar</f:facet>
+                <h:commandLink action="#{empresaController.cargarEmpresaEditar(_object.id)}" value="Editar" />
+            </h:column>
+         <h:column>
+            <f:facet name="header">Eliminar</f:facet>
+            <h:commandLink action="#{empresaController.eliminarEmpresa(_object.id)}" value="Eliminar" />
+         </h:column> 
+          
+      </h:dataTable>
+     </h:form>
+   </ui:define>
+</ui:composition>

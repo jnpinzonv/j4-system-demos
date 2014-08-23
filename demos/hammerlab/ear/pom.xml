@@ -52,6 +52,30 @@
             <artifactId>hammerlab-ejb</artifactId>
             <type>ejb</type>
         </dependency>
+        
+        <!-- Dependencias de Primefaces -->
+		<dependency>
+			<groupId>org.primefaces</groupId>
+			<artifactId>primefaces</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.primefaces.extensions</groupId>
+			<artifactId>primefaces-extensions</artifactId>
+		</dependency>
+		<!-- Dependencia de File Upload -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+		</dependency>
+		<!-- Dependencia de commons IO -->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-configuration</groupId>
+			<artifactId>commons-configuration</artifactId>
+		</dependency>
     </dependencies>
 
     <build>

@@ -91,6 +91,18 @@
                </exclusion>
            </exclusions>
        </dependency>
+       
+       <!-- Dependencia de primefaces -->
+		<dependency>
+			<groupId>org.primefaces</groupId>
+			<artifactId>primefaces</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+            <groupId>org.primefaces.extensions</groupId>
+            <artifactId>primefaces-extensions</artifactId>
+            <scope>provided</scope>
+        </dependency>
 
    </dependencies>
 

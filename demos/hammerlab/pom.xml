@@ -73,6 +73,18 @@
         <!-- maven-compiler-plugin -->
         <maven.compiler.target>1.6</maven.compiler.target>
         <maven.compiler.source>1.6</maven.compiler.source>
+        <!-- Version de PrimeFaces -->
+        <primefaces.version>4.0</primefaces.version>
+        <!-- Version de Primefaces Extensions -->
+        <primefaces-extensions.version>1.2.1</primefaces-extensions.version>
+        <!-- Version de Primefaces Mobile -->
+        <primefaces.mobile.version>0.9.4</primefaces.mobile.version>
+        <!-- Tema y Version del tema -->
+        <tema.version>1.0.10</tema.version>
+        <!-- Version de Commons IO -->
+        <commons-io.version>1.4</commons-io.version>
+        <!-- Version de file upload -->
+        <fileupload.version>1.2.1</fileupload.version>
     </properties>
 
     <dependencyManagement>
@@ -119,6 +131,36 @@
                 <version>${version.jboss.bom}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            
+            <!-- Dependencias de Primefaces -->
+            <dependency>
+                <groupId>org.primefaces</groupId>
+                <artifactId>primefaces</artifactId>
+                <version>${primefaces.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.primefaces.extensions</groupId>
+                <artifactId>primefaces-extensions</artifactId>
+                <version>${primefaces-extensions.version}</version>
+            </dependency>
+            
+             <!-- Dependencia de File Upload -->
+            <dependency>
+                <groupId>commons-fileupload</groupId>
+                <artifactId>commons-fileupload</artifactId>
+                <version>${fileupload.version}</version>
+            </dependency>
+            <!-- Dependencia de commons IO -->
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons-io.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-configuration</groupId>
+                <artifactId>commons-configuration</artifactId>
+                <version>1.6</version>
             </dependency>
 
         </dependencies>

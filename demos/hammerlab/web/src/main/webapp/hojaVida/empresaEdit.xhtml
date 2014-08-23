@@ -1,0 +1,57 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:p="http://primefaces.org/ui"	
+	template="/WEB-INF/templates/default.xhtml">
+
+	<ui:define name="content">
+
+		<h:form id="fileDefinitionTypeEdit">
+			<p:panel id="fileDefTypePanelEdit" styleClass="pPanel"
+				header="#{fileProcFileDefinitionType.editMode ? 'fp.fileDefinitionType.title.edit' : 'fp.fileDefinitionType.title.add'}">
+
+				<p:formFormat id="idForm">
+					<p:inputText id="typeName" required="true"
+						label="fp.fileDefinitionType.label.name"
+						title="fp.fileDefinitionType.title.name"
+						value="#{fileProcFileDefinitionType.fileDefinitionTypeConsole.name}" />
+
+					<p:inputTextArea id="typeDescription"
+						label="fp.fileDefinitionType.label.description"
+						title="fp.fileDefinitionType.title.description"
+						value="#{fileProcFileDefinitionType.fileDefinitionTypeConsole.description}" />
+
+				</p:formFormat>
+
+				<div style="clear: both" />
+
+				<p:requiredFields />
+
+				<p:panelButton id="groupButton" align="right">
+					<p:commandButton id="create" styleClass="pButtonEnabled"
+						value="messages.common.guardar" type="complex"
+						actionBean="#{fileProcFileDefinitionType}" action="create"
+						rendered="#{!fileProcFileDefinitionType.editMode}" />
+
+					<p:commandButton id="update" styleClass="pButtonEnabled"
+						type="complex" value="messages.common.guardar"
+						actionBean="#{fileProcFileDefinitionType}" action="update"
+						rendered="#{fileProcFileDefinitionType.editMode}" />
+
+					<p:commandButton id="cancel" styleClass="pButtonEnabled"
+						type="complex" value="messages.common.cancelar"
+						actionBean="#{fileProcFileDefinitionType}" action="cancel"
+						immediate="true" />
+				</p:panelButton>
+
+				<div style="clear: both" />
+
+			</p:panel>
+		</h:form>
+
+	</ui:define>
+</ui:composition>
