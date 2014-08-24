@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    JBoss, Home of Professional Open Source
+    Copyright 2013, Red Hat, Inc. and/or its affiliates, and individual
+    contributors by the @authors tag. See the copyright.txt in the
+    distribution for a full listing of individual contributors.
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+    http://www.apache.org/licenses/LICENSE-2.0
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:ui="http://java.sun.com/jsf/facelets"
+   xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:h="http://java.sun.com/jsf/html"
+    template="/WEB-INF/templates/defaultPrincipal.xhtml">
+   <ui:define name="content">
+      <h1>Welcome to JBoss!</h1>
+
+      <div>
+         <p>You have successfully deployed a Java EE 6 Enterprise Application.</p>        
+      </div>
+
+      <h:form id="reg">
+         <h2>CRUD de ManualesEquipo</h2>
+         <p>Desde esta pagina podra realizar: Modificación, Eliminación y Crear nuevos items</p>
+         <h:panelGrid columns="3" columnClasses="titleCell">
+              
+            
+           
+            
+           
+            <h:outputLabel for="tecnico_confirmar" value="tecnico_confirmar:"/>
+            <h:inputText id= "tecnico_confirmar" value="#{ManualesEquipoController.newObject.tecnico_confirmar }" />
+            <h:message for="tecnico_confirmar" errorClass="invalid"/> 
+            
+            
+           
+            <h:outputLabel for="tecnico_ubicacion" value="tecnico_ubicacion:"/>
+            <h:inputText id= "tecnico_ubicacion" value="#{ManualesEquipoController.newObject.tecnico_ubicacion }" />
+            <h:message for="tecnico_ubicacion" errorClass="invalid"/> 
+            
+            
+           
+            <h:outputLabel for="servicio_confirmar" value="servicio_confirmar:"/>
+            <h:inputText id= "servicio_confirmar" value="#{ManualesEquipoController.newObject.servicio_confirmar }" />
+            <h:message for="servicio_confirmar" errorClass="invalid"/> 
+            
+            
+           
+            <h:outputLabel for="servicio_ubicacion" value="servicio_ubicacion:"/>
+            <h:inputText id= "servicio_ubicacion" value="#{ManualesEquipoController.newObject.servicio_ubicacion }" />
+            <h:message for="servicio_ubicacion" errorClass="invalid"/> 
+            
+            
+           
+            <h:outputLabel for="usuario_confirmar" value="usuario_confirmar:"/>
+            <h:inputText id= "usuario_confirmar" value="#{ManualesEquipoController.newObject.usuario_confirmar }" />
+            <h:message for="usuario_confirmar" errorClass="invalid"/> 
+            
+            
+           
+            <h:outputLabel for="usuario_ubicacion" value="usuario_ubicacion:"/>
+            <h:inputText id= "usuario_ubicacion" value="#{ManualesEquipoController.newObject.usuario_ubicacion }" />
+            <h:message for="usuario_ubicacion" errorClass="invalid"/> 
+            
+            
+           
+         </h:panelGrid>
+
+         <p>
+            <h:panelGrid columns="2">
+               <h:commandButton id="register" action="#{ManualesEquipoController.register}" value="Register" styleClass="register" rendered="#{!ManualesEquipoController.editManualesEquipo}" />
+               
+                <h:commandButton id="edit" action="#{ManualesEquipoController.actualizarManualesEquipo}" value="Editar" styleClass="register" rendered="#{ManualesEquipoController.editManualesEquipo}" />
+               <h:messages styleClass="messages" errorClass="invalid" infoClass="valid" warnClass="warning"
+                           globalOnly="true"/>
+            </h:panelGrid>
+         </p>
+     
+      <h2>ManualesEquipo</h2>
+      <h:panelGroup rendered="#{empty ManualesEquipoController.listaManualesEquipo}">
+         <em>No ManualesEquipo</em>
+      </h:panelGroup>
+      <h:dataTable var="_object" value="#{ManualesEquipoController.listaManualesEquipo}" rendered="#{not empty ManualesEquipoController.listaManualesEquipo}" styleClass="simpletablestyle">
+         
+        <h:column>
+            <f:facet name="header">id</f:facet>
+                #{_object.id}
+            </h:column>
+          
+        <h:column>
+            <f:facet name="header">tecnico_confirmar</f:facet>
+                #{_object.tecnico_confirmar}
+            </h:column>
+          
+        <h:column>
+            <f:facet name="header">tecnico_ubicacion</f:facet>
+                #{_object.tecnico_ubicacion}
+            </h:column>
+          
+        <h:column>
+            <f:facet name="header">servicio_confirmar</f:facet>
+                #{_object.servicio_confirmar}
+            </h:column>
+          
+        <h:column>
+            <f:facet name="header">servicio_ubicacion</f:facet>
+                #{_object.servicio_ubicacion}
+            </h:column>
+          
+        <h:column>
+            <f:facet name="header">usuario_confirmar</f:facet>
+                #{_object.usuario_confirmar}
+            </h:column>
+          
+        <h:column>
+            <f:facet name="header">usuario_ubicacion</f:facet>
+                #{_object.usuario_ubicacion}
+            </h:column>
+           
+         <h:column>
+            <f:facet name="header">Editar</f:facet>
+                <h:commandLink action="#{ManualesEquipoController.cargarManualesEquipoEditar(_object.id)}" value="Editar" />
+            </h:column>
+         <h:column>
+            <f:facet name="header">Eliminar</f:facet>
+            <h:commandLink action="#{ManualesEquipoController.eliminarManualesEquipo(_object.id)}" value="Eliminar" />
+         </h:column> 
+          
+      </h:dataTable>
+     </h:form>
+   </ui:define>
+</ui:composition>

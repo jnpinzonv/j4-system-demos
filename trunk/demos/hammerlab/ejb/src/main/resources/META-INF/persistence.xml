@@ -22,6 +22,16 @@
 		<jta-data-source>java:jboss/datasources/hammerlabDS</jta-data-source>
 		<class>co.com.hammerlab.model.Member</class>
 		<class>co.com.hammerlab.model.Empresa</class>
+		<class>co.com.hammerlab.model.AdquisicionEquipo</class>
+		<class>co.com.hammerlab.model.EquipoHospitalario</class>
+		<class>co.com.hammerlab.model.EstadoEquipo</class>
+		<class>co.com.hammerlab.model.EquipoInfoTecnica</class>
+		<class>co.com.hammerlab.model.FuncionamientoEquipo</class>
+		<class>co.com.hammerlab.model.MantenimientoEquipo</class>
+		<class>co.com.hammerlab.model.ManualesEquipo</class>
+		<class>co.com.hammerlab.model.PlanosEquipo</class>
+		<class>co.com.hammerlab.model.RecomendacionesEquipo</class>
+		<class>co.com.hammerlab.model.TipoManteEquipo</class>
 		<properties>
 
 			<!-- Properties for Hibernate -->

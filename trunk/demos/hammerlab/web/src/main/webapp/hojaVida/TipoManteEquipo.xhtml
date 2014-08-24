@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    JBoss, Home of Professional Open Source
+    Copyright 2013, Red Hat, Inc. and/or its affiliates, and individual
+    contributors by the @authors tag. See the copyright.txt in the
+    distribution for a full listing of individual contributors.
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+    http://www.apache.org/licenses/LICENSE-2.0
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:ui="http://java.sun.com/jsf/facelets"
+   xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:h="http://java.sun.com/jsf/html"
+    template="/WEB-INF/templates/defaultPrincipal.xhtml">
+   <ui:define name="content">
+      <h1>Welcome to JBoss!</h1>
+
+      <div>
+         <p>You have successfully deployed a Java EE 6 Enterprise Application.</p>        
+      </div>
+
+      <h:form id="reg">
+         <h2>CRUD de TipoManteEquipo</h2>
+         <p>Desde esta pagina podra realizar: Modificación, Eliminación y Crear nuevos items</p>
+         <h:panelGrid columns="3" columnClasses="titleCell">
+              
+            
+           
+            
+           
+            <h:outputLabel for="tipo_mantenimiento" value="tipo_mantenimiento:"/>
+            <h:inputText id= "tipo_mantenimiento" value="#{TipoManteEquipoController.newObject.tipo_mantenimiento }" />
+            <h:message for="tipo_mantenimiento" errorClass="invalid"/> 
+            
+            
+           
+            <h:outputLabel for="propio" value="propio:"/>
+            <h:inputText id= "propio" value="#{TipoManteEquipoController.newObject.propio }" />
+            <h:message for="propio" errorClass="invalid"/> 
+            
+            
+           
+            <h:outputLabel for="contratado" value="contratado:"/>
+            <h:inputText id= "contratado" value="#{TipoManteEquipoController.newObject.contratado }" />
+            <h:message for="contratado" errorClass="invalid"/> 
+            
+            
+           
+            <h:outputLabel for="cual" value="cual:"/>
+            <h:inputText id= "cual" value="#{TipoManteEquipoController.newObject.cual }" />
+            <h:message for="cual" errorClass="invalid"/> 
+            
+            
+           
+         </h:panelGrid>
+
+         <p>
+            <h:panelGrid columns="2">
+               <h:commandButton id="register" action="#{TipoManteEquipoController.register}" value="Register" styleClass="register" rendered="#{!TipoManteEquipoController.editTipoManteEquipo}" />
+               
+                <h:commandButton id="edit" action="#{TipoManteEquipoController.actualizarTipoManteEquipo}" value="Editar" styleClass="register" rendered="#{TipoManteEquipoController.editTipoManteEquipo}" />
+               <h:messages styleClass="messages" errorClass="invalid" infoClass="valid" warnClass="warning"
+                           globalOnly="true"/>
+            </h:panelGrid>
+         </p>
+     
+      <h2>TipoManteEquipo</h2>
+      <h:panelGroup rendered="#{empty TipoManteEquipoController.listaTipoManteEquipo}">
+         <em>No TipoManteEquipo</em>
+      </h:panelGroup>
+      <h:dataTable var="_object" value="#{TipoManteEquipoController.listaTipoManteEquipo}" rendered="#{not empty TipoManteEquipoController.listaTipoManteEquipo}" styleClass="simpletablestyle">
+         
+        <h:column>
+            <f:facet name="header">id</f:facet>
+                #{_object.id}
+            </h:column>
+          
+        <h:column>
+            <f:facet name="header">tipo_mantenimiento</f:facet>
+                #{_object.tipo_mantenimiento}
+            </h:column>
+          
+        <h:column>
+            <f:facet name="header">propio</f:facet>
+                #{_object.propio}
+            </h:column>
+          
+        <h:column>
+            <f:facet name="header">contratado</f:facet>
+                #{_object.contratado}
+            </h:column>
+          
+        <h:column>
+            <f:facet name="header">cual</f:facet>
+                #{_object.cual}
+            </h:column>
+           
+         <h:column>
+            <f:facet name="header">Editar</f:facet>
+                <h:commandLink action="#{TipoManteEquipoController.cargarTipoManteEquipoEditar(_object.id)}" value="Editar" />
+            </h:column>
+         <h:column>
+            <f:facet name="header">Eliminar</f:facet>
+            <h:commandLink action="#{TipoManteEquipoController.eliminarTipoManteEquipo(_object.id)}" value="Eliminar" />
+         </h:column> 
+          
+      </h:dataTable>
+     </h:form>
+   </ui:define>
+</ui:composition>

@@ -1,12 +1,25 @@
-<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    JBoss, Home of Professional Open Source
+    Copyright 2013, Red Hat, Inc. and/or its affiliates, and individual
+    contributors by the @authors tag. See the copyright.txt in the
+    distribution for a full listing of individual contributors.
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+    http://www.apache.org/licenses/LICENSE-2.0
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:c="http://java.sun.com/jstl/core"
-	xmlns:p="http://primefaces.org/ui"	
-	template="/WEB-INF/templates/default.xhtml">
+   xmlns:ui="http://java.sun.com/jsf/facelets"
+   xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:h="http://java.sun.com/jsf/html"
+    template="/WEB-INF/templates/defaultPrincipal.xhtml">
    <ui:define name="content">
       <h1>Welcome to JBoss!</h1>
 
@@ -24,37 +37,37 @@
             
            
             <h:outputLabel for="razonSocial" value="razonSocial:"/>
-            <h:inputText id= "razonSocial" value="#{empresaController.newObject.razonSocial }" />
+            <h:inputText id= "razonSocial" value="#{EmpresaController.newObject.razonSocial }" />
             <h:message for="razonSocial" errorClass="invalid"/> 
             
             
            
             <h:outputLabel for="nit" value="nit:"/>
-            <h:inputText id= "nit" value="#{empresaController.newObject.nit }" />
+            <h:inputText id= "nit" value="#{EmpresaController.newObject.nit }" />
             <h:message for="nit" errorClass="invalid"/> 
             
             
            
             <h:outputLabel for="telefono" value="telefono:"/>
-            <h:inputText id= "telefono" value="#{empresaController.newObject.telefono }" />
+            <h:inputText id= "telefono" value="#{EmpresaController.newObject.telefono }" />
             <h:message for="telefono" errorClass="invalid"/> 
             
             
            
             <h:outputLabel for="direccion" value="direccion:"/>
-            <h:inputText id= "direccion" value="#{empresaController.newObject.direccion }" />
+            <h:inputText id= "direccion" value="#{EmpresaController.newObject.direccion }" />
             <h:message for="direccion" errorClass="invalid"/> 
             
             
            
             <h:outputLabel for="correoElectronico" value="correoElectronico:"/>
-            <h:inputText id= "correoElectronico" value="#{empresaController.newObject.correoElectronico }" />
+            <h:inputText id= "correoElectronico" value="#{EmpresaController.newObject.correoElectronico }" />
             <h:message for="correoElectronico" errorClass="invalid"/> 
             
             
            
-            <h:outputLabel for="sitioWeb" value="correoElectronico:"/>
-            <h:inputText id= "sitioWeb" value="#{empresaController.newObject.sitioWeb }" />
+            <h:outputLabel for="sitioWeb" value="sitioWeb:"/>
+            <h:inputText id= "sitioWeb" value="#{EmpresaController.newObject.sitioWeb }" />
             <h:message for="sitioWeb" errorClass="invalid"/> 
             
             
@@ -63,19 +76,19 @@
 
          <p>
             <h:panelGrid columns="2">
-               <h:commandButton id="register" action="#{empresaController.register}" value="Register" styleClass="register" rendered="#{!empresaController.editEmpresa}" />
+               <h:commandButton id="register" action="#{EmpresaController.register}" value="Register" styleClass="register" rendered="#{!EmpresaController.editEmpresa}" />
                
-                <h:commandButton id="edit" action="#{empresaController.actualizarEmpresa}" value="Editar" styleClass="register" rendered="#{empresaController.editEmpresa}" />
+                <h:commandButton id="edit" action="#{EmpresaController.actualizarEmpresa}" value="Editar" styleClass="register" rendered="#{EmpresaController.editEmpresa}" />
                <h:messages styleClass="messages" errorClass="invalid" infoClass="valid" warnClass="warning"
                            globalOnly="true"/>
             </h:panelGrid>
          </p>
      
       <h2>Empresa</h2>
-      <h:panelGroup rendered="#{empty empresaController.listaEmpresa}">
+      <h:panelGroup rendered="#{empty EmpresaController.listaEmpresa}">
          <em>No Empresa</em>
       </h:panelGroup>
-      <h:dataTable var="_object" value="#{empresaController.listaEmpresa}" rendered="#{not empty empresaController.listaEmpresa}" styleClass="simpletablestyle">
+      <h:dataTable var="_object" value="#{EmpresaController.listaEmpresa}" rendered="#{not empty EmpresaController.listaEmpresa}" styleClass="simpletablestyle">
          
         <h:column>
             <f:facet name="header">id</f:facet>
@@ -114,11 +127,11 @@
            
          <h:column>
             <f:facet name="header">Editar</f:facet>
-                <h:commandLink action="#{empresaController.cargarEmpresaEditar(_object.id)}" value="Editar" />
+                <h:commandLink action="#{EmpresaController.cargarEmpresaEditar(_object.id)}" value="Editar" />
             </h:column>
          <h:column>
             <f:facet name="header">Eliminar</f:facet>
-            <h:commandLink action="#{empresaController.eliminarEmpresa(_object.id)}" value="Eliminar" />
+            <h:commandLink action="#{EmpresaController.eliminarEmpresa(_object.id)}" value="Eliminar" />
          </h:column> 
           
       </h:dataTable>

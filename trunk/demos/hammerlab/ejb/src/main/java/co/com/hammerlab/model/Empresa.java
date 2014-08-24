@@ -94,7 +94,7 @@ public class Empresa implements Serializable{
 
     
     /**     
-     *  correoElectronico 
+     *  sitioWeb 
      */
      
      
@@ -103,128 +103,141 @@ public class Empresa implements Serializable{
      
     private String sitioWeb;
 
-
-	/**
-	 * @return the id
-	 */
-	public Long getId() {
-		return id;
-	}
-
-
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-
-	/**
-	 * @return the razonSocial
-	 */
-	public String getRazonSocial() {
-		return razonSocial;
-	}
-
-
-	/**
-	 * @param razonSocial the razonSocial to set
-	 */
-	public void setRazonSocial(String razonSocial) {
-		this.razonSocial = razonSocial;
-	}
-
-
-	/**
-	 * @return the nit
-	 */
-	public Integer getNit() {
-		return nit;
-	}
-
-
-	/**
-	 * @param nit the nit to set
-	 */
-	public void setNit(Integer nit) {
-		this.nit = nit;
-	}
-
-
-	/**
-	 * @return the telefono
-	 */
-	public String getTelefono() {
-		return telefono;
-	}
-
-
-	/**
-	 * @param telefono the telefono to set
-	 */
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
-	}
-
-
-	/**
-	 * @return the direccion
-	 */
-	public String getDireccion() {
-		return direccion;
-	}
-
-
-	/**
-	 * @param direccion the direccion to set
-	 */
-	public void setDireccion(String direccion) {
-		this.direccion = direccion;
-	}
-
-
-	/**
-	 * @return the correoElectronico
-	 */
-	public String getCorreoElectronico() {
-		return correoElectronico;
-	}
-
-
-	/**
-	 * @param correoElectronico the correoElectronico to set
-	 */
-	public void setCorreoElectronico(String correoElectronico) {
-		this.correoElectronico = correoElectronico;
-	}
-
-
-	/**
-	 * @return the sitioWeb
-	 */
-	public String getSitioWeb() {
-		return sitioWeb;
-	}
-
-
-	/**
-	 * @param sitioWeb the sitioWeb to set
-	 */
-	public void setSitioWeb(String sitioWeb) {
-		this.sitioWeb = sitioWeb;
-	}
-
     
 
 
      
 
- 
+    /**
+      * Devuelve el valor de id
+      * @return  El valor de id 
+      */
+    public Long getid() {
+		return id;
+    }
+
+    /**
+     * Establece el valor de id
+     * @param id
+     *        El valor por establecer para  id                       
+     */
+    public void setid(Long id){
+		this.id = id;
+    }
 
     
 
+    /**
+      * Devuelve el valor de razonSocial
+      * @return  El valor de razonSocial 
+      */
+    public String getrazonSocial() {
+		return razonSocial;
+    }
+
+    /**
+     * Establece el valor de razonSocial
+     * @param razonSocial
+     *        El valor por establecer para  razonSocial                       
+     */
+    public void setrazonSocial(String razonSocial){
+		this.razonSocial = razonSocial;
+    }
+
     
+
+    /**
+      * Devuelve el valor de nit
+      * @return  El valor de nit 
+      */
+    public Integer getnit() {
+		return nit;
+    }
+
+    /**
+     * Establece el valor de nit
+     * @param nit
+     *        El valor por establecer para  nit                       
+     */
+    public void setnit(Integer nit){
+		this.nit = nit;
+    }
+
+    
+
+    /**
+      * Devuelve el valor de telefono
+      * @return  El valor de telefono 
+      */
+    public String gettelefono() {
+		return telefono;
+    }
+
+    /**
+     * Establece el valor de telefono
+     * @param telefono
+     *        El valor por establecer para  telefono                       
+     */
+    public void settelefono(String telefono){
+		this.telefono = telefono;
+    }
+
+    
+
+    /**
+      * Devuelve el valor de direccion
+      * @return  El valor de direccion 
+      */
+    public String getdireccion() {
+		return direccion;
+    }
+
+    /**
+     * Establece el valor de direccion
+     * @param direccion
+     *        El valor por establecer para  direccion                       
+     */
+    public void setdireccion(String direccion){
+		this.direccion = direccion;
+    }
+
+    
+
+    /**
+      * Devuelve el valor de correoElectronico
+      * @return  El valor de correoElectronico 
+      */
+    public String getcorreoElectronico() {
+		return correoElectronico;
+    }
+
+    /**
+     * Establece el valor de correoElectronico
+     * @param correoElectronico
+     *        El valor por establecer para  correoElectronico                       
+     */
+    public void setcorreoElectronico(String correoElectronico){
+		this.correoElectronico = correoElectronico;
+    }
+
+    
+
+    /**
+      * Devuelve el valor de sitioWeb
+      * @return  El valor de sitioWeb 
+      */
+    public String getsitioWeb() {
+		return sitioWeb;
+    }
+
+    /**
+     * Establece el valor de sitioWeb
+     * @param sitioWeb
+     *        El valor por establecer para  sitioWeb                       
+     */
+    public void setsitioWeb(String sitioWeb){
+		this.sitioWeb = sitioWeb;
+    }
 
     	
 }
