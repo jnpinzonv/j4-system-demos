@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    JBoss, Home of Professional Open Source
+    Copyright 2013, Red Hat, Inc. and/or its affiliates, and individual
+    contributors by the @authors tag. See the copyright.txt in the
+    distribution for a full listing of individual contributors.
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+    http://www.apache.org/licenses/LICENSE-2.0
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:ui="http://java.sun.com/jsf/facelets"
+   xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:h="http://java.sun.com/jsf/html"
+    template="/WEB-INF/templates/defaultPrincipal.xhtml">
+   <ui:define name="content">
+      <h1>Welcome to JBoss!</h1>
+
+      <div>
+         <p>You have successfully deployed a Java EE 6 Enterprise Application.</p>        
+      </div>
+
+      <h:form id="reg">
+         <h2>CRUD de MantenimientoEquipo</h2>
+         <p>Desde esta pagina podra realizar: Modificación, Eliminación y Crear nuevos items</p>
+         <h:panelGrid columns="3" columnClasses="titleCell">
+              
+            
+           
+            
+           
+            <h:outputLabel for="fecha" value="fecha:"/>
+            <h:inputText id= "fecha" value="#{MantenimientoEquipoController.newObject.fecha }" />
+            <h:message for="fecha" errorClass="invalid"/> 
+            
+            
+           
+            <h:outputLabel for="danio_falla" value="danio_falla:"/>
+            <h:inputText id= "danio_falla" value="#{MantenimientoEquipoController.newObject.danio_falla }" />
+            <h:message for="danio_falla" errorClass="invalid"/> 
+            
+            
+           
+            <h:outputLabel for="reparaciones" value="reparaciones:"/>
+            <h:inputText id= "reparaciones" value="#{MantenimientoEquipoController.newObject.reparaciones }" />
+            <h:message for="reparaciones" errorClass="invalid"/> 
+            
+            
+           
+            <h:outputLabel for="repuestos" value="repuestos:"/>
+            <h:inputText id= "repuestos" value="#{MantenimientoEquipoController.newObject.repuestos }" />
+            <h:message for="repuestos" errorClass="invalid"/> 
+            
+            
+           
+            <h:outputLabel for="costo_total" value="costo_total:"/>
+            <h:inputText id= "costo_total" value="#{MantenimientoEquipoController.newObject.costo_total }" />
+            <h:message for="costo_total" errorClass="invalid"/> 
+            
+            
+           
+            <h:outputLabel for="observaciones" value="observaciones:"/>
+            <h:inputText id= "observaciones" value="#{MantenimientoEquipoController.newObject.observaciones }" />
+            <h:message for="observaciones" errorClass="invalid"/> 
+            
+            
+           
+            <h:outputLabel for="firmaAprovacion" value="firmaAprovacion:"/>
+            <h:inputText id= "firmaAprovacion" value="#{MantenimientoEquipoController.newObject.firmaAprovacion }" />
+            <h:message for="firmaAprovacion" errorClass="invalid"/> 
+            
+            
+           
+            <h:outputLabel for="cedulaAprovacion" value="cedulaAprovacion:"/>
+            <h:inputText id= "cedulaAprovacion" value="#{MantenimientoEquipoController.newObject.cedulaAprovacion }" />
+            <h:message for="cedulaAprovacion" errorClass="invalid"/> 
+            
+            
+           
+            <h:outputLabel for="IdTransaccion" value="IdTransaccion:"/>
+            <h:inputText id= "IdTransaccion" value="#{MantenimientoEquipoController.newObject.IdTransaccion }" />
+            <h:message for="IdTransaccion" errorClass="invalid"/> 
+            
+            
+           
+         </h:panelGrid>
+
+         <p>
+            <h:panelGrid columns="2">
+               <h:commandButton id="register" action="#{MantenimientoEquipoController.register}" value="Register" styleClass="register" rendered="#{!MantenimientoEquipoController.editMantenimientoEquipo}" />
+               
+                <h:commandButton id="edit" action="#{MantenimientoEquipoController.actualizarMantenimientoEquipo}" value="Editar" styleClass="register" rendered="#{MantenimientoEquipoController.editMantenimientoEquipo}" />
+               <h:messages styleClass="messages" errorClass="invalid" infoClass="valid" warnClass="warning"
+                           globalOnly="true"/>
+            </h:panelGrid>
+         </p>
+     
+      <h2>MantenimientoEquipo</h2>
+      <h:panelGroup rendered="#{empty MantenimientoEquipoController.listaMantenimientoEquipo}">
+         <em>No MantenimientoEquipo</em>
+      </h:panelGroup>
+      <h:dataTable var="_object" value="#{MantenimientoEquipoController.listaMantenimientoEquipo}" rendered="#{not empty MantenimientoEquipoController.listaMantenimientoEquipo}" styleClass="simpletablestyle">
+         
+        <h:column>
+            <f:facet name="header">id</f:facet>
+                #{_object.id}
+            </h:column>
+          
+        <h:column>
+            <f:facet name="header">fecha</f:facet>
+                #{_object.fecha}
+            </h:column>
+          
+        <h:column>
+            <f:facet name="header">danio_falla</f:facet>
+                #{_object.danio_falla}
+            </h:column>
+          
+        <h:column>
+            <f:facet name="header">reparaciones</f:facet>
+                #{_object.reparaciones}
+            </h:column>
+          
+        <h:column>
+            <f:facet name="header">repuestos</f:facet>
+                #{_object.repuestos}
+            </h:column>
+          
+        <h:column>
+            <f:facet name="header">costo_total</f:facet>
+                #{_object.costo_total}
+            </h:column>
+          
+        <h:column>
+            <f:facet name="header">observaciones</f:facet>
+                #{_object.observaciones}
+            </h:column>
+          
+        <h:column>
+            <f:facet name="header">firmaAprovacion</f:facet>
+                #{_object.firmaAprovacion}
+            </h:column>
+          
+        <h:column>
+            <f:facet name="header">cedulaAprovacion</f:facet>
+                #{_object.cedulaAprovacion}
+            </h:column>
+          
+        <h:column>
+            <f:facet name="header">IdTransaccion</f:facet>
+                #{_object.IdTransaccion}
+            </h:column>
+           
+         <h:column>
+            <f:facet name="header">Editar</f:facet>
+                <h:commandLink action="#{MantenimientoEquipoController.cargarMantenimientoEquipoEditar(_object.id)}" value="Editar" />
+            </h:column>
+         <h:column>
+            <f:facet name="header">Eliminar</f:facet>
+            <h:commandLink action="#{MantenimientoEquipoController.eliminarMantenimientoEquipo(_object.id)}" value="Eliminar" />
+         </h:column> 
+          
+      </h:dataTable>
+     </h:form>
+   </ui:define>
+</ui:composition>

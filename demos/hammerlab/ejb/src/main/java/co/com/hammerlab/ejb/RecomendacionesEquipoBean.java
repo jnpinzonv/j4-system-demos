@@ -5,7 +5,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import co.com.hammerlab.model.Empresa;
+import co.com.hammerlab.model.RecomendacionesEquipo;
 
 /**
  * <b>Descripcion:</b> Clase que <br/> Controla las transaccion y logica de negocio de una determianda entidad
@@ -14,7 +14,7 @@ import co.com.hammerlab.model.Empresa;
  * @author Josué Nicolás Pinzón Villamil <jnpinzonv@gmail.com>
  */
 @Stateless
-public class EmpresaBean {
+public class RecomendacionesEquipoBean {
         
         /**
          * Controlador de base de datos
@@ -25,14 +25,14 @@ public class EmpresaBean {
          * Persiste un objeto en la base de datos
          * @param obj Onjeto a ser persistido
          */
-        public void save(Empresa obj) {
+        public void save(RecomendacionesEquipo obj) {
                 entityManager.persist(obj);
         }
         /**
          * Actualiza un objeto en base de datos
          * @param obj Objeto a ser actualizado
          */
-        public void update(Empresa obj) {
+        public void update(RecomendacionesEquipo obj) {
                 entityManager.merge(obj);
         }
         /**
@@ -40,7 +40,7 @@ public class EmpresaBean {
          * @param idObj Parametro de filtro de eliminacion 
          */
         public void delete(Long idObj) {
-                Empresa obj = entityManager.find(Empresa.class, idObj);
+                RecomendacionesEquipo obj = entityManager.find(RecomendacionesEquipo.class, idObj);
                 entityManager.remove(obj);
         }
         /**
@@ -48,15 +48,15 @@ public class EmpresaBean {
          * @param idObj Parametro de busqeuda 
          * @return Retorna Un objeto
          */
-        public Empresa getByID(Long idObj) {
-                return entityManager.find(Empresa.class, idObj);
+        public RecomendacionesEquipo getByID(Long idObj) {
+                return entityManager.find(RecomendacionesEquipo.class, idObj);
         }
        /**
          * Consulta todos los registro de un objeto
          * @return Lista de objetos 
          */
-        public List< Empresa > getAll() {
-                return entityManager.createNamedQuery("empresa.getAll", Empresa.class).getResultList();
+        public List< RecomendacionesEquipo > getAll() {
+                return entityManager.createNamedQuery("recomendacionesEquipo.getAll", RecomendacionesEquipo.class).getResultList();
         }
 
 }

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    JBoss, Home of Professional Open Source
+    Copyright 2013, Red Hat, Inc. and/or its affiliates, and individual
+    contributors by the @authors tag. See the copyright.txt in the
+    distribution for a full listing of individual contributors.
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+    http://www.apache.org/licenses/LICENSE-2.0
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:ui="http://java.sun.com/jsf/facelets"
+   xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:h="http://java.sun.com/jsf/html"
+    template="/WEB-INF/templates/defaultPrincipal.xhtml">
+   <ui:define name="content">
+      <h1>Welcome to JBoss!</h1>
+
+      <div>
+         <p>You have successfully deployed a Java EE 6 Enterprise Application.</p>        
+      </div>
+
+      <h:form id="reg">
+         <h2>CRUD de EquipoHospitalario</h2>
+         <p>Desde esta pagina podra realizar: Modificación, Eliminación y Crear nuevos items</p>
+         <h:panelGrid columns="3" columnClasses="titleCell">
+              
+            
+           
+            
+           
+            <h:outputLabel for="fotoEquipo" value="fotoEquipo:"/>
+            <h:inputText id= "fotoEquipo" value="#{EquipoHospitalarioController.newObject.fotoEquipo }" />
+            <h:message for="fotoEquipo" errorClass="invalid"/> 
+            
+            
+           
+            <h:outputLabel for="marca" value="marca:"/>
+            <h:inputText id= "marca" value="#{EquipoHospitalarioController.newObject.marca }" />
+            <h:message for="marca" errorClass="invalid"/> 
+            
+            
+           
+            <h:outputLabel for="modelo" value="modelo:"/>
+            <h:inputText id= "modelo" value="#{EquipoHospitalarioController.newObject.modelo }" />
+            <h:message for="modelo" errorClass="invalid"/> 
+            
+            
+           
+            <h:outputLabel for="ubicacion" value="ubicacion:"/>
+            <h:inputText id= "ubicacion" value="#{EquipoHospitalarioController.newObject.ubicacion }" />
+            <h:message for="ubicacion" errorClass="invalid"/> 
+            
+            
+           
+            <h:outputLabel for="fabricante" value="fabricante:"/>
+            <h:inputText id= "fabricante" value="#{EquipoHospitalarioController.newObject.fabricante }" />
+            <h:message for="fabricante" errorClass="invalid"/> 
+            
+            
+           
+            <h:outputLabel for="representanteCol" value="representanteCol:"/>
+            <h:inputText id= "representanteCol" value="#{EquipoHospitalarioController.newObject.representanteCol }" />
+            <h:message for="representanteCol" errorClass="invalid"/> 
+            
+            
+           
+            <h:outputLabel for="direccion" value="direccion:"/>
+            <h:inputText id= "direccion" value="#{EquipoHospitalarioController.newObject.direccion }" />
+            <h:message for="direccion" errorClass="invalid"/> 
+            
+            
+           
+            <h:outputLabel for="telefono" value="telefono:"/>
+            <h:inputText id= "telefono" value="#{EquipoHospitalarioController.newObject.telefono }" />
+            <h:message for="telefono" errorClass="invalid"/> 
+            
+            
+           
+         </h:panelGrid>
+
+         <p>
+            <h:panelGrid columns="2">
+               <h:commandButton id="register" action="#{EquipoHospitalarioController.register}" value="Register" styleClass="register" rendered="#{!EquipoHospitalarioController.editEquipoHospitalario}" />
+               
+                <h:commandButton id="edit" action="#{EquipoHospitalarioController.actualizarEquipoHospitalario}" value="Editar" styleClass="register" rendered="#{EquipoHospitalarioController.editEquipoHospitalario}" />
+               <h:messages styleClass="messages" errorClass="invalid" infoClass="valid" warnClass="warning"
+                           globalOnly="true"/>
+            </h:panelGrid>
+         </p>
+     
+      <h2>EquipoHospitalario</h2>
+      <h:panelGroup rendered="#{empty EquipoHospitalarioController.listaEquipoHospitalario}">
+         <em>No EquipoHospitalario</em>
+      </h:panelGroup>
+      <h:dataTable var="_object" value="#{EquipoHospitalarioController.listaEquipoHospitalario}" rendered="#{not empty EquipoHospitalarioController.listaEquipoHospitalario}" styleClass="simpletablestyle">
+         
+        <h:column>
+            <f:facet name="header">id</f:facet>
+                #{_object.id}
+            </h:column>
+          
+        <h:column>
+            <f:facet name="header">fotoEquipo</f:facet>
+                #{_object.fotoEquipo}
+            </h:column>
+          
+        <h:column>
+            <f:facet name="header">marca</f:facet>
+                #{_object.marca}
+            </h:column>
+          
+        <h:column>
+            <f:facet name="header">modelo</f:facet>
+                #{_object.modelo}
+            </h:column>
+          
+        <h:column>
+            <f:facet name="header">ubicacion</f:facet>
+                #{_object.ubicacion}
+            </h:column>
+          
+        <h:column>
+            <f:facet name="header">fabricante</f:facet>
+                #{_object.fabricante}
+            </h:column>
+          
+        <h:column>
+            <f:facet name="header">representanteCol</f:facet>
+                #{_object.representanteCol}
+            </h:column>
+          
+        <h:column>
+            <f:facet name="header">direccion</f:facet>
+                #{_object.direccion}
+            </h:column>
+          
+        <h:column>
+            <f:facet name="header">telefono</f:facet>
+                #{_object.telefono}
+            </h:column>
+           
+         <h:column>
+            <f:facet name="header">Editar</f:facet>
+                <h:commandLink action="#{EquipoHospitalarioController.cargarEquipoHospitalarioEditar(_object.id)}" value="Editar" />
+            </h:column>
+         <h:column>
+            <f:facet name="header">Eliminar</f:facet>
+            <h:commandLink action="#{EquipoHospitalarioController.eliminarEquipoHospitalario(_object.id)}" value="Eliminar" />
+         </h:column> 
+          
+      </h:dataTable>
+     </h:form>
+   </ui:define>
+</ui:composition>
