@@ -2,8 +2,8 @@ package co.com.hammerlab.ejb;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
 import co.com.hammerlab.model.AdquisicionEquipo;
 
@@ -19,7 +19,7 @@ public class AdquisicionEquipoBean {
         /**
          * Controlador de base de datos
          */
-        @PersistenceContext(unitName = "geoAutomotoresPU")
+        @Inject
         private EntityManager entityManager;
          /**
          * Persiste un objeto en la base de datos
