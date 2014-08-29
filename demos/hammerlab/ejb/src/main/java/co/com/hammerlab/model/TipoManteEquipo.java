@@ -1,7 +1,13 @@
 package co.com.hammerlab.model;
-import java.util.*;
-import javax.persistence.*;
 import java.io.Serializable;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 /**
  * <b>Descripcion:</b> Clase que <br/> se encarga de administrar los datos de un TipoManteEquipo

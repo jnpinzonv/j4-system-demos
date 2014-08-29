@@ -25,22 +25,14 @@ public class PlanosEquipo implements Serializable{
      *  id 
      */
     @Id 
-    @GeneratedValue(strategy=GenerationType.AUTO) 
-     
-     
-     
+    @GeneratedValue(strategy=GenerationType.AUTO)      
     private Long id;
 
     
     /**     
      *  instalacion_confirmar 
      */
-     
-     
-     
-     
-     
-    private Boolean instalacion_confirmar;
+   private Boolean instalacion_confirmar;
 
     
     /**     

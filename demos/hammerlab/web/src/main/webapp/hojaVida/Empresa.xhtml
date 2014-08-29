@@ -19,7 +19,15 @@
    xmlns:ui="http://java.sun.com/jsf/facelets"
    xmlns:f="http://java.sun.com/jsf/core"
    xmlns:h="http://java.sun.com/jsf/html"
-    template="/WEB-INF/templates/defaultPrincipal.xhtml">
+   template="/WEB-INF/templates/default.xhtml">
+   
+   <ui:define name="metadata">
+		<f:metadata>
+			<f:event type="preRenderView"
+				listener="#{empresaController.initNewObject}" />
+		</f:metadata>
+	</ui:define>
+	
    <ui:define name="content">
       <h1>Welcome to JBoss!</h1>
 
@@ -37,37 +45,37 @@
             
            
             <h:outputLabel for="razonSocial" value="razonSocial:"/>
-            <h:inputText id= "razonSocial" value="#{EmpresaController.newObject.razonSocial }" />
+            <h:inputText id= "razonSocial" value="#{empresaController.newObject.razonSocial }" />
             <h:message for="razonSocial" errorClass="invalid"/> 
             
             
            
             <h:outputLabel for="nit" value="nit:"/>
-            <h:inputText id= "nit" value="#{EmpresaController.newObject.nit }" />
+            <h:inputText id= "nit" value="#{empresaController.newObject.nit }" />
             <h:message for="nit" errorClass="invalid"/> 
             
             
            
             <h:outputLabel for="telefono" value="telefono:"/>
-            <h:inputText id= "telefono" value="#{EmpresaController.newObject.telefono }" />
+            <h:inputText id= "telefono" value="#{empresaController.newObject.telefono }" />
             <h:message for="telefono" errorClass="invalid"/> 
             
             
            
             <h:outputLabel for="direccion" value="direccion:"/>
-            <h:inputText id= "direccion" value="#{EmpresaController.newObject.direccion }" />
+            <h:inputText id= "direccion" value="#{empresaController.newObject.direccion }" />
             <h:message for="direccion" errorClass="invalid"/> 
             
             
            
             <h:outputLabel for="correoElectronico" value="correoElectronico:"/>
-            <h:inputText id= "correoElectronico" value="#{EmpresaController.newObject.correoElectronico }" />
+            <h:inputText id= "correoElectronico" value="#{empresaController.newObject.correoElectronico }" />
             <h:message for="correoElectronico" errorClass="invalid"/> 
             
             
            
             <h:outputLabel for="sitioWeb" value="sitioWeb:"/>
-            <h:inputText id= "sitioWeb" value="#{EmpresaController.newObject.sitioWeb }" />
+            <h:inputText id= "sitioWeb" value="#{empresaController.newObject.sitioWeb }" />
             <h:message for="sitioWeb" errorClass="invalid"/> 
             
             
@@ -76,19 +84,19 @@
 
          <p>
             <h:panelGrid columns="2">
-               <h:commandButton id="register" action="#{EmpresaController.register}" value="Register" styleClass="register" rendered="#{!EmpresaController.editEmpresa}" />
+               <h:commandButton id="register" action="#{empresaController.register}" value="Register" styleClass="register" rendered="#{!empresaController.editEmpresa}" />
                
-                <h:commandButton id="edit" action="#{EmpresaController.actualizarEmpresa}" value="Editar" styleClass="register" rendered="#{EmpresaController.editEmpresa}" />
+                <h:commandButton id="edit" action="#{empresaController.actualizarEmpresa}" value="Editar" styleClass="register" rendered="#{empresaController.editEmpresa}" />
                <h:messages styleClass="messages" errorClass="invalid" infoClass="valid" warnClass="warning"
                            globalOnly="true"/>
             </h:panelGrid>
          </p>
      
       <h2>Empresa</h2>
-      <h:panelGroup rendered="#{empty EmpresaController.listaEmpresa}">
+      <h:panelGroup rendered="#{empty empresaController.listaEmpresa}">
          <em>No Empresa</em>
       </h:panelGroup>
-      <h:dataTable var="_object" value="#{EmpresaController.listaEmpresa}" rendered="#{not empty EmpresaController.listaEmpresa}" styleClass="simpletablestyle">
+      <h:dataTable var="_object" value="#{empresaController.listaEmpresa}" rendered="#{not empty empresaController.listaEmpresa}" styleClass="simpletablestyle">
          
         <h:column>
             <f:facet name="header">id</f:facet>
@@ -127,11 +135,11 @@
            
          <h:column>
             <f:facet name="header">Editar</f:facet>
-                <h:commandLink action="#{EmpresaController.cargarEmpresaEditar(_object.id)}" value="Editar" />
+                <h:commandLink action="#{empresaController.cargarEmpresaEditar(_object.id)}" value="Editar" />
             </h:column>
          <h:column>
             <f:facet name="header">Eliminar</f:facet>
-            <h:commandLink action="#{EmpresaController.eliminarEmpresa(_object.id)}" value="Eliminar" />
+            <h:commandLink action="#{empresaController.eliminarEmpresa(_object.id)}" value="Eliminar" />
          </h:column> 
           
       </h:dataTable>

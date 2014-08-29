@@ -1,11 +1,11 @@
 package co.com.hammerlab.controller;
+import java.io.Serializable;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.inject.Produces;
+import javax.enterprise.context.Conversation;
+import javax.enterprise.context.ConversationScoped;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.application.FacesMessage.Severity;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -18,10 +18,17 @@ import co.com.hammerlab.model.Empresa;
  * 
  * @author Josué Nicolás Pinzón Villamil <jnpinzonv@gmail.com>
  */
-@ManagedBean
-@ViewScoped
-public class EmpresaController {
+@Named("empresaController")
+@ConversationScoped
+public class EmpresaController implements Serializable {
 
+    /**
+     * Serialziacion 
+     */
+    private static final long serialVersionUID = -8515841786261886008L;
+    
+    @Inject
+    private Conversation conversation;
     /**
      * Inyeccion de contexto de faces
      */
@@ -40,15 +47,18 @@ public class EmpresaController {
      * Variable de control
      */
     private boolean editEmpresa;
+    
+    /**
+     * Variable de control de conversacion 
+     */
+    private boolean bandera= Boolean.FALSE;
 
     /**
      * Devuelve el valor de editEmpresa
      * 
      * @return El valor de editEmpresa
      */
-    @Produces
-    @Named
-    public boolean iseditEmpresa() {
+     public boolean iseditEmpresa() {
         return editEmpresa;
     }
 
@@ -56,9 +66,7 @@ public class EmpresaController {
      * Devuelve el valor de newUsuario
      * 
      * @return El valor de newUsuario
-     */
-    @Produces
-    @Named
+     */   
     public Empresa getNewObject() {
         return newObject;
     }
@@ -82,8 +90,7 @@ public class EmpresaController {
             initNewObject();
         } catch (Exception e) {
             String errorMessage = getRootErrorMessage(e);
-            FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage, "No se realizo la actualización");
-            facesContext.addMessage(null, m);
+            addMessage(FacesMessage.SEVERITY_ERROR, errorMessage);            
         }
     }
     /**
@@ -97,8 +104,8 @@ public class EmpresaController {
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Empresa Eliminada!", "Exito!!"));
         } catch (Exception e) {
             String errorMessage = getRootErrorMessage(e);
-            FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage, "Se Elimino la Empresa");
-            facesContext.addMessage(null, m);
+            addMessage(FacesMessage.SEVERITY_ERROR, errorMessage);
+            
         }
     }
     /**
@@ -106,7 +113,7 @@ public class EmpresaController {
      *@return Retorna regla de nevagacion
      * @throws Exception Lanza una excepcion si hay un error en la transacciòn 
      */
-    public String register() throws Exception {
+    public String register(){
         try {
             EmpresaBean.save(newObject);
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Exito!", "Se realizo un resgistro exitoso de Empresa"));
@@ -114,19 +121,28 @@ public class EmpresaController {
             return "";
         } catch (Exception e) {
             String errorMessage = getRootErrorMessage(e);
-            FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage, "Error de Empresa");
-            facesContext.addMessage(null, m);
+           addMessage(FacesMessage.SEVERITY_ERROR, errorMessage);
+           
         }
         return "";
     }
     /**
      * Inicializa el bakinbean de control
-     */
-    @PostConstruct
+     */   
     public void initNewObject() {
+       // TODO pendienta para inicializar el estado de editaod se deve mover
         if (editEmpresa == Boolean.FALSE) {
             newObject = new Empresa();
         }
+        
+        if(bandera == Boolean.FALSE){
+            if (conversation.isTransient()) {
+                conversation.begin();
+            }
+            bandera = Boolean.TRUE;
+        }
+        
+        
     }
     /**
      * Realiza transformacion de mensaje para el control del log
@@ -151,6 +167,20 @@ public class EmpresaController {
         // This is the root cause message
         return errorMessage;
     }
+    
+    /**
+     * Genera un mensaje al contexto
+     * 
+     * @param severidad
+     *            , Severidad del mensaje
+     * @param mensaje
+     *            Clave del mensaje
+     */
+    public void addMessage(Severity severidad, String mensaje) {
+        facesContext.addMessage(null, new FacesMessage(severidad, "",mensaje));
+
+    }
+    
     /**
      * Lista de objetos a ser consultados y visualizados en pantalla
      * @return Retorna una lista de obejtos
