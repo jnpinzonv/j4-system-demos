@@ -14,13 +14,12 @@
 	xsi:schemaLocation="
         http://java.sun.com/xml/ns/persistence
         http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
-	<persistence-unit name="geoAutomotoresPU">
+	<persistence-unit name="hammerLabPU">
 		<!-- If you are running in a production environment, add a managed data 
 			source, this example data source is just for development and testing! -->
 		<!-- The datasource is deployed as <EAR>/META-INF/hammerlab-ds.xml, you 
 			can find it in the source at ear/src/main/application/META-INF/hammerlab-ds.xml -->
-		<jta-data-source>java:jboss/datasources/hammerlabDS</jta-data-source>
-		<class>co.com.hammerlab.model.Member</class>
+		<jta-data-source>java:jboss/datasources/hammerlabDS</jta-data-source>		
 		<class>co.com.hammerlab.model.Empresa</class>
 		<class>co.com.hammerlab.model.AdquisicionEquipo</class>
 		<class>co.com.hammerlab.model.EquipoHospitalario</class>

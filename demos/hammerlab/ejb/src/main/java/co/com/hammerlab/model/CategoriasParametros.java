@@ -2,21 +2,27 @@ package co.com.hammerlab.model;
 
 /**
  * <b>Descripcion:</b> Clase que <br/>
- * Enumera las opciones a registrar cuando el campo no es diligenciado <b>Caso de Uso:</b> SOL_MOV- <br/>
- * 
+ * <b>Caso de Uso:</b> SOL_MOV- <br/>
+ *
  * @author Josué Nicolás Pinzón Villamil <jnpinzonv@gmail.com>
  */
-public enum SinInformacion {
+public enum CategoriasParametros {
 
     /**
      * 
      */
-    NO_APLICA("No Aplica"),
+    UBICACION("Ubicacion"),
 
     /**
      * 
      */
-    NO_REGISTRA("No Registra");
+    UNIDADES_MEDIDA("Unidades de Medida"),
+    
+    TECNOLOGIA ("Tecnologia"),
+    
+    DECRETO_4725("Decreto 4725b de 2005"),
+    
+    RECOMENDACIONES("Recomendaciones");
 
     private String variable;
 
@@ -25,7 +31,7 @@ public enum SinInformacion {
      * 
      * @param variable
      */
-    private SinInformacion(String variable) {
+    private CategoriasParametros(String variable) {
         this.variable = variable;
     }
 
@@ -37,5 +43,4 @@ public enum SinInformacion {
     public String getVariable() {
         return variable;
     }
-
 }
