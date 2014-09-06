@@ -5,146 +5,133 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:p="http://primefaces.org/ui"	
+	xmlns:p="http://primefaces.org/ui"
 	template="/WEB-INF/templates/default.xhtml">
 
 	<ui:define name="metadata">
 		<f:metadata>
 			<f:event type="preRenderView"
-				listener="#{fileProcFileDefinitionType.init()}" />
+				listener="#{empresaController.initNewObject}" />
 		</f:metadata>
 	</ui:define>
 
 	<ui:define name="content">
 
-		<h:form id="lineDefListTypeSelect">
-			<p:panel id="fileDefinitionTypePanelInfo" styleClass="pPanel"
-				header="fp.fileDefinitionType.title.searchFilter">
+		<h:form id="formEmpresas">
+			<p:panel id="fileDefinitionTypePanelInfo" header="Busqueda">
 
-				<p:inputText id="name" label="fp.fileDefinitionType.label.name"
-					title="fp.fileDefinitionType.title.name"
-					value="#{fileProcFileDefinitionType.fileDefinitionTypeConsole.name}" />
+				<p:inputText id="name" label="Nombre Empresa" title="Nombre Empresa"
+					value="#{empresaController.newObject.razonSocial}" />
 
 
 				<div style="clear: both" />
 
-				<p:panelButton id="groupButton" align="right">
-					<p:commandButton id="search" styleClass="pButtonEnabled"
-						type="complex" value="messages.common.buscar"
-						actionBean="#{fileProcFileDefinitionType}" action="search" />
+				<p:panel id="groupButton" align="right">
+					<p:commandButton id="search" value="Buscar"
+						action="empresaController.search" />
 
-					<p:commandButton id="reset" styleClass="pButtonEnabled"
-						type="complex" value="messages.common.reiniciar"
-						actionBean="#{fileProcFileDefinitionType}" action="cancel"
-						immediate="true" />
-				</p:panelButton>
+					<p:commandButton id="reset" type="complex" value="Reiniciar"
+						action="empresaController.cancel" immediate="true" />
+				</p:panel>
 
 				<div style="clear: both" />
 			</p:panel>
 
 
-			<p:panel id="fileDefinitionTypePanelList"
-				styleClass="pPanel pPanelList"
-				header="fp.fileDefinitionType.title.searchResults">
+			<p:panel id="panelListaEmpresas" header="Lista de empresas">
 
-				<p:noResult value="fp.fileDefinitionType.title.searchNoResult"
-					rendered="#{fileProcFileDefinitionType.fileDefinitionTypeList.rowCount == 0}" />
+				<h:panelGroup rendered="#{empty empresaController.listaEmpresa}">
+					<em>No existen Empresas</em>
+				</h:panelGroup>
 
-				<p:panelButton id="groupButtonTop" align="right">
+				<p:panel id="groupButtonTop" align="right">
 
 					<p:commandButton id="createButtonTop"
-						actionBean="#{fileProcFileDefinitionType}" action="initCreateMode"
-						styleClass="pButtonEnabled" type="complex"
-						value="messages.common.crear" />
+						action="empresaController.initCreateMode" value="Crear" />
 
 					<p:commandButton id="editButtonTop"
-						actionBean="#{fileProcFileDefinitionType}" action="initUpdateMode"
+						action="empresaController.initUpdateMode"
 						value="messages.common.editar" immediate="true"
-						disabled="#{fileProcFileDefinitionType.selectedRows.size() != 1}"
-						styleClass="#{utilStyles.getStateStyleButton(fileProcFileDefinitionType.selectedRows.size() != 1)}"
-						type="complex" />
+						disabled="#{empresaController.selectEmpresas.size() != 1}" />
 
 					<p:commandButton id="viewButtonTop"
-						actionBean="#{fileProcFileDefinitionType}" action="initViewMode"
-						value="messages.common.ver" immediate="true"
-						disabled="#{fileProcFileDefinitionType.selectedRows.size() != 1}"
-						styleClass="#{utilStyles.getStateStyleButton(fileProcFileDefinitionType.selectedRows.size() != 1)}"
-						type="complex" />
+						action="empresaController.empresaController.initViewMode"
+						value="Ver" immediate="true"
+						disabled="#{empresaController.selectEmpresas.size() != 1}" />
 
 
-					<p:commandButton id="deleteButtonTop"
-						value="messages.common.borrar" immediate="true"
-						update=":modalConfirmacion"
+					<p:commandButton id="deleteButtonTop" value="Borrar"
+						immediate="true" update=":modalConfirmacion"
 						oncomplete="PF('modalConfirmacionVar').show()" ajax="true"
 						ignoreAutoUpdate="true" async="true"
-						disabled="#{fileProcFileDefinitionType.selectedRows.size()  == 0}"
-						styleClass="#{utilStyles.getStateStyleButton(fileProcFileDefinitionType.selectedRows.size() == 0)}"
-						type="simple" />
+						disabled="#{empresaController.selectEmpresas.size()  == 0}" />
 
-				</p:panelButton>
+				</p:panel>
 
-				<p:dataTable id="fileDefinitionTypeList"
-					value="#{fileProcFileDefinitionType.fileDefinitionTypeList}"
-					rendered="#{fileProcFileDefinitionType.fileDefinitionTypeList.rowCount > 0}"
+				<p:dataTable var="_object" value="#{empresaController.listaEmpresa}"
+					rendered="#{not empty empresaController.listaEmpresa}"
+					styleClass="simpletablestyle" id="fileDefinitionTypeList"
 					paginator="true" paginatorPosition="bottom"
-					rows="#{paginador.pageSize}" lazy="true" rowKey="#{itemVar.id}"
-					selection="#{fileProcFileDefinitionType.selectedRows}"
-					selectionUpdate=":lineDefListTypeSelect:groupButtonBottom,:lineDefListTypeSelect:groupButtonTop"
-					selectionMode="multiple"
-					selectionHeaderLabel="#{messages['messages.common.accion']}">
+					selection="#{empresaController.selectEmpresas}"
+					selectionUpdate=":formEmpresas:groupButtonBottom,:formEmpresas:groupButtonTop"
+					selectionMode="multiple" selectionHeaderLabel="Acción">
 
-					<p:column id="c1"
-						headerText="#{messages['fp.fileDefinitionType.label.id']}">
-						<h:outputText value="#{itemVar.id}" />
+					<p:column id="c1" headerText="razonSocial">
+						<h:outputText value="#{_object.razonSocial}" />
 					</p:column>
 
-					<p:column id="c2"
-						headerText="#{messages['fp.fileDefinitionType.label.name']}">
-						<h:outputText value="#{itemVar.name}" />
+					<p:column id="c2" headerText="Nit">
+						<h:outputText value=" #{_object.nit}" />
 					</p:column>
 
+					<p:column id="c3" headerText="Telefono">
+						<h:outputText value="#{_object.telefono}" />
+					</p:column>
+
+					<p:column id="c4" headerText="Direccion">
+						<h:outputText value="#{_object.direccion}" />
+					</p:column>
+
+					<p:column id="c5" headerText="Correo Electronico">
+						<h:outputText value="#{_object.correoElectronico}" />
+					</p:column>
+
+					<p:column id="c6" headerText="Sitio Web">
+						<h:outputText value="#{_object.sitioWeb}" />
+					</p:column>
 				</p:dataTable>
 
 
-				<p:panelButton id="groupButtonBottom" align="right">
+
+				<p:panel id="groupButtonBottom" align="right"
+					rendered="#{fileProcFileDefinitionType.fileDefinitionTypeList.rowCount > 0}">
 
 					<p:commandButton id="createButtonBottom"
-						actionBean="#{fileProcFileDefinitionType}" action="initCreateMode"
-						styleClass="pButtonEnabled" type="complex"
-						value="messages.common.crear"
-						rendered="#{fileProcFileDefinitionType.fileDefinitionTypeList.rowCount > 0}" />
+						action="empresaController.initCreateMode"
+						styleClass="pButtonEnabled" type="complex" value="Crear" />
 
 					<p:commandButton id="editButtonBottom"
-						actionBean="#{fileProcFileDefinitionType}" action="initUpdateMode"
-						immediate="true" value="messages.common.editar"
-						disabled="#{fileProcFileDefinitionType.selectedRows.size() != 1}"
-						styleClass="#{utilStyles.getStateStyleButton(fileProcFileDefinitionType.selectedRows.size() != 1)}"
-						type="complex"
-						rendered="#{fileProcFileDefinitionType.fileDefinitionTypeList.rowCount > 0}" />
+						action="empresaController.initUpdateMode" immediate="true"
+						value="messages.common.editar"
+						disabled="#{empresaController.selectEmpresas.size() != 1}" />
 
 					<p:commandButton id="viewButtonBottom"
-						actionBean="#{fileProcFileDefinitionType}" action="initViewMode"
-						immediate="true" value="messages.common.ver"
-						disabled="#{fileProcFileDefinitionType.selectedRows.size()!= 1}"
-						styleClass="#{utilStyles.getStateStyleButton(fileProcFileDefinitionType.selectedRows.size() != 1)}"
-						type="complex"
-						rendered="#{fileProcFileDefinitionType.fileDefinitionTypeList.rowCount > 0}" />
+						action="empresaController.initViewMode" immediate="true"
+						value="Ver"
+						disabled="#{empresaController.selectEmpresas.size()!= 1}" />
 
-					<p:commandButton id="deleteButtonBottom"
-						value="messages.common.borrar" immediate="true"
-						update=":modalConfirmacion"
+					<p:commandButton id="deleteButtonBottom" value="Borrar"
+						immediate="true" update=":modalConfirmacion"
 						oncomplete="PF('modalConfirmacionVar').show()" ajax="true"
 						ignoreAutoUpdate="true" async="true"
-						disabled="#{fileProcFileDefinitionType.selectedRows.size() == 0}"
-						styleClass="#{utilStyles.getStateStyleButton(fileProcFileDefinitionType.selectedRows.size() == 0)}"
-						type="simple"
-						rendered="#{fileProcFileDefinitionType.fileDefinitionTypeList.rowCount > 0}" />
-				</p:panelButton>
+						disabled="#{empresaController.selectEmpresas.size() == 0}" />
+				</p:panel>
 			</p:panel>
 		</h:form>
-		<p:confirmModalMessage id="modalConfirmacion" width="500"
-			height="120" actionBean="#{fileProcFileDefinitionType}"
-			action="delete" reRenderAceptar=":lineDefListTypeSelect"
+		
+		<p:confirmModalMessage id="modalConfirmacion" width="500" height="120"
+			actionBean="#{fileProcFileDefinitionType}" action="delete"
+			reRenderAceptar=":lineDefListTypeSelect"
 			displayMessage="#{fileProcFileDefinitionType.selectedRows.size() == 1 ? 'fp.fileDefinitionType.confirm.delete' : 'fp.fileDefinitionType.confirm.deleteMulti'}">
 			<ui:define name="displayMessageParam">
 				<c:if test="#{fileProcFileDefinitionType.selectedRows.size() == 1}">

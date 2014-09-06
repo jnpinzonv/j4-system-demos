@@ -58,5 +58,7 @@ public class EquipoHospitalarioBean {
         public List< EquipoHospitalario > getAll() {
                 return entityManager.createNamedQuery("equipoHospitalario.getAll", EquipoHospitalario.class).getResultList();
         }
+        
+        
 
 }
