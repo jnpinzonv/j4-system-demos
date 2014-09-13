@@ -1,6 +1,8 @@
 package co.com.hammerlab.controller;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ArrayBlockingQueue;
 
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
@@ -69,6 +71,14 @@ public class EmpresaController implements Serializable {
      */   
     public Empresa getNewObject() {
         return newObject;
+    }
+    
+    private List<Empresa> listaEmpresa;
+    
+    private List<Empresa> selectEmpresas;
+    
+    public void busqueda(){
+    	
     }
     /**
      * Asigna el valor del objeto seleccionado pra su edicion
@@ -188,4 +198,31 @@ public class EmpresaController implements Serializable {
     public List< Empresa > getListaEmpresa() {
         return EmpresaBean.getAll();
     }
+
+	/**
+	 * @return the selectEmpresas
+	 */
+	public List<Empresa> getSelectEmpresas() {
+		if(selectEmpresas==null){
+			selectEmpresas= new ArrayList<Empresa>();
+		}
+		return selectEmpresas;
+	}
+
+	/**
+	 * @param selectEmpresas the selectEmpresas to set
+	 */
+	public void setSelectEmpresas(List<Empresa> selectEmpresas) {
+		this.selectEmpresas = selectEmpresas;
+	}
+
+	/**
+	 * @param listaEmpresa the listaEmpresa to set
+	 */
+	public void setListaEmpresa(List<Empresa> listaEmpresa) {
+		this.listaEmpresa = listaEmpresa;
+	}
+    
+	
+    
 }

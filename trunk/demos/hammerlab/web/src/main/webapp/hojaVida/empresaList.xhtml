@@ -18,7 +18,7 @@
 	<ui:define name="content">
 
 		<h:form id="formEmpresas">
-			<p:panel id="fileDefinitionTypePanelInfo" header="Busqueda">
+			<p:panel id="panelEmpresas" header="Busqueda">
 
 				<p:inputText id="name" label="Nombre Empresa" title="Nombre Empresa"
 					value="#{empresaController.newObject.razonSocial}" />
@@ -28,7 +28,7 @@
 
 				<p:panel id="groupButton" align="right">
 					<p:commandButton id="search" value="Buscar"
-						action="empresaController.search" />
+						action="empresaController.busqueda" />
 
 					<p:commandButton id="reset" type="complex" value="Reiniciar"
 						action="empresaController.cancel" immediate="true" />
@@ -51,8 +51,8 @@
 
 					<p:commandButton id="editButtonTop"
 						action="empresaController.initUpdateMode"
-						value="messages.common.editar" immediate="true"
-						disabled="#{empresaController.selectEmpresas.size() != 1}" />
+						value="Editar" immediate="true"
+						disabled="#{empresaController.selectEmpresas.size()!= 1}" />
 
 					<p:commandButton id="viewButtonTop"
 						action="empresaController.empresaController.initViewMode"
@@ -61,8 +61,8 @@
 
 
 					<p:commandButton id="deleteButtonTop" value="Borrar"
-						immediate="true" update=":modalConfirmacion"
-						oncomplete="PF('modalConfirmacionVar').show()" ajax="true"
+						immediate="true" 
+						ajax="true"
 						ignoreAutoUpdate="true" async="true"
 						disabled="#{empresaController.selectEmpresas.size()  == 0}" />
 
@@ -76,11 +76,11 @@
 					selectionUpdate=":formEmpresas:groupButtonBottom,:formEmpresas:groupButtonTop"
 					selectionMode="multiple" selectionHeaderLabel="Acción">
 
-					<p:column id="c1" headerText="razonSocial">
+					<p:column id="c1" headerText="Razón Social">
 						<h:outputText value="#{_object.razonSocial}" />
 					</p:column>
 
-					<p:column id="c2" headerText="Nit">
+					<p:column id="c2" headerText="NIT">
 						<h:outputText value=" #{_object.nit}" />
 					</p:column>
 
@@ -88,7 +88,7 @@
 						<h:outputText value="#{_object.telefono}" />
 					</p:column>
 
-					<p:column id="c4" headerText="Direccion">
+					<p:column id="c4" headerText="Dirección">
 						<h:outputText value="#{_object.direccion}" />
 					</p:column>
 
@@ -104,7 +104,7 @@
 
 
 				<p:panel id="groupButtonBottom" align="right"
-					rendered="#{fileProcFileDefinitionType.fileDefinitionTypeList.rowCount > 0}">
+					rendered="#{empresaController.listaEmpresa.size() > 0}">
 
 					<p:commandButton id="createButtonBottom"
 						action="empresaController.initCreateMode"
@@ -121,25 +121,32 @@
 						disabled="#{empresaController.selectEmpresas.size()!= 1}" />
 
 					<p:commandButton id="deleteButtonBottom" value="Borrar"
-						immediate="true" update=":modalConfirmacion"
-						oncomplete="PF('modalConfirmacionVar').show()" ajax="true"
+						immediate="true" 
+						 ajax="true"
 						ignoreAutoUpdate="true" async="true"
 						disabled="#{empresaController.selectEmpresas.size() == 0}" />
 				</p:panel>
 			</p:panel>
 		</h:form>
+
 		
-		<p:confirmModalMessage id="modalConfirmacion" width="500" height="120"
-			actionBean="#{fileProcFileDefinitionType}" action="delete"
-			reRenderAceptar=":lineDefListTypeSelect"
-			displayMessage="#{fileProcFileDefinitionType.selectedRows.size() == 1 ? 'fp.fileDefinitionType.confirm.delete' : 'fp.fileDefinitionType.confirm.deleteMulti'}">
-			<ui:define name="displayMessageParam">
-				<c:if test="#{fileProcFileDefinitionType.selectedRows.size() == 1}">
-					<f:param
-						value="#{fileProcFileDefinitionType.selectedRows.get(0).id}" />
-				</c:if>
-			</ui:define>
-		</p:confirmModalMessage>
+
+		<h:form>
+			<p:growl id="message" showDetail="true" />
+
+			<p:commandButton value="Destroy the World"
+				actionListener="#{dialogView.destroyWorld}" update="message">
+				<p:confirm header="Confirmation" message="Are you sure?"
+					icon="ui-icon-alert" />
+			</p:commandButton>
+
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+				<p:commandButton value="Yes" type="button"
+					styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+				<p:commandButton value="No" type="button"
+					styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+			</p:confirmDialog>
+		</h:form>
 
 	</ui:define>
 </ui:composition>
