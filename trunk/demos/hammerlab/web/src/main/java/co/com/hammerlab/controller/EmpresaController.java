@@ -2,7 +2,6 @@ package co.com.hammerlab.controller;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ArrayBlockingQueue;
 
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
@@ -40,7 +39,7 @@ public class EmpresaController implements Serializable {
      * Realcion con el EJB que controla las transacciones del objeto
      */
     @Inject
-    private EmpresaBean EmpresaBean;
+    private EmpresaBean empresaBean;
     /**
      * Entidad sobre la que se gestiona la transaccion
      */
@@ -73,12 +72,18 @@ public class EmpresaController implements Serializable {
         return newObject;
     }
     
+    /**
+     * 
+     */
     private List<Empresa> listaEmpresa;
     
+    /**
+     * 
+     */
     private List<Empresa> selectEmpresas;
     
     public void busqueda(){
-    	
+    	listaEmpresa= empresaBean.getAll();
     }
     /**
      * Asigna el valor del objeto seleccionado pra su edicion
@@ -87,7 +92,7 @@ public class EmpresaController implements Serializable {
      */
     public void cargarEmpresaEditar(Long objectId) {
         editEmpresa = Boolean.TRUE;
-        newObject = EmpresaBean.getByID(objectId);
+        newObject = empresaBean.getByID(objectId);
     }
     /**
      * Actualiza un objeto en la base de datos
@@ -95,13 +100,23 @@ public class EmpresaController implements Serializable {
      */
     public void actualizarEmpresa() {
         try {
-            EmpresaBean.update(newObject);
+            empresaBean.update(newObject);
             editEmpresa = Boolean.FALSE;
             initNewObject();
         } catch (Exception e) {
             String errorMessage = getRootErrorMessage(e);
             addMessage(FacesMessage.SEVERITY_ERROR, errorMessage);            
         }
+    }
+    
+    public String initCreateMode(){
+        System.out.println("Hola");
+        
+        return "";
+    }
+    
+    public String cancel() {
+        return"celce";
     }
     /**
      * Elimina un objeto en base de datos
@@ -110,7 +125,7 @@ public class EmpresaController implements Serializable {
      */
     public void eliminarEmpresa(Long idObject) {
         try {
-            EmpresaBean.delete(idObject);
+            empresaBean.delete(idObject);
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Empresa Eliminada!", "Exito!!"));
         } catch (Exception e) {
             String errorMessage = getRootErrorMessage(e);
@@ -125,7 +140,7 @@ public class EmpresaController implements Serializable {
      */
     public String register(){
         try {
-            EmpresaBean.save(newObject);
+            empresaBean.save(newObject);
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Exito!", "Se realizo un resgistro exitoso de Empresa"));
             initNewObject();
             return "";
@@ -140,16 +155,18 @@ public class EmpresaController implements Serializable {
      * Inicializa el bakinbean de control
      */   
     public void initNewObject() {
-       // TODO pendienta para inicializar el estado de editaod se deve mover
-        if (editEmpresa == Boolean.FALSE) {
-            newObject = new Empresa();
-        }
-        
+      
         if(bandera == Boolean.FALSE){
             if (conversation.isTransient()) {
                 conversation.begin();
             }
             bandera = Boolean.TRUE;
+            
+            // TODO pendienta para inicializar el estado de editaod se deve mover
+            if (editEmpresa == Boolean.FALSE) {
+                newObject = new Empresa();
+            }
+            
         }
         
         
@@ -196,7 +213,7 @@ public class EmpresaController implements Serializable {
      * @return Retorna una lista de obejtos
      */
     public List< Empresa > getListaEmpresa() {
-        return EmpresaBean.getAll();
+        return empresaBean.getAll();
     }
 
 	/**
@@ -205,7 +222,7 @@ public class EmpresaController implements Serializable {
 	public List<Empresa> getSelectEmpresas() {
 		if(selectEmpresas==null){
 			selectEmpresas= new ArrayList<Empresa>();
-		}
+		}		
 		return selectEmpresas;
 	}
 
@@ -213,7 +230,7 @@ public class EmpresaController implements Serializable {
 	 * @param selectEmpresas the selectEmpresas to set
 	 */
 	public void setSelectEmpresas(List<Empresa> selectEmpresas) {
-		this.selectEmpresas = selectEmpresas;
+		this.selectEmpresas = selectEmpresas;		
 	}
 
 	/**
