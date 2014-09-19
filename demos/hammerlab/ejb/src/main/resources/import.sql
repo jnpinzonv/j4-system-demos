@@ -17,3 +17,5 @@
 
 -- You can use this file to load seed data into the database using SQL statements
 
+insert into empresa(id,razonSocial,nit,telefono,direccion,correoElectronico,sitioWeb) values(12,'HammerLab',870317945,'3123419478','Cra 6 #4 14','jnpinzonv@hotmail.com','www.hammerlab.com.co')
+insert into empresa(id,razonSocial,nit,telefono,direccion,correoElectronico,sitioWeb) values(13,'HammerLab',870317945,'3123419478','Cra 6 #4 14','jnpinzonv@hotmail.com','www.hammerlab.com.co')

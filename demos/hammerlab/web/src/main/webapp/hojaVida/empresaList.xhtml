@@ -30,7 +30,7 @@
 					<p:commandButton id="search" value="Buscar"
 						action="empresaController.busqueda" />
 
-					<p:commandButton id="reset" type="complex" value="Reiniciar"
+					<p:commandButton id="reset" value="Reiniciar"
 						action="empresaController.cancel" immediate="true" />
 				</p:panel>
 
@@ -45,17 +45,17 @@
 				</h:panelGroup>
 
 				<p:panel id="groupButtonTop" align="right">
-
+						
 					<p:commandButton id="createButtonTop"
-						action="empresaController.initCreateMode" value="Crear" />
-
+						actionListener="#{empresaController.initCreateMode}" immediate="true"  value="Crear" />
+					
 					<p:commandButton id="editButtonTop"
 						action="empresaController.initUpdateMode"
 						value="Editar" immediate="true"
 						disabled="#{empresaController.selectEmpresas.size()!= 1}" />
 
 					<p:commandButton id="viewButtonTop"
-						action="empresaController.empresaController.initViewMode"
+						action="empresaController.initViewMode"
 						value="Ver" immediate="true"
 						disabled="#{empresaController.selectEmpresas.size() != 1}" />
 
@@ -70,11 +70,9 @@
 
 				<p:dataTable var="_object" value="#{empresaController.listaEmpresa}"
 					rendered="#{not empty empresaController.listaEmpresa}"
-					styleClass="simpletablestyle" id="fileDefinitionTypeList"
-					paginator="true" paginatorPosition="bottom"
-					selection="#{empresaController.selectEmpresas}"
-					selectionUpdate=":formEmpresas:groupButtonBottom,:formEmpresas:groupButtonTop"
-					selectionMode="multiple" selectionHeaderLabel="Acción">
+					id="empresaList"
+					paginator="true" paginatorPosition="bottom" rowKey="#{_object.id}"
+					selection="#{empresaController.selectEmpresas}" >
 
 					<p:column id="c1" headerText="Razón Social">
 						<h:outputText value="#{_object.razonSocial}" />
@@ -99,6 +97,11 @@
 					<p:column id="c6" headerText="Sitio Web">
 						<h:outputText value="#{_object.sitioWeb}" />
 					</p:column>
+					<p:column selectionMode="multiple" style="width:16px;text-align:center"/>
+					
+					<p:ajax event="rowSelectCheckbox" immediate="true"  update=":formEmpresas:groupButtonBottom,:formEmpresas:groupButtonTop" />
+					<p:ajax event="rowUnselectCheckbox" immediate="true" update=":formEmpresas:groupButtonBottom,:formEmpresas:groupButtonTop" />
+					
 				</p:dataTable>
 
 
@@ -108,11 +111,11 @@
 
 					<p:commandButton id="createButtonBottom"
 						action="empresaController.initCreateMode"
-						styleClass="pButtonEnabled" type="complex" value="Crear" />
+						styleClass="pButtonEnabled" value="Crear" />
 
 					<p:commandButton id="editButtonBottom"
 						action="empresaController.initUpdateMode" immediate="true"
-						value="messages.common.editar"
+						value="Editar"
 						disabled="#{empresaController.selectEmpresas.size() != 1}" />
 
 					<p:commandButton id="viewButtonBottom"
@@ -131,7 +134,7 @@
 
 		
 
-		<h:form>
+		<h:form id="idForm">
 			<p:growl id="message" showDetail="true" />
 
 			<p:commandButton value="Destroy the World"

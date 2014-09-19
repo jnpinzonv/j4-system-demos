@@ -29,17 +29,6 @@
 		<param-value>server</param-value>
 	</context-param>
 	
-	<context-param>
-		<param-name>facelets.LIBRARIES</param-name>
-		<param-value>/lion/common/facelets/lionTaglib_prime.xml</param-value>
-	</context-param>
-	
-	
-	
-	
-
-
-
 	
 	<!-- Filtro para cargar archivos -->
 	<filter>
