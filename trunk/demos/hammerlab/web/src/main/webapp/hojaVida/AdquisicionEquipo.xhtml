@@ -30,62 +30,7 @@
       <h:form id="reg">
          <h2>CRUD de AdquisicionEquipo</h2>
          <p>Desde esta pagina podra realizar: Modificación, Eliminación y Crear nuevos items</p>
-         <h:panelGrid columns="3" columnClasses="titleCell">
-              
-            
-           
-            
-           
-            <h:outputLabel for="voltaje" value="voltaje:"/>
-            <h:inputText id= "voltaje" value="#{AdquisicionEquipoController.newObject.voltaje }" />
-            <h:message for="voltaje" errorClass="invalid"/> 
-            
-            
-           
-            <h:outputLabel for="instalaciones" value="instalaciones:"/>
-            <h:inputText id= "instalaciones" value="#{AdquisicionEquipoController.newObject.instalaciones }" />
-            <h:message for="instalaciones" errorClass="invalid"/> 
-            
-            
-           
-            <h:outputLabel for="potencia" value="potencia:"/>
-            <h:inputText id= "potencia" value="#{AdquisicionEquipoController.newObject.potencia }" />
-            <h:message for="potencia" errorClass="invalid"/> 
-            
-            
-           
-            <h:outputLabel for="frecuencia" value="frecuencia:"/>
-            <h:inputText id= "frecuencia" value="#{AdquisicionEquipoController.newObject.frecuencia }" />
-            <h:message for="frecuencia" errorClass="invalid"/> 
-            
-            
-           
-            <h:outputLabel for="capacidadTeorica" value="capacidadTeorica:"/>
-            <h:inputText id= "capacidadTeorica" value="#{AdquisicionEquipoController.newObject.capacidadTeorica }" />
-            <h:message for="capacidadTeorica" errorClass="invalid"/> 
-            
-            
-           
-            <h:outputLabel for="capacidadPractica" value="capacidadPractica:"/>
-            <h:inputText id= "capacidadPractica" value="#{AdquisicionEquipoController.newObject.capacidadPractica }" />
-            <h:message for="capacidadPractica" errorClass="invalid"/> 
-            
-            
-           
-            <h:outputLabel for="tecnologia" value="tecnologia:"/>
-            <h:inputText id= "tecnologia" value="#{AdquisicionEquipoController.newObject.tecnologia }" />
-            <h:message for="tecnologia" errorClass="invalid"/> 
-            
-            
-           
-            <h:outputLabel for="insumos" value="insumos:"/>
-            <h:inputText id= "insumos" value="#{AdquisicionEquipoController.newObject.insumos }" />
-            <h:message for="insumos" errorClass="invalid"/> 
-            
-            
-           
-         </h:panelGrid>
-
+         
          <p>
             <h:panelGrid columns="2">
                <h:commandButton id="register" action="#{AdquisicionEquipoController.register}" value="Register" styleClass="register" rendered="#{!AdquisicionEquipoController.editAdquisicionEquipo}" />

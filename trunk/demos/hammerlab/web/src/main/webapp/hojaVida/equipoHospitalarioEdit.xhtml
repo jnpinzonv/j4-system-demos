@@ -1,0 +1,332 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/default.xhtml">
+
+	<ui:define name="content">
+
+		<h:form id="empresaEdit">
+			<p:panel id="empresaPanelEdit"
+				header="#{empresaController.editMode ? 'Actualizar Equipo' : 'Crear Equipo'}">
+
+				<p:panel id="basicalEdit" header="Información Basica">
+					<h:panelGrid columns="2" columnClasses="titleCell">
+
+						<h:outputLabel for="fotoEquipo" value="fotoEquipo:" />
+						<h:inputText id="fotoEquipo"
+							value="#{EquipoHospitalarioController.newObject.fotoEquipo }" />
+
+
+						<h:outputLabel for="marca" value="marca:" />
+						<h:inputText id="marca"
+							value="#{EquipoHospitalarioController.newObject.marca }" />
+
+
+						<h:outputLabel for="modelo" value="modelo:" />
+						<h:inputText id="modelo"
+							value="#{EquipoHospitalarioController.newObject.modelo }" />
+
+
+						<h:outputLabel for="ubicacion" value="ubicacion:" />
+						<h:inputText id="ubicacion"
+							value="#{EquipoHospitalarioController.newObject.ubicacion }" />
+
+
+						<h:outputLabel for="fabricante" value="fabricante:" />
+						<h:inputText id="fabricante"
+							value="#{EquipoHospitalarioController.newObject.fabricante }" />
+
+
+						<h:outputLabel for="representanteCol" value="representanteCol:" />
+						<h:inputText id="representanteCol"
+							value="#{EquipoHospitalarioController.newObject.representanteCol }" />
+
+
+						<h:outputLabel for="direccion" value="direccion:" />
+						<h:inputText id="direccion"
+							value="#{EquipoHospitalarioController.newObject.direccion }" />
+
+
+						<h:outputLabel for="telefono" value="telefono:" />
+						<h:inputText id="telefono"
+							value="#{EquipoHospitalarioController.newObject.telefono }" />
+
+
+					</h:panelGrid>
+				</p:panel>
+				<p:panel id="adquisicionlEdit" header="Adquisicion">
+					<h:panelGrid columns="2" columnClasses="titleCell">
+
+						<h:outputLabel for="voltaje" value="voltaje:" />
+						<h:inputText id="voltaje"
+							value="#{AdquisicionEquipoController.newObject.voltaje }" />
+
+
+						<h:outputLabel for="instalaciones" value="instalaciones:" />
+						<h:inputText id="instalaciones"
+							value="#{AdquisicionEquipoController.newObject.instalaciones }" />
+
+
+						<h:outputLabel for="potencia" value="potencia:" />
+						<h:inputText id="potencia2"
+							value="#{AdquisicionEquipoController.newObject.potencia }" />
+
+
+						<h:outputLabel for="frecuencia" value="frecuencia:" />
+						<h:inputText id="frecuencia2"
+							value="#{AdquisicionEquipoController.newObject.frecuencia }" />
+
+
+						<h:outputLabel for="capacidadTeorica" value="capacidadTeorica:" />
+						<h:inputText id="capacidadTeorica2"
+							value="#{AdquisicionEquipoController.newObject.capacidadTeorica }" />
+
+
+						<h:outputLabel for="capacidadPractica" value="capacidadPractica:" />
+						<h:inputText id="capacidadPractica2"
+							value="#{AdquisicionEquipoController.newObject.capacidadPractica }" />
+
+
+						<h:outputLabel for="tecnologia" value="tecnologia:" />
+						<h:inputText id="tecnologia2"
+							value="#{AdquisicionEquipoController.newObject.tecnologia }" />
+
+
+						<h:outputLabel for="insumos" value="insumos:" />
+						<h:inputText id="insumos2"
+							value="#{AdquisicionEquipoController.newObject.insumos }" />
+
+
+					</h:panelGrid>
+
+				</p:panel>
+				<p:panel id="tecnicalEdit" header="Tecnica">
+					<h:panelGrid columns="2" columnClasses="titleCell">
+
+						<h:outputLabel for="voltaje" value="voltaje:" />
+						<h:inputText id="voltaje2"
+							value="#{EquipoInfoTecnicaController.newObject.voltaje }" />
+
+
+						<h:outputLabel for="instalaciones" value="instalaciones:" />
+						<h:inputText id="instalaciones2"
+							value="#{EquipoInfoTecnicaController.newObject.instalaciones }" />
+
+
+						<h:outputLabel for="potencia" value="potencia:" />
+						<h:inputText id="potencia"
+							value="#{EquipoInfoTecnicaController.newObject.potencia }" />
+
+
+						<h:outputLabel for="frecuencia" value="frecuencia:" />
+						<h:inputText id="frecuencia"
+							value="#{EquipoInfoTecnicaController.newObject.frecuencia }" />
+
+
+						<h:outputLabel for="capacidadTeorica" value="capacidadTeorica:" />
+						<h:inputText id="capacidadTeorica"
+							value="#{EquipoInfoTecnicaController.newObject.capacidadTeorica }" />
+
+
+						<h:outputLabel for="capacidadPractica" value="capacidadPractica:" />
+						<h:inputText id="capacidadPractica"
+							value="#{EquipoInfoTecnicaController.newObject.capacidadPractica }" />
+
+
+						<h:outputLabel for="tecnologia" value="tecnologia:" />
+						<h:inputText id="tecnologia"
+							value="#{EquipoInfoTecnicaController.newObject.tecnologia }" />
+
+
+						<h:outputLabel for="insumos" value="insumos:" />
+						<h:inputText id="insumos"
+							value="#{EquipoInfoTecnicaController.newObject.insumos }" />
+
+
+					</h:panelGrid>
+				</p:panel>
+				<p:panel id="estadolEdit" header="Estado">
+					<h:panelGrid columns="2" columnClasses="titleCell">
+
+						<h:outputLabel for="estado_confirmar" value="estado_confirmar:" />
+						<h:inputText id="estado_confirmar"
+							value="#{EstadoEquipoController.newObject.estado_confirmar }" />
+
+
+						<h:outputLabel for="causa" value="causa:" />
+						<h:inputText id="causa2"
+							value="#{EstadoEquipoController.newObject.causa }" />
+
+
+					</h:panelGrid>
+				</p:panel>
+				<p:panel id="funcionamiemtolEdit" header="Funcionamiento">
+					<h:panelGrid columns="2" columnClasses="titleCell">
+
+						<h:outputLabel for="funcionamiento_confirmar"
+							value="funcionamiento_confirmar:" />
+						<h:inputText id="funcionamiento_confirmar"
+							value="#{FuncionamientoEquipoController.newObject.funcionamiento_confirmar }" />
+
+
+						<h:outputLabel for="anios_fuera_servicio"
+							value="anios_fuera_servicio:" />
+						<h:inputText id="anios_fuera_servicio"
+							value="#{FuncionamientoEquipoController.newObject.anios_fuera_servicio }" />
+
+
+						<h:outputLabel for="causa" value="causa:" />
+						<h:inputText id="causa"
+							value="#{FuncionamientoEquipoController.newObject.causa }" />
+
+
+						<h:outputLabel for="fuera_servicio" value="fuera_servicio:" />
+						<h:inputText id="fuera_servicio"
+							value="#{FuncionamientoEquipoController.newObject.fuera_servicio }" />
+
+
+					</h:panelGrid>
+
+				</p:panel>
+				<p:panel id="planoslEdit" header="planos">
+					<h:panelGrid columns="2" columnClasses="titleCell">
+
+						<h:outputLabel for="instalacion_confirmar"
+							value="instalacion_confirmar:" />
+						<h:inputText id="instalacion_confirmar"
+							value="#{PlanosEquipoController.newObject.instalacion_confirmar }" />
+
+
+						<h:outputLabel for="instalacion_ubicacion"
+							value="instalacion_ubicacion:" />
+						<h:inputText id="instalacion_ubicacion"
+							value="#{PlanosEquipoController.newObject.instalacion_ubicacion }" />
+
+
+						<h:outputLabel for="partes_confirmar" value="partes_confirmar:" />
+						<h:inputText id="partes_confirmar"
+							value="#{PlanosEquipoController.newObject.partes_confirmar }" />
+
+
+						<h:outputLabel for="partes_ubicacion" value="partes_ubicacion:" />
+						<h:inputText id="partes_ubicacion"
+							value="#{PlanosEquipoController.newObject.partes_ubicacion }" />
+
+
+						<h:outputLabel for="funcionamiento_confirmar"
+							value="funcionamiento_confirmar:" />
+						<h:inputText id="funcionamiento_confirmar2"
+							value="#{PlanosEquipoController.newObject.funcionamiento_confirmar }" />
+
+
+						<h:outputLabel for="funcionamiento_ubicacion"
+							value="funcionamiento_ubicacion:" />
+						<h:inputText id="funcionamiento_ubicacion"
+							value="#{PlanosEquipoController.newObject.funcionamiento_ubicacion }" />
+
+
+					</h:panelGrid>
+
+				</p:panel>
+				<p:panel id="manualeslEdit" header="Manuales">
+					<h:panelGrid columns="2" columnClasses="titleCell">
+
+						<h:outputLabel for="tecnico_confirmar" value="tecnico_confirmar:" />
+						<h:inputText id="tecnico_confirmar"
+							value="#{ManualesEquipoController.newObject.tecnico_confirmar }" />
+
+
+						<h:outputLabel for="tecnico_ubicacion" value="tecnico_ubicacion:" />
+						<h:inputText id="tecnico_ubicacion"
+							value="#{ManualesEquipoController.newObject.tecnico_ubicacion }" />
+
+
+						<h:outputLabel for="servicio_confirmar"
+							value="servicio_confirmar:" />
+						<h:inputText id="servicio_confirmar"
+							value="#{ManualesEquipoController.newObject.servicio_confirmar }" />
+
+
+						<h:outputLabel for="servicio_ubicacion"
+							value="servicio_ubicacion:" />
+						<h:inputText id="servicio_ubicacion"
+							value="#{ManualesEquipoController.newObject.servicio_ubicacion }" />
+
+
+						<h:outputLabel for="usuario_confirmar" value="usuario_confirmar:" />
+						<h:inputText id="usuario_confirmar"
+							value="#{ManualesEquipoController.newObject.usuario_confirmar }" />
+
+
+						<h:outputLabel for="usuario_ubicacion" value="usuario_ubicacion:" />
+						<h:inputText id="usuario_ubicacion"
+							value="#{ManualesEquipoController.newObject.usuario_ubicacion }" />
+
+
+					</h:panelGrid>
+				</p:panel>
+				<p:panel id="recomendacionesEdit" header="Recomendaciones">
+					<h:panelGrid columns="2" columnClasses="titleCell">
+
+						<h:outputLabel for="detalle" value="detalle:" />
+						<h:inputText id="detalle"
+							value="#{RecomendacionesEquipoController.newObject.detalle }" />
+
+
+					</h:panelGrid>
+
+				</p:panel>
+				<p:panel id="tipoMantenimientoEdit" header="Tipo Mantenimiento">
+					<h:panelGrid columns="2" columnClasses="titleCell">
+
+						<h:outputLabel for="tipo_mantenimiento"
+							value="tipo_mantenimiento:" />
+						<h:inputText id="tipo_mantenimiento"
+							value="#{TipoManteEquipoController.newObject.tipo_mantenimiento }" />
+
+
+						<h:outputLabel for="propio" value="propio:" />
+						<h:inputText id="propio"
+							value="#{TipoManteEquipoController.newObject.propio }" />
+
+
+						<h:outputLabel for="contratado" value="contratado:" />
+						<h:inputText id="contratado"
+							value="#{TipoManteEquipoController.newObject.contratado }" />
+
+
+						<h:outputLabel for="cual" value="cual:" />
+						<h:inputText id="cual"
+							value="#{TipoManteEquipoController.newObject.cual }" />
+
+					</h:panelGrid>
+				</p:panel>
+				<div style="clear: both" />
+
+				<!-- p:requiredFields /> -->
+
+				<p:panel id="groupButton" align="right">
+					<p:commandButton id="create" styleClass="" value="Guardar"
+						action="#{empresaController.create}"
+						rendered="#{!empresaController.editMode}" />
+
+					<p:commandButton id="update" styleClass="" type="complex"
+						value="Guardar" action="#{empresaController.actualizarEmpresa}"
+						rendered="#{empresaController.editMode}" />
+
+					<p:commandButton id="cancel" styleClass="" value="Cancelar"
+						action="#{empresaController.cancel}" immediate="true" />
+				</p:panel>
+
+				<div style="clear: both" />
+
+			</p:panel>
+		</h:form>
+
+	</ui:define>
+</ui:composition>

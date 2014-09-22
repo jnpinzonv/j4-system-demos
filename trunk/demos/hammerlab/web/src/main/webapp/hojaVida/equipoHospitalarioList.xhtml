@@ -45,63 +45,79 @@
 				</h:panelGroup>
 
 				<p:panel id="groupButtonTop" align="right">
-						
+
 					<p:commandButton id="createButtonTop"
-						action="#{empresaController.initCreateMode}" immediate="true"  value="Crear" />
-					
+						action="#{empresaController.initCreateMode}" immediate="true"
+						value="Crear" />
+
 					<p:commandButton id="editButtonTop"
-						action="#{empresaController.cargarEmpresaEditar}"
-						value="Editar" immediate="true"
+						action="#{empresaController.cargarEmpresaEditar}" value="Editar"
+						immediate="true"
 						disabled="#{empresaController.selectEmpresas.size()!= 1}" />
 
 					<p:commandButton id="viewButtonTop"
-						action="empresaController.initViewMode"
-						value="Ver" immediate="true"
+						action="empresaController.initViewMode" value="Ver"
+						immediate="true"
 						disabled="#{empresaController.selectEmpresas.size() != 1}" />
 
 
 					<p:commandButton id="deleteButtonTop" value="Borrar"
-						immediate="true" 
-						ajax="true"
-						ignoreAutoUpdate="true" async="true"
+						immediate="true" ajax="true" ignoreAutoUpdate="true" async="true"
 						disabled="#{empresaController.selectEmpresas.size()  == 0}" />
 
 				</p:panel>
 
 				<p:dataTable var="_object" value="#{empresaController.listaEmpresa}"
 					rendered="#{not empty empresaController.listaEmpresa}"
-					id="empresaList"
-					paginator="true" paginatorPosition="bottom" rowKey="#{_object.id}"
-					selection="#{empresaController.selectEmpresas}" >
+					id="empresaList" paginator="true" paginatorPosition="bottom"
+					rowKey="#{_object.id}"
+					selection="#{empresaController.selectEmpresas}">
 
-					<p:column id="c1" headerText="Razón Social">
-						<h:outputText value="#{_object.razonSocial}" />
+
+
+					<p:column id="c1" headerText="id">
+						<h:outputText value="#{_object.id}" />
 					</p:column>
 
-					<p:column id="c2" headerText="NIT">
-						<h:outputText value=" #{_object.nit}" />
+					<p:column id="c2" headerText="fotoEquipo">
+						<h:outputText value=" #{_object.fotoEquipo}" />
 					</p:column>
 
-					<p:column id="c3" headerText="Telefono">
-						<h:outputText value="#{_object.telefono}" />
+					<p:column id="c3" headerText="marca">
+						<h:outputText value=" #{_object.marca}" />
 					</p:column>
 
-					<p:column id="c4" headerText="Dirección">
-						<h:outputText value="#{_object.direccion}" />
+					<p:column id="c4" headerText="modelo">
+						<h:outputText value="#{_object.modelo}" "/>
 					</p:column>
 
-					<p:column id="c5" headerText="Correo Electronico">
-						<h:outputText value="#{_object.correoElectronico}" />
+					<p:column id="c5" headerText="ubicacion">
+						<h:outputText value=" #{_object.ubicacion}" />
 					</p:column>
 
-					<p:column id="c6" headerText="Sitio Web">
-						<h:outputText value="#{_object.sitioWeb}" />
+					<p:column id="c6" headerText="fabricante">
+						<h:outputText value=" #{_object.fabricante}" />
 					</p:column>
-					<p:column selectionMode="multiple" style="width:16px;text-align:center"/>
-					
-					<p:ajax event="rowSelectCheckbox" immediate="true"  update=":formEmpresas:groupButtonBottom,:formEmpresas:groupButtonTop" />
-					<p:ajax event="rowUnselectCheckbox" immediate="true" update=":formEmpresas:groupButtonBottom,:formEmpresas:groupButtonTop" />
-					
+
+					<p:column id="c7" headerText="representanteCol">
+						<h:outputText value="#{_object.representanteCol}" />
+					</p:column>
+
+					<p:column id="c8" headerText="direccion">
+						<h:outputText value=" #{_object.direccion}" />
+					</p:column>
+
+					<p:column id="c9" headerText="telefono">
+						<h:outputText value=" #{_object.telefono}" />
+					</p:column>
+
+					<p:column selectionMode="multiple"
+						style="width:16px;text-align:center" />
+
+					<p:ajax event="rowSelectCheckbox" immediate="true"
+						update=":formEmpresas:groupButtonBottom,:formEmpresas:groupButtonTop" />
+					<p:ajax event="rowUnselectCheckbox" immediate="true"
+						update=":formEmpresas:groupButtonBottom,:formEmpresas:groupButtonTop" />
 				</p:dataTable>
 
 
@@ -124,15 +140,13 @@
 						disabled="#{empresaController.selectEmpresas.size()!= 1}" />
 
 					<p:commandButton id="deleteButtonBottom" value="Borrar"
-						immediate="true" 
-						 ajax="true"
-						ignoreAutoUpdate="true" async="true"
+						immediate="true" ajax="true" ignoreAutoUpdate="true" async="true"
 						disabled="#{empresaController.selectEmpresas.size() == 0}" />
 				</p:panel>
 			</p:panel>
 		</h:form>
 
-		
+
 
 		<h:form id="idForm">
 			<p:growl id="message" showDetail="true" />

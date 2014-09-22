@@ -5,48 +5,66 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:c="http://java.sun.com/jstl/core"
-	xmlns:p="http://primefaces.org/ui"	
+	xmlns:p="http://primefaces.org/ui"
 	template="/WEB-INF/templates/default.xhtml">
 
 	<ui:define name="content">
 
-		<h:form id="fileDefinitionTypeEdit">
-			<p:panel id="fileDefTypePanelEdit" styleClass="pPanel"
-				header="#{fileProcFileDefinitionType.editMode ? 'fp.fileDefinitionType.title.edit' : 'fp.fileDefinitionType.title.add'}">
+		<h:form id="empresaEdit">
+			<p:panel id="empresaPanelEdit"
+				header="#{empresaController.editMode ? 'Actualizar Empresa' : 'Crear Empresa'}">
 
-				<p:formFormat id="idForm">
-					<p:inputText id="typeName" required="true"
-						label="fp.fileDefinitionType.label.name"
-						title="fp.fileDefinitionType.title.name"
-						value="#{fileProcFileDefinitionType.fileDefinitionTypeConsole.name}" />
+				<h:panelGrid id="idForm" columns="2" columnClasses="titleCell">
 
-					<p:inputTextArea id="typeDescription"
-						label="fp.fileDefinitionType.label.description"
-						title="fp.fileDefinitionType.title.description"
-						value="#{fileProcFileDefinitionType.fileDefinitionTypeConsole.description}" />
+					<p:outputLabel for="razonSocial" value="Razón Social:" />
+					<p:inputText id="razonSocial"
+						value="#{empresaController.newObject.razonSocial}" required="true" />
 
-				</p:formFormat>
+
+					<p:outputLabel for="nit" value="NIT:" />
+					<p:inputText id="nit" value="#{empresaController.newObject.nit }"
+						required="true" />
+
+
+					<p:outputLabel for="telefono" value="Telefono:" />
+					<p:inputText id="telefono"
+						value="#{empresaController.newObject.telefono }" required="true" />
+
+
+					<p:outputLabel for="direccion" value="Dirección:" />
+					<p:inputText id="direccion"
+						value="#{empresaController.newObject.direccion }" required="true" />
+
+
+					<p:outputLabel for="correoElectronico" value="Correo Electronico:" />
+					<p:inputText id="correoElectronico"
+						value="#{empresaController.newObject.correoElectronico}"
+						required="true" />
+
+
+					<p:outputLabel for="sitioWeb" value="sitio Web:" />
+					<p:inputText id="sitioWeb"
+						value="#{empresaController.newObject.sitioWeb }" required="true" />
+
+
+				</h:panelGrid>
 
 				<div style="clear: both" />
 
-				<p:requiredFields />
+				<!-- p:requiredFields /> -->
 
-				<p:panelButton id="groupButton" align="right">
-					<p:commandButton id="create" styleClass="pButtonEnabled"
-						value="messages.common.guardar" type="complex"
-						actionBean="#{fileProcFileDefinitionType}" action="create"
-						rendered="#{!fileProcFileDefinitionType.editMode}" />
+				<p:panel id="groupButton" align="right">
+					<p:commandButton id="create" styleClass="" value="Guardar"
+						action="#{empresaController.create}"
+						rendered="#{!empresaController.editMode}" />
 
-					<p:commandButton id="update" styleClass="pButtonEnabled"
-						type="complex" value="messages.common.guardar"
-						actionBean="#{fileProcFileDefinitionType}" action="update"
-						rendered="#{fileProcFileDefinitionType.editMode}" />
+					<p:commandButton id="update" styleClass="" type="complex"
+						value="Guardar" action="#{empresaController.actualizarEmpresa}"
+						rendered="#{empresaController.editMode}" />
 
-					<p:commandButton id="cancel" styleClass="pButtonEnabled"
-						type="complex" value="messages.common.cancelar"
-						actionBean="#{fileProcFileDefinitionType}" action="cancel"
-						immediate="true" />
-				</p:panelButton>
+					<p:commandButton id="cancel" styleClass="" value="Cancelar"
+						action="#{empresaController.cancel}" immediate="true" />
+				</p:panel>
 
 				<div style="clear: both" />
 
