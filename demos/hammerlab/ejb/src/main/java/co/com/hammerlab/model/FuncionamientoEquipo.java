@@ -39,13 +39,13 @@ public class FuncionamientoEquipo implements Serializable {
      * funcionamiento_confirmar
      */
 
-    private String funcionamiento_confirmar;
+    private String funcionamientoConfirmar;
 
     /**
      * anios_fuera_servicio
      */
 
-    private Integer anios_fuera_servicio;
+    private Integer anioFueraServicio;
 
     /**
      * causa
@@ -57,7 +57,7 @@ public class FuncionamientoEquipo implements Serializable {
      * fuera_servicio
      */
 
-    private Boolean fuera_servicio;
+    private Boolean fueraServicio;
 
     /**
      * Devuelve el valor de id
@@ -73,22 +73,6 @@ public class FuncionamientoEquipo implements Serializable {
      */
     @OneToOne()
     private EquipoHospitalario equipoHospitalario;
-    
-    /**
-     * Devuelve el valor de equipoHospitalario
-     * @return El valor de equipoHospitalario
-     */
-    public EquipoHospitalario getEquipoHospitalario() {
-        return equipoHospitalario;
-    }
-
-    /**
-     * Establece el valor de equipoHospitalario
-     * @param equipoHospitalario El valor por establecer para equipoHospitalario
-     */
-    public void setEquipoHospitalario(EquipoHospitalario equipoHospitalario) {
-        this.equipoHospitalario = equipoHospitalario;
-    }
 
     /**
      * Devuelve el valor de id
@@ -107,35 +91,35 @@ public class FuncionamientoEquipo implements Serializable {
     }
 
     /**
-     * Devuelve el valor de funcionamiento_confirmar
-     * @return El valor de funcionamiento_confirmar
+     * Devuelve el valor de funcionamientoConfirmar
+     * @return El valor de funcionamientoConfirmar
      */
-    public String getFuncionamiento_confirmar() {
-        return funcionamiento_confirmar;
+    public String getFuncionamientoConfirmar() {
+        return funcionamientoConfirmar;
     }
 
     /**
-     * Establece el valor de funcionamiento_confirmar
-     * @param funcionamiento_confirmar El valor por establecer para funcionamiento_confirmar
+     * Establece el valor de funcionamientoConfirmar
+     * @param funcionamientoConfirmar El valor por establecer para funcionamientoConfirmar
      */
-    public void setFuncionamiento_confirmar(String funcionamiento_confirmar) {
-        this.funcionamiento_confirmar = funcionamiento_confirmar;
+    public void setFuncionamientoConfirmar(String funcionamientoConfirmar) {
+        this.funcionamientoConfirmar = funcionamientoConfirmar;
     }
 
     /**
-     * Devuelve el valor de anios_fuera_servicio
-     * @return El valor de anios_fuera_servicio
+     * Devuelve el valor de anioFueraServicio
+     * @return El valor de anioFueraServicio
      */
-    public Integer getAnios_fuera_servicio() {
-        return anios_fuera_servicio;
+    public Integer getAnioFueraServicio() {
+        return anioFueraServicio;
     }
 
     /**
-     * Establece el valor de anios_fuera_servicio
-     * @param anios_fuera_servicio El valor por establecer para anios_fuera_servicio
+     * Establece el valor de anioFueraServicio
+     * @param anioFueraServicio El valor por establecer para anioFueraServicio
      */
-    public void setAnios_fuera_servicio(Integer anios_fuera_servicio) {
-        this.anios_fuera_servicio = anios_fuera_servicio;
+    public void setAnioFueraServicio(Integer anioFueraServicio) {
+        this.anioFueraServicio = anioFueraServicio;
     }
 
     /**
@@ -155,19 +139,36 @@ public class FuncionamientoEquipo implements Serializable {
     }
 
     /**
-     * Devuelve el valor de fuera_servicio
-     * @return El valor de fuera_servicio
+     * Devuelve el valor de fueraServicio
+     * @return El valor de fueraServicio
      */
-    public Boolean getFuera_servicio() {
-        return fuera_servicio;
+    public Boolean getFueraServicio() {
+        return fueraServicio;
     }
 
     /**
-     * Establece el valor de fuera_servicio
-     * @param fuera_servicio El valor por establecer para fuera_servicio
+     * Establece el valor de fueraServicio
+     * @param fueraServicio El valor por establecer para fueraServicio
      */
-    public void setFuera_servicio(Boolean fuera_servicio) {
-        this.fuera_servicio = fuera_servicio;
+    public void setFueraServicio(Boolean fueraServicio) {
+        this.fueraServicio = fueraServicio;
     }
+
+    /**
+     * Devuelve el valor de equipoHospitalario
+     * @return El valor de equipoHospitalario
+     */
+    public EquipoHospitalario getEquipoHospitalario() {
+        return equipoHospitalario;
+    }
+
+    /**
+     * Establece el valor de equipoHospitalario
+     * @param equipoHospitalario El valor por establecer para equipoHospitalario
+     */
+    public void setEquipoHospitalario(EquipoHospitalario equipoHospitalario) {
+        this.equipoHospitalario = equipoHospitalario;
+    }
+    
 
 }

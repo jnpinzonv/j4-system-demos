@@ -12,49 +12,49 @@
 
 		<h:form id="empresaEdit">
 			<p:panel id="empresaPanelEdit"
-				header="#{empresaController.editMode ? 'Actualizar Equipo' : 'Crear Equipo'}">
+				header="#{equipoController.editMode ? 'Actualizar Equipo' : 'Crear Equipo'}">
 
 				<p:panel id="basicalEdit" header="Información Basica">
 					<h:panelGrid columns="2" columnClasses="titleCell">
 
-						<h:outputLabel for="fotoEquipo" value="fotoEquipo:" />
-						<h:inputText id="fotoEquipo"
-							value="#{EquipoHospitalarioController.newObject.fotoEquipo }" />
+						<p:outputLabel for="fotoEquipo" value="fotoEquipo:" />
+						<p:inputText id="fotoEquipo"
+							value="#{equipoController.newObject.fotoEquipo }" />
 
 
-						<h:outputLabel for="marca" value="marca:" />
-						<h:inputText id="marca"
-							value="#{EquipoHospitalarioController.newObject.marca }" />
+						<p:outputLabel for="marca" value="marca:" />
+						<p:inputText id="marca"
+							value="#{equipoController.newObject.marca }" />
 
 
-						<h:outputLabel for="modelo" value="modelo:" />
-						<h:inputText id="modelo"
-							value="#{EquipoHospitalarioController.newObject.modelo }" />
+						<p:outputLabel for="modelo" value="modelo:" />
+						<p:inputText id="modelo"
+							value="#{equipoController.newObject.modelo }" />
 
 
-						<h:outputLabel for="ubicacion" value="ubicacion:" />
-						<h:inputText id="ubicacion"
-							value="#{EquipoHospitalarioController.newObject.ubicacion }" />
+						<p:outputLabel for="ubicacion" value="ubicacion:" />
+						<p:inputText id="ubicacion"
+							value="#{equipoController.newObject.ubicacion }" />
 
 
-						<h:outputLabel for="fabricante" value="fabricante:" />
-						<h:inputText id="fabricante"
-							value="#{EquipoHospitalarioController.newObject.fabricante }" />
+						<p:outputLabel for="fabricante" value="fabricante:" />
+						<p:inputText id="fabricante"
+							value="#{equipoController.newObject.fabricante }" />
 
 
-						<h:outputLabel for="representanteCol" value="representanteCol:" />
-						<h:inputText id="representanteCol"
-							value="#{EquipoHospitalarioController.newObject.representanteCol }" />
+						<p:outputLabel for="representanteCol" value="representanteCol:" />
+						<p:inputText id="representanteCol"
+							value="#{equipoController.newObject.representanteCol }" />
 
 
-						<h:outputLabel for="direccion" value="direccion:" />
-						<h:inputText id="direccion"
-							value="#{EquipoHospitalarioController.newObject.direccion }" />
+						<p:outputLabel for="direccion" value="direccion:" />
+						<p:inputText id="direccion"
+							value="#{equipoController.newObject.direccion }" />
 
 
-						<h:outputLabel for="telefono" value="telefono:" />
-						<h:inputText id="telefono"
-							value="#{EquipoHospitalarioController.newObject.telefono }" />
+						<p:outputLabel for="telefono" value="telefono:" />
+						<p:inputText id="telefono"
+							value="#{equipoController.newObject.telefono }" />
 
 
 					</h:panelGrid>
@@ -62,44 +62,44 @@
 				<p:panel id="adquisicionlEdit" header="Adquisicion">
 					<h:panelGrid columns="2" columnClasses="titleCell">
 
-						<h:outputLabel for="voltaje" value="voltaje:" />
-						<h:inputText id="voltaje"
-							value="#{AdquisicionEquipoController.newObject.voltaje }" />
+						<p:outputLabel for="voltaje" value="voltaje:" />
+						<p:inputText id="voltaje"
+							value="#{equipoController.adquisicionEquipo.voltaje }" />
 
 
-						<h:outputLabel for="instalaciones" value="instalaciones:" />
-						<h:inputText id="instalaciones"
-							value="#{AdquisicionEquipoController.newObject.instalaciones }" />
+						<p:outputLabel for="instalaciones" value="instalaciones:" />
+						<p:inputText id="instalaciones"
+							value="#{equipoController.adquisicionEquipo.instalaciones }" />
 
 
-						<h:outputLabel for="potencia" value="potencia:" />
-						<h:inputText id="potencia2"
-							value="#{AdquisicionEquipoController.newObject.potencia }" />
+						<p:outputLabel for="potencia" value="potencia:" />
+						<p:inputText id="potencia2"
+							value="#{equipoController.adquisicionEquipo.potencia }" />
 
 
-						<h:outputLabel for="frecuencia" value="frecuencia:" />
-						<h:inputText id="frecuencia2"
-							value="#{AdquisicionEquipoController.newObject.frecuencia }" />
+						<p:outputLabel for="frecuencia" value="frecuencia:" />
+						<p:inputText id="frecuencia2"
+							value="#{equipoController.adquisicionEquipo.frecuencia }" />
 
 
-						<h:outputLabel for="capacidadTeorica" value="capacidadTeorica:" />
-						<h:inputText id="capacidadTeorica2"
-							value="#{AdquisicionEquipoController.newObject.capacidadTeorica }" />
+						<p:outputLabel for="capacidadTeorica" value="capacidadTeorica:" />
+						<p:inputText id="capacidadTeorica2"
+							value="#{equipoController.adquisicionEquipo.capacidadTeorica }" />
 
 
-						<h:outputLabel for="capacidadPractica" value="capacidadPractica:" />
-						<h:inputText id="capacidadPractica2"
-							value="#{AdquisicionEquipoController.newObject.capacidadPractica }" />
+						<p:outputLabel for="capacidadPractica" value="capacidadPractica:" />
+						<p:inputText id="capacidadPractica2"
+							value="#{equipoController.adquisicionEquipo.capacidadPractica }" />
 
 
-						<h:outputLabel for="tecnologia" value="tecnologia:" />
-						<h:inputText id="tecnologia2"
-							value="#{AdquisicionEquipoController.newObject.tecnologia }" />
+						<p:outputLabel for="tecnologia" value="tecnologia:" />
+						<p:inputText id="tecnologia2"
+							value="#{equipoController.adquisicionEquipo.tecnologia }" />
 
 
-						<h:outputLabel for="insumos" value="insumos:" />
-						<h:inputText id="insumos2"
-							value="#{AdquisicionEquipoController.newObject.insumos }" />
+						<p:outputLabel for="insumos" value="insumos:" />
+						<p:inputText id="insumos2"
+							value="#{equipoController.adquisicionEquipo.insumos }" />
 
 
 					</h:panelGrid>
@@ -108,44 +108,44 @@
 				<p:panel id="tecnicalEdit" header="Tecnica">
 					<h:panelGrid columns="2" columnClasses="titleCell">
 
-						<h:outputLabel for="voltaje" value="voltaje:" />
-						<h:inputText id="voltaje2"
-							value="#{EquipoInfoTecnicaController.newObject.voltaje }" />
+						<p:outputLabel for="voltaje" value="voltaje:" />
+						<p:inputText id="voltaje2"
+							value="#{equipoController.infoTecnica.voltaje }" />
 
 
-						<h:outputLabel for="instalaciones" value="instalaciones:" />
-						<h:inputText id="instalaciones2"
-							value="#{EquipoInfoTecnicaController.newObject.instalaciones }" />
+						<p:outputLabel for="instalaciones" value="instalaciones:" />
+						<p:inputText id="instalaciones2"
+							value="#{equipoController.infoTecnica.instalaciones }" />
 
 
-						<h:outputLabel for="potencia" value="potencia:" />
-						<h:inputText id="potencia"
-							value="#{EquipoInfoTecnicaController.newObject.potencia }" />
+						<p:outputLabel for="potencia" value="potencia:" />
+						<p:inputText id="potencia"
+							value="#{equipoController.infoTecnica.potencia }" />
 
 
-						<h:outputLabel for="frecuencia" value="frecuencia:" />
-						<h:inputText id="frecuencia"
-							value="#{EquipoInfoTecnicaController.newObject.frecuencia }" />
+						<p:outputLabel for="frecuencia" value="frecuencia:" />
+						<p:inputText id="frecuencia"
+							value="#{equipoController.infoTecnica.frecuencia }" />
 
 
-						<h:outputLabel for="capacidadTeorica" value="capacidadTeorica:" />
-						<h:inputText id="capacidadTeorica"
-							value="#{EquipoInfoTecnicaController.newObject.capacidadTeorica }" />
+						<p:outputLabel for="capacidadTeorica" value="capacidadTeorica:" />
+						<p:inputText id="capacidadTeorica"
+							value="#{equipoController.infoTecnica.capacidadTeorica }" />
 
 
-						<h:outputLabel for="capacidadPractica" value="capacidadPractica:" />
-						<h:inputText id="capacidadPractica"
-							value="#{EquipoInfoTecnicaController.newObject.capacidadPractica }" />
+						<p:outputLabel for="capacidadPractica" value="capacidadPractica:" />
+						<p:inputText id="capacidadPractica"
+							value="#{equipoController.infoTecnica.capacidadPractica }" />
 
 
-						<h:outputLabel for="tecnologia" value="tecnologia:" />
-						<h:inputText id="tecnologia"
-							value="#{EquipoInfoTecnicaController.newObject.tecnologia }" />
+						<p:outputLabel for="tecnologia" value="tecnologia:" />
+						<p:inputText id="tecnologia"
+							value="#{equipoController.infoTecnica.tecnologia }" />
 
 
-						<h:outputLabel for="insumos" value="insumos:" />
-						<h:inputText id="insumos"
-							value="#{EquipoInfoTecnicaController.newObject.insumos }" />
+						<p:outputLabel for="insumos" value="insumos:" />
+						<p:inputText id="insumos"
+							value="#{equipoController.infoTecnica.insumos }" />
 
 
 					</h:panelGrid>
@@ -153,14 +153,14 @@
 				<p:panel id="estadolEdit" header="Estado">
 					<h:panelGrid columns="2" columnClasses="titleCell">
 
-						<h:outputLabel for="estado_confirmar" value="estado_confirmar:" />
-						<h:inputText id="estado_confirmar"
-							value="#{EstadoEquipoController.newObject.estado_confirmar }" />
+						<p:outputLabel for="estado_confirmar" value="estado_confirmar:" />
+						<p:inputText id="estado_confirmar"
+							value="#{equipoController.estadoEquipo.estado_confirmar }" />
 
 
-						<h:outputLabel for="causa" value="causa:" />
-						<h:inputText id="causa2"
-							value="#{EstadoEquipoController.newObject.causa }" />
+						<p:outputLabel for="causa" value="causa:" />
+						<p:inputText id="causa2"
+							value="#{equipoController.estadoEquipo.causa }" />
 
 
 					</h:panelGrid>
@@ -168,26 +168,26 @@
 				<p:panel id="funcionamiemtolEdit" header="Funcionamiento">
 					<h:panelGrid columns="2" columnClasses="titleCell">
 
-						<h:outputLabel for="funcionamiento_confirmar"
+						<p:outputLabel for="funcionamiento_confirmar"
 							value="funcionamiento_confirmar:" />
-						<h:inputText id="funcionamiento_confirmar"
-							value="#{FuncionamientoEquipoController.newObject.funcionamiento_confirmar }" />
+						<p:inputText id="funcionamiento_confirmar"
+							value="#{equipoController.funcionamientoEquipo.funcionamientoConfirmar }" />
 
 
-						<h:outputLabel for="anios_fuera_servicio"
-							value="anios_fuera_servicio:" />
-						<h:inputText id="anios_fuera_servicio"
-							value="#{FuncionamientoEquipoController.newObject.anios_fuera_servicio }" />
+						<p:outputLabel for="aniosFueraServicio"
+							value="aniosFueraServicio:" />
+						<p:inputText id="aniosFueraServicio"
+							value="#{equipoController.funcionamientoEquipo.anioFueraServicio }" />
 
 
-						<h:outputLabel for="causa" value="causa:" />
-						<h:inputText id="causa"
-							value="#{FuncionamientoEquipoController.newObject.causa }" />
+						<p:outputLabel for="causa" value="causa:" />
+						<p:inputText id="causa"
+							value="#{equipoController.funcionamientoEquipo.causa }" />
 
 
-						<h:outputLabel for="fuera_servicio" value="fuera_servicio:" />
-						<h:inputText id="fuera_servicio"
-							value="#{FuncionamientoEquipoController.newObject.fuera_servicio }" />
+						<p:outputLabel for="fueraServicio" value="Fuera Servicio:" />
+						<p:inputText id="fueraServicio"
+							value="#{equipoController.funcionamientoEquipo.fueraServicio }" />
 
 
 					</h:panelGrid>
@@ -196,38 +196,38 @@
 				<p:panel id="planoslEdit" header="planos">
 					<h:panelGrid columns="2" columnClasses="titleCell">
 
-						<h:outputLabel for="instalacion_confirmar"
+						<p:outputLabel for="instalacion_confirmar"
 							value="instalacion_confirmar:" />
-						<h:inputText id="instalacion_confirmar"
-							value="#{PlanosEquipoController.newObject.instalacion_confirmar }" />
+						<p:inputText id="instalacion_confirmar"
+							value="#{equipoController.planosEquipo.instalacionConfirmar }" />
 
 
-						<h:outputLabel for="instalacion_ubicacion"
+						<p:outputLabel for="instalacion_ubicacion"
 							value="instalacion_ubicacion:" />
-						<h:inputText id="instalacion_ubicacion"
-							value="#{PlanosEquipoController.newObject.instalacion_ubicacion }" />
+						<p:inputText id="instalacion_ubicacion"
+							value="#{equipoController.planosEquipo.instalacionUbicacion }" />
 
 
-						<h:outputLabel for="partes_confirmar" value="partes_confirmar:" />
-						<h:inputText id="partes_confirmar"
-							value="#{PlanosEquipoController.newObject.partes_confirmar }" />
+						<p:outputLabel for="partes_confirmar" value="partesConfirmar:" />
+						<p:inputText id="partes_confirmar"
+							value="#{equipoController.planosEquipo.partesConfirmar }" />
 
 
-						<h:outputLabel for="partes_ubicacion" value="partes_ubicacion:" />
-						<h:inputText id="partes_ubicacion"
-							value="#{PlanosEquipoController.newObject.partes_ubicacion }" />
+						<p:outputLabel for="partes_ubicacion" value="partesUbicacion:" />
+						<p:inputText id="partes_ubicacion"
+							value="#{equipoController.planosEquipo.partesUbicacion }" />
 
 
-						<h:outputLabel for="funcionamiento_confirmar"
+						<p:outputLabel for="funcionamiento_confirmar"
 							value="funcionamiento_confirmar:" />
-						<h:inputText id="funcionamiento_confirmar2"
-							value="#{PlanosEquipoController.newObject.funcionamiento_confirmar }" />
+						<p:inputText id="funcionamiento_confirmar2"
+							value="#{equipoController.planosEquipo.funcionamientoConfirmar }" />
 
 
-						<h:outputLabel for="funcionamiento_ubicacion"
+						<p:outputLabel for="funcionamiento_ubicacion"
 							value="funcionamiento_ubicacion:" />
-						<h:inputText id="funcionamiento_ubicacion"
-							value="#{PlanosEquipoController.newObject.funcionamiento_ubicacion }" />
+						<p:inputText id="funcionamiento_ubicacion"
+							value="#{equipoController.planosEquipo.funcionamientoUbicacion }" />
 
 
 					</h:panelGrid>
@@ -236,36 +236,36 @@
 				<p:panel id="manualeslEdit" header="Manuales">
 					<h:panelGrid columns="2" columnClasses="titleCell">
 
-						<h:outputLabel for="tecnico_confirmar" value="tecnico_confirmar:" />
-						<h:inputText id="tecnico_confirmar"
-							value="#{ManualesEquipoController.newObject.tecnico_confirmar }" />
+						<p:outputLabel for="tecnico_confirmar" value="tecnicoConfirmar:" />
+						<p:inputText id="tecnico_confirmar"
+							value="#{equipoController.manualesEquipo.tecnicoConfirmar }" />
 
 
-						<h:outputLabel for="tecnico_ubicacion" value="tecnico_ubicacion:" />
-						<h:inputText id="tecnico_ubicacion"
-							value="#{ManualesEquipoController.newObject.tecnico_ubicacion }" />
+						<p:outputLabel for="tecnico_ubicacion" value="tecnicoUbicacion:" />
+						<p:inputText id="tecnico_ubicacion"
+							value="#{equipoController.manualesEquipo.tecnicoUbicacion }" />
 
 
-						<h:outputLabel for="servicio_confirmar"
+						<p:outputLabel for="servicio_confirmar"
 							value="servicio_confirmar:" />
-						<h:inputText id="servicio_confirmar"
-							value="#{ManualesEquipoController.newObject.servicio_confirmar }" />
+						<p:inputText id="servicio_confirmar"
+							value="#{equipoController.manualesEquipo.servicioConfirmar }" />
 
 
-						<h:outputLabel for="servicio_ubicacion"
+						<p:outputLabel for="servicio_ubicacion"
 							value="servicio_ubicacion:" />
-						<h:inputText id="servicio_ubicacion"
-							value="#{ManualesEquipoController.newObject.servicio_ubicacion }" />
+						<p:inputText id="servicio_ubicacion"
+							value="#{equipoController.manualesEquipo.servicioUbicacion }" />
 
 
-						<h:outputLabel for="usuario_confirmar" value="usuario_confirmar:" />
-						<h:inputText id="usuario_confirmar"
-							value="#{ManualesEquipoController.newObject.usuario_confirmar }" />
+						<p:outputLabel for="usuario_confirmar" value="usuarioConfirmar:" />
+						<p:inputText id="usuario_confirmar"
+							value="#{equipoController.manualesEquipo.usuarioConfirmar }" />
 
 
-						<h:outputLabel for="usuario_ubicacion" value="usuario_ubicacion:" />
-						<h:inputText id="usuario_ubicacion"
-							value="#{ManualesEquipoController.newObject.usuario_ubicacion }" />
+						<p:outputLabel for="usuario_ubicacion" value="usuarioUbicacion:" />
+						<p:inputText id="usuario_ubicacion"
+							value="#{equipoController.manualesEquipo.usuarioUbicacion }" />
 
 
 					</h:panelGrid>
@@ -273,9 +273,9 @@
 				<p:panel id="recomendacionesEdit" header="Recomendaciones">
 					<h:panelGrid columns="2" columnClasses="titleCell">
 
-						<h:outputLabel for="detalle" value="detalle:" />
-						<h:inputText id="detalle"
-							value="#{RecomendacionesEquipoController.newObject.detalle }" />
+						<p:outputLabel for="detalle" value="detalle:" />
+						<p:inputText id="detalle"
+							value="#{equipoController.recomendacionesEquipo.detalle }" />
 
 
 					</h:panelGrid>
@@ -284,25 +284,25 @@
 				<p:panel id="tipoMantenimientoEdit" header="Tipo Mantenimiento">
 					<h:panelGrid columns="2" columnClasses="titleCell">
 
-						<h:outputLabel for="tipo_mantenimiento"
+						<p:outputLabel for="tipo_mantenimiento"
 							value="tipo_mantenimiento:" />
-						<h:inputText id="tipo_mantenimiento"
-							value="#{TipoManteEquipoController.newObject.tipo_mantenimiento }" />
+						<p:inputText id="tipo_mantenimiento"
+							value="#{equipoController.tipoManteEquipo.tipo_mantenimiento }" />
 
 
-						<h:outputLabel for="propio" value="propio:" />
-						<h:inputText id="propio"
-							value="#{TipoManteEquipoController.newObject.propio }" />
+						<p:outputLabel for="propio" value="propio:" />
+						<p:inputText id="propio"
+							value="#{equipoController.tipoManteEquipo.propio }" />
 
 
-						<h:outputLabel for="contratado" value="contratado:" />
-						<h:inputText id="contratado"
-							value="#{TipoManteEquipoController.newObject.contratado }" />
+						<p:outputLabel for="contratado" value="contratado:" />
+						<p:inputText id="contratado"
+							value="#{equipoController.tipoManteEquipo.contratado }" />
 
 
-						<h:outputLabel for="cual" value="cual:" />
-						<h:inputText id="cual"
-							value="#{TipoManteEquipoController.newObject.cual }" />
+						<p:outputLabel for="cual" value="cual:" />
+						<p:inputText id="cual"
+							value="#{equipoController.tipoManteEquipo.cual }" />
 
 					</h:panelGrid>
 				</p:panel>
@@ -312,15 +312,15 @@
 
 				<p:panel id="groupButton" align="right">
 					<p:commandButton id="create" styleClass="" value="Guardar"
-						action="#{empresaController.create}"
-						rendered="#{!empresaController.editMode}" />
+						action="#{equipoController.create}"
+						rendered="#{!equipoController.editMode}" />
 
 					<p:commandButton id="update" styleClass="" type="complex"
-						value="Guardar" action="#{empresaController.actualizarEmpresa}"
-						rendered="#{empresaController.editMode}" />
+						value="Guardar" action="#{equipoController.actualizarEmpresa}"
+						rendered="#{equipoController.editMode}" />
 
 					<p:commandButton id="cancel" styleClass="" value="Cancelar"
-						action="#{empresaController.cancel}" immediate="true" />
+						action="#{equipoController.cancel}" immediate="true" />
 				</p:panel>
 
 				<div style="clear: both" />
