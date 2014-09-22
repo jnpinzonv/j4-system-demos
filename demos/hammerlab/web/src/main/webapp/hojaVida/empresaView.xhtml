@@ -10,30 +10,53 @@
 
 	<ui:define name="content">
 
-		<h:form id="fileDefinitionType">
-			<p:panel id="fileDefinitionTypePanel" styleClass="pPanel"
-				header="fp.fileDefinitionType.title.detail">
+		<h:form id="empresa">
+			<p:panel id="empresaPanel" styleClass="pPanel"
+				header="Detalles de una Empresa">
 
-				<p:formFormat id="idForm">
-					<p:outputText id="name" label="fp.fileDefinitionType.label.name"
-						title="fp.fileDefinitionType.title.name"
-						value="#{fileProcFileDefinitionType.fileDefinitionTypeConsole.name}" />
+				<h:panelGrid id="idForm" columns="2" columnClasses="titleCell">
 
-					<p:outputText id="description"
-						label="fp.fileDefinitionType.label.description"
-						title="fp.fileDefinitionType.title.description"
-						value="#{fileProcFileDefinitionType.fileDefinitionTypeConsole.description}" />
+					<p:outputLabel for="razonSocial" value="Razón Social:" />
+					<p:outputLabel id="razonSocial"
+						value="#{empresaController.newObject.razonSocial}" required="true" />
 
-				</p:formFormat>
+
+					<p:outputLabel for="nit" value="NIT:" />
+					<p:outputLabel id="nit" value="#{empresaController.newObject.nit }"
+						required="true" />
+
+
+					<p:outputLabel for="telefono" value="Telefono:" />
+					<p:outputLabel id="telefono"
+						value="#{empresaController.newObject.telefono }" required="true" />
+
+
+					<p:outputLabel for="direccion" value="Dirección:" />
+					<p:outputLabel id="direccion"
+						value="#{empresaController.newObject.direccion }" required="true" />
+
+
+					<p:outputLabel for="correoElectronico" value="Correo Electronico:" />
+					<p:outputLabel id="correoElectronico"
+						value="#{empresaController.newObject.correoElectronico}"
+						required="true" />
+
+
+					<p:outputLabel for="sitioWeb" value="sitio Web:" />
+					<p:outputLabel id="sitioWeb"
+						value="#{empresaController.newObject.sitioWeb }" required="true" />
+
+
+				</h:panelGrid>
 
 				<div style="clear: both" />
 
-				<p:panelButton id="groupButton" align="right">
+				<p:panel id="groupButton" align="right">
 					<p:commandButton id="cancel" styleClass="pButtonEnabled"
-						value="messages.common.cancelar" type="complex"
-						actionBean="#{fileProcFileDefinitionType}" action="cancel"
+						value="Cancelar" 
+						action="empresaController.cancel"
 						immediate="true" />
-				</p:panelButton>
+				</p:panel>
 
 				<div style="clear: both" />
 

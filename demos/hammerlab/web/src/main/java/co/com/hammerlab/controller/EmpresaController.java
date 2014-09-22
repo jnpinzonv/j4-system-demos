@@ -13,6 +13,7 @@ import javax.inject.Named;
 
 import co.com.hammerlab.ejb.EmpresaBean;
 import co.com.hammerlab.model.Empresa;
+import co.com.hammerlab.util.ConstantesUtil;
 /**
  * <b>Descripcion:</b> Clase que <br/> se encarga de controlar los datos de un Empresa
  * <b>Caso de Uso:</b> SOL_MOV- <br/> CreacionModeloBaseDatosPagoUso
@@ -47,21 +48,14 @@ public class EmpresaController implements Serializable {
     /**
      * Variable de control
      */
-    private boolean editEmpresa;
+    private boolean editMode;
     
     /**
      * Variable de control de conversacion 
      */
     private boolean bandera= Boolean.FALSE;
 
-    /**
-     * Devuelve el valor de editEmpresa
-     * 
-     * @return El valor de editEmpresa
-     */
-     public boolean iseditEmpresa() {
-        return editEmpresa;
-    }
+   
 
       /**
      * Devuelve el valor de newUsuario
@@ -90,33 +84,39 @@ public class EmpresaController implements Serializable {
      * @param userId Identificador del objeto Seleccionado
      * @return Retorna regla de nevagacion
      */
-    public void cargarEmpresaEditar(Long objectId) {
-        editEmpresa = Boolean.TRUE;
-        newObject = empresaBean.getByID(objectId);
+    public String cargarEmpresaEditar() {
+    	editMode = Boolean.TRUE;
+        newObject = empresaBean.getByID(selectEmpresas.get(0).getId());
+        return ConstantesUtil.CREAR_ACTU;
+    }
+    
+    public String initViewMode(){
+    	 newObject = empresaBean.getByID(selectEmpresas.get(0).getId());
+    	 return ConstantesUtil.VER;
     }
     /**
      * Actualiza un objeto en la base de datos
      * @return Retorna regla de nevagacion
      */
-    public void actualizarEmpresa() {
+    public String actualizarEmpresa() {
         try {
             empresaBean.update(newObject);
-            editEmpresa = Boolean.FALSE;
+            editMode = Boolean.FALSE;
             initNewObject();
         } catch (Exception e) {
             String errorMessage = getRootErrorMessage(e);
             addMessage(FacesMessage.SEVERITY_ERROR, errorMessage);            
         }
+        
+        return ConstantesUtil.ATRAS;
     }
     
     public String initCreateMode(){
-        System.out.println("Hola");
-        
-        return "";
+        return ConstantesUtil.CREAR_ACTU;
     }
     
     public String cancel() {
-        return"celce";
+        return ConstantesUtil.ATRAS;
     }
     /**
      * Elimina un objeto en base de datos
@@ -138,12 +138,12 @@ public class EmpresaController implements Serializable {
      *@return Retorna regla de nevagacion
      * @throws Exception Lanza una excepcion si hay un error en la transacciòn 
      */
-    public String register(){
+    public String create(){
         try {
             empresaBean.save(newObject);
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Exito!", "Se realizo un resgistro exitoso de Empresa"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Exito!", "Se guardo un registro de una Empresa"));
             initNewObject();
-            return "";
+            return ConstantesUtil.ATRAS;
         } catch (Exception e) {
             String errorMessage = getRootErrorMessage(e);
            addMessage(FacesMessage.SEVERITY_ERROR, errorMessage);
@@ -163,7 +163,7 @@ public class EmpresaController implements Serializable {
             bandera = Boolean.TRUE;
             
             // TODO pendienta para inicializar el estado de editaod se deve mover
-            if (editEmpresa == Boolean.FALSE) {
+            if (editMode == Boolean.FALSE) {
                 newObject = new Empresa();
             }
             
@@ -238,6 +238,18 @@ public class EmpresaController implements Serializable {
 	 */
 	public void setListaEmpresa(List<Empresa> listaEmpresa) {
 		this.listaEmpresa = listaEmpresa;
+	}
+	/**
+	 * @return the editMode
+	 */
+	public boolean isEditMode() {
+		return editMode;
+	}
+	/**
+	 * @param editMode the editMode to set
+	 */
+	public void setEditMode(boolean editMode) {
+		this.editMode = editMode;
 	}
     
 	
