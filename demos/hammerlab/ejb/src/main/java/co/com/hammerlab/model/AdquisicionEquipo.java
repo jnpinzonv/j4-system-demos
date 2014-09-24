@@ -1,6 +1,7 @@
 package co.com.hammerlab.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -38,42 +39,50 @@ public class AdquisicionEquipo implements Serializable {
     /**
      * voltaje
      */
-    private Integer voltaje;
+    private  Date fechaAdquisicion;
 
     /**
      * instalaciones
      */
-    private String instalaciones;
+    private String fechaInstalacion;
 
     /**
      * potencia
      */
-    private Integer potencia;
+    private Integer aniosOperacion;
 
     /**
      * frecuencia
      */
-    private Double frecuencia;
+    private String propiedadEquipo;
 
     /**
      * capacidadTeorica
      */
-    private String capacidadTeorica;
+    private Integer aniosFueraServicio;
 
     /**
      * capacidadPractica
      */
-    private String capacidadPractica;
+    private String razon;
 
     /**
      * tecnologia
      */
-    private String tecnologia;
+    private String garantia;
 
     /**
      * insumos
      */
-    private String insumos;
+    private Date peridoGarantia;
+    
+    private String cubrimientoGarantia;
+    
+    private String clasificacionDecreto;
+    
+    private String calibracionTipo;
+    
+    private String calibracionPeriocidad;
     
     /**
      * Realacion con equiopo principal
@@ -112,132 +121,200 @@ public class AdquisicionEquipo implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+   
 
     /**
-     * Devuelve el valor de voltaje
-     * @return El valor de voltaje
+     * Devuelve el valor de fechaAdquisicion
+     * @return El valor de fechaAdquisicion
      */
-    public Integer getVoltaje() {
-        return voltaje;
+    public Date getFechaAdquisicion() {
+        return fechaAdquisicion;
     }
 
     /**
-     * Establece el valor de voltaje
-     * @param voltaje El valor por establecer para voltaje
+     * Establece el valor de fechaAdquisicion
+     * @param fechaAdquisicion El valor por establecer para fechaAdquisicion
      */
-    public void setVoltaje(Integer voltaje) {
-        this.voltaje = voltaje;
+    public void setFechaAdquisicion(Date fechaAdquisicion) {
+        this.fechaAdquisicion = fechaAdquisicion;
     }
 
     /**
-     * Devuelve el valor de instalaciones
-     * @return El valor de instalaciones
+     * Devuelve el valor de fechaInstalacion
+     * @return El valor de fechaInstalacion
      */
-    public String getInstalaciones() {
-        return instalaciones;
+    public String getFechaInstalacion() {
+        return fechaInstalacion;
     }
 
     /**
-     * Establece el valor de instalaciones
-     * @param instalaciones El valor por establecer para instalaciones
+     * Establece el valor de fechaInstalacion
+     * @param fechaInstalacion El valor por establecer para fechaInstalacion
      */
-    public void setInstalaciones(String instalaciones) {
-        this.instalaciones = instalaciones;
+    public void setFechaInstalacion(String fechaInstalacion) {
+        this.fechaInstalacion = fechaInstalacion;
     }
 
     /**
-     * Devuelve el valor de potencia
-     * @return El valor de potencia
+     * Devuelve el valor de aniosOperacion
+     * @return El valor de aniosOperacion
      */
-    public Integer getPotencia() {
-        return potencia;
+    public Integer getAniosOperacion() {
+        return aniosOperacion;
     }
 
     /**
-     * Establece el valor de potencia
-     * @param potencia El valor por establecer para potencia
+     * Establece el valor de aniosOperacion
+     * @param aniosOperacion El valor por establecer para aniosOperacion
      */
-    public void setPotencia(Integer potencia) {
-        this.potencia = potencia;
+    public void setAniosOperacion(Integer aniosOperacion) {
+        this.aniosOperacion = aniosOperacion;
     }
 
     /**
-     * Devuelve el valor de frecuencia
-     * @return El valor de frecuencia
+     * Devuelve el valor de propiedadEquipo
+     * @return El valor de propiedadEquipo
      */
-    public Double getFrecuencia() {
-        return frecuencia;
+    public String getPropiedadEquipo() {
+        return propiedadEquipo;
     }
 
     /**
-     * Establece el valor de frecuencia
-     * @param frecuencia El valor por establecer para frecuencia
+     * Establece el valor de propiedadEquipo
+     * @param propiedadEquipo El valor por establecer para propiedadEquipo
      */
-    public void setFrecuencia(Double frecuencia) {
-        this.frecuencia = frecuencia;
+    public void setPropiedadEquipo(String propiedadEquipo) {
+        this.propiedadEquipo = propiedadEquipo;
     }
 
     /**
-     * Devuelve el valor de capacidadTeorica
-     * @return El valor de capacidadTeorica
+     * Devuelve el valor de aniosFueraServicio
+     * @return El valor de aniosFueraServicio
      */
-    public String getCapacidadTeorica() {
-        return capacidadTeorica;
+    public Integer getAniosFueraServicio() {
+        return aniosFueraServicio;
     }
 
     /**
-     * Establece el valor de capacidadTeorica
-     * @param capacidadTeorica El valor por establecer para capacidadTeorica
+     * Establece el valor de aniosFueraServicio
+     * @param aniosFueraServicio El valor por establecer para aniosFueraServicio
      */
-    public void setCapacidadTeorica(String capacidadTeorica) {
-        this.capacidadTeorica = capacidadTeorica;
+    public void setAniosFueraServicio(Integer aniosFueraServicio) {
+        this.aniosFueraServicio = aniosFueraServicio;
     }
 
     /**
-     * Devuelve el valor de capacidadPractica
-     * @return El valor de capacidadPractica
+     * Devuelve el valor de razon
+     * @return El valor de razon
      */
-    public String getCapacidadPractica() {
-        return capacidadPractica;
+    public String getRazon() {
+        return razon;
     }
 
     /**
-     * Establece el valor de capacidadPractica
-     * @param capacidadPractica El valor por establecer para capacidadPractica
+     * Establece el valor de razon
+     * @param razon El valor por establecer para razon
      */
-    public void setCapacidadPractica(String capacidadPractica) {
-        this.capacidadPractica = capacidadPractica;
+    public void setRazon(String razon) {
+        this.razon = razon;
     }
 
     /**
-     * Devuelve el valor de tecnologia
-     * @return El valor de tecnologia
+     * Devuelve el valor de garantia
+     * @return El valor de garantia
      */
-    public String getTecnologia() {
-        return tecnologia;
+    public String getGarantia() {
+        return garantia;
     }
 
     /**
-     * Establece el valor de tecnologia
-     * @param tecnologia El valor por establecer para tecnologia
+     * Establece el valor de garantia
+     * @param garantia El valor por establecer para garantia
      */
-    public void setTecnologia(String tecnologia) {
-        this.tecnologia = tecnologia;
+    public void setGarantia(String garantia) {
+        this.garantia = garantia;
     }
 
     /**
-     * Devuelve el valor de insumos
-     * @return El valor de insumos
+     * Devuelve el valor de peridoGarantia
+     * @return El valor de peridoGarantia
      */
-    public String getInsumos() {
-        return insumos;
+    public Date getPeridoGarantia() {
+        return peridoGarantia;
     }
 
     /**
-     * Establece el valor de insumos
-     * @param insumos El valor por establecer para insumos
+     * Establece el valor de peridoGarantia
+     * @param peridoGarantia El valor por establecer para peridoGarantia
      */
-    public void setInsumos(String insumos) {
-        this.insumos = insumos;
+    public void setPeridoGarantia(Date peridoGarantia) {
+        this.peridoGarantia = peridoGarantia;
     }
+
+    /**
+     * Devuelve el valor de cubrimientoGarantia
+     * @return El valor de cubrimientoGarantia
+     */
+    public String getCubrimientoGarantia() {
+        return cubrimientoGarantia;
+    }
+
+    /**
+     * Establece el valor de cubrimientoGarantia
+     * @param cubrimientoGarantia El valor por establecer para cubrimientoGarantia
+     */
+    public void setCubrimientoGarantia(String cubrimientoGarantia) {
+        this.cubrimientoGarantia = cubrimientoGarantia;
+    }
+
+    /**
+     * Devuelve el valor de clasificacionDecreto
+     * @return El valor de clasificacionDecreto
+     */
+    public String getClasificacionDecreto() {
+        return clasificacionDecreto;
+    }
+
+    /**
+     * Establece el valor de clasificacionDecreto
+     * @param clasificacionDecreto El valor por establecer para clasificacionDecreto
+     */
+    public void setClasificacionDecreto(String clasificacionDecreto) {
+        this.clasificacionDecreto = clasificacionDecreto;
+    }
+
+    /**
+     * Devuelve el valor de calibracionTipo
+     * @return El valor de calibracionTipo
+     */
+    public String getCalibracionTipo() {
+        return calibracionTipo;
+    }
+
+    /**
+     * Establece el valor de calibracionTipo
+     * @param calibracionTipo El valor por establecer para calibracionTipo
+     */
+    public void setCalibracionTipo(String calibracionTipo) {
+        this.calibracionTipo = calibracionTipo;
+    }
+
+    /**
+     * Devuelve el valor de calibracionPeriocidad
+     * @return El valor de calibracionPeriocidad
+     */
+    public String getCalibracionPeriocidad() {
+        return calibracionPeriocidad;
+    }
+
+    /**
+     * Establece el valor de calibracionPeriocidad
+     * @param calibracionPeriocidad El valor por establecer para calibracionPeriocidad
+     */
+    public void setCalibracionPeriocidad(String calibracionPeriocidad) {
+        this.calibracionPeriocidad = calibracionPeriocidad;
+    }
+
+    
+    
 }

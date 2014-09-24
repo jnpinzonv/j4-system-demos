@@ -20,7 +20,8 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "parametros_generales")
-@NamedQueries({ @NamedQuery(name = "parametrosGenerales.getAll", query = "select s from ParametrosGenerales s") })
+@NamedQueries({ @NamedQuery(name = "parametrosGenerales.getAll", query = "select s from ParametrosGenerales s"),
+                @NamedQuery(name = "parametrosCategoria.getAll", query = "select s from ParametrosGenerales s where s.categoria = ?")})
 public class ParametrosGenerales implements Serializable{
     
     /**
@@ -50,7 +51,7 @@ public class ParametrosGenerales implements Serializable{
      * Categoria que a la que pertence un grupo de caracteristicas
      */
     @Enumerated(EnumType.STRING)
-    private String categoria;
+    private CategoriasParametros categoria;
     
     /**
      * Descripcion de la propiedad
@@ -103,13 +104,13 @@ public class ParametrosGenerales implements Serializable{
      */
     public void setPropiedad(String propiedad) {
         this.propiedad = propiedad;
-    }
+    }    
 
     /**
      * Devuelve el valor de categoria
      * @return El valor de categoria
      */
-    public String getCategoria() {
+    public CategoriasParametros getCategoria() {
         return categoria;
     }
 
@@ -117,7 +118,7 @@ public class ParametrosGenerales implements Serializable{
      * Establece el valor de categoria
      * @param categoria El valor por establecer para categoria
      */
-    public void setCategoria(String categoria) {
+    public void setCategoria(CategoriasParametros categoria) {
         this.categoria = categoria;
     }
 

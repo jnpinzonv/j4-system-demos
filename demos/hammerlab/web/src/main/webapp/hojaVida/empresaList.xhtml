@@ -28,10 +28,10 @@
 
 				<p:panel id="groupButton" align="right">
 					<p:commandButton id="search" value="Buscar"
-						action="empresaController.busqueda" />
+						action="#{empresaController.busqueda}" />
 
 					<p:commandButton id="reset" value="Reiniciar"
-						action="empresaController.cancel" immediate="true" />
+						action="#{empresaController.reiniciar}" immediate="true" />
 				</p:panel>
 
 				<div style="clear: both" />
@@ -47,15 +47,15 @@
 				<p:panel id="groupButtonTop" align="right">
 						
 					<p:commandButton id="createButtonTop"
-						action="#{empresaController.initCreateMode}" immediate="true"  value="Crear" />
+						action="#{empresaController.initCrearModo}" immediate="true"  value="Crear" />
 					
 					<p:commandButton id="editButtonTop"
-						action="#{empresaController.cargarEmpresaEditar}"
+						action="#{empresaController.initEditarModo}"
 						value="Editar" immediate="true"
 						disabled="#{empresaController.selectEmpresas.size()!= 1}" />
 
 					<p:commandButton id="viewButtonTop"
-						action="empresaController.initViewMode"
+						action="#{empresaController.initVistaModo}"
 						value="Ver" immediate="true"
 						disabled="#{empresaController.selectEmpresas.size() != 1}" />
 
@@ -110,16 +110,16 @@
 					rendered="#{empresaController.listaEmpresa.size() > 0}">
 
 					<p:commandButton id="createButtonBottom"
-						action="#{empresaController.initCreateMode}"
+						action="#{empresaController.initCrearModo}"
 						styleClass="pButtonEnabled" value="Crear" />
 
 					<p:commandButton id="editButtonBottom"
-						action="empresaController.cargarEmpresaEditar" immediate="true"
+						action="empresaController.initEditarModo" immediate="true"
 						value="Editar"
 						disabled="#{empresaController.selectEmpresas.size() != 1}" />
 
 					<p:commandButton id="viewButtonBottom"
-						action="empresaController.initViewMode" immediate="true"
+						action="#{empresaController.initVistaModo}" immediate="true"
 						value="Ver"
 						disabled="#{empresaController.selectEmpresas.size()!= 1}" />
 
