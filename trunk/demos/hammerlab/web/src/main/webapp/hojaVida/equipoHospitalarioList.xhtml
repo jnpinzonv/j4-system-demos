@@ -11,67 +11,67 @@
 	<ui:define name="metadata">
 		<f:metadata>
 			<f:event type="preRenderView"
-				listener="#{empresaController.initNewObject}" />
+				listener="#{equipoController.initNewObject}" />
 		</f:metadata>
 	</ui:define>
 
 	<ui:define name="content">
 
-		<h:form id="formEmpresas">
-			<p:panel id="panelEmpresas" header="Busqueda">
+		<h:form id="formEquipos">
+			<p:panel id="panelEquipos" header="Busqueda">
 
-				<p:inputText id="name" label="Nombre Empresa" title="Nombre Empresa"
-					value="#{empresaController.newObject.razonSocial}" />
+				<p:inputText id="name" label="Nombre Equipo" title="Nombre Equipo"
+					value="#{equipoController.newObject.modelo}" />
 
 
 				<div style="clear: both" />
 
 				<p:panel id="groupButton" align="right">
 					<p:commandButton id="search" value="Buscar"
-						action="empresaController.busqueda" />
+						action="#{equipoController.busqueda}" />
 
 					<p:commandButton id="reset" value="Reiniciar"
-						action="empresaController.cancel" immediate="true" />
+						action="equipoController.reiniciar" immediate="true" />
 				</p:panel>
 
 				<div style="clear: both" />
 			</p:panel>
 
 
-			<p:panel id="panelListaEmpresas" header="Lista de empresas">
+			<p:panel id="panellistaEquiposs" header="Lista de Equipos">
 
-				<h:panelGroup rendered="#{empty empresaController.listaEmpresa}">
-					<em>No existen Empresas</em>
+				<h:panelGroup rendered="#{empty equipoController.listaEquipos}">
+					<em>No existen Equipos</em>
 				</h:panelGroup>
 
 				<p:panel id="groupButtonTop" align="right">
 
 					<p:commandButton id="createButtonTop"
-						action="#{empresaController.initCreateMode}" immediate="true"
+						action="#{equipoController.initCrearModo}" immediate="true"
 						value="Crear" />
 
 					<p:commandButton id="editButtonTop"
-						action="#{empresaController.cargarEmpresaEditar}" value="Editar"
+						action="#{equipoController.initEditarModo}" value="Editar"
 						immediate="true"
-						disabled="#{empresaController.selectEmpresas.size()!= 1}" />
+						disabled="#{equipoController.selectEquipos.size()!= 1}" />
 
 					<p:commandButton id="viewButtonTop"
-						action="empresaController.initViewMode" value="Ver"
+						action="#{equipoController.initVistaModo}" value="Ver"
 						immediate="true"
-						disabled="#{empresaController.selectEmpresas.size() != 1}" />
+						disabled="#{equipoController.selectEquipos.size() != 1}" />
 
 
 					<p:commandButton id="deleteButtonTop" value="Borrar"
 						immediate="true" ajax="true" ignoreAutoUpdate="true" async="true"
-						disabled="#{empresaController.selectEmpresas.size()  == 0}" />
+						disabled="#{equipoController.selectEquipos.size()  == 0}" />
 
 				</p:panel>
 
-				<p:dataTable var="_object" value="#{empresaController.listaEmpresa}"
-					rendered="#{not empty empresaController.listaEmpresa}"
-					id="empresaList" paginator="true" paginatorPosition="bottom"
+				<p:dataTable var="_object" value="#{equipoController.listaEquipos}"
+					rendered="#{not empty equipoController.listaEquipos}"
+					id="EquipoList" paginator="true" paginatorPosition="bottom"
 					rowKey="#{_object.id}"
-					selection="#{empresaController.selectEmpresas}">
+					selection="#{equipoController.selectEquipos}">
 
 
 
@@ -88,7 +88,7 @@
 					</p:column>
 
 					<p:column id="c4" headerText="modelo">
-						<h:outputText value="#{_object.modelo}" "/>
+						<h:outputText value="#{_object.modelo}"/>
 					</p:column>
 
 					<p:column id="c5" headerText="ubicacion">
@@ -115,33 +115,33 @@
 						style="width:16px;text-align:center" />
 
 					<p:ajax event="rowSelectCheckbox" immediate="true"
-						update=":formEmpresas:groupButtonBottom,:formEmpresas:groupButtonTop" />
+						update=":formEquipos:groupButtonBottom,:formEquipos:groupButtonTop" />
 					<p:ajax event="rowUnselectCheckbox" immediate="true"
-						update=":formEmpresas:groupButtonBottom,:formEmpresas:groupButtonTop" />
+						update=":formEquipos:groupButtonBottom,:formEquipos:groupButtonTop" />
 				</p:dataTable>
 
 
 
 				<p:panel id="groupButtonBottom" align="right"
-					rendered="#{empresaController.listaEmpresa.size() > 0}">
+					rendered="#{equipoController.listaEquipos.size() > 0}">
 
 					<p:commandButton id="createButtonBottom"
-						action="#{empresaController.initCreateMode}"
+						action="#{equipoController.initEditarModo}"
 						styleClass="pButtonEnabled" value="Crear" />
 
 					<p:commandButton id="editButtonBottom"
-						action="empresaController.cargarEmpresaEditar" immediate="true"
+						action="#{equipoController.initEditarModo}" immediate="true"
 						value="Editar"
-						disabled="#{empresaController.selectEmpresas.size() != 1}" />
+						disabled="#{equipoController.selectEquipos.size() != 1}" />
 
 					<p:commandButton id="viewButtonBottom"
-						action="empresaController.initViewMode" immediate="true"
+						action="#{equipoController.initVistaModo}" immediate="true"
 						value="Ver"
-						disabled="#{empresaController.selectEmpresas.size()!= 1}" />
+						disabled="#{equipoController.selectEquipos.size()!= 1}" />
 
 					<p:commandButton id="deleteButtonBottom" value="Borrar"
 						immediate="true" ajax="true" ignoreAutoUpdate="true" async="true"
-						disabled="#{empresaController.selectEmpresas.size() == 0}" />
+						disabled="#{equipoController.selectEquipos.size() == 0}" />
 				</p:panel>
 			</p:panel>
 		</h:form>

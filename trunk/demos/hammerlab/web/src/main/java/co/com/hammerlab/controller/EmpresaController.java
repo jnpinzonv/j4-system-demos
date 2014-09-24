@@ -84,21 +84,33 @@ public class EmpresaController implements Serializable {
      * @param userId Identificador del objeto Seleccionado
      * @return Retorna regla de nevagacion
      */
-    public String cargarEmpresaEditar() {
+    public String initEditarModo() {
     	editMode = Boolean.TRUE;
         newObject = empresaBean.getByID(selectEmpresas.get(0).getId());
         return ConstantesUtil.CREAR_ACTU;
     }
     
-    public String initViewMode(){
+    public String initVistaModo(){
     	 newObject = empresaBean.getByID(selectEmpresas.get(0).getId());
     	 return ConstantesUtil.VER;
+    }
+    
+    public String initCrearModo(){
+        return ConstantesUtil.CREAR_ACTU;
+    }
+    
+    public String cancelar() {
+        return ConstantesUtil.ATRAS;
+    }
+    
+    public String reiniciar() {
+        return ConstantesUtil.ATRAS;
     }
     /**
      * Actualiza un objeto en la base de datos
      * @return Retorna regla de nevagacion
      */
-    public String actualizarEmpresa() {
+    public String actualizar() {
         try {
             empresaBean.update(newObject);
             editMode = Boolean.FALSE;
@@ -111,19 +123,13 @@ public class EmpresaController implements Serializable {
         return ConstantesUtil.ATRAS;
     }
     
-    public String initCreateMode(){
-        return ConstantesUtil.CREAR_ACTU;
-    }
-    
-    public String cancel() {
-        return ConstantesUtil.ATRAS;
-    }
+   
     /**
      * Elimina un objeto en base de datos
      * @param id Identificador del objeto a eliminar
      * @return Retorna regla de nevagacion
      */
-    public void eliminarEmpresa(Long idObject) {
+    public void eliminar(Long idObject) {
         try {
             empresaBean.delete(idObject);
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Empresa Eliminada!", "Exito!!"));
@@ -138,7 +144,7 @@ public class EmpresaController implements Serializable {
      *@return Retorna regla de nevagacion
      * @throws Exception Lanza una excepcion si hay un error en la transacciòn 
      */
-    public String create(){
+    public String crear(){
         try {
             empresaBean.save(newObject);
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Exito!", "Se guardo un registro de una Empresa"));
@@ -150,6 +156,10 @@ public class EmpresaController implements Serializable {
            
         }
         return "";
+    }
+    
+    public String visualizar(){
+        return ConstantesUtil.VER;
     }
     /**
      * Inicializa el bakinbean de control

@@ -1,0 +1,81 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/default.xhtml">
+
+	<ui:define name="content">
+
+		<h:form id="empresaEdit">
+			<p:panel id="empresaPanelEdit"
+				header="#{empresaController.editMode ? 'Actualizar Empresa' : 'Crear Empresa'}">
+
+				<h:panelGrid columns="3" columnClasses="titleCell">
+
+					<h:outputLabel for="fecha" value="fecha:" />
+					<h:inputText id="fecha"
+						value="#{mantenimientoController.newObject.fecha}" />
+						
+					<h:outputLabel for="danioFalla" value="Daño Falla:" />
+					<h:inputText id="danioFalla"
+						value="#{mantenimientoController.newObject.danioFalla }" />
+						
+					<h:outputLabel for="reparaciones" value="reparaciones:" />
+					<h:inputText id="reparaciones"
+						value="#{mantenimientoController.newObject.reparaciones }" />
+					
+					<h:outputLabel for="repuestos" value="repuestos:" />
+					<h:inputText id="repuestos"
+						value="#{mantenimientoController.newObject.repuestos }" />
+
+					<h:outputLabel for="costoTotal" value="costo_total:" />
+					<h:inputText id="costoTotal"
+						value="#{mantenimientoController.newObject.costoTotal }" />
+
+					<h:outputLabel for="observaciones" value="observaciones:" />
+					<h:inputText id="observaciones"
+						value="#{mantenimientoController.newObject.observaciones }" />
+						
+					<h:outputLabel for="firmaAprovacion" value="firmaAprovacion:" />
+					<h:inputText id="firmaAprovacion"
+						value="#{mantenimientoController.newObject.firmaAprovacion }" />
+					
+
+					<h:outputLabel for="cedulaAprovacion" value="cedulaAprovacion:" />
+					<h:inputText id="cedulaAprovacion"
+						value="#{mantenimientoController.newObject.cedulaAprovacion }" />
+
+					<h:outputLabel for="IdTransaccion" value="IdTransaccion:" />
+					<h:inputText id="IdTransaccion"
+						value="#{mantenimientoController.newObject.idTransaccion }" />					
+
+				</h:panelGrid>
+
+				<div style="clear: both" />
+
+				<!-- p:requiredFields /> -->
+
+				<p:panel id="groupButton" align="right">
+					<p:commandButton id="create" styleClass="" value="Guardar"
+						action="#{empresaController.crear}"
+						rendered="#{!empresaController.editMode}" />
+
+					<p:commandButton id="update" styleClass="" type="complex"
+						value="Guardar" action="#{empresaController.actualizar}"
+						rendered="#{empresaController.editMode}" />
+
+					<p:commandButton id="cancel" styleClass="" value="Cancelar"
+						action="#{empresaController.cancelar}" immediate="true" />
+				</p:panel>
+
+				<div style="clear: both" />
+
+			</p:panel>
+		</h:form>
+
+	</ui:define>
+</ui:composition>

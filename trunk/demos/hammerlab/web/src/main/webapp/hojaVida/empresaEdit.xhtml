@@ -55,15 +55,15 @@
 
 				<p:panel id="groupButton" align="right">
 					<p:commandButton id="create" styleClass="" value="Guardar"
-						action="#{empresaController.create}"
+						action="#{empresaController.crear}"
 						rendered="#{!empresaController.editMode}" />
 
 					<p:commandButton id="update" styleClass="" type="complex"
-						value="Guardar" action="#{empresaController.actualizarEmpresa}"
+						value="Guardar" action="#{empresaController.actualizar}"
 						rendered="#{empresaController.editMode}" />
 
 					<p:commandButton id="cancel" styleClass="" value="Cancelar"
-						action="#{empresaController.cancel}" immediate="true" />
+						action="#{empresaController.cancelar}" immediate="true" />
 				</p:panel>
 
 				<div style="clear: both" />
