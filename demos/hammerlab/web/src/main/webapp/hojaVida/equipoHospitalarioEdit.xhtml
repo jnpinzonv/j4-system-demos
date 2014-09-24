@@ -7,6 +7,13 @@
 	xmlns:c="http://java.sun.com/jstl/core"
 	xmlns:p="http://primefaces.org/ui"
 	template="/WEB-INF/templates/default.xhtml">
+	<ui:define name="metadata">
+		<f:metadata>
+			<f:viewParam name="accion" value="#{equipoController.accion}" />
+			<f:event type="preRenderComponent"
+				listener="#{equipoController.cargarEmpresa}" />
+		</f:metadata>
+	</ui:define>
 
 	<ui:define name="content">
 
@@ -14,13 +21,28 @@
 			<p:panel id="empresaPanelEdit"
 				header="#{equipoController.editMode ? 'Actualizar Equipo' : 'Crear Equipo'}">
 
+				<p:panel id="groupButtonTop" align="right">
+					<p:commandButton id="createTop" styleClass="" value="Guardar"
+						action="#{equipoController.crear}"
+						rendered="#{!equipoController.editMode}"/>
+
+					<p:commandButton id="updateTop" styleClass="" 
+						value="Guardar" action="#{equipoController.actualizar}"
+						rendered="#{equipoController.editMode}"/>
+
+					<p:commandButton id="cancelTop" styleClass="" value="Cancelar"
+						action="#{equipoController.cancelar}" immediate="true" />
+				</p:panel>
+
+		
+
 				<p:panel id="basicalEdit" header="DATOS GENERALES">
 					<h:panelGrid columns="3" columnClasses="titleCell"
 						style="margin-bottom:10px">
 
 						<p:outputLabel for="fotoEquipo" value="Foto Equipo:" />
 						<p:inputText id="fotoEquipo"
-							value="#{equipoController.newObject.fotoEquipo}" />
+							value="#{equipoController.newObject.fotoEquipo}" required="true" />
 						<p:fileUpload
 							fileUploadListener="#{equipoController.handleFileUpload}"
 							mode="advanced" dragDropSupport="true" sizeLimit="100000"
@@ -28,23 +50,24 @@
 
 						<p:outputLabel for="marca" value="Marca:" />
 						<p:inputText id="marca"
-							value="#{equipoController.newObject.marca}" />
+							value="#{equipoController.newObject.marca}" required="true" />
 						<p:selectOneMenu id="console"
 							value="#{equipoController.newObject.marca}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
 							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
 							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
-							<p:ajax event="change" update="marca" />							
+							<p:ajax event="change" update="marca" />
 						</p:selectOneMenu>
 
 						<p:outputLabel for="modelo" value="Modelo:" />
 						<p:inputText id="modelo"
-							value="#{equipoController.newObject.modelo}" />
-						<p:selectOneMenu id="console2" value="#{equipoController.newObject.modelo}">
+							value="#{equipoController.newObject.modelo}" required="true" />
+						<p:selectOneMenu id="console2"
+							value="#{equipoController.newObject.modelo}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
 							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
 							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
-							<p:ajax event="change" update="modelo" />							
+							<p:ajax event="change" update="modelo" />
 						</p:selectOneMenu>
 
 
@@ -52,33 +75,35 @@
 						<p:selectOneMenu id="ubicacion"
 							value="#{equipoController.newObject.ubicacion}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItems value="#{equipoController.ubicacionList}" />							
+							<f:selectItems value="#{equipoController.ubicacionList}" required="true" />
 						</p:selectOneMenu>
-						<p:selectOneMenu id="console3" value="#{equipoController.newObject.ubicacion}"
-							disabled="true">
+						<p:selectOneMenu id="console3"
+							value="#{equipoController.newObject.ubicacion}" disabled="true">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
 							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
 							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
-							<p:ajax event="change" update="ubicacion" />							
+							<p:ajax event="change" update="ubicacion" />
 						</p:selectOneMenu>
 
 
 						<p:outputLabel for="fabricante" value="Fabricante:" />
 						<p:inputText id="fabricante"
-							value="#{equipoController.newObject.fabricante }" />
-						<p:selectOneMenu id="console4" value="#{equipoController.newObject.fabricante}">
+							value="#{equipoController.newObject.fabricante }" required="true" />
+						<p:selectOneMenu id="console4"
+							value="#{equipoController.newObject.fabricante}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
 							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
 							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
-							<p:ajax event="change" update="fabricante" />							
+							<p:ajax event="change" update="fabricante" />
 						</p:selectOneMenu>
 
 
 						<p:outputLabel for="representanteCol"
 							value="Representante Colombia:" />
 						<p:inputText id="representanteCol"
-							value="#{equipoController.newObject.representanteCol }" />
-						<p:selectOneMenu id="console5" value="#{equipoController.newObject.representanteCol}">
+							value="#{equipoController.newObject.representanteCol }" required="true" />
+						<p:selectOneMenu id="console5"
+							value="#{equipoController.newObject.representanteCol}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
 							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
 							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
@@ -88,24 +113,26 @@
 
 						<p:outputLabel for="direccion" value="Dirección:" />
 						<p:inputText id="direccion"
-							value="#{equipoController.newObject.direccion }" />
-						<p:selectOneMenu id="console6" value="#{equipoController.newObject.direccion}">
+							value="#{equipoController.newObject.direccion }" required="true" />
+						<p:selectOneMenu id="console6"
+							value="#{equipoController.newObject.direccion}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
 							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />							
+							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
 							<p:ajax event="change" update="direccion" />
 						</p:selectOneMenu>
 
 
 						<p:outputLabel for="telefono" value="Telefono:" />
 						<p:inputText id="telefono"
-							value="#{equipoController.newObject.telefono }" />
+							value="#{equipoController.newObject.telefono }" required="true" />
 
-						<p:selectOneMenu id="console7" value="#{equipoController.newObject.telefono}">
+						<p:selectOneMenu id="console7"
+							value="#{equipoController.newObject.telefono}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
 							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
 							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
-							<p:ajax event="change" update="telefono" />							
+							<p:ajax event="change" update="telefono" />
 						</p:selectOneMenu>
 
 
@@ -116,19 +143,18 @@
 
 						<p:outputLabel for="voltaje2" value="Voltaje (V):" />
 						<p:inputText id="voltaje2"
-							value="#{equipoController.infoTecnica.voltaje }" />
+							value="#{equipoController.infoTecnica.voltaje }" required="true" />
 						<p:selectOneMenu id="console16"
 							value="#{equipoController.infoTecnica.voltaje}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
-							<p:ajax event="change" update="voltaje2" />							
+							<f:selectItem itemLabel="0" itemValue="0" />
+							<p:ajax event="change" update="voltaje2" />
 						</p:selectOneMenu>
 
 
 						<p:outputLabel for="instalaciones2" value="Instalaciones:" />
 						<p:inputText id="instalaciones2"
-							value="#{equipoController.infoTecnica.instalaciones }" />
+							value="#{equipoController.infoTecnica.instalaciones }" required="true" />
 
 						<p:selectOneMenu id="console17"
 							value="#{equipoController.infoTecnica.instalaciones}">
@@ -141,35 +167,33 @@
 
 						<p:outputLabel for="potencia" value="Potencia: (Kw)" />
 						<p:inputText id="potencia"
-							value="#{equipoController.infoTecnica.potencia }" />
+							value="#{equipoController.infoTecnica.potencia }" required="true" />
 
 
 						<p:selectOneMenu id="console18"
 							value="#{equipoController.infoTecnica.potencia}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
+							<f:selectItem itemLabel="0" itemValue="0" />
 							<p:ajax event="change" update="potencia" />
 						</p:selectOneMenu>
 
 
 						<p:outputLabel for="frecuencia" value="Frecuencia: (Hz)" />
 						<p:inputText id="frecuencia"
-							value="#{equipoController.infoTecnica.frecuencia }" />
+							value="#{equipoController.infoTecnica.frecuencia }" required="true" />
 
 
 						<p:selectOneMenu id="console19"
 							value="#{equipoController.infoTecnica.frecuencia}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
+							<f:selectItem itemLabel="0" itemValue="0" />
 							<p:ajax event="change" update="frecuencia" />
 						</p:selectOneMenu>
 
 
 						<p:outputLabel for="capacidadTeorica" value="Capacidad Teórica:" />
 						<p:inputText id="capacidadTeorica"
-							value="#{equipoController.infoTecnica.capacidadTeorica }" />
+							value="#{equipoController.infoTecnica.capacidadTeorica }" required="true" />
 
 
 						<p:selectOneMenu id="console20"
@@ -183,7 +207,7 @@
 
 						<p:outputLabel for="capacidadPractica" value="Capacidad Practica:" />
 						<p:inputText id="capacidadPractica"
-							value="#{equipoController.infoTecnica.capacidadPractica }" />
+							value="#{equipoController.infoTecnica.capacidadPractica }" required="true" />
 
 
 						<p:selectOneMenu id="console21"
@@ -195,15 +219,16 @@
 						</p:selectOneMenu>
 
 
-						<p:outputLabel for="tecnologia" value="Tecnología:" />						
+						<p:outputLabel for="tecnologia" value="Tecnología:" />
 						<p:selectOneMenu id="tecnologia"
 							value="#{equipoController.infoTecnica.tecnologia }">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItems value="#{equipoController.tecnologiaList}" />							
+							<f:selectItems value="#{equipoController.tecnologiaList}" required="true" />
 						</p:selectOneMenu>
 
 						<p:selectOneMenu id="console22"
-							value="#{equipoController.infoTecnica.tecnologia}" disabled="true">
+							value="#{equipoController.infoTecnica.tecnologia}"
+							disabled="true">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
 							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
 							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
@@ -213,7 +238,7 @@
 
 						<p:outputLabel for="insumos" value="Insumos:" />
 						<p:inputText id="insumos"
-							value="#{equipoController.infoTecnica.insumos }" />
+							value="#{equipoController.infoTecnica.insumos }" required="true" />
 
 
 						<p:selectOneMenu id="console23"
@@ -232,9 +257,12 @@
 					<h:panelGrid columns="3" columnClasses="titleCell">
 
 						<p:outputLabel for="fechaAdquisicion" value="Fecha Adquisición:" />
-						<p:calendar id="fechaAdquisicion" value="#{equipoController.adquisicionEquipo.fechaAdquisicion}" />
-						
-						<p:selectOneMenu id="console8" value="#{equipoController.adquisicionEquipo.fechaAdquisicion }">
+						<p:calendar id="fechaAdquisicion"
+							value="#{equipoController.adquisicionEquipo.fechaAdquisicion}" required="true" />
+
+						<p:selectOneMenu id="console8"
+							value="#{equipoController.adquisicionEquipo.fechaAdquisicion }"
+							disabled="true">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
 							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
 							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
@@ -243,9 +271,12 @@
 
 
 						<p:outputLabel for="fechaInstalacion" value="Fecha Instalación:" />
-						<p:calendar id="fechaInstalacion" value="#{equipoController.adquisicionEquipo.fechaInstalacion }" />
-						
-						<p:selectOneMenu id="console9" value="#{equipoController.adquisicionEquipo.fechaInstalacion}">
+						<p:calendar id="fechaInstalacion"
+							value="#{equipoController.adquisicionEquipo.fechaInstalacion }" required="true" />
+
+						<p:selectOneMenu id="console9"
+							value="#{equipoController.adquisicionEquipo.fechaInstalacion}"
+							disabled="true">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
 							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
 							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
@@ -253,23 +284,22 @@
 						</p:selectOneMenu>
 
 
-						<p:outputLabel for="aniosOperacion" value="aniosOperacion:" />
+						<p:outputLabel for="aniosOperacion" value="Años Operación:" />
 						<p:inputText id="aniosOperacion"
-							value="#{equipoController.adquisicionEquipo.aniosOperacion }" />
+							value="#{equipoController.adquisicionEquipo.aniosOperacion }" required="true" />
 
 
 						<p:selectOneMenu id="console10"
 							value="#{equipoController.adquisicionEquipo.aniosOperacion}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
+							<f:selectItem itemLabel="0" itemValue="0" />
 							<p:ajax event="change" update="aniosOperacion" />
 						</p:selectOneMenu>
 
 
-						<p:outputLabel for="propiedadEquipo" value="propiedadEquipo:" />
+						<p:outputLabel for="propiedadEquipo" value="Propiedad del Equipo:" />
 						<p:inputText id="propiedadEquipo"
-							value="#{equipoController.adquisicionEquipo.propiedadEquipo }" />
+							value="#{equipoController.adquisicionEquipo.propiedadEquipo }" required="true" />
 
 
 						<p:selectOneMenu id="console11"
@@ -281,23 +311,23 @@
 						</p:selectOneMenu>
 
 
-						<p:outputLabel for="aniosFueraServicio" value="aniosFueraServicio:" />
-						<p:inputText id="aniosFueraServicio"
-							value="#{equipoController.adquisicionEquipo.aniosFueraServicio }" />
+						<p:outputLabel for="aniosFueraServicio2"
+							value="Años Fuera de Servicio:" />
+						<p:inputText id="aniosFueraServicio2"
+							value="#{equipoController.adquisicionEquipo.aniosFueraServicio }" required="true" />
 
 
 						<p:selectOneMenu id="console12"
 							value="#{equipoController.adquisicionEquipo.aniosFueraServicio}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
-							<p:ajax event="change" update="aniosFueraServicio" />
+							<f:selectItem itemLabel="0" itemValue="0" />
+							<p:ajax event="change" update="aniosFueraServicio2" />
 						</p:selectOneMenu>
 
 
-						<p:outputLabel for="razon" value="razon:" />
+						<p:outputLabel for="razon" value="Razón:" />
 						<p:inputText id="razon"
-							value="#{equipoController.adquisicionEquipo.razon }" />
+							value="#{equipoController.adquisicionEquipo.razon }" required="true" />
 
 
 						<p:selectOneMenu id="console13"
@@ -311,7 +341,7 @@
 
 						<p:outputLabel for="garantia" value="garantia:" />
 						<p:inputText id="garantia"
-							value="#{equipoController.adquisicionEquipo.garantia }" />
+							value="#{equipoController.adquisicionEquipo.garantia }" required="true" />
 
 
 						<p:selectOneMenu id="console14"
@@ -323,22 +353,22 @@
 						</p:selectOneMenu>
 
 
-						<p:outputLabel for="peridoGarantia" value="peridoGarantia:" />
+						<p:outputLabel for="peridoGarantia" value="Perido Garantia:" />
 						<p:inputText id="peridoGarantia"
-							value="#{equipoController.adquisicionEquipo.peridoGarantia }" />
+							value="#{equipoController.adquisicionEquipo.peridoGarantia }" required="true" />
 
 
 						<p:selectOneMenu id="console15"
 							value="#{equipoController.adquisicionEquipo.peridoGarantia}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
+							<f:selectItem itemLabel="0" itemValue="0" />
 							<p:ajax event="change" update="peridoGarantia" />
 						</p:selectOneMenu>
-						
-						<p:outputLabel for="cubrimientoGarantia" value="cubrimientoGarantia:" />
-						<p:inputText id="cubrimientoGarantia"
-							value="#{equipoController.adquisicionEquipo.cubrimientoGarantia }" />
+
+						<p:outputLabel for="cubrimientoGarantia"
+							value="Cubrimiento Garantia:" />
+						<p:inputTextarea rows="6" cols="33" id="cubrimientoGarantia"
+							value="#{equipoController.adquisicionEquipo.cubrimientoGarantia }" required="true" />
 
 
 						<p:selectOneMenu id="console151"
@@ -348,11 +378,12 @@
 							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
 							<p:ajax event="change" update="cubrimientoGarantia" />
 						</p:selectOneMenu>
-						
-						
-						<p:outputLabel for="clasificacionDecreto" value="Clasificación según riesgo:" />
+
+
+						<p:outputLabel for="clasificacionDecreto"
+							value="Clasificación según riesgo:" />
 						<p:inputText id="clasificacionDecreto"
-							value="#{equipoController.adquisicionEquipo.clasificacionDecreto }" />
+							value="#{equipoController.adquisicionEquipo.clasificacionDecreto }" required="true" />
 
 
 						<p:selectOneMenu id="console152"
@@ -362,10 +393,10 @@
 							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
 							<p:ajax event="change" update="clasificacionDecreto" />
 						</p:selectOneMenu>
-						
+
 						<p:outputLabel for="calibracionTipo" value="Calibración Tipo:" />
 						<p:inputText id="calibracionTipo"
-							value="#{equipoController.adquisicionEquipo.calibracionTipo }" />
+							value="#{equipoController.adquisicionEquipo.calibracionTipo }" required="true" />
 
 
 						<p:selectOneMenu id="console153"
@@ -375,11 +406,12 @@
 							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
 							<p:ajax event="change" update="calibracionTipo" />
 						</p:selectOneMenu>
-						
-						<p:outputLabel for="calibracionPeriocidad" value="Calibración Periocidad:" />
+
+						<p:outputLabel for="calibracionPeriocidad"
+							value="Calibración Periocidad:" />
 						<p:inputText id="calibracionPeriocidad"
-							value="#{equipoController.adquisicionEquipo.calibracionPeriocidad }" />
-						
+							value="#{equipoController.adquisicionEquipo.calibracionPeriocidad }" required="true" />
+
 						<p:selectOneMenu id="console154"
 							value="#{equipoController.adquisicionEquipo.calibracionPeriocidad}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
@@ -390,398 +422,446 @@
 
 
 					</h:panelGrid>
-					</p:panel>
-					<p:panel id="planoslEdit" header="PLANOS">
-						<h:panelGrid columns="3" columnClasses="titleCell">
+				</p:panel>
+				<p:panel id="planoslEdit" header="PLANOS">
+					<h:panelGrid columns="3" columnClasses="titleCell">
 
-							<p:outputLabel for="instalacion_confirmar"
-								value="Instalación:" />
-							<p:selectBooleanCheckbox id="instalacion_confirmar"
-								value="#{equipoController.planosEquipo.instalacionConfirmar }" />
+						<p:outputLabel for="instalacion_confirmar" value="Instalación:" />
+						<p:selectBooleanCheckbox id="instalacion_confirmar"
+							value="#{equipoController.planosEquipo.instalacionConfirmar }" required="true" />
 
 
-							<p:selectOneMenu id="console30"
-								value="#{equipoController.planosEquipo.instalacionConfirmar}">
-								<f:selectItem itemLabel="Seleccione" itemValue="" />
-								<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-								<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
-								<p:ajax event="change" update="instalacion_confirmar" />
-							</p:selectOneMenu>
+						<p:selectOneMenu id="console30"
+							value="#{equipoController.planosEquipo.instalacionConfirmar}"
+							disabled="true">
+							<f:selectItem itemLabel="Seleccione" itemValue="" />
+							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
+							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
+							<p:ajax event="change" update="instalacion_confirmar" />
+						</p:selectOneMenu>
 
 
-							<p:outputLabel for="instalacion_ubicacion"
-								value="Ubicación Intalación:" />
-							<p:inputText id="instalacion_ubicacion"
-								value="#{equipoController.planosEquipo.instalacionUbicacion }" />
+						<p:outputLabel for="instalacion_ubicacion"
+							value="Ubicación Intalación:" />
+						<p:inputText id="instalacion_ubicacion"
+							value="#{equipoController.planosEquipo.instalacionUbicacion }" required="true" />
 
 
-							<p:selectOneMenu id="console32"
-								value="#{equipoController.planosEquipo.instalacionUbicacion}">
-								<f:selectItem itemLabel="Seleccione" itemValue="" />
-								<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-								<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
-								<p:ajax event="change" update="instalacion_ubicacion" />
-							</p:selectOneMenu>
+						<p:selectOneMenu id="console32"
+							value="#{equipoController.planosEquipo.instalacionUbicacion}">
+							<f:selectItem itemLabel="Seleccione" itemValue="" />
+							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
+							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
+							<p:ajax event="change" update="instalacion_ubicacion" />
+						</p:selectOneMenu>
 
 
-							<p:outputLabel for="partes_confirmar" value="Partes:" />
-							<p:selectBooleanCheckbox id="partes_confirmar"
-								value="#{equipoController.planosEquipo.partesConfirmar }" />
+						<p:outputLabel for="partes_confirmar" value="Partes:" />
+						<p:selectBooleanCheckbox id="partes_confirmar"
+							value="#{equipoController.planosEquipo.partesConfirmar }" required="true" />
 
 
-							<p:selectOneMenu id="console33"
-								value="#{equipoController.planosEquipo.partesConfirmar}">
-								<f:selectItem itemLabel="Seleccione" itemValue="" />
-								<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-								<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
-								<p:ajax event="change" update="partes_confirmar" />
-							</p:selectOneMenu>
+						<p:selectOneMenu id="console33"
+							value="#{equipoController.planosEquipo.partesConfirmar}"
+							disabled="true">
+							<f:selectItem itemLabel="Seleccione" itemValue="" />
+							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
+							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
+							<p:ajax event="change" update="partes_confirmar" />
+						</p:selectOneMenu>
 
 
-							<p:outputLabel for="partes_ubicacion" value="Ubicación Partes:" />
-							<p:inputText id="partes_ubicacion"
-								value="#{equipoController.planosEquipo.partesUbicacion }" />
+						<p:outputLabel for="partes_ubicacion" value="Ubicación Partes:" />
+						<p:inputText id="partes_ubicacion"
+							value="#{equipoController.planosEquipo.partesUbicacion }" required="true" />
 
 
-							<p:selectOneMenu id="console34"
-								value="#{equipoController.planosEquipo.partesUbicacion}">
-								<f:selectItem itemLabel="Seleccione" itemValue="" />
-								<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-								<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
-								<p:ajax event="change" update="partes_ubicacion" />
-							</p:selectOneMenu>
+						<p:selectOneMenu id="console34"
+							value="#{equipoController.planosEquipo.partesUbicacion}">
+							<f:selectItem itemLabel="Seleccione" itemValue="" />
+							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
+							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
+							<p:ajax event="change" update="partes_ubicacion" />
+						</p:selectOneMenu>
 
 
-							<p:outputLabel for="funcionamiento_confirmar2"
-								value="Funcionamiento:" />
-							<p:selectBooleanCheckbox id="funcionamiento_confirmar2"
-								value="#{equipoController.planosEquipo.funcionamientoConfirmar }" />
+						<p:outputLabel for="funcionamiento_confirmar2"
+							value="Funcionamiento:" />
+						<p:selectBooleanCheckbox id="funcionamiento_confirmar2"
+							value="#{equipoController.planosEquipo.funcionamientoConfirmar }" required="true" />
 
 
-							<p:selectOneMenu id="console35"
-								value="#{equipoController.planosEquipo.funcionamientoConfirmar}">
-								<f:selectItem itemLabel="Seleccione" itemValue="" />
-								<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-								<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
-								<p:ajax event="change" update="funcionamiento_confirmar2" />
-							</p:selectOneMenu>
+						<p:selectOneMenu id="console35"
+							value="#{equipoController.planosEquipo.funcionamientoConfirmar}"
+							disabled="true">
+							<f:selectItem itemLabel="Seleccione" itemValue="" />
+							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
+							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
+							<p:ajax event="change" update="funcionamiento_confirmar2" />
+						</p:selectOneMenu>
 
 
-							<p:outputLabel for="funcionamiento_ubicacion"
-								value="Ubicación Funcionamiento:" />
-							<p:inputText id="funcionamiento_ubicacion"
-								value="#{equipoController.planosEquipo.funcionamientoUbicacion }" />
+						<p:outputLabel for="funcionamiento_ubicacion"
+							value="Ubicación Funcionamiento:" />
+						<p:inputText id="funcionamiento_ubicacion"
+							value="#{equipoController.planosEquipo.funcionamientoUbicacion }" required="true" />
 
 
-							<p:selectOneMenu id="console36"
-								value="#{equipoController.planosEquipo.funcionamientoUbicacion}">
-								<f:selectItem itemLabel="Seleccione" itemValue="" />
-								<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-								<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
-								<p:ajax event="change" update="funcionamiento_ubicacion" />
-							</p:selectOneMenu>
+						<p:selectOneMenu id="console36"
+							value="#{equipoController.planosEquipo.funcionamientoUbicacion}">
+							<f:selectItem itemLabel="Seleccione" itemValue="" />
+							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
+							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
+							<p:ajax event="change" update="funcionamiento_ubicacion" />
+						</p:selectOneMenu>
 
 
-						</h:panelGrid>
-					</p:panel>
+					</h:panelGrid>
+				</p:panel>
 
-					<p:panel id="manualeslEdit" header="MANUALES">
-						<h:panelGrid columns="3" columnClasses="titleCell">
+				<p:panel id="manualeslEdit" header="MANUALES">
+					<h:panelGrid columns="3" columnClasses="titleCell">
 
-							<p:outputLabel for="tecnico_confirmar" value="Técnico:" />
-							<p:selectBooleanCheckbox id="tecnico_confirmar"
-								value="#{equipoController.manualesEquipo.tecnicoConfirmar }" />
+						<p:outputLabel for="tecnico_confirmar" value="Técnico:" />
+						<p:selectBooleanCheckbox id="tecnico_confirmar"
+							value="#{equipoController.manualesEquipo.tecnicoConfirmar }" required="true" />
 
 
-							<p:selectOneMenu id="console37"
-								value="#{equipoController.manualesEquipo.tecnicoConfirmar}">
-								<f:selectItem itemLabel="Seleccione" itemValue="" />
-								<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-								<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
-								<p:ajax event="change" update="tecnico_confirmar" />
-							</p:selectOneMenu>
+						<p:selectOneMenu id="console37"
+							value="#{equipoController.manualesEquipo.tecnicoConfirmar}"
+							disabled="true">
+							<f:selectItem itemLabel="Seleccione" itemValue="" />
+							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
+							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
+							<p:ajax event="change" update="tecnico_confirmar" />
+						</p:selectOneMenu>
 
 
-							<p:outputLabel for="tecnico_ubicacion" value="Ubicacion Técnico:" />
-							<p:inputText id="tecnico_ubicacion"
-								value="#{equipoController.manualesEquipo.tecnicoUbicacion }" />
+						<p:outputLabel for="tecnico_ubicacion" value="Ubicacion Técnico:" />
+						<p:inputText id="tecnico_ubicacion"
+							value="#{equipoController.manualesEquipo.tecnicoUbicacion }" required="true" />
 
 
-							<p:selectOneMenu id="console38"
-								value="#{equipoController.manualesEquipo.tecnicoUbicacion}">
-								<f:selectItem itemLabel="Seleccione" itemValue="" />
-								<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-								<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
-								<p:ajax event="change" update="tecnico_ubicacion" />
-							</p:selectOneMenu>
+						<p:selectOneMenu id="console38"
+							value="#{equipoController.manualesEquipo.tecnicoUbicacion}">
+							<f:selectItem itemLabel="Seleccione" itemValue="" />
+							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
+							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
+							<p:ajax event="change" update="tecnico_ubicacion" />
+						</p:selectOneMenu>
 
 
-							<p:outputLabel for="servicio_confirmar"
-								value="De Servicio:" />
-							<p:selectBooleanCheckbox id="servicio_confirmar"
-								value="#{equipoController.manualesEquipo.servicioConfirmar }" />
+						<p:outputLabel for="servicio_confirmar" value="De Servicio:" />
+						<p:selectBooleanCheckbox id="servicio_confirmar"
+							value="#{equipoController.manualesEquipo.servicioConfirmar }" required="true" />
 
 
-							<p:selectOneMenu id="console39"
-								value="#{equipoController.manualesEquipo.servicioConfirmar}">
-								<f:selectItem itemLabel="Seleccione" itemValue="" />
-								<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-								<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
-								<p:ajax event="change" update="servicio_confirmar" />
-							</p:selectOneMenu>
+						<p:selectOneMenu id="console39"
+							value="#{equipoController.manualesEquipo.servicioConfirmar}"
+							disabled="true">
+							<f:selectItem itemLabel="Seleccione" itemValue="" />
+							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
+							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
+							<p:ajax event="change" update="servicio_confirmar" />
+						</p:selectOneMenu>
 
 
-							<p:outputLabel for="servicio_ubicacion"
-								value="Ubicación Servicio:" />
-							<p:inputText id="servicio_ubicacion"
-								value="#{equipoController.manualesEquipo.servicioUbicacion }" />
+						<p:outputLabel for="servicio_ubicacion"
+							value="Ubicación Servicio:" />
+						<p:inputText id="servicio_ubicacion"
+							value="#{equipoController.manualesEquipo.servicioUbicacion }" required="true" />
 
 
-							<p:selectOneMenu id="console40"
-								value="#{equipoController.manualesEquipo.servicioUbicacion}">
-								<f:selectItem itemLabel="Seleccione" itemValue="" />
-								<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-								<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
-								<p:ajax event="change" update="servicio_ubicacion" />
-							</p:selectOneMenu>
+						<p:selectOneMenu id="console40"
+							value="#{equipoController.manualesEquipo.servicioUbicacion}">
+							<f:selectItem itemLabel="Seleccione" itemValue="" />
+							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
+							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
+							<p:ajax event="change" update="servicio_ubicacion" />
+						</p:selectOneMenu>
 
 
-							<p:outputLabel for="usuario_confirmar" value="De Usuario:" />
-							<p:selectBooleanCheckbox id="usuario_confirmar"
-								value="#{equipoController.manualesEquipo.usuarioConfirmar }" />
+						<p:outputLabel for="usuario_confirmar" value="De Usuario:" />
+						<p:selectBooleanCheckbox id="usuario_confirmar"
+							value="#{equipoController.manualesEquipo.usuarioConfirmar }" required="true" />
 
 
-							<p:selectOneMenu id="console41"
-								value="#{equipoController.manualesEquipo.usuarioConfirmar}">
-								<f:selectItem itemLabel="Seleccione" itemValue="" />
-								<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-								<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
-								<p:ajax event="change" update="usuario_confirmar" />
-							</p:selectOneMenu>
+						<p:selectOneMenu id="console41"
+							value="#{equipoController.manualesEquipo.usuarioConfirmar}"
+							disabled="true">
+							<f:selectItem itemLabel="Seleccione" itemValue="" />
+							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
+							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
+							<p:ajax event="change" update="usuario_confirmar" />
+						</p:selectOneMenu>
 
 
-							<p:outputLabel for="usuario_ubicacion" value="Ubicación Usuario:" />
-							<p:inputText id="usuario_ubicacion"
-								value="#{equipoController.manualesEquipo.usuarioUbicacion }" />
+						<p:outputLabel for="usuario_ubicacion" value="Ubicación Usuario:" />
+						<p:inputText id="usuario_ubicacion"
+							value="#{equipoController.manualesEquipo.usuarioUbicacion }" required="true" />
 
 
-							<p:selectOneMenu id="console42"
-								value="#{equipoController.manualesEquipo.usuarioUbicacion}">
-								<f:selectItem itemLabel="Seleccione" itemValue="" />
-								<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-								<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
-								<p:ajax event="change" update="usuario_ubicacion" />
-							</p:selectOneMenu>
+						<p:selectOneMenu id="console42"
+							value="#{equipoController.manualesEquipo.usuarioUbicacion}">
+							<f:selectItem itemLabel="Seleccione" itemValue="" />
+							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
+							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
+							<p:ajax event="change" update="usuario_ubicacion" />
+						</p:selectOneMenu>
 
 
-						</h:panelGrid>
-					</p:panel>
+					</h:panelGrid>
+				</p:panel>
 
 
-					<p:panel id="recomendacionesEdit"
-						header="RECOMENDACIONES DEL FABRICANTE Y CONDICIONES AMBIENTALES">
-						<h:panelGrid columns="3" columnClasses="titleCell">
+				<p:panel id="recomendacionesEdit"
+					header="RECOMENDACIONES DEL FABRICANTE Y CONDICIONES AMBIENTALES">
+					<h:panelGrid columns="3" columnClasses="titleCell">
 
-							<p:outputLabel for="detalle" value="detalle:" />
-							<p:inputText id="detalle"
-								value="#{equipoController.recomendacionesEquipo.detalle }" />
+						<p:outputLabel for="detalle" value="Detalle:" />
+						<p:pickList id="detalle"
+							value="#{equipoController.recomendacionesList}"
+							var="recomendaciones" itemLabel="#{recomendaciones}"
+							itemValue="#{recomendaciones}" required="true" />
 
+					</h:panelGrid>
 
-							<p:selectOneMenu id="console43"
-								value="#{equipoController.recomendacionesEquipo.detalle}">
-								<f:selectItem itemLabel="Seleccione" itemValue="" />
-								<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-								<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
-								<p:ajax event="change" update="detalle" />
-							</p:selectOneMenu>
+				</p:panel>
 
+				<p:panel id="estadolEdit" header="ESTADO GENERAL DEL EQUIPO">
+					<h:panelGrid columns="3" columnClasses="titleCell">
 
-						</h:panelGrid>
+						<p:outputLabel for="estado_confirmar" value="Estado:" />
+						<p:selectOneRadio id="estado_confirmar" required="true"
+							value="#{equipoController.estadoEquipo.estadoConfirmar }">
+							<f:selectItem itemLabel="Bueno" itemValue="Bueno" />
+							<f:selectItem itemLabel="Regular" itemValue="Regular" />
+							<f:selectItem itemLabel="Malo" itemValue="Malo" />
+						</p:selectOneRadio>
 
-					</p:panel>
+						<p:selectOneMenu id="console24" disabled="true"
+							value="#{equipoController.estadoEquipo.estadoConfirmar}">
+							<f:selectItem itemLabel="Seleccione" itemValue="" />
+							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
+							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
+							<p:ajax event="change" update="estado_confirmar" />
+						</p:selectOneMenu>
 
-					<p:panel id="estadolEdit" header="ESTADO GENERAL DEL EQUIPO">
-						<h:panelGrid columns="3" columnClasses="titleCell">
 
-							<p:outputLabel for="estado_confirmar" value="estado_confirmar:" />
-							<p:inputText id="estado_confirmar"
-								value="#{equipoController.estadoEquipo.estado_confirmar }" />
+						<p:outputLabel for="causa2" value="Causas:" />
+						<p:inputTextarea rows="6" cols="33" id="causa2"
+							value="#{equipoController.estadoEquipo.causa }" required="true" />
 
 
-							<p:selectOneMenu id="console24"
-								value="#{equipoController.estadoEquipo.estado_confirmar}">
-								<f:selectItem itemLabel="Seleccione" itemValue="" />
-								<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-								<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
-								<p:ajax event="change" update="estado_confirmar" />
-							</p:selectOneMenu>
+						<p:selectOneMenu id="console25"
+							value="#{equipoController.estadoEquipo.causa}">
+							<f:selectItem itemLabel="Seleccione" itemValue="" />
+							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
+							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
+							<p:ajax event="change" update="causa2" />
+						</p:selectOneMenu>
 
 
-							<p:outputLabel for="causa2" value="causa:" />
-							<p:inputText id="causa2"
-								value="#{equipoController.estadoEquipo.causa }" />
+					</h:panelGrid>
+				</p:panel>
+				<p:panel id="funcionamiemtolEdit" header="FUNCIONAMIENTO DEL EQUIPO">
+					<h:panelGrid columns="3" columnClasses="titleCell">
 
+						<p:outputLabel for="funcionamiento_confirmar"
+							value="Funcionamiento:" />
+						<p:selectOneRadio id="funcionamiento_confirmar" required="true"
+							value="#{equipoController.funcionamientoEquipo.funcionamientoConfirmar }">
+							<f:selectItem itemLabel="Bueno" itemValue="Bueno" />
+							<f:selectItem itemLabel="Regular" itemValue="Regular" />
+							<f:selectItem itemLabel="Malo" itemValue="Malo" />
+						</p:selectOneRadio>
 
-							<p:selectOneMenu id="console25"
-								value="#{equipoController.estadoEquipo.causa}">
-								<f:selectItem itemLabel="Seleccione" itemValue="" />
-								<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-								<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
-								<p:ajax event="change" update="causa2" />
-							</p:selectOneMenu>
+						<p:selectOneMenu id="console26" disabled="true"
+							value="#{equipoController.funcionamientoEquipo.funcionamientoConfirmar}">
+							<f:selectItem itemLabel="Seleccione" itemValue="" />
+							<f:selectItem itemLabel="0" itemValue="0" />
+							<p:ajax event="change" update="funcionamiento_confirmar" />
+						</p:selectOneMenu>
 
 
-						</h:panelGrid>
-					</p:panel>
-					<p:panel id="funcionamiemtolEdit"
-						header="FUNCIONAMIENTO DEL EQUIPO">
-						<h:panelGrid columns="3" columnClasses="titleCell">
+						<p:outputLabel for="aniosFueraServicio"
+							value="Años Fuera Servicio:" />
+						<p:inputText id="aniosFueraServicio"
+							value="#{equipoController.funcionamientoEquipo.anioFueraServicio }" required="true" />
 
-							<p:outputLabel for="funcionamiento_confirmar"
-								value="funcionamiento_confirmar:" />
-							<p:inputText id="funcionamiento_confirmar"
-								value="#{equipoController.funcionamientoEquipo.funcionamientoConfirmar }" />
 
+						<p:selectOneMenu id="console27"
+							value="#{equipoController.funcionamientoEquipo.anioFueraServicio}">
+							<f:selectItem itemLabel="Seleccione" itemValue="" />
+							<f:selectItem itemLabel="0" itemValue="0" />
+							<p:ajax event="change" update="aniosFueraServicio" />
+						</p:selectOneMenu>
 
-							<p:selectOneMenu id="console26"
-								value="#{equipoController.funcionamientoEquipo.funcionamientoConfirmar}">
-								<f:selectItem itemLabel="Seleccione" itemValue="" />
-								<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-								<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
-								<p:ajax event="change" update="funcionamiento_confirmar" />
-							</p:selectOneMenu>
 
+						<p:outputLabel for="causa" value="Causas:" />
+						<p:inputTextarea rows="6" cols="33" id="causa"
+							value="#{equipoController.funcionamientoEquipo.causa }" required="true" />
 
-							<p:outputLabel for="aniosFueraServicio"
-								value="aniosFueraServicio:" />
-							<p:inputText id="aniosFueraServicio"
-								value="#{equipoController.funcionamientoEquipo.anioFueraServicio }" />
 
+						<p:selectOneMenu id="console28"
+							value="#{equipoController.funcionamientoEquipo.causa}">
+							<f:selectItem itemLabel="Seleccione" itemValue="" />
+							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
+							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
+							<p:ajax event="change" update="causa" />
+						</p:selectOneMenu>
 
-							<p:selectOneMenu id="console27"
-								value="#{equipoController.funcionamientoEquipo.anioFueraServicio}">
-								<f:selectItem itemLabel="Seleccione" itemValue="" />
-								<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-								<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
-								<p:ajax event="change" update="aniosFueraServicio" />
-							</p:selectOneMenu>
+						<p:outputLabel for="fueraServicio" value="Fuera Servicio:" />
+						<p:selectBooleanCheckbox id="fueraServicio"
+							value="#{equipoController.funcionamientoEquipo.fueraServicio }" required="true" />
 
+						<p:selectOneMenu id="console29" disabled="true"
+							value="#{equipoController.funcionamientoEquipo.fueraServicio}">
+							<f:selectItem itemLabel="Seleccione" itemValue="" />
+							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
+							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
+							<p:ajax event="change" update="fueraServicio" />
+						</p:selectOneMenu>
 
-							<p:outputLabel for="causa" value="causa:" />
-							<p:inputText id="causa"
-								value="#{equipoController.funcionamientoEquipo.causa }" />
 
+					</h:panelGrid>
 
-							<p:selectOneMenu id="console28"
-								value="#{equipoController.funcionamientoEquipo.causa}">
-								<f:selectItem itemLabel="Seleccione" itemValue="" />
-								<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-								<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
-								<p:ajax event="change" update="causa" />
-							</p:selectOneMenu>
+				</p:panel>
 
+				<p:panel id="tipoMantenimientoEdit"
+					header="TIPO DE MANTENIMIENTO AL QUE ES SOMETIDO EL EQUIPO">
+					<h:panelGrid columns="3" columnClasses="titleCell">
 
-							<p:outputLabel for="fueraServicio" value="Fuera Servicio:" />
-							<p:inputText id="fueraServicio"
-								value="#{equipoController.funcionamientoEquipo.fueraServicio }" />
+						<p:outputLabel for="tipoMantenimientoPre" value="Preventivo:" />
+						<p:selectOneMenu id="tipoMantenimientoPre" required="true"
+							value="#{equipoController.tipoManteEquipoCorr.propioStr}">
+							<f:selectItem itemLabel="Seleccione" itemValue="" />
+							<f:selectItem itemLabel="Propio" itemValue="Propio" />
+							<f:selectItem itemLabel="Contratado" itemValue="Contratado" />
+						</p:selectOneMenu>
 
 
-							<p:selectOneMenu id="console29"
-								value="#{equipoController.funcionamientoEquipo.fueraServicio}">
-								<f:selectItem itemLabel="Seleccione" itemValue="" />
-								<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-								<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
-								<p:ajax event="change" update="fueraServicio" />
-							</p:selectOneMenu>
+						<p:selectOneMenu id="console44" disabled="true"
+							value="#{equipoController.tipoManteEquipoCorr.propioStr}">
+							<f:selectItem itemLabel="Seleccione" itemValue="" />
+							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
+							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
+							<p:ajax event="change" update="tipoMantenimientoPre" />
+						</p:selectOneMenu>
 
+						<p:outputLabel for="cual" value="¿Cúal?:" />
+						<p:inputTextarea rows="6" cols="33" id="cual"
+							value="#{equipoController.tipoManteEquipoPre.cual }" required="true" />
 
-						</h:panelGrid>
 
-					</p:panel>
+						<p:selectOneMenu id="console47"
+							value="#{equipoController.tipoManteEquipoPre.cual}">
+							<f:selectItem itemLabel="Seleccione" itemValue="" />
+							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
+							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
+							<p:ajax event="change" update="cual" />
+						</p:selectOneMenu>
 
-					<p:panel id="tipoMantenimientoEdit"
-						header="TIPO DE MANTENIMIENTO AL QUE ES SOMETIDO EL EQUIPO">
-						<h:panelGrid columns="3" columnClasses="titleCell">
 
-							<p:outputLabel for="tipo_mantenimiento"
-								value="tipo_mantenimiento:" />
-							<p:inputText id="tipo_mantenimiento"
-								value="#{equipoController.tipoManteEquipo.tipo_mantenimiento }" />
+						<p:outputLabel for="tipoMantenimientoCor" value="Contratado:" />
+						<p:selectOneMenu id="tipoMantenimientoCor" required="true"
+							value="#{equipoController.tipoManteEquipoCorr.contratadoStr}">
+							<f:selectItem itemLabel="Seleccione" itemValue="" />
+							<f:selectItem itemLabel="Propio" itemValue="Propio" />
+							<f:selectItem itemLabel="Contratado" itemValue="Contratado" />
+						</p:selectOneMenu>
 
 
-							<p:selectOneMenu id="console44"
-								value="#{equipoController.tipoManteEquipo.tipo_mantenimiento}">
-								<f:selectItem itemLabel="Seleccione" itemValue="" />
-								<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-								<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
-								<p:ajax event="change" update="tipo_mantenimiento" />
-							</p:selectOneMenu>
+						<p:selectOneMenu id="console461" disabled="true"
+							value="#{equipoController.tipoManteEquipoCorr.contratadoStr}">
+							<f:selectItem itemLabel="Seleccione" itemValue="" />
+							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
+							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
+							<p:ajax event="change" update="tipoMantenimientoCor" />
+						</p:selectOneMenu>
 
 
-							<p:outputLabel for="propio" value="propio:" />
-							<p:inputText id="propio"
-								value="#{equipoController.tipoManteEquipo.propio }" />
+						<p:outputLabel for="cual1" value="¿Cúal?:" />
+						<p:inputTextarea rows="6" cols="33" id="cual1"
+							value="#{equipoController.tipoManteEquipoCorr.cual }" required="true" />
 
 
-							<p:selectOneMenu id="console45"
-								value="#{equipoController.tipoManteEquipo.propio}">
-								<f:selectItem itemLabel="Seleccione" itemValue="" />
-								<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-								<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
-								<p:ajax event="change" update="propio" />
-							</p:selectOneMenu>
+						<p:selectOneMenu id="console471"
+							value="#{equipoController.tipoManteEquipoCorr.cual}">
+							<f:selectItem itemLabel="Seleccione" itemValue="" />
+							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
+							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
+							<p:ajax event="change" update="cual1" />
+						</p:selectOneMenu>
 
+					</h:panelGrid>
+				</p:panel>
 
-							<p:outputLabel for="contratado" value="contratado:" />
-							<p:inputText id="contratado"
-								value="#{equipoController.tipoManteEquipo.contratado }" />
-
-
-							<p:selectOneMenu id="console46"
-								value="#{equipoController.tipoManteEquipo.contratado}">
-								<f:selectItem itemLabel="Seleccione" itemValue="" />
-								<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-								<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
-								<p:ajax event="change" update="contratado" />
-							</p:selectOneMenu>
-
-
-							<p:outputLabel for="cual" value="¿Cúal?:" />
-							<p:inputText id="cual"
-								value="#{equipoController.tipoManteEquipo.cual }" />
-
-
-							<p:selectOneMenu id="console47"
-								value="#{equipoController.tipoManteEquipo.cual}">
-								<f:selectItem itemLabel="Seleccione" itemValue="" />
-								<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-								<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
-								<p:ajax event="change" update="cual" />
-							</p:selectOneMenu>
-
-						</h:panelGrid>
-					</p:panel>
-				
 				<div style="clear: both" />
 
-				<!-- p:requiredFields /> -->
 
+			</p:panel>
+			
+					<p:tabView>
+					<p:tab title="Empresa" id="empresaTab">
+						
+						<h:panelGroup rendered="#{empty equipoController.listaEmpresa}">
+							<em>No existen Empresas</em>
+						</h:panelGroup> 
+
+						<p:dataTable var="_object"
+							value="#{equipoController.listaEmpresa}"
+							rendered="#{not empty equipoController.listaEmpresa}"
+							id="empresaList" paginator="true" paginatorPosition="bottom"
+							rowKey="#{_object.id}"
+							selection="#{empresaController.selectEmpresas}">
+
+							<p:column id="c1" headerText="Razón Social">
+								<h:outputText value="#{_object.razonSocial}"/>
+							</p:column>
+
+							<p:column id="c2" headerText="NIT">
+								<h:outputText value=" #{_object.nit}"/>
+							</p:column>
+
+							<p:column id="c3" headerText="Telefono">
+								<h:outputText value="#{_object.telefono}" />
+							</p:column>
+
+							<p:column id="c4" headerText="Dirección">
+								<h:outputText value="#{_object.direccion}" />
+							</p:column>
+
+							<p:column id="c5" headerText="Correo Electronico">
+								<h:outputText value="#{_object.correoElectronico}" />
+							</p:column>
+
+							<p:column id="c6" headerText="Sitio Web">
+								<h:outputText value="#{_object.sitioWeb}" />
+							</p:column>							
+						</p:dataTable>
+						
+						<p:panel id="empreTabButton" align="right">
+							<p:commandButton id="selectEmpresa" action="empresaSelecction"								
+								value="#{empresaController.refer != null ?  'Cambiar Empresa' : 'Seleccionar'}" />
+						</p:panel>
+
+					</p:tab>
+				</p:tabView>
+				
 				<p:panel id="groupButton" align="right">
 					<p:commandButton id="create" styleClass="" value="Guardar"
 						action="#{equipoController.crear}"
 						rendered="#{!equipoController.editMode}" />
 
-					<p:commandButton id="update" styleClass="" type="complex"
+					<p:commandButton id="update" styleClass="" 
 						value="Guardar" action="#{equipoController.actualizar}"
 						rendered="#{equipoController.editMode}" />
 
 					<p:commandButton id="cancel" styleClass="" value="Cancelar"
-						action="#{equipoController.cancelar}" immediate="true" />
+						action="#{equipoController.cancelar}" immediate="true"/>
 				</p:panel>
-
-				<div style="clear: both" />
-
-			</p:panel>
+				
 		</h:form>
 
 	</ui:define>

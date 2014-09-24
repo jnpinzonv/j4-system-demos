@@ -11,6 +11,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.criteria.CriteriaBuilder.In;
 
 /**
  * <b>Descripcion:</b> Clase que <br/>
@@ -44,7 +45,7 @@ public class AdquisicionEquipo implements Serializable {
     /**
      * instalaciones
      */
-    private String fechaInstalacion;
+    private Date fechaInstalacion;
 
     /**
      * potencia
@@ -74,7 +75,7 @@ public class AdquisicionEquipo implements Serializable {
     /**
      * insumos
      */
-    private Date peridoGarantia;
+    private Integer peridoGarantia;
     
     private String cubrimientoGarantia;
     
@@ -143,7 +144,7 @@ public class AdquisicionEquipo implements Serializable {
      * Devuelve el valor de fechaInstalacion
      * @return El valor de fechaInstalacion
      */
-    public String getFechaInstalacion() {
+    public Date getFechaInstalacion() {
         return fechaInstalacion;
     }
 
@@ -151,7 +152,7 @@ public class AdquisicionEquipo implements Serializable {
      * Establece el valor de fechaInstalacion
      * @param fechaInstalacion El valor por establecer para fechaInstalacion
      */
-    public void setFechaInstalacion(String fechaInstalacion) {
+    public void setFechaInstalacion(Date fechaInstalacion) {
         this.fechaInstalacion = fechaInstalacion;
     }
 
@@ -239,7 +240,7 @@ public class AdquisicionEquipo implements Serializable {
      * Devuelve el valor de peridoGarantia
      * @return El valor de peridoGarantia
      */
-    public Date getPeridoGarantia() {
+    public Integer getPeridoGarantia() {
         return peridoGarantia;
     }
 
@@ -247,7 +248,7 @@ public class AdquisicionEquipo implements Serializable {
      * Establece el valor de peridoGarantia
      * @param peridoGarantia El valor por establecer para peridoGarantia
      */
-    public void setPeridoGarantia(Date peridoGarantia) {
+    public void setPeridoGarantia(Integer peridoGarantia) {
         this.peridoGarantia = peridoGarantia;
     }
 

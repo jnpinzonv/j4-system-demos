@@ -21,6 +21,17 @@ public class EquipoHospitalarioBean {
          */
         @Inject
         private EntityManager entityManager;
+        
+        /**
+         * Persiste un objeto en la base de datos
+         * @param obj Onjeto a ser persistido
+         */
+        public void save(Object... obj) {
+            for (Object object : obj) {
+                entityManager.persist(object); 
+            }
+               
+        }
          /**
          * Persiste un objeto en la base de datos
          * @param obj Onjeto a ser persistido

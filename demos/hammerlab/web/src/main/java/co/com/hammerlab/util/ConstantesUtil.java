@@ -16,6 +16,12 @@ public interface ConstantesUtil {
 	String VER  ="ver";
 	
 	String ACTUALIZAR  ="actualizar";
+	
+	String REFER  ="refer";
+	
+	String MANTE  ="mante";
+	
+	
 
 	
 }

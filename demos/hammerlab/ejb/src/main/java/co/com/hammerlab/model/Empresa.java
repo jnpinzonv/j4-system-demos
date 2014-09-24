@@ -71,7 +71,7 @@ public class Empresa implements Serializable {
     /**
      * 
      */
-    @OneToMany
+    @OneToMany(mappedBy="empresa")
     private List<EquipoHospitalario> listaEquipos;
 
     /**

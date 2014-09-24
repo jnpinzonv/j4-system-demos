@@ -7,7 +7,7 @@ package co.com.hammerlab.model;
  * @author Josué Nicolás Pinzón Villamil <jnpinzonv@gmail.com>
  */
 public enum CategoriasParametros {
-
+     
     /**
      * 
      */

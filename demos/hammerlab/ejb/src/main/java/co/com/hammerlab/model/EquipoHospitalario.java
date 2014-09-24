@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -78,6 +79,9 @@ public class EquipoHospitalario implements Serializable {
      * telefono
      */
     private String telefono;
+    
+    @ManyToOne
+    private Empresa empresa;
     
     /**
      * 
@@ -421,4 +425,24 @@ public class EquipoHospitalario implements Serializable {
     public void setManteEquipo(TipoManteEquipo manteEquipo) {
         this.manteEquipo = manteEquipo;
     }
+
+    /**
+     * Devuelve el valor de empresa
+     * @return El valor de empresa
+     */
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    /**
+     * Establece el valor de empresa
+     * @param empresa El valor por establecer para empresa
+     */
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
+    
+    
 }
+
+

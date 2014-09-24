@@ -10,6 +10,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  * <b>Descripcion:</b> Clase que <br/>
@@ -39,7 +40,7 @@ public class TipoManteEquipo implements Serializable {
      * tipo_mantenimiento
      */
 
-    private String tipo_mantenimiento;
+    private String tipoMantenimiento;
 
     /**
      * propio
@@ -58,6 +59,10 @@ public class TipoManteEquipo implements Serializable {
      */
 
     private String cual;
+    @Transient
+    private transient String contratadoStr;
+    @Transient
+    private transient String propioStr;
 
     /**
      * Realacion con equiopo principal
@@ -96,21 +101,22 @@ public class TipoManteEquipo implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+   
 
     /**
-     * Devuelve el valor de tipo_mantenimiento
-     * @return El valor de tipo_mantenimiento
+     * Devuelve el valor de tipoMantenimiento
+     * @return El valor de tipoMantenimiento
      */
-    public String getTipo_mantenimiento() {
-        return tipo_mantenimiento;
+    public String getTipoMantenimiento() {
+        return tipoMantenimiento;
     }
 
     /**
-     * Establece el valor de tipo_mantenimiento
-     * @param tipo_mantenimiento El valor por establecer para tipo_mantenimiento
+     * Establece el valor de tipoMantenimiento
+     * @param tipoMantenimiento El valor por establecer para tipoMantenimiento
      */
-    public void setTipo_mantenimiento(String tipo_mantenimiento) {
-        this.tipo_mantenimiento = tipo_mantenimiento;
+    public void setTipoMantenimiento(String tipoMantenimiento) {
+        this.tipoMantenimiento = tipoMantenimiento;
     }
 
     /**
@@ -161,4 +167,37 @@ public class TipoManteEquipo implements Serializable {
         this.cual = cual;
     }
 
+    /**
+     * Devuelve el valor de contratadoStr
+     * @return El valor de contratadoStr
+     */
+    public String getContratadoStr() {
+        return contratadoStr;
+    }
+
+    /**
+     * Establece el valor de contratadoStr
+     * @param contratadoStr El valor por establecer para contratadoStr
+     */
+    public void setContratadoStr(String contratadoStr) {
+        this.contratadoStr = contratadoStr;
+    }
+
+    /**
+     * Devuelve el valor de propioStr
+     * @return El valor de propioStr
+     */
+    public String getPropioStr() {
+        return propioStr;
+    }
+
+    /**
+     * Establece el valor de propioStr
+     * @param propioStr El valor por establecer para propioStr
+     */
+    public void setPropioStr(String propioStr) {
+        this.propioStr = propioStr;
+    }
+
+    
 }

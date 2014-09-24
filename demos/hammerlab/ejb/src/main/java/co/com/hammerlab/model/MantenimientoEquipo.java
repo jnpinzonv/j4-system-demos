@@ -74,10 +74,16 @@ public class MantenimientoEquipo implements Serializable {
     private String observaciones;
 
     /**
-     * firmaAprovacion
+     * firmaAprobacion
      */
     @Lob
-    private byte[] firmaAprovacion;
+    private byte[] firmaAprobacion;
+    
+    /**
+    * firmaAprobacion
+    */
+   @Lob
+   private byte[] firmaAprobacionTecnico;
 
     /**
      * cedulaAprovacion
@@ -225,22 +231,37 @@ public class MantenimientoEquipo implements Serializable {
         this.observaciones = observaciones;
     }
 
-   
 
     /**
-     * Devuelve el valor de firmaAprovacion
-     * @return El valor de firmaAprovacion
+     * Devuelve el valor de firmaAprobacion
+     * @return El valor de firmaAprobacion
      */
-    public byte[] getFirmaAprovacion() {
-        return firmaAprovacion;
+    public byte[] getFirmaAprobacion() {
+        return firmaAprobacion;
     }
 
     /**
-     * Establece el valor de firmaAprovacion
-     * @param firmaAprovacion El valor por establecer para firmaAprovacion
+     * Establece el valor de firmaAprobacion
+     * @param firmaAprobacion El valor por establecer para firmaAprobacion
      */
-    public void setFirmaAprovacion(byte[] firmaAprovacion) {
-        this.firmaAprovacion = firmaAprovacion;
+    public void setFirmaAprobacion(byte[] firmaAprobacion) {
+        this.firmaAprobacion = firmaAprobacion;
+    }
+
+    /**
+     * Devuelve el valor de firmaAprobacionTecnico
+     * @return El valor de firmaAprobacionTecnico
+     */
+    public byte[] getFirmaAprobacionTecnico() {
+        return firmaAprobacionTecnico;
+    }
+
+    /**
+     * Establece el valor de firmaAprobacionTecnico
+     * @param firmaAprobacionTecnico El valor por establecer para firmaAprobacionTecnico
+     */
+    public void setFirmaAprobacionTecnico(byte[] firmaAprobacionTecnico) {
+        this.firmaAprobacionTecnico = firmaAprobacionTecnico;
     }
 
     /**

@@ -38,9 +38,11 @@
 			</p:panel>
 
 
-			<p:panel id="panellistaMantenimientos" header="Lista de Mantenimientos">
+			<p:panel id="panellistaMantenimientos"
+				header="Lista de Mantenimientos">
 
-				<h:panelGroup rendered="#{empty mantenimientoController.listaMantenimiento}">
+				<h:panelGroup
+					rendered="#{empty mantenimientoController.listaMantenimiento}">
 					<em>No existen Empresas</em>
 				</h:panelGroup>
 
@@ -65,9 +67,14 @@
 						immediate="true" ajax="true" ignoreAutoUpdate="true" async="true"
 						disabled="#{mantenimientoController.selectMantenimiento.size()  == 0}" />
 
+					<p:commandButton id="cancelarButtonTop" value="Cancelar"
+						immediate="true" ajax="true" ignoreAutoUpdate="true" async="true"
+						action="atras" />
+
 				</p:panel>
 
-				<p:dataTable var="_object" value="#{mantenimientoController.listaMantenimiento}"
+				<p:dataTable var="_object"
+					value="#{mantenimientoController.listaMantenimiento}"
 					rendered="#{not empty mantenimientoController.listaMantenimiento}"
 					id="empresaList" paginator="true" paginatorPosition="bottom"
 					rowKey="#{_object.id}"
@@ -147,6 +154,10 @@
 					<p:commandButton id="deleteButtonBottom" value="Borrar"
 						immediate="true" ajax="true" ignoreAutoUpdate="true" async="true"
 						disabled="#{mantenimientoController.selectMantenimiento.size() == 0}" />
+
+					<p:commandButton id="cancelarButton" value="Cancelar"
+						immediate="true" ajax="true" ignoreAutoUpdate="true" async="true"
+						action="atras" />
 				</p:panel>
 			</p:panel>
 		</h:form>
