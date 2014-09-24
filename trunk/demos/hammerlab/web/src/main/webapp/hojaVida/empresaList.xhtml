@@ -12,6 +12,7 @@
 		<f:metadata>
 			<f:event type="preRenderView"
 				listener="#{empresaController.initNewObject}" />
+				<f:viewParam name="refer" value="#{empresaController.refer}"/>
 		</f:metadata>
 	</ui:define>
 
@@ -43,8 +44,23 @@
 				<h:panelGroup rendered="#{empty empresaController.listaEmpresa}">
 					<em>No existen Empresas</em>
 				</h:panelGroup>
+				
+				<p:panel id="selectPanelButtonTop" align="right"
+					rendered="#{(not empty empresaController.refer)}">
 
-				<p:panel id="groupButtonTop" align="right">
+					<p:commandButton id="selectButton"
+						action="#{empresaController.empresaSeleccionada}"
+						value="Seleccionar"
+						disabled="#{empresaController.selectEmpresas.size() != 1}"						
+						ignoreDupResponses="true" />
+
+					<p:commandButton id="cancelButtonTop" immediate="true"
+						styleClass="lionButtonEnabled" value="Cancelar"
+						action="cancelSelect" />
+
+				</p:panel>
+
+				<p:panel id="groupButtonTop" align="right" rendered="#{(empty empresaController.refer)}">
 						
 					<p:commandButton id="createButtonTop"
 						action="#{empresaController.initCrearModo}" immediate="true"  value="Crear" />
@@ -99,15 +115,15 @@
 					</p:column>
 					<p:column selectionMode="multiple" style="width:16px;text-align:center"/>
 					
-					<p:ajax event="rowSelectCheckbox" immediate="true"  update=":formEmpresas:groupButtonBottom,:formEmpresas:groupButtonTop" />
-					<p:ajax event="rowUnselectCheckbox" immediate="true" update=":formEmpresas:groupButtonBottom,:formEmpresas:groupButtonTop" />
+					<p:ajax event="rowSelectCheckbox" immediate="true"  update=":formEmpresas:groupButtonBottom,:formEmpresas:groupButtonTop,:formEmpresas:selectPanelButtonTop" />
+					<p:ajax event="rowUnselectCheckbox" immediate="true" update=":formEmpresas:groupButtonBottom,:formEmpresas:groupButtonTop,:formEmpresas:selectPanelButtonTop" />
 					
 				</p:dataTable>
 
 
 
 				<p:panel id="groupButtonBottom" align="right"
-					rendered="#{empresaController.listaEmpresa.size() > 0}">
+					rendered="#{(empresaController.listaEmpresa.size() > 0) and (empty empresaController.refer)}">
 
 					<p:commandButton id="createButtonBottom"
 						action="#{empresaController.initCrearModo}"

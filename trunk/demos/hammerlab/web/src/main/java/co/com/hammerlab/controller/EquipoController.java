@@ -15,11 +15,13 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.DualListModel;
 
 import co.com.hammerlab.ejb.EquipoHospitalarioBean;
 import co.com.hammerlab.ejb.ParametrosBean;
 import co.com.hammerlab.model.AdquisicionEquipo;
 import co.com.hammerlab.model.CategoriasParametros;
+import co.com.hammerlab.model.Empresa;
 import co.com.hammerlab.model.EquipoHospitalario;
 import co.com.hammerlab.model.EquipoInfoTecnica;
 import co.com.hammerlab.model.EstadoEquipo;
@@ -70,7 +72,10 @@ public class EquipoController implements Serializable {
 
     @Inject
     private ParametrosBean parametrosBean;
-
+    
+    @Inject
+    private EmpresaController empresaController;
+    
     private AdquisicionEquipo adquisicionEquipo;
 
     private EquipoInfoTecnica infoTecnica;
@@ -85,11 +90,31 @@ public class EquipoController implements Serializable {
 
     private RecomendacionesEquipo recomendacionesEquipo;
 
-    private TipoManteEquipo tipoManteEquipo;
+    private TipoManteEquipo tipoManteEquipoPre;
+    
+    private TipoManteEquipo tipoManteEquipoCorr;
 
     private Map<String, String> ubicacionList;
     
     private List<String> tecnologiaList;
+    
+    private DualListModel<String> recomendacionesList= new DualListModel<String>();
+    
+    private String accion;
+    
+    /**
+     * 
+     */
+    private List<EquipoHospitalario> listaEquipos;
+
+    /**
+     * 
+     */
+    private List<EquipoHospitalario> selectEquipos;
+    
+    private List<Empresa>  listaEmpresa;
+    
+    ArrayList <String> target = new ArrayList<String>();
 
     /**
      * Inicializa el bakend bean de control
@@ -115,6 +140,14 @@ public class EquipoController implements Serializable {
                 tecnologiaList.add(elemen.getPropiedad());
             }
             
+            ArrayList< String> source = new ArrayList<String>();
+           
+            for (ParametrosGenerales element : parametrosBean.getAllCategoria(CategoriasParametros.RECOMENDACIONES)) {
+               source.add(element.getPropiedad());
+            }
+            
+            recomendacionesList.setSource(source);
+            recomendacionesList.setTarget(target);
             adquisicionEquipo= new AdquisicionEquipo();
             infoTecnica= new EquipoInfoTecnica();
             estadoEquipo= new EstadoEquipo();
@@ -122,37 +155,24 @@ public class EquipoController implements Serializable {
             planosEquipo= new PlanosEquipo();
             manualesEquipo= new ManualesEquipo();
             recomendacionesEquipo= new RecomendacionesEquipo();
-            tipoManteEquipo= new TipoManteEquipo();
+            tipoManteEquipoPre= new TipoManteEquipo();
+            tipoManteEquipoCorr= new TipoManteEquipo();
             
-            
+            listaEmpresa= new ArrayList<Empresa>();
             
         }
-        
+        busqueda();
         
     }
 
-    /**
-     * Devuelve el valor de newUsuario
-     * 
-     * @return El valor de newUsuario
-     */
-    public EquipoHospitalario getNewObject() {
-        return newObject;
-    }
-
-    /**
-     * 
-     */
-    private List<EquipoHospitalario> listaEquipos;
-
-    /**
-     * 
-     */
-    private List<EquipoHospitalario> selectEquipos;
+   
+    
+    
 
     public void busqueda() {
         listaEquipos = equipoHospitalarioBean.getAll();
     }
+    
 
     /**
      * Asigna el valor del objeto seleccionado pra su edicion
@@ -182,6 +202,14 @@ public class EquipoController implements Serializable {
 
     public String reiniciar() {
         return ConstantesUtil.ATRAS;
+    }
+    
+    public void cargarEmpresa(){
+        if(accion!=null){
+            listaEmpresa.clear();
+            listaEmpresa.add(empresaController.getEmpresaSelect());
+            empresaController.setEmpresaSelect(null);
+        }
     }
 
     /**
@@ -228,17 +256,23 @@ public class EquipoController implements Serializable {
      *             Lanza una excepcion si hay un error en la transacciòn
      */
     public String crear() {
-        try {
-            equipoHospitalarioBean.save(newObject);
+        try {          
+            StringBuilder nuevo= new StringBuilder();
+            for (String recomendaciones : target) {
+                nuevo.append(recomendaciones);
+                nuevo.append(",");
+            }
+            equipoHospitalarioBean.save(tipoManteEquipoCorr,tipoManteEquipoPre,recomendacionesEquipo,manualesEquipo,adquisicionEquipo,estadoEquipo,infoTecnica,funcionamientoEquipo,planosEquipo,newObject);
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Exito!", "Se guardo un registro de una Empresa"));
             initNewObject();
+            busqueda();
             return ConstantesUtil.ATRAS;
         } catch (Exception e) {
             String errorMessage = getRootErrorMessage(e);
             addMessage(FacesMessage.SEVERITY_ERROR, errorMessage);
 
         }
-        return "";
+        return ConstantesUtil.ATRAS;
     }
 
     public void handleFileUpload(FileUploadEvent event) {
@@ -457,22 +491,35 @@ public class EquipoController implements Serializable {
     }
 
     /**
-     * Devuelve el valor de tipoManteEquipo
-     * 
-     * @return El valor de tipoManteEquipo
+     * Devuelve el valor de tipoManteEquipoPre
+     * @return El valor de tipoManteEquipoPre
      */
-    public TipoManteEquipo getTipoManteEquipo() {
-        return tipoManteEquipo;
+    public TipoManteEquipo getTipoManteEquipoPre() {
+        return tipoManteEquipoPre;
     }
 
     /**
-     * Establece el valor de tipoManteEquipo
-     * 
-     * @param tipoManteEquipo
-     *            El valor por establecer para tipoManteEquipo
+     * Establece el valor de tipoManteEquipoPre
+     * @param tipoManteEquipoPre El valor por establecer para tipoManteEquipoPre
      */
-    public void setTipoManteEquipo(TipoManteEquipo tipoManteEquipo) {
-        this.tipoManteEquipo = tipoManteEquipo;
+    public void setTipoManteEquipoPre(TipoManteEquipo tipoManteEquipoPre) {
+        this.tipoManteEquipoPre = tipoManteEquipoPre;
+    }
+
+    /**
+     * Devuelve el valor de tipoManteEquipoCorr
+     * @return El valor de tipoManteEquipoCorr
+     */
+    public TipoManteEquipo getTipoManteEquipoCorr() {
+        return tipoManteEquipoCorr;
+    }
+
+    /**
+     * Establece el valor de tipoManteEquipoCorr
+     * @param tipoManteEquipoCorr El valor por establecer para tipoManteEquipoCorr
+     */
+    public void setTipoManteEquipoCorr(TipoManteEquipo tipoManteEquipoCorr) {
+        this.tipoManteEquipoCorr = tipoManteEquipoCorr;
     }
 
     /**
@@ -560,7 +607,73 @@ public class EquipoController implements Serializable {
     public void setTecnologiaList(List<String> tecnologiaList) {
         this.tecnologiaList = tecnologiaList;
     }
+
+    /**
+     * Devuelve el valor de recomendacionesList
+     * @return El valor de recomendacionesList
+     */
+    public DualListModel<String> getRecomendacionesList() {
+        return recomendacionesList;
+    }
+
+    /**
+     * Establece el valor de recomendacionesList
+     * @param recomendacionesList El valor por establecer para recomendacionesList
+     */
+    public void setRecomendacionesList(DualListModel<String> recomendacionesList) {
+        this.recomendacionesList = recomendacionesList;
+    }
+
+    /**
+     * Devuelve el valor de accion
+     * @return El valor de accion
+     */
+    public String getAccion() {
+        return accion;
+    }
+
+    /**
+     * Establece el valor de accion
+     * @param accion El valor por establecer para accion
+     */
+    public void setAccion(String accion) {
+        this.accion = accion;
+    }
     
-    
+    /**
+     * Devuelve el valor de newUsuario
+     * 
+     * @return El valor de newUsuario
+     */
+    public EquipoHospitalario getNewObject() {
+        return newObject;
+    }
+
+
+
+
+
+    /**
+     * Devuelve el valor de listaEmpresa
+     * @return El valor de listaEmpresa
+     */
+    public List<Empresa> getListaEmpresa() {
+        return listaEmpresa;
+    }
+
+
+
+
+
+    /**
+     * Establece el valor de listaEmpresa
+     * @param listaEmpresa El valor por establecer para listaEmpresa
+     */
+    public void setListaEmpresa(List<Empresa> listaEmpresa) {
+        this.listaEmpresa = listaEmpresa;
+    }
+
+   
+   
 
 }

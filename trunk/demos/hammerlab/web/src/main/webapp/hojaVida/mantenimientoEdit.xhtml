@@ -14,45 +14,46 @@
 			<p:panel id="empresaPanelEdit"
 				header="#{empresaController.editMode ? 'Actualizar Empresa' : 'Crear Empresa'}">
 
-				<h:panelGrid columns="3" columnClasses="titleCell">
+				<h:panelGrid columns="2" columnClasses="titleCell">
 
-					<h:outputLabel for="fecha" value="fecha:" />
-					<h:inputText id="fecha"
+					<p:outputLabel for="fecha" value="Fecha:" />
+					<p:calendar id="fecha"
 						value="#{mantenimientoController.newObject.fecha}" />
-						
-					<h:outputLabel for="danioFalla" value="Daño Falla:" />
-					<h:inputText id="danioFalla"
+
+					<p:outputLabel for="danioFalla" value="Daño, Falla o Averias:" />
+					<p:inputTextarea rows="6" cols="33" id="danioFalla"
 						value="#{mantenimientoController.newObject.danioFalla }" />
-						
-					<h:outputLabel for="reparaciones" value="reparaciones:" />
-					<h:inputText id="reparaciones"
+
+					<p:outputLabel for="reparaciones"
+						value="Reparaciones o Procedimientos:" />
+					<p:inputTextarea rows="6" cols="33" id="reparaciones"
 						value="#{mantenimientoController.newObject.reparaciones }" />
-					
-					<h:outputLabel for="repuestos" value="repuestos:" />
-					<h:inputText id="repuestos"
+
+					<p:outputLabel for="repuestos" value="Repuestos Básicos:" />
+					<p:inputTextarea rows="6" cols="33" id="repuestos"
 						value="#{mantenimientoController.newObject.repuestos }" />
 
-					<h:outputLabel for="costoTotal" value="costo_total:" />
-					<h:inputText id="costoTotal"
+					<p:outputLabel for="observaciones" value="Observaciones:" />
+					<p:inputTextarea rows="6" cols="33" id="observaciones"
+						value="#{mantenimientoController.newObject.observaciones }" />
+
+					<p:outputLabel for="costoTotal" value="Costo Total:" />
+					<p:inputText id="costoTotal"
 						value="#{mantenimientoController.newObject.costoTotal }" />
 
-					<h:outputLabel for="observaciones" value="observaciones:" />
-					<h:inputText id="observaciones"
-						value="#{mantenimientoController.newObject.observaciones }" />
-						
-					<h:outputLabel for="firmaAprovacion" value="firmaAprovacion:" />
-					<h:inputText id="firmaAprovacion"
-						value="#{mantenimientoController.newObject.firmaAprovacion }" />
-					
+					<p:outputLabel 
+						value="Firma Aprobación Tecnico:" />
+					<p:fileUpload
+						fileUploadListener="#{equipoController.handleFileUpload}"
+						mode="advanced" dragDropSupport="true" sizeLimit="100000"
+						allowTypes="/(\.|\/)(gif|jpe?g|png|jpg)$/" />
 
-					<h:outputLabel for="cedulaAprovacion" value="cedulaAprovacion:" />
-					<h:inputText id="cedulaAprovacion"
-						value="#{mantenimientoController.newObject.cedulaAprovacion }" />
-
-					<h:outputLabel for="IdTransaccion" value="IdTransaccion:" />
-					<h:inputText id="IdTransaccion"
-						value="#{mantenimientoController.newObject.idTransaccion }" />					
-
+					<p:outputLabel 
+						value="Firma Aprobación de Institución:" />
+					<p:fileUpload
+						fileUploadListener="#{equipoController.handleFileUpload}"
+						mode="advanced" dragDropSupport="true" sizeLimit="100000"
+						allowTypes="/(\.|\/)(gif|jpe?g|png|jpg)$/" />
 				</h:panelGrid>
 
 				<div style="clear: both" />

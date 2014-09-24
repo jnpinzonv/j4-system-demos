@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.context.Conversation;
+import javax.enterprise.context.ConversationScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.application.FacesMessage.Severity;
 import javax.faces.context.FacesContext;
@@ -26,6 +27,7 @@ import co.com.hammerlab.util.ConstantesUtil;
 
 
 @Named("mantenimientoController")
+@ConversationScoped
 public class MantenimientoController implements Serializable {
 
     /**
@@ -61,21 +63,11 @@ public class MantenimientoController implements Serializable {
     @Inject
     private MantenimientoEquipoBean mantenimientoEquipoBean;
     
-    private AdquisicionEquipo adquisicionEquipo;
+    @Inject
+    private EquipoController controller;
+  
     
-    private EquipoInfoTecnica infoTecnica;
-    
-    private EstadoEquipo estadoEquipo;
-    
-    private FuncionamientoEquipo funcionamientoEquipo;    
-    
-    private PlanosEquipo planosEquipo;
-    
-    private ManualesEquipo manualesEquipo;
-    
-    private RecomendacionesEquipo recomendacionesEquipo;
-    
-    private TipoManteEquipo tipoManteEquipo;
+   private EquipoHospitalario equipoHospitalario;
 
    
 
@@ -191,7 +183,7 @@ public class MantenimientoController implements Serializable {
                 conversation.begin();
             }
             bandera = Boolean.TRUE;
-            
+            equipoHospitalario= controller.getSelectEquipos().get(0);
             // TODO pendienta para inicializar el estado de editaod se deve mover
             if (editMode == Boolean.FALSE) {
                 newObject = new MantenimientoEquipo();
@@ -265,118 +257,7 @@ public class MantenimientoController implements Serializable {
     public void setBandera(boolean bandera) {
         this.bandera = bandera;
     }
-    /**
-     * Devuelve el valor de adquisicionEquipo
-     * @return El valor de adquisicionEquipo
-     */
-    public AdquisicionEquipo getAdquisicionEquipo() {
-        return adquisicionEquipo;
-    }
-    /**
-     * Establece el valor de adquisicionEquipo
-     * @param adquisicionEquipo El valor por establecer para adquisicionEquipo
-     */
-    public void setAdquisicionEquipo(AdquisicionEquipo adquisicionEquipo) {
-        this.adquisicionEquipo = adquisicionEquipo;
-    }
-    /**
-     * Devuelve el valor de infoTecnica
-     * @return El valor de infoTecnica
-     */
-    public EquipoInfoTecnica getInfoTecnica() {
-        return infoTecnica;
-    }
-    /**
-     * Establece el valor de infoTecnica
-     * @param infoTecnica El valor por establecer para infoTecnica
-     */
-    public void setInfoTecnica(EquipoInfoTecnica infoTecnica) {
-        this.infoTecnica = infoTecnica;
-    }
-    /**
-     * Devuelve el valor de estadoEquipo
-     * @return El valor de estadoEquipo
-     */
-    public EstadoEquipo getEstadoEquipo() {
-        return estadoEquipo;
-    }
-    /**
-     * Establece el valor de estadoEquipo
-     * @param estadoEquipo El valor por establecer para estadoEquipo
-     */
-    public void setEstadoEquipo(EstadoEquipo estadoEquipo) {
-        this.estadoEquipo = estadoEquipo;
-    }
-    /**
-     * Devuelve el valor de funcionamientoEquipo
-     * @return El valor de funcionamientoEquipo
-     */
-    public FuncionamientoEquipo getFuncionamientoEquipo() {
-        return funcionamientoEquipo;
-    }
-    /**
-     * Establece el valor de funcionamientoEquipo
-     * @param funcionamientoEquipo El valor por establecer para funcionamientoEquipo
-     */
-    public void setFuncionamientoEquipo(FuncionamientoEquipo funcionamientoEquipo) {
-        this.funcionamientoEquipo = funcionamientoEquipo;
-    }
-    /**
-     * Devuelve el valor de planosEquipo
-     * @return El valor de planosEquipo
-     */
-    public PlanosEquipo getPlanosEquipo() {
-        return planosEquipo;
-    }
-    /**
-     * Establece el valor de planosEquipo
-     * @param planosEquipo El valor por establecer para planosEquipo
-     */
-    public void setPlanosEquipo(PlanosEquipo planosEquipo) {
-        this.planosEquipo = planosEquipo;
-    }
-    /**
-     * Devuelve el valor de manualesEquipo
-     * @return El valor de manualesEquipo
-     */
-    public ManualesEquipo getManualesEquipo() {
-        return manualesEquipo;
-    }
-    /**
-     * Establece el valor de manualesEquipo
-     * @param manualesEquipo El valor por establecer para manualesEquipo
-     */
-    public void setManualesEquipo(ManualesEquipo manualesEquipo) {
-        this.manualesEquipo = manualesEquipo;
-    }
-    /**
-     * Devuelve el valor de recomendacionesEquipo
-     * @return El valor de recomendacionesEquipo
-     */
-    public RecomendacionesEquipo getRecomendacionesEquipo() {
-        return recomendacionesEquipo;
-    }
-    /**
-     * Establece el valor de recomendacionesEquipo
-     * @param recomendacionesEquipo El valor por establecer para recomendacionesEquipo
-     */
-    public void setRecomendacionesEquipo(RecomendacionesEquipo recomendacionesEquipo) {
-        this.recomendacionesEquipo = recomendacionesEquipo;
-    }
-    /**
-     * Devuelve el valor de tipoManteEquipo
-     * @return El valor de tipoManteEquipo
-     */
-    public TipoManteEquipo getTipoManteEquipo() {
-        return tipoManteEquipo;
-    }
-    /**
-     * Establece el valor de tipoManteEquipo
-     * @param tipoManteEquipo El valor por establecer para tipoManteEquipo
-     */
-    public void setTipoManteEquipo(TipoManteEquipo tipoManteEquipo) {
-        this.tipoManteEquipo = tipoManteEquipo;
-    }
+  
     /**
      * Devuelve el valor de listaMantenimiento
      * @return El valor de listaMantenimiento

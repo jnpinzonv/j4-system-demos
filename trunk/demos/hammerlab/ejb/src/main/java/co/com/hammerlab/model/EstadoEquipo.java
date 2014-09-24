@@ -39,7 +39,7 @@ public class EstadoEquipo implements Serializable {
      * estado_confirmar
      */
 
-    private String estado_confirmar;
+    private String estadoConfirmar;
 
     /**
      * causa
@@ -86,19 +86,19 @@ public class EstadoEquipo implements Serializable {
     }
 
     /**
-     * Devuelve el valor de estado_confirmar
-     * @return El valor de estado_confirmar
+     * Devuelve el valor de estadoConfirmar
+     * @return El valor de estadoConfirmar
      */
-    public String getEstado_confirmar() {
-        return estado_confirmar;
+    public String getEstadoConfirmar() {
+        return estadoConfirmar;
     }
 
     /**
-     * Establece el valor de estado_confirmar
-     * @param estado_confirmar El valor por establecer para estado_confirmar
+     * Establece el valor de estadoConfirmar
+     * @param estadoConfirmar El valor por establecer para estadoConfirmar
      */
-    public void setEstado_confirmar(String estado_confirmar) {
-        this.estado_confirmar = estado_confirmar;
+    public void setEstadoConfirmar(String estadoConfirmar) {
+        this.estadoConfirmar = estadoConfirmar;
     }
 
     /**

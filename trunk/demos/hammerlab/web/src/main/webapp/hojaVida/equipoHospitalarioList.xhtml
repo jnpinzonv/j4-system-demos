@@ -60,6 +60,11 @@
 						immediate="true"
 						disabled="#{equipoController.selectEquipos.size() != 1}" />
 
+					<p:commandButton id="manteButtonTop"
+						action="mante" value="Mantenimiento"
+						immediate="true"
+						disabled="#{equipoController.selectEquipos.size() != 1}" />
+
 
 					<p:commandButton id="deleteButtonTop" value="Borrar"
 						immediate="true" ajax="true" ignoreAutoUpdate="true" async="true"
@@ -88,7 +93,7 @@
 					</p:column>
 
 					<p:column id="c4" headerText="modelo">
-						<h:outputText value="#{_object.modelo}"/>
+						<h:outputText value="#{_object.modelo}" />
 					</p:column>
 
 					<p:column id="c5" headerText="ubicacion">
@@ -138,6 +143,11 @@
 						action="#{equipoController.initVistaModo}" immediate="true"
 						value="Ver"
 						disabled="#{equipoController.selectEquipos.size()!= 1}" />
+
+					<p:commandButton id="manteButton"
+						action="mante" value="Mantenimiento"
+						immediate="true"
+						disabled="#{equipoController.selectEquipos.size() != 1}" />
 
 					<p:commandButton id="deleteButtonBottom" value="Borrar"
 						immediate="true" ajax="true" ignoreAutoUpdate="true" async="true"

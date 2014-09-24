@@ -50,4 +50,8 @@ insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) 
 insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(29,'decreto2','Mecánica','TECNOLOGIA','Tecnologia de equipos medicos')
 insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(30,'decreto3','Mecánica','TECNOLOGIA','Tecnologia de equipos medicos')
 insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(31,'decreto4','Mecánica','TECNOLOGIA','Tecnologia de equipos medicos')
+insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(32,'recomendaciones1','Temperatura 17° C','RECOMENDACIONES','Recomendaciones de equipos medicos')
+insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(33,'recomendaciones2','Humedad Relativa 45','RECOMENDACIONES','Recomendaciones de equipos medicos')
+insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(34,'recomendaciones3','115 V. AC, Red electrica','RECOMENDACIONES','Recomendaciones de equipos medicos')
+
 
