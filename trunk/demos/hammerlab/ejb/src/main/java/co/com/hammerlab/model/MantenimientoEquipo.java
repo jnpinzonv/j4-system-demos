@@ -61,11 +61,7 @@ public class MantenimientoEquipo implements Serializable {
 
     private String repuestos;
 
-    /**
-     * costo_total
-     */
-
-    private Double costoTotal;
+    
 
     /**
      * observaciones
@@ -197,22 +193,6 @@ public class MantenimientoEquipo implements Serializable {
      */
     public void setRepuestos(String repuestos) {
         this.repuestos = repuestos;
-    }
-
-    /**
-     * Devuelve el valor de costoTotal
-     * @return El valor de costoTotal
-     */
-    public Double getCostoTotal() {
-        return costoTotal;
-    }
-
-    /**
-     * Establece el valor de costoTotal
-     * @param costoTotal El valor por establecer para costoTotal
-     */
-    public void setCostoTotal(Double costoTotal) {
-        this.costoTotal = costoTotal;
     }
 
     /**

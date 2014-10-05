@@ -50,7 +50,7 @@ public class AdquisicionEquipo implements Serializable {
     /**
      * potencia
      */
-    private Integer aniosOperacion;
+    private String aniosOperacion;
 
     /**
      * frecuencia
@@ -60,7 +60,7 @@ public class AdquisicionEquipo implements Serializable {
     /**
      * capacidadTeorica
      */
-    private Integer aniosFueraServicio;
+    private String aniosFueraServicio;
 
     /**
      * capacidadPractica
@@ -73,16 +73,28 @@ public class AdquisicionEquipo implements Serializable {
     private String garantia;
 
     /**
-     * insumos
-     */
-    private Integer peridoGarantia;
+     * Perido de Garantia
+     */   
+    private String peridoGarantia;
     
+    /**
+     * 
+     */
     private String cubrimientoGarantia;
     
+    /**
+     * 
+     */
     private String clasificacionDecreto;
     
+    /**
+     * 
+     */
     private String calibracionTipo;
     
+    /**
+     * 
+     */
     private String calibracionPeriocidad;
     
     /**
@@ -156,21 +168,7 @@ public class AdquisicionEquipo implements Serializable {
         this.fechaInstalacion = fechaInstalacion;
     }
 
-    /**
-     * Devuelve el valor de aniosOperacion
-     * @return El valor de aniosOperacion
-     */
-    public Integer getAniosOperacion() {
-        return aniosOperacion;
-    }
-
-    /**
-     * Establece el valor de aniosOperacion
-     * @param aniosOperacion El valor por establecer para aniosOperacion
-     */
-    public void setAniosOperacion(Integer aniosOperacion) {
-        this.aniosOperacion = aniosOperacion;
-    }
+   
 
     /**
      * Devuelve el valor de propiedadEquipo
@@ -188,21 +186,7 @@ public class AdquisicionEquipo implements Serializable {
         this.propiedadEquipo = propiedadEquipo;
     }
 
-    /**
-     * Devuelve el valor de aniosFueraServicio
-     * @return El valor de aniosFueraServicio
-     */
-    public Integer getAniosFueraServicio() {
-        return aniosFueraServicio;
-    }
-
-    /**
-     * Establece el valor de aniosFueraServicio
-     * @param aniosFueraServicio El valor por establecer para aniosFueraServicio
-     */
-    public void setAniosFueraServicio(Integer aniosFueraServicio) {
-        this.aniosFueraServicio = aniosFueraServicio;
-    }
+   
 
     /**
      * Devuelve el valor de razon
@@ -236,21 +220,7 @@ public class AdquisicionEquipo implements Serializable {
         this.garantia = garantia;
     }
 
-    /**
-     * Devuelve el valor de peridoGarantia
-     * @return El valor de peridoGarantia
-     */
-    public Integer getPeridoGarantia() {
-        return peridoGarantia;
-    }
-
-    /**
-     * Establece el valor de peridoGarantia
-     * @param peridoGarantia El valor por establecer para peridoGarantia
-     */
-    public void setPeridoGarantia(Integer peridoGarantia) {
-        this.peridoGarantia = peridoGarantia;
-    }
+    
 
     /**
      * Devuelve el valor de cubrimientoGarantia
@@ -314,6 +284,54 @@ public class AdquisicionEquipo implements Serializable {
      */
     public void setCalibracionPeriocidad(String calibracionPeriocidad) {
         this.calibracionPeriocidad = calibracionPeriocidad;
+    }
+
+    /**
+     * Devuelve el valor de aniosOperacion
+     * @return El valor de aniosOperacion
+     */
+    public String getAniosOperacion() {
+        return aniosOperacion;
+    }
+
+    /**
+     * Establece el valor de aniosOperacion
+     * @param aniosOperacion El valor por establecer para aniosOperacion
+     */
+    public void setAniosOperacion(String aniosOperacion) {
+        this.aniosOperacion = aniosOperacion;
+    }
+
+    /**
+     * Devuelve el valor de aniosFueraServicio
+     * @return El valor de aniosFueraServicio
+     */
+    public String getAniosFueraServicio() {
+        return aniosFueraServicio;
+    }
+
+    /**
+     * Establece el valor de aniosFueraServicio
+     * @param aniosFueraServicio El valor por establecer para aniosFueraServicio
+     */
+    public void setAniosFueraServicio(String aniosFueraServicio) {
+        this.aniosFueraServicio = aniosFueraServicio;
+    }
+
+    /**
+     * Devuelve el valor de peridoGarantia
+     * @return El valor de peridoGarantia
+     */
+    public String getPeridoGarantia() {
+        return peridoGarantia;
+    }
+
+    /**
+     * Establece el valor de peridoGarantia
+     * @param peridoGarantia El valor por establecer para peridoGarantia
+     */
+    public void setPeridoGarantia(String peridoGarantia) {
+        this.peridoGarantia = peridoGarantia;
     }
 
     

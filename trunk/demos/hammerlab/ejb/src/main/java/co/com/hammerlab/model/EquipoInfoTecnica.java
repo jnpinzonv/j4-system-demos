@@ -39,7 +39,7 @@ public class EquipoInfoTecnica implements Serializable {
      * voltaje
      */
 
-    private Integer voltaje;
+    private String voltaje;
 
     /**
      * instalaciones
@@ -49,12 +49,12 @@ public class EquipoInfoTecnica implements Serializable {
     /**
      * potencia
      */
-    private Integer potencia;
+    private String potencia;
 
     /**
      * frecuencia
      */
-    private Double frecuencia;
+    private String frecuencia;
 
     /**
      * capacidadTeorica
@@ -114,22 +114,7 @@ public class EquipoInfoTecnica implements Serializable {
         this.id = id;
     }
 
-    /**
-     * Devuelve el valor de voltaje
-     * @return El valor de voltaje
-     */
-    public Integer getVoltaje() {
-        return voltaje;
-    }
-
-    /**
-     * Establece el valor de voltaje
-     * @param voltaje El valor por establecer para voltaje
-     */
-    public void setVoltaje(Integer voltaje) {
-        this.voltaje = voltaje;
-    }
-
+   
     /**
      * Devuelve el valor de instalaciones
      * @return El valor de instalaciones
@@ -146,37 +131,7 @@ public class EquipoInfoTecnica implements Serializable {
         this.instalaciones = instalaciones;
     }
 
-    /**
-     * Devuelve el valor de potencia
-     * @return El valor de potencia
-     */
-    public Integer getPotencia() {
-        return potencia;
-    }
-
-    /**
-     * Establece el valor de potencia
-     * @param potencia El valor por establecer para potencia
-     */
-    public void setPotencia(Integer potencia) {
-        this.potencia = potencia;
-    }
-
-    /**
-     * Devuelve el valor de frecuencia
-     * @return El valor de frecuencia
-     */
-    public Double getFrecuencia() {
-        return frecuencia;
-    }
-
-    /**
-     * Establece el valor de frecuencia
-     * @param frecuencia El valor por establecer para frecuencia
-     */
-    public void setFrecuencia(Double frecuencia) {
-        this.frecuencia = frecuencia;
-    }
+   
 
     /**
      * Devuelve el valor de capacidadTeorica
@@ -240,6 +195,54 @@ public class EquipoInfoTecnica implements Serializable {
      */
     public void setInsumos(String insumos) {
         this.insumos = insumos;
+    }
+
+    /**
+     * Devuelve el valor de voltaje
+     * @return El valor de voltaje
+     */
+    public String getVoltaje() {
+        return voltaje;
+    }
+
+    /**
+     * Establece el valor de voltaje
+     * @param voltaje El valor por establecer para voltaje
+     */
+    public void setVoltaje(String voltaje) {
+        this.voltaje = voltaje;
+    }
+
+    /**
+     * Devuelve el valor de potencia
+     * @return El valor de potencia
+     */
+    public String getPotencia() {
+        return potencia;
+    }
+
+    /**
+     * Establece el valor de potencia
+     * @param potencia El valor por establecer para potencia
+     */
+    public void setPotencia(String potencia) {
+        this.potencia = potencia;
+    }
+
+    /**
+     * Devuelve el valor de frecuencia
+     * @return El valor de frecuencia
+     */
+    public String getFrecuencia() {
+        return frecuencia;
+    }
+
+    /**
+     * Establece el valor de frecuencia
+     * @param frecuencia El valor por establecer para frecuencia
+     */
+    public void setFrecuencia(String frecuencia) {
+        this.frecuencia = frecuencia;
     }
     
 

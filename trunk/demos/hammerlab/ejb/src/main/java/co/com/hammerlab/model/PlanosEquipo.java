@@ -62,7 +62,7 @@ public class PlanosEquipo implements Serializable {
      * funcionamiento_confirmar
      */
 
-    private boolean funcionamientoConfirmar;
+    private Boolean funcionamientoConfirmar;
 
     /**
      * funcionamiento_ubicacion
@@ -171,23 +171,8 @@ public class PlanosEquipo implements Serializable {
     public void setPartesUbicacion(String partesUbicacion) {
         this.partesUbicacion = partesUbicacion;
     }
-
-    /**
-     * Devuelve el valor de funcionamientoConfirmar
-     * @return El valor de funcionamientoConfirmar
-     */
-    public boolean isFuncionamientoConfirmar() {
-        return funcionamientoConfirmar;
-    }
-
-    /**
-     * Establece el valor de funcionamientoConfirmar
-     * @param funcionamientoConfirmar El valor por establecer para funcionamientoConfirmar
-     */
-    public void setFuncionamientoConfirmar(boolean funcionamientoConfirmar) {
-        this.funcionamientoConfirmar = funcionamientoConfirmar;
-    }
-
+  
+   
     /**
      * Devuelve el valor de funcionamientoUbicacion
      * @return El valor de funcionamientoUbicacion
@@ -203,5 +188,23 @@ public class PlanosEquipo implements Serializable {
     public void setFuncionamientoUbicacion(String funcionamientoUbicacion) {
         this.funcionamientoUbicacion = funcionamientoUbicacion;
     }
+
+    /**
+     * Devuelve el valor de funcionamientoConfirmar
+     * @return El valor de funcionamientoConfirmar
+     */
+    public Boolean getFuncionamientoConfirmar() {
+        return funcionamientoConfirmar;
+    }
+
+    /**
+     * Establece el valor de funcionamientoConfirmar
+     * @param funcionamientoConfirmar El valor por establecer para funcionamientoConfirmar
+     */
+    public void setFuncionamientoConfirmar(Boolean funcionamientoConfirmar) {
+        this.funcionamientoConfirmar = funcionamientoConfirmar;
+    }
+    
+    
 
 }

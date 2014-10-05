@@ -18,28 +18,25 @@
 
 					<p:outputLabel for="fecha" value="Fecha:" />
 					<p:calendar id="fecha"
-						value="#{mantenimientoController.newObject.fecha}" />
+						value="#{mantenimientoController.newObject.fecha}" required="true"/>
 
 					<p:outputLabel for="danioFalla" value="Daño, Falla o Averias:" />
 					<p:inputTextarea rows="6" cols="33" id="danioFalla"
-						value="#{mantenimientoController.newObject.danioFalla }" />
+						value="#{mantenimientoController.newObject.danioFalla }" required="true" />
 
 					<p:outputLabel for="reparaciones"
 						value="Reparaciones o Procedimientos:" />
 					<p:inputTextarea rows="6" cols="33" id="reparaciones"
-						value="#{mantenimientoController.newObject.reparaciones }" />
+						value="#{mantenimientoController.newObject.reparaciones }" required="true" />
 
 					<p:outputLabel for="repuestos" value="Repuestos Básicos:" />
 					<p:inputTextarea rows="6" cols="33" id="repuestos"
-						value="#{mantenimientoController.newObject.repuestos }" />
+						value="#{mantenimientoController.newObject.repuestos }" required="true"/>
 
 					<p:outputLabel for="observaciones" value="Observaciones:" />
 					<p:inputTextarea rows="6" cols="33" id="observaciones"
-						value="#{mantenimientoController.newObject.observaciones }" />
-
-					<p:outputLabel for="costoTotal" value="Costo Total:" />
-					<p:inputText id="costoTotal"
-						value="#{mantenimientoController.newObject.costoTotal }" />
+						value="#{mantenimientoController.newObject.observaciones }" required="true"/>
+					
 
 					<p:outputLabel 
 						value="Firma Aprobación Tecnico:" />
@@ -63,11 +60,11 @@
 				<p:panel id="groupButton" align="right">
 					<p:commandButton id="create" styleClass="" value="Guardar"
 						action="#{empresaController.crear}"
-						rendered="#{!empresaController.editMode}" />
+						rendered="#{!empresaController.editMode}" update="@form"/>
 
 					<p:commandButton id="update" styleClass="" type="complex"
 						value="Guardar" action="#{empresaController.actualizar}"
-						rendered="#{empresaController.editMode}" />
+						rendered="#{empresaController.editMode}" update="@form"/>
 
 					<p:commandButton id="cancel" styleClass="" value="Cancelar"
 						action="#{empresaController.cancelar}" immediate="true" />
