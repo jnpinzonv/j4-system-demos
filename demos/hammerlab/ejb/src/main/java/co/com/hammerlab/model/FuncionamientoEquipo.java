@@ -45,7 +45,7 @@ public class FuncionamientoEquipo implements Serializable {
      * anios_fuera_servicio
      */
 
-    private Integer anioFueraServicio;
+    private String anioFueraServicio;
 
     /**
      * causa
@@ -110,7 +110,7 @@ public class FuncionamientoEquipo implements Serializable {
      * Devuelve el valor de anioFueraServicio
      * @return El valor de anioFueraServicio
      */
-    public Integer getAnioFueraServicio() {
+    public String getAnioFueraServicio() {
         return anioFueraServicio;
     }
 
@@ -118,7 +118,7 @@ public class FuncionamientoEquipo implements Serializable {
      * Establece el valor de anioFueraServicio
      * @param anioFueraServicio El valor por establecer para anioFueraServicio
      */
-    public void setAnioFueraServicio(Integer anioFueraServicio) {
+    public void setAnioFueraServicio(String anioFueraServicio) {
         this.anioFueraServicio = anioFueraServicio;
     }
 

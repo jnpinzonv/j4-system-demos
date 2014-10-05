@@ -12,6 +12,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.Email;
+
 /**
  * <b>Descripcion:</b> Clase que <br/>
  * se encarga de administrar los datos de un Empresa <b>Caso de Uso:</b> SOL_MOV- <br/>
@@ -61,6 +63,7 @@ public class Empresa implements Serializable {
     /**
      * correoElectronico
      */
+    @Email
     private String correoElectronico;
 
     /**

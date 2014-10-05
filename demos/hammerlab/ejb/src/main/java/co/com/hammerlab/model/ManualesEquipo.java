@@ -39,7 +39,7 @@ public class ManualesEquipo implements Serializable {
      * tecnico_confirmar
      */
 
-    private boolean tecnicoConfirmar;
+    private Boolean tecnicoConfirmar;
 
     /**
      * tecnico_ubicacion
@@ -94,20 +94,13 @@ public class ManualesEquipo implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-
-    /**
-     * Devuelve el valor de tecnicoConfirmar
-     * @return El valor de tecnicoConfirmar
-     */
-    public boolean isTecnicoConfirmar() {
-        return tecnicoConfirmar;
-    }
+  
 
     /**
      * Establece el valor de tecnicoConfirmar
      * @param tecnicoConfirmar El valor por establecer para tecnicoConfirmar
      */
-    public void setTecnicoConfirmar(boolean tecnicoConfirmar) {
+    public void setTecnicoConfirmar(Boolean tecnicoConfirmar) {
         this.tecnicoConfirmar = tecnicoConfirmar;
     }
 
@@ -206,5 +199,14 @@ public class ManualesEquipo implements Serializable {
     public void setEquipoHospitalario(EquipoHospitalario equipoHospitalario) {
         this.equipoHospitalario = equipoHospitalario;
     }
+
+    /**
+     * Devuelve el valor de tecnicoConfirmar
+     * @return El valor de tecnicoConfirmar
+     */
+    public Boolean getTecnicoConfirmar() {
+        return tecnicoConfirmar;
+    }
+    
 
 }

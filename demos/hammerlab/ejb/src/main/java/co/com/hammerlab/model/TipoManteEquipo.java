@@ -57,10 +57,17 @@ public class TipoManteEquipo implements Serializable {
     /**
      * cual
      */
-
     private String cual;
+    
+    /**
+     * 
+     */
     @Transient
     private transient String contratadoStr;
+    
+    /**
+     * 
+     */
     @Transient
     private transient String propioStr;
 
