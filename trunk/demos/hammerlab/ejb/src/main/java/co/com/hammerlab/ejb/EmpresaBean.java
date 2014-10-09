@@ -4,6 +4,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import co.com.hammerlab.model.Empresa;
 
@@ -57,6 +58,16 @@ public class EmpresaBean {
          */
         public List< Empresa > getAll() {
                 return entityManager.createNamedQuery("empresa.getAll", Empresa.class).getResultList();
+        }
+        
+        /**
+         * Consulta todos los registro de un objeto
+         * @return Lista de objetos 
+         */
+        public List< Empresa > getAllName(String parametro) {
+            Query q= entityManager.createNamedQuery("empresa.getRazonSocial", Empresa.class);
+                    q.setParameter("RAZONSOCIAL", parametro);
+                return q.getResultList();
         }
 
 }

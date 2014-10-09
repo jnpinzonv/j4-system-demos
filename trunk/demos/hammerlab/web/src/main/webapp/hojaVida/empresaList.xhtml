@@ -21,7 +21,7 @@
 		<h:form id="formEmpresas">
 			<p:panel id="panelEmpresas" header="Busqueda">
 
-				<p:inputText id="name" label="Nombre Empresa" title="Nombre Empresa"
+				<p:inputText id="name" label="Nombre Clientes" title="Nombre Clientes"
 					value="#{empresaController.newObject.razonSocial}" />
 
 
@@ -29,20 +29,20 @@
 
 				<p:panel id="groupButton" align="right">
 					<p:commandButton id="search" value="Buscar"
-						action="#{empresaController.busqueda}" />
+						action="#{empresaController.busqueda}" update =":formEmpresas"/>
 
 					<p:commandButton id="reset" value="Reiniciar"
-						action="#{empresaController.reiniciar}" immediate="true" />
+						action="#{empresaController.reiniciar}" immediate="true" update =":formEmpresas" />
 				</p:panel>
 
 				<div style="clear: both" />
 			</p:panel>
 
 
-			<p:panel id="panelListaEmpresas" header="Lista de empresas">
+			<p:panel id="panelListaEmpresas" header="Lista de Clientes">
 
 				<h:panelGroup rendered="#{empty empresaController.listaEmpresa}">
-					<em>No existen Empresas</em>
+					<em>No existen Clientes</em>
 				</h:panelGroup>
 
 				<p:panel id="selectPanelButtonTop" align="right"
@@ -79,8 +79,13 @@
 
 
 					<p:commandButton id="deleteButtonTop" value="Borrar"
-						immediate="true" ajax="true" ignoreAutoUpdate="true" async="true"
-						disabled="#{empresaController.selectEmpresas.size()  == 0}" />
+						immediate="true" ajax="true" update=":formEmpresas:message,:formEmpresas"
+						ignoreAutoUpdate="true" async="true" action="#{empresaController.eliminar}"
+						disabled="#{empresaController.selectEmpresas.size() == 0}">
+						<p:confirm header="Confirmation"
+							message="¿Desea Eliminar los registros seleccionados?"
+							icon="ui-icon-alert" />
+					</p:commandButton>
 
 				</p:panel>
 
@@ -143,7 +148,7 @@
 						disabled="#{empresaController.selectEmpresas.size()!= 1}" />
 
 					<p:commandButton id="deleteButtonBottom" value="Borrar"
-						immediate="true" ajax="true" update=":formEmpresas:message"
+						immediate="true" ajax="true" update=":formEmpresas:message,:formEmpresas"
 						ignoreAutoUpdate="true" async="true" action="#{empresaController.eliminar}"
 						disabled="#{empresaController.selectEmpresas.size() == 0}">
 						<p:confirm header="Confirmation"
