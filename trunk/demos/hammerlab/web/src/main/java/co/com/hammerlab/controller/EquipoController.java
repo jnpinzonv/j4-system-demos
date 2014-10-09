@@ -281,9 +281,10 @@ public class EquipoController implements Serializable {
 	}
 
 	public void handleFileUpload(FileUploadEvent event) {
-		FacesMessage message = new FacesMessage("Succesful", event.getFile()
-				.getFileName() + " is uploaded.");
-		FacesContext.getCurrentInstance().addMessage(null, message);
+	    newObject.setFotoEquipo(event.getFile().getContents());
+	    
+	    addMessage(FacesMessage.SEVERITY_INFO,  event.getFile()
+                .getFileName() + " Fue cargado.");
 	}
 
 	/**
