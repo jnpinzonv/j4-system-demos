@@ -91,7 +91,11 @@ public class EmpresaController implements Serializable {
      * 
      */
 	public void busqueda() {
+	    if(!newObject.getRazonSocial().isEmpty()){
+	        listaEmpresa = empresaBean.getAllName(newObject.getRazonSocial());
+	    }else{
 		listaEmpresa = empresaBean.getAll();
+	    }
 	}
 
 	/**
@@ -233,10 +237,10 @@ public class EmpresaController implements Serializable {
 				conversation.begin();
 			}
 			bandera = Boolean.TRUE;
+			newObject = new Empresa();
 			busqueda();
 			selectEmpresas = null;
-			newObject = new Empresa();
-
+			
 		}
 
 	}
