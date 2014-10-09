@@ -23,7 +23,8 @@ import org.hibernate.validator.constraints.Email;
  */
 @Entity
 @Table(name = "empresa")
-@NamedQueries({ @NamedQuery(name = "empresa.getAll", query = "select s from Empresa s") })
+@NamedQueries({ @NamedQuery(name = "empresa.getAll", query = "select s from Empresa s"),
+                @NamedQuery(name = "empresa.getRazonSocial", query = "Select e from Empresa e where " + Constants.replaceVocals1 + " e.razonSocial " + Constants.replaceVocals2 + " like concat(:RAZONSOCIAL,'%') ")})
 public class Empresa implements Serializable {
 
     /**
@@ -42,7 +43,7 @@ public class Empresa implements Serializable {
      * razonSocial
      */
 
-    private String razonSocial;
+    private String razonSocial="";
 
     /**
      * nit
