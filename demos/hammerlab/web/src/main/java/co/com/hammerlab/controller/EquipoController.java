@@ -1,5 +1,6 @@
 package co.com.hammerlab.controller;
 
+import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,12 @@ import javax.faces.application.FacesMessage.Severity;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.export.JRXlsAbstractExporterParameter;
+import net.sf.jasperreports.engine.export.JRXlsExporter;
+import net.sf.jasperreports.engine.export.JRXlsExporterParameter;
 
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.DualListModel;
@@ -37,659 +44,1137 @@ import co.com.hammerlab.util.ConstantesUtil;
 @ConversationScoped
 public class EquipoController implements Serializable {
 
-	/**
+    /**
      * 
      */
-	private static final long serialVersionUID = 2412744316675957914L;
+    private static final long serialVersionUID = 2412744316675957914L;
 
-	@Inject
-	private Conversation conversation;
-	/**
-	 * Inyeccion de contexto de faces
-	 */
-	@Inject
-	private FacesContext facesContext;
+    @Inject
+    private Conversation conversation;
+    /**
+     * Inyeccion de contexto de faces
+     */
+    @Inject
+    private FacesContext facesContext;
 
-	/**
-	 * Entidad sobre la que se gestiona la transaccion
-	 */
-	private EquipoHospitalario newObject;
-	/**
-	 * Variable de control
-	 */
-	private boolean editMode;
+    /**
+     * Entidad sobre la que se gestiona la transaccion
+     */
+    private EquipoHospitalario newObject;
 
-	/**
-	 * Variable de control de conversacion
-	 */
-	private boolean bandera = Boolean.FALSE;
+    /**
+     * Entidad sobre la que se gestiona la transaccion
+     */
+    private EquipoHospitalario newObjectCo;
+    /**
+     * Variable de control
+     */
+    private boolean editMode;
 
-	/**
+    /**
+     * Variable de control de conversacion
+     */
+    private boolean bandera = Boolean.FALSE;
+
+    /**
      * 
      */
-	@Inject
-	private EquipoHospitalarioBean equipoHospitalarioBean;
+    @Inject
+    private EquipoHospitalarioBean equipoHospitalarioBean;
 
-	@Inject
-	private ParametrosBean parametrosBean;
+    @Inject
+    private ParametrosBean parametrosBean;
 
-	@Inject
-	private EmpresaController empresaController;
+    @Inject
+    private EmpresaController empresaController;
 
-	private AdquisicionEquipo adquisicionEquipo;
+    private AdquisicionEquipo adquisicionEquipo;
 
-	private EquipoInfoTecnica infoTecnica;
+    private EquipoInfoTecnica infoTecnica;
 
-	private EstadoEquipo estadoEquipo;
+    private EstadoEquipo estadoEquipo;
 
-	private FuncionamientoEquipo funcionamientoEquipo;
+    private FuncionamientoEquipo funcionamientoEquipo;
 
-	private PlanosEquipo planosEquipo;
+    private PlanosEquipo planosEquipo;
 
-	private ManualesEquipo manualesEquipo;
+    private ManualesEquipo manualesEquipo;
 
-	private RecomendacionesEquipo recomendacionesEquipo;
+    private RecomendacionesEquipo recomendacionesEquipo;
 
-	private TipoManteEquipo tipoManteEquipoPre;
+    private TipoManteEquipo tipoManteEquipoPre;
 
-	private TipoManteEquipo tipoManteEquipoCorr;
+    private TipoManteEquipo tipoManteEquipoCorr;
 
-	private Map<String, String> ubicacionList;
+    private AdquisicionEquipo adquisicionEquipoCo;
 
-	private List<String> tecnologiaList;
+    private EquipoInfoTecnica infoTecnicaCo;
 
-	private DualListModel<String> recomendacionesList = new DualListModel<String>();
+    private EstadoEquipo estadoEquipoCo;
 
-	private String accion;
+    private FuncionamientoEquipo funcionamientoEquipoCo;
 
-	/**
+    private PlanosEquipo planosEquipoCo;
+
+    private ManualesEquipo manualesEquipoCo;
+
+    private RecomendacionesEquipo recomendacionesEquipoCo;
+
+    private TipoManteEquipo tipoManteEquipoPreCo;
+
+    private TipoManteEquipo tipoManteEquipoCorrCo;
+
+    private Map<String, String> ubicacionList;
+
+    private List<String> tecnologiaList;
+
+    private DualListModel<String> recomendacionesList = new DualListModel<String>();
+
+    private String accion;
+
+    /**
      * 
      */
-	private List<EquipoHospitalario> listaEquipos;
+    private List<EquipoHospitalario> listaEquipos;
 
-	/**
+    /**
      * 
      */
-	private List<EquipoHospitalario> selectEquipos;
+    private List<EquipoHospitalario> selectEquipos;
 
-	private List<Empresa> listaEmpresa;
-
-	ArrayList<String> target = new ArrayList<String>();
-
-	/**
-	 * Inicializa el bakend bean de control
-	 */
-	public void initNewObject() {
-
-		if (bandera == Boolean.FALSE) {
-			if (conversation.isTransient()) {
-				conversation.begin();
-			}
-			bandera = Boolean.TRUE;
-			
-			newObject = new EquipoHospitalario();
-			ubicacionList = new TreeMap<String, String>();
-			tecnologiaList = new ArrayList<String>();
-			for (ParametrosGenerales element : parametrosBean
-					.getAllCategoria(CategoriasParametros.UBICACION)) {
-				ubicacionList.put(element.getPropiedad(),
-						element.getPropiedad());
-			}
-			for (ParametrosGenerales elemen : parametrosBean
-					.getAllCategoria(CategoriasParametros.TECNOLOGIA)) {
-				tecnologiaList.add(elemen.getPropiedad());
-			}
-
-			ArrayList<String> source = new ArrayList<String>();
-
-			for (ParametrosGenerales element : parametrosBean
-					.getAllCategoria(CategoriasParametros.RECOMENDACIONES)) {
-				source.add(element.getPropiedad());
-			}
-
-			recomendacionesList.setSource(source);
-			recomendacionesList.setTarget(target);
-			adquisicionEquipo = new AdquisicionEquipo();
-			infoTecnica = new EquipoInfoTecnica();
-			estadoEquipo = new EstadoEquipo();
-			funcionamientoEquipo = new FuncionamientoEquipo();
-			planosEquipo = new PlanosEquipo();
-			manualesEquipo = new ManualesEquipo();
-			recomendacionesEquipo = new RecomendacionesEquipo();
-			tipoManteEquipoPre = new TipoManteEquipo();
-			tipoManteEquipoCorr = new TipoManteEquipo();
-
-			listaEmpresa = new ArrayList<Empresa>();
-
-		}
-		busqueda();
-
-	}
-
-	public void busqueda() {
-		listaEquipos = equipoHospitalarioBean.getAll();
-	}
-
-	/**
-	 * Asigna el valor del objeto seleccionado pra su edicion
+    /**
 	 * 
-	 * @param userId
-	 *            Identificador del objeto Seleccionado
-	 * @return Retorna regla de nevagacion
 	 */
-	public String initEditarModo() {
-		editMode = Boolean.TRUE;
-		newObject = equipoHospitalarioBean
-				.getByID(selectEquipos.get(0).getId());
-		return ConstantesUtil.CREAR_ACTU;
-	}
+    private List<Empresa> listaEmpresa;
 
-	public String initVistaModo() {
-		newObject = equipoHospitalarioBean
-				.getByID(selectEquipos.get(0).getId());
-		return ConstantesUtil.VER;
-	}
-
-	public String initCrearModo() {
-		return ConstantesUtil.CREAR_ACTU;
-	}
-
-	public String cancelar() {
-		return ConstantesUtil.ATRAS;
-	}
-
-	public String reiniciar() {
-		return ConstantesUtil.ATRAS;
-	}
-
-	public void cargarEmpresa() {
-		if (accion != null) {
-			listaEmpresa.clear();
-			listaEmpresa.add(empresaController.getEmpresaSelect());
-			empresaController.setEmpresaSelect(null);
-		}
-	}
-
-	/**
-	 * Actualiza un objeto en la base de datos
+    /**
 	 * 
-	 * @return Retorna regla de nevagacion
 	 */
-	public String actualizar() {
-		try {
-			equipoHospitalarioBean.update(newObject);
-			editMode = Boolean.FALSE;
-			initNewObject();
-		} catch (Exception e) {
-			String errorMessage = getRootErrorMessage(e);
-			addMessage(FacesMessage.SEVERITY_ERROR, errorMessage);
-		}
+    private ArrayList<String> target = new ArrayList<String>();
 
-		return ConstantesUtil.ATRAS;
-	}
+    /**
+     * 
+     */
+    private ArrayList<String> source = new ArrayList<String>();
 
-	/**
-	 * Elimina un objeto en base de datos
-	 * 
-	 * @param id
-	 *            Identificador del objeto a eliminar
-	 * @return Retorna regla de nevagacion
-	 */
-	public void eliminar(Long idObject) {
-		try {
-			equipoHospitalarioBean.delete(idObject);
-			facesContext.addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_INFO,
-							"Empresa Eliminada!", "Exito!!"));
-		} catch (Exception e) {
-			String errorMessage = getRootErrorMessage(e);
-			addMessage(FacesMessage.SEVERITY_ERROR, errorMessage);
+    /**
+     * Inicializa el bakend bean de control
+     */
+    public void initNewObject() {
 
-		}
-	}
+        if (bandera == Boolean.FALSE) {
+            if (conversation.isTransient()) {
+                conversation.begin();
+            }
+            bandera = Boolean.TRUE;
+            inicializarVariables();
+        }
+        busqueda();
 
-	/**
-	 * Registra un nuevo objeto en Base de datos
-	 * 
-	 * @return Retorna regla de nevagacion
-	 * @throws Exception
-	 *             Lanza una excepcion si hay un error en la transacciòn
-	 */
-	public String crear() {
-		try {
-			StringBuilder nuevo = new StringBuilder();
-			for (String recomendaciones : target) {
-				nuevo.append(recomendaciones);
-				nuevo.append(",");
-			}
-			equipoHospitalarioBean.save(tipoManteEquipoCorr,
-					tipoManteEquipoPre, recomendacionesEquipo, manualesEquipo,
-					adquisicionEquipo, estadoEquipo, infoTecnica,
-					funcionamientoEquipo, planosEquipo, newObject);
-			facesContext.addMessage(null, new FacesMessage(
-					FacesMessage.SEVERITY_INFO, "Exito!",
-					"Se guardo un registro de una Empresa"));
-			initNewObject();
-			busqueda();
-			return ConstantesUtil.ATRAS;
-		} catch (Exception e) {
-			String errorMessage = getRootErrorMessage(e);
-			addMessage(FacesMessage.SEVERITY_ERROR, errorMessage);
+    }
 
-		}
-		return ConstantesUtil.ATRAS;
-	}
+    /**
+     * Inicializa los valores para el CRUD
+     */
+    private void inicializarVariables() {
+        newObject = new EquipoHospitalario();
+        ubicacionList = new TreeMap<String, String>();
+        tecnologiaList = new ArrayList<String>();
+        for (ParametrosGenerales element : parametrosBean.getAllCategoria(CategoriasParametros.UBICACION)) {
+            ubicacionList.put(element.getPropiedad(), element.getPropiedad());
+        }
+        for (ParametrosGenerales elemen : parametrosBean.getAllCategoria(CategoriasParametros.TECNOLOGIA)) {
+            tecnologiaList.add(elemen.getPropiedad());
+        }
 
-	public void handleFileUpload(FileUploadEvent event) {
-	    newObject.setFotoEquipo(event.getFile().getContents());
-	    
-	    addMessage(FacesMessage.SEVERITY_INFO,  event.getFile()
-                .getFileName() + " Fue cargado.");
-	}
+        source = new ArrayList<String>();
 
-	/**
-	 * Realiza transformacion de mensaje para el control del log
-	 * 
-	 * @param e
-	 *            Excepcion generada
-	 * @return Retorna el mensaje de error
-	 */
-	private String getRootErrorMessage(Exception e) {
-		// Default to general error message that registration failed.
-		String errorMessage = "Registration failed. See server log for more information";
-		if (e == null) {
-			// This shouldn't happen, but return the default messages
-			return errorMessage;
-		}
+        for (ParametrosGenerales element : parametrosBean.getAllCategoria(CategoriasParametros.RECOMENDACIONES)) {
+            source.add(element.getPropiedad());
+        }
 
-		// Start with the exception and recurse to find the root cause
-		Throwable t = e;
-		while (t != null) {
-			// Get the message from the Throwable class instance
-			errorMessage = t.getLocalizedMessage();
-			t = t.getCause();
-		}
-		// This is the root cause message
-		return errorMessage;
-	}
+        recomendacionesList.setSource(source);
+        recomendacionesList.setTarget(target);
+        adquisicionEquipo = new AdquisicionEquipo();
+        infoTecnica = new EquipoInfoTecnica();
+        estadoEquipo = new EstadoEquipo();
+        funcionamientoEquipo = new FuncionamientoEquipo();
+        planosEquipo = new PlanosEquipo();
+        manualesEquipo = new ManualesEquipo();
+        recomendacionesEquipo = new RecomendacionesEquipo();
+        tipoManteEquipoPre = new TipoManteEquipo();
+        tipoManteEquipoCorr = new TipoManteEquipo();
 
-	/**
-	 * Genera un mensaje al contexto
-	 * 
-	 * @param severidad
-	 *            , Severidad del mensaje
-	 * @param mensaje
-	 *            Clave del mensaje
-	 */
-	public void addMessage(Severity severidad, String mensaje) {
-		facesContext.addMessage(null, new FacesMessage(severidad, "", mensaje));
+        newObjectCo = new EquipoHospitalario();
+        adquisicionEquipoCo = new AdquisicionEquipo();
+        infoTecnicaCo = new EquipoInfoTecnica();
+        estadoEquipoCo = new EstadoEquipo();
+        funcionamientoEquipoCo = new FuncionamientoEquipo();
+        planosEquipoCo = new PlanosEquipo();
+        manualesEquipoCo = new ManualesEquipo();
+        recomendacionesEquipoCo = new RecomendacionesEquipo();
+        tipoManteEquipoPreCo = new TipoManteEquipo();
+        tipoManteEquipoCorrCo = new TipoManteEquipo();
 
-	}
+        listaEmpresa = new ArrayList<Empresa>();
+    }
 
-	/**
-	 * Devuelve el valor de editMode
-	 * 
-	 * @return El valor de editMode
-	 */
-	public boolean isEditMode() {
-		return editMode;
-	}
+    /**
+     * 
+     */
+    public void busqueda() {
+        listaEquipos = equipoHospitalarioBean.getAll();
+    }
 
-	/**
-	 * Establece el valor de editMode
-	 * 
-	 * @param editMode
-	 *            El valor por establecer para editMode
-	 */
-	public void setEditMode(boolean editMode) {
-		this.editMode = editMode;
-	}
+    /**
+     * 
+     */
+    public void agregarComentario() {
+        if (newObjectCo.getDireccion() != null) {
+            newObject.setDireccion(newObjectCo.getDireccion());
+        }
+        if (newObjectCo.getMarca() != null) {
+            newObject.setMarca(newObjectCo.getMarca());
+        }
 
-	/**
-	 * Devuelve el valor de bandera
-	 * 
-	 * @return El valor de bandera
-	 */
-	public boolean isBandera() {
-		return bandera;
-	}
+        if (newObjectCo.getModelo() != null) {
+            newObject.setModelo(newObjectCo.getModelo());
+        }
+        if (newObjectCo.getUbicacion() != null) {
+            newObject.setUbicacion(newObjectCo.getUbicacion());
+        }
 
-	/**
-	 * Establece el valor de bandera
-	 * 
-	 * @param bandera
-	 *            El valor por establecer para bandera
-	 */
-	public void setBandera(boolean bandera) {
-		this.bandera = bandera;
-	}
+        if (newObjectCo.getFabricante() != null) {
+            newObject.setFabricante(newObjectCo.getFabricante());
+        }
+        if (newObjectCo.getRepresentanteCol() != null) {
+            newObject.setRepresentanteCol(newObjectCo.getRepresentanteCol());
+        }
 
-	/**
-	 * Devuelve el valor de adquisicionEquipo
-	 * 
-	 * @return El valor de adquisicionEquipo
-	 */
-	public AdquisicionEquipo getAdquisicionEquipo() {
-		return adquisicionEquipo;
-	}
+        if (newObjectCo.getTelefono() != null) {
+            newObject.setTelefono(newObjectCo.getTelefono());
+        }
 
-	/**
-	 * Establece el valor de adquisicionEquipo
-	 * 
-	 * @param adquisicionEquipo
-	 *            El valor por establecer para adquisicionEquipo
-	 */
-	public void setAdquisicionEquipo(AdquisicionEquipo adquisicionEquipo) {
-		this.adquisicionEquipo = adquisicionEquipo;
-	}
+        if (infoTecnicaCo.getVoltaje() != null) {
+            infoTecnica.setVoltaje(infoTecnicaCo.getVoltaje());
+        }
 
-	/**
-	 * Devuelve el valor de infoTecnica
-	 * 
-	 * @return El valor de infoTecnica
-	 */
-	public EquipoInfoTecnica getInfoTecnica() {
-		return infoTecnica;
-	}
+        if (infoTecnicaCo.getInstalaciones() != null) {
+            infoTecnica.setInstalaciones(infoTecnicaCo.getInstalaciones());
+        }
 
-	/**
-	 * Establece el valor de infoTecnica
-	 * 
-	 * @param infoTecnica
-	 *            El valor por establecer para infoTecnica
-	 */
-	public void setInfoTecnica(EquipoInfoTecnica infoTecnica) {
-		this.infoTecnica = infoTecnica;
-	}
+        if (infoTecnicaCo.getVoltaje() != null) {
+            infoTecnica.setVoltaje(infoTecnicaCo.getVoltaje());
+        }
 
-	/**
-	 * Devuelve el valor de estadoEquipo
-	 * 
-	 * @return El valor de estadoEquipo
-	 */
-	public EstadoEquipo getEstadoEquipo() {
-		return estadoEquipo;
-	}
+        if (infoTecnicaCo.getFrecuencia() != null) {
+            infoTecnica.setFrecuencia(infoTecnicaCo.getFrecuencia());
+        }
 
-	/**
-	 * Establece el valor de estadoEquipo
-	 * 
-	 * @param estadoEquipo
-	 *            El valor por establecer para estadoEquipo
-	 */
-	public void setEstadoEquipo(EstadoEquipo estadoEquipo) {
-		this.estadoEquipo = estadoEquipo;
-	}
+        if (infoTecnicaCo.getPotencia() != null) {
+            infoTecnica.setPotencia(infoTecnicaCo.getPotencia());
+        }
 
-	/**
-	 * Devuelve el valor de funcionamientoEquipo
-	 * 
-	 * @return El valor de funcionamientoEquipo
-	 */
-	public FuncionamientoEquipo getFuncionamientoEquipo() {
-		return funcionamientoEquipo;
-	}
+        if (infoTecnicaCo.getCapacidadPractica() != null) {
+            infoTecnica.setCapacidadPractica(infoTecnicaCo.getCapacidadPractica());
+        }
 
-	/**
-	 * Establece el valor de funcionamientoEquipo
-	 * 
-	 * @param funcionamientoEquipo
-	 *            El valor por establecer para funcionamientoEquipo
-	 */
-	public void setFuncionamientoEquipo(
-			FuncionamientoEquipo funcionamientoEquipo) {
-		this.funcionamientoEquipo = funcionamientoEquipo;
-	}
+        if (infoTecnicaCo.getCapacidadTeorica() != null) {
+            infoTecnica.setCapacidadTeorica(infoTecnicaCo.getCapacidadTeorica());
+        }
 
-	/**
-	 * Devuelve el valor de planosEquipo
-	 * 
-	 * @return El valor de planosEquipo
-	 */
-	public PlanosEquipo getPlanosEquipo() {
-		return planosEquipo;
-	}
+        if (infoTecnicaCo.getTecnologia() != null) {
+            infoTecnica.setTecnologia(infoTecnicaCo.getTecnologia());
+        }
 
-	/**
-	 * Establece el valor de planosEquipo
-	 * 
-	 * @param planosEquipo
-	 *            El valor por establecer para planosEquipo
-	 */
-	public void setPlanosEquipo(PlanosEquipo planosEquipo) {
-		this.planosEquipo = planosEquipo;
-	}
+        if (infoTecnicaCo.getInsumos() != null) {
+            infoTecnica.setInsumos(infoTecnicaCo.getInsumos());
+        }
 
-	/**
-	 * Devuelve el valor de manualesEquipo
-	 * 
-	 * @return El valor de manualesEquipo
-	 */
-	public ManualesEquipo getManualesEquipo() {
-		return manualesEquipo;
-	}
+        if (adquisicionEquipoCo.getAniosOperacion() != null) {
+            adquisicionEquipo.setAniosOperacion(adquisicionEquipoCo.getAniosOperacion());
+        }
 
-	/**
-	 * Establece el valor de manualesEquipo
-	 * 
-	 * @param manualesEquipo
-	 *            El valor por establecer para manualesEquipo
-	 */
-	public void setManualesEquipo(ManualesEquipo manualesEquipo) {
-		this.manualesEquipo = manualesEquipo;
-	}
+        if (adquisicionEquipoCo.getPropiedadEquipo() != null) {
+            adquisicionEquipo.setPropiedadEquipo(adquisicionEquipoCo.getPropiedadEquipo());
+        }
 
-	/**
-	 * Devuelve el valor de recomendacionesEquipo
-	 * 
-	 * @return El valor de recomendacionesEquipo
-	 */
-	public RecomendacionesEquipo getRecomendacionesEquipo() {
-		return recomendacionesEquipo;
-	}
+        if (adquisicionEquipoCo.getAniosFueraServicio() != null) {
+            adquisicionEquipo.setAniosFueraServicio(adquisicionEquipoCo.getAniosFueraServicio());
+        }
 
-	/**
-	 * Establece el valor de recomendacionesEquipo
-	 * 
-	 * @param recomendacionesEquipo
-	 *            El valor por establecer para recomendacionesEquipo
-	 */
-	public void setRecomendacionesEquipo(
-			RecomendacionesEquipo recomendacionesEquipo) {
-		this.recomendacionesEquipo = recomendacionesEquipo;
-	}
+        if (adquisicionEquipoCo.getRazon() != null) {
+            adquisicionEquipo.setRazon(adquisicionEquipoCo.getRazon());
+        }
 
-	/**
-	 * Devuelve el valor de tipoManteEquipoPre
-	 * 
-	 * @return El valor de tipoManteEquipoPre
-	 */
-	public TipoManteEquipo getTipoManteEquipoPre() {
-		return tipoManteEquipoPre;
-	}
+        if (adquisicionEquipoCo.getGarantia() != null) {
+            adquisicionEquipo.setGarantia(adquisicionEquipoCo.getGarantia());
+        }
+        if (adquisicionEquipoCo.getPeridoGarantia() != null) {
+            adquisicionEquipo.setPeridoGarantia(adquisicionEquipoCo.getPeridoGarantia());
+        }
+        if (adquisicionEquipoCo.getCubrimientoGarantia() != null) {
+            adquisicionEquipo.setCubrimientoGarantia(adquisicionEquipoCo.getCubrimientoGarantia());
+        }
+        if (adquisicionEquipoCo.getClasificacionDecreto() != null) {
+            adquisicionEquipo.setClasificacionDecreto(adquisicionEquipoCo.getClasificacionDecreto());
+        }
+        if (adquisicionEquipoCo.getCalibracionPeriocidad() != null) {
+            adquisicionEquipo.setCalibracionPeriocidad(adquisicionEquipoCo.getCalibracionPeriocidad());
+        }
+        if (adquisicionEquipoCo.getCalibracionTipo() != null) {
+            adquisicionEquipo.setCalibracionTipo(adquisicionEquipoCo.getCalibracionTipo());
+        }
 
-	/**
-	 * Establece el valor de tipoManteEquipoPre
-	 * 
-	 * @param tipoManteEquipoPre
-	 *            El valor por establecer para tipoManteEquipoPre
-	 */
-	public void setTipoManteEquipoPre(TipoManteEquipo tipoManteEquipoPre) {
-		this.tipoManteEquipoPre = tipoManteEquipoPre;
-	}
+        if (planosEquipoCo.getInstalacionUbicacion() != null) {
+            planosEquipo.setInstalacionUbicacion(planosEquipoCo.getInstalacionUbicacion());
+        }
 
-	/**
-	 * Devuelve el valor de tipoManteEquipoCorr
-	 * 
-	 * @return El valor de tipoManteEquipoCorr
-	 */
-	public TipoManteEquipo getTipoManteEquipoCorr() {
-		return tipoManteEquipoCorr;
-	}
+        if (planosEquipoCo.getPartesUbicacion() != null) {
+            planosEquipo.setPartesUbicacion(planosEquipoCo.getPartesUbicacion());
+        }
 
-	/**
-	 * Establece el valor de tipoManteEquipoCorr
-	 * 
-	 * @param tipoManteEquipoCorr
-	 *            El valor por establecer para tipoManteEquipoCorr
-	 */
-	public void setTipoManteEquipoCorr(TipoManteEquipo tipoManteEquipoCorr) {
-		this.tipoManteEquipoCorr = tipoManteEquipoCorr;
-	}
+        if (planosEquipoCo.getFuncionamientoUbicacion() != null) {
+            planosEquipo.setFuncionamientoUbicacion(planosEquipoCo.getFuncionamientoUbicacion());
+        }
 
-	/**
-	 * Establece el valor de newObject
-	 * 
-	 * @param newObject
-	 *            El valor por establecer para newObject
-	 */
-	public void setNewObject(EquipoHospitalario newObject) {
-		this.newObject = newObject;
-	}
+        if (manualesEquipoCo.getServicioUbicacion() != null) {
+            manualesEquipo.setServicioUbicacion(manualesEquipoCo.getServicioUbicacion());
+        }
 
-	/**
-	 * Devuelve el valor de listaEquipos
-	 * 
-	 * @return El valor de listaEquipos
-	 */
-	public List<EquipoHospitalario> getListaEquipos() {
-		return listaEquipos;
-	}
+        if (manualesEquipoCo.getTecnicoUbicacion() != null) {
+            manualesEquipo.setTecnicoUbicacion(manualesEquipoCo.getTecnicoUbicacion());
+        }
 
-	/**
-	 * Establece el valor de listaEquipos
-	 * 
-	 * @param listaEquipos
-	 *            El valor por establecer para listaEquipos
-	 */
-	public void setListaEquipos(List<EquipoHospitalario> listaEquipos) {
-		this.listaEquipos = listaEquipos;
-	}
+        if (estadoEquipoCo.getCausa() != null) {
+            estadoEquipo.setCausa(estadoEquipoCo.getCausa());
+        }
 
-	/**
-	 * Devuelve el valor de selectEquipos
-	 * 
-	 * @return El valor de selectEquipos
-	 */
-	public List<EquipoHospitalario> getSelectEquipos() {
-		if (selectEquipos == null) {
-			selectEquipos = new ArrayList<EquipoHospitalario>();
-		}
-		return selectEquipos;
-	}
+        if (funcionamientoEquipoCo.getAnioFueraServicio() != null) {
+            funcionamientoEquipo.setAnioFueraServicio(funcionamientoEquipoCo.getAnioFueraServicio());
+        }
 
-	/**
-	 * Establece el valor de selectEquipos
-	 * 
-	 * @param selectEquipos
-	 *            El valor por establecer para selectEquipos
-	 */
-	public void setSelectEquipos(List<EquipoHospitalario> selectEquipos) {
-		this.selectEquipos = selectEquipos;
-	}
+        if (funcionamientoEquipoCo.getCausa() != null) {
+            funcionamientoEquipo.setCausa(funcionamientoEquipoCo.getCausa());
+        }
 
-	/**
-	 * Devuelve el valor de ubicacionList
-	 * 
-	 * @return El valor de ubicacionList
-	 */
-	public Map<String, String> getUbicacionList() {
-		return ubicacionList;
-	}
+        if (tipoManteEquipoPreCo.getCual() != null) {
+            tipoManteEquipoPre.setCual(tipoManteEquipoPreCo.getCual());
+        }
 
-	/**
-	 * Establece el valor de ubicacionList
-	 * 
-	 * @param ubicacionList
-	 *            El valor por establecer para ubicacionList
-	 */
-	public void setUbicacionList(Map<String, String> ubicacionList) {
-		this.ubicacionList = ubicacionList;
-	}
+        if (tipoManteEquipoCorrCo.getCual() != null) {
+            tipoManteEquipoCorr.setCual(tipoManteEquipoCorrCo.getCual());
+        }
 
-	/**
-	 * Devuelve el valor de tecnologiaList
-	 * 
-	 * @return El valor de tecnologiaList
-	 */
-	public List<String> getTecnologiaList() {
-		return tecnologiaList;
-	}
+    }
 
-	/**
-	 * Establece el valor de tecnologiaList
-	 * 
-	 * @param tecnologiaList
-	 *            El valor por establecer para tecnologiaList
-	 */
-	public void setTecnologiaList(List<String> tecnologiaList) {
-		this.tecnologiaList = tecnologiaList;
-	}
+    /**
+     * Asigna el valor del objeto seleccionado pra su edicion
+     * 
+     * @param userId
+     *            Identificador del objeto Seleccionado
+     * @return Retorna regla de nevagacion
+     */
+    public String initEditarModo() {
+        editMode = Boolean.TRUE;
 
-	/**
-	 * Devuelve el valor de recomendacionesList
-	 * 
-	 * @return El valor de recomendacionesList
-	 */
-	public DualListModel<String> getRecomendacionesList() {
-		return recomendacionesList;
-	}
+        newObject = equipoHospitalarioBean.getAllRelations(selectEquipos.get(0).getId());
+        adquisicionEquipo = newObject.getAdquisicionEquipo();
+        infoTecnica = newObject.getInfoTecnica();
+        estadoEquipo = newObject.getEstadoEquipo();
+        funcionamientoEquipo = newObject.getFuncionamientoEquipo();
+        planosEquipo = newObject.getPlanosEquipo();
+        manualesEquipo = newObject.getManualesEquipo();
+        recomendacionesEquipo = newObject.getRecomendacionesEquipo();
+        tipoManteEquipoPre = new TipoManteEquipo();
+        tipoManteEquipoCorr = new TipoManteEquipo();
 
-	/**
-	 * Establece el valor de recomendacionesList
-	 * 
-	 * @param recomendacionesList
-	 *            El valor por establecer para recomendacionesList
-	 */
-	public void setRecomendacionesList(DualListModel<String> recomendacionesList) {
-		this.recomendacionesList = recomendacionesList;
-	}
+        return ConstantesUtil.CREAR_ACTU;
+    }
 
-	/**
-	 * Devuelve el valor de accion
-	 * 
-	 * @return El valor de accion
-	 */
-	public String getAccion() {
-		return accion;
-	}
+    public String initVistaModo() {
+        newObject = equipoHospitalarioBean.getByID(selectEquipos.get(0).getId());
+        return ConstantesUtil.VER;
+    }
 
-	/**
-	 * Establece el valor de accion
-	 * 
-	 * @param accion
-	 *            El valor por establecer para accion
-	 */
-	public void setAccion(String accion) {
-		this.accion = accion;
-	}
+    public String initCrearModo() {
+        return ConstantesUtil.CREAR_ACTU;
+    }
 
-	/**
-	 * Devuelve el valor de newUsuario
-	 * 
-	 * @return El valor de newUsuario
-	 */
-	public EquipoHospitalario getNewObject() {
-		return newObject;
-	}
+    public String cancelar() {
+        return ConstantesUtil.ATRAS;
+    }
 
-	/**
-	 * Devuelve el valor de listaEmpresa
-	 * 
-	 * @return El valor de listaEmpresa
-	 */
-	public List<Empresa> getListaEmpresa() {
-		return listaEmpresa;
-	}
+    public String reiniciar() {
+        return ConstantesUtil.ATRAS;
+    }
 
-	/**
-	 * Establece el valor de listaEmpresa
-	 * 
-	 * @param listaEmpresa
-	 *            El valor por establecer para listaEmpresa
-	 */
-	public void setListaEmpresa(List<Empresa> listaEmpresa) {
-		this.listaEmpresa = listaEmpresa;
-	}
+    public void cargarEmpresa() {
+        if (accion != null) {
+            listaEmpresa.clear();
+            listaEmpresa.add(empresaController.getEmpresaSelect());
+            empresaController.setEmpresaSelect(null);
+        }
+    }
+
+    /**
+     * Actualiza un objeto en la base de datos
+     * 
+     * @return Retorna regla de nevagacion
+     */
+    public String actualizar() {
+        try {
+            equipoHospitalarioBean.update(newObject);
+            editMode = Boolean.FALSE;
+            initNewObject();
+        } catch (Exception e) {
+            String errorMessage = getRootErrorMessage(e);
+            addMessage(FacesMessage.SEVERITY_ERROR, errorMessage);
+        }
+
+        return ConstantesUtil.ATRAS;
+    }
+
+    /**
+     * Elimina un objeto en base de datos
+     * 
+     * @param id
+     *            Identificador del objeto a eliminar
+     * @return Retorna regla de nevagacion
+     */
+    public void eliminar(Long idObject) {
+        try {
+            equipoHospitalarioBean.delete(idObject);
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Empresa Eliminada!", "Exito!!"));
+        } catch (Exception e) {
+            String errorMessage = getRootErrorMessage(e);
+            addMessage(FacesMessage.SEVERITY_ERROR, errorMessage);
+
+        }
+    }
+
+    /**
+     * Registra un nuevo objeto en Base de datos
+     * 
+     * @return Retorna regla de nevagacion
+     * @throws Exception
+     *             Lanza una excepcion si hay un error en la transacciòn
+     */
+    public String crear() {
+        try {
+            StringBuilder nuevo = new StringBuilder();
+            for (String recomendaciones : target) {
+                nuevo.append(recomendaciones);
+                nuevo.append(",");
+            }
+
+            equipoHospitalarioBean.save(tipoManteEquipoCorr, tipoManteEquipoPre, recomendacionesEquipo, manualesEquipo, adquisicionEquipo,
+                    estadoEquipo, infoTecnica, funcionamientoEquipo, planosEquipo);
+            newObject.setRecomendacionesEquipo(recomendacionesEquipo);
+            newObject.setManualesEquipo(manualesEquipo);
+            newObject.setAdquisicionEquipo(adquisicionEquipo);
+            newObject.setEstadoEquipo(estadoEquipo);
+            newObject.setInfoTecnica(infoTecnica);
+            newObject.setFuncionamientoEquipo(funcionamientoEquipo);
+            newObject.setPlanosEquipo(planosEquipo);
+            equipoHospitalarioBean.save(newObject);
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Exito!", "Se guardo un registro de una Empresa"));
+            inicializarVariables();
+            busqueda();
+            return ConstantesUtil.ATRAS;
+        } catch (Exception e) {
+            String errorMessage = getRootErrorMessage(e);
+            addMessage(FacesMessage.SEVERITY_ERROR, errorMessage);
+
+        }
+        return ConstantesUtil.ATRAS;
+    }
+
+    public void handleFileUpload(FileUploadEvent event) {
+        newObject.setFotoEquipo(event.getFile().getContents());
+
+        addMessage(FacesMessage.SEVERITY_INFO, event.getFile().getFileName() + " Fue cargado.");
+    }
+
+    /**
+     * Realiza transformacion de mensaje para el control del log
+     * 
+     * @param e
+     *            Excepcion generada
+     * @return Retorna el mensaje de error
+     */
+    private String getRootErrorMessage(Exception e) {
+        // Default to general error message that registration failed.
+        String errorMessage = "Registration failed. See server log for more information";
+        if (e == null) {
+            // This shouldn't happen, but return the default messages
+            return errorMessage;
+        }
+
+        // Start with the exception and recurse to find the root cause
+        Throwable t = e;
+        while (t != null) {
+            // Get the message from the Throwable class instance
+            errorMessage = t.getLocalizedMessage();
+            t = t.getCause();
+        }
+        // This is the root cause message
+        return errorMessage;
+    }
+    
+    /**
+     * Método encargado de llenar los datos necesarios para la generación del archivo JasperPrint.
+     * 
+     * @throws Exception
+     *             Se genera cuando ocurre un error al generar el JasperPrint del reporte.
+     */
+    public void generarJasperPrint() {
+        JasperPrint print = null;
+
+        try {
+            Map<String, Object> datosAdicionales = new TreeMap<String, Object>();
+
+            
+//            InputStream logoImpuestos = this.getClass().getResourceAsStream(ConstantesReportesEstadisticos.RUTA_LOGO);
+//            datosAdicionales.put(ConstantesReportesEstadisticos.NOMBRE_PARAMETRO, logoImpuestos);
+
+          
+
+           // JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(puntosAtencion);
+
+           // print = JasperFillManager.fillReport(obtenerPlantilla(), datosAdicionales, dataSource);
+            print = JasperFillManager.fillReport(obtenerPlantilla(),datosAdicionales);
+
+            enviarPDF(print);
+        } catch (Exception e) {
+            
+        }
+    }
+    
+    /**
+     * Envía un xls como respuesta al cliente.
+     * 
+     * @param jasperPrint
+     *            con el reporte xls.
+     * @throws Exception
+     *             Se genera cuando se presenta un error al exportar el reporte como archivo xls.
+     */
+    private void enviarPDF(JasperPrint jasperPrint) throws Exception {
+        
+        String fileName ="Nombre del archivo";
+       
+        JRXlsExporter exportador = new JRXlsExporter();
+
+        exportador.setParameter(JRXlsExporterParameter.JASPER_PRINT, jasperPrint);
+        exportador.setParameter(JRXlsExporterParameter.OUTPUT_FILE_NAME, fileName);
+        exportador.setParameter(JRXlsExporterParameter.IGNORE_PAGE_MARGINS, true);
+        exportador.setParameter(JRXlsAbstractExporterParameter.IS_IGNORE_CELL_BORDER, false);
+        exportador.setParameter(JRXlsAbstractExporterParameter.IS_REMOVE_EMPTY_SPACE_BETWEEN_COLUMNS, false);
+
+        exportador.exportReport();
+        //DescargarArchivosWeb.descargarArchivoExcel(fileName);
+    }
+    
+    /**
+     * Retorna la plantilla del reporte en un objeto <code>InputStream</code>.
+     * 
+     * @return La plantilla del reporte en forma de <code>InputStream</code>.
+     */
+    private InputStream obtenerPlantilla() {
+        InputStream reportStream = null;
+        String ubicacionPlantilla;
+        
+            ubicacionPlantilla = "/Biomedico_subreport2.jasper";
+       
+
+        reportStream = this.getClass().getResourceAsStream(ubicacionPlantilla);
+        return reportStream;
+    }
+
+    /**
+     * Genera un mensaje al contexto
+     * 
+     * @param severidad
+     *            , Severidad del mensaje
+     * @param mensaje
+     *            Clave del mensaje
+     */
+    public void addMessage(Severity severidad, String mensaje) {
+        facesContext.addMessage(null, new FacesMessage(severidad, "", mensaje));
+
+    }
+
+    /**
+     * Devuelve el valor de editMode
+     * 
+     * @return El valor de editMode
+     */
+    public boolean isEditMode() {
+        return editMode;
+    }
+
+    /**
+     * Establece el valor de editMode
+     * 
+     * @param editMode
+     *            El valor por establecer para editMode
+     */
+    public void setEditMode(boolean editMode) {
+        this.editMode = editMode;
+    }
+
+    /**
+     * Devuelve el valor de bandera
+     * 
+     * @return El valor de bandera
+     */
+    public boolean isBandera() {
+        return bandera;
+    }
+
+    /**
+     * Establece el valor de bandera
+     * 
+     * @param bandera
+     *            El valor por establecer para bandera
+     */
+    public void setBandera(boolean bandera) {
+        this.bandera = bandera;
+    }
+
+    /**
+     * Devuelve el valor de adquisicionEquipo
+     * 
+     * @return El valor de adquisicionEquipo
+     */
+    public AdquisicionEquipo getAdquisicionEquipo() {
+        return adquisicionEquipo;
+    }
+
+    /**
+     * Establece el valor de adquisicionEquipo
+     * 
+     * @param adquisicionEquipo
+     *            El valor por establecer para adquisicionEquipo
+     */
+    public void setAdquisicionEquipo(AdquisicionEquipo adquisicionEquipo) {
+        this.adquisicionEquipo = adquisicionEquipo;
+    }
+
+    /**
+     * Devuelve el valor de infoTecnica
+     * 
+     * @return El valor de infoTecnica
+     */
+    public EquipoInfoTecnica getInfoTecnica() {
+        return infoTecnica;
+    }
+
+    /**
+     * Establece el valor de infoTecnica
+     * 
+     * @param infoTecnica
+     *            El valor por establecer para infoTecnica
+     */
+    public void setInfoTecnica(EquipoInfoTecnica infoTecnica) {
+        this.infoTecnica = infoTecnica;
+    }
+
+    /**
+     * Devuelve el valor de estadoEquipo
+     * 
+     * @return El valor de estadoEquipo
+     */
+    public EstadoEquipo getEstadoEquipo() {
+        return estadoEquipo;
+    }
+
+    /**
+     * Establece el valor de estadoEquipo
+     * 
+     * @param estadoEquipo
+     *            El valor por establecer para estadoEquipo
+     */
+    public void setEstadoEquipo(EstadoEquipo estadoEquipo) {
+        this.estadoEquipo = estadoEquipo;
+    }
+
+    /**
+     * Devuelve el valor de funcionamientoEquipo
+     * 
+     * @return El valor de funcionamientoEquipo
+     */
+    public FuncionamientoEquipo getFuncionamientoEquipo() {
+        return funcionamientoEquipo;
+    }
+
+    /**
+     * Establece el valor de funcionamientoEquipo
+     * 
+     * @param funcionamientoEquipo
+     *            El valor por establecer para funcionamientoEquipo
+     */
+    public void setFuncionamientoEquipo(FuncionamientoEquipo funcionamientoEquipo) {
+        this.funcionamientoEquipo = funcionamientoEquipo;
+    }
+
+    /**
+     * Devuelve el valor de planosEquipo
+     * 
+     * @return El valor de planosEquipo
+     */
+    public PlanosEquipo getPlanosEquipo() {
+        return planosEquipo;
+    }
+
+    /**
+     * Establece el valor de planosEquipo
+     * 
+     * @param planosEquipo
+     *            El valor por establecer para planosEquipo
+     */
+    public void setPlanosEquipo(PlanosEquipo planosEquipo) {
+        this.planosEquipo = planosEquipo;
+    }
+
+    /**
+     * Devuelve el valor de manualesEquipo
+     * 
+     * @return El valor de manualesEquipo
+     */
+    public ManualesEquipo getManualesEquipo() {
+        return manualesEquipo;
+    }
+
+    /**
+     * Establece el valor de manualesEquipo
+     * 
+     * @param manualesEquipo
+     *            El valor por establecer para manualesEquipo
+     */
+    public void setManualesEquipo(ManualesEquipo manualesEquipo) {
+        this.manualesEquipo = manualesEquipo;
+    }
+
+    /**
+     * Devuelve el valor de recomendacionesEquipo
+     * 
+     * @return El valor de recomendacionesEquipo
+     */
+    public RecomendacionesEquipo getRecomendacionesEquipo() {
+        return recomendacionesEquipo;
+    }
+
+    /**
+     * Establece el valor de recomendacionesEquipo
+     * 
+     * @param recomendacionesEquipo
+     *            El valor por establecer para recomendacionesEquipo
+     */
+    public void setRecomendacionesEquipo(RecomendacionesEquipo recomendacionesEquipo) {
+        this.recomendacionesEquipo = recomendacionesEquipo;
+    }
+
+    /**
+     * Devuelve el valor de tipoManteEquipoPre
+     * 
+     * @return El valor de tipoManteEquipoPre
+     */
+    public TipoManteEquipo getTipoManteEquipoPre() {
+        return tipoManteEquipoPre;
+    }
+
+    /**
+     * Establece el valor de tipoManteEquipoPre
+     * 
+     * @param tipoManteEquipoPre
+     *            El valor por establecer para tipoManteEquipoPre
+     */
+    public void setTipoManteEquipoPre(TipoManteEquipo tipoManteEquipoPre) {
+        this.tipoManteEquipoPre = tipoManteEquipoPre;
+    }
+
+    /**
+     * Devuelve el valor de tipoManteEquipoCorr
+     * 
+     * @return El valor de tipoManteEquipoCorr
+     */
+    public TipoManteEquipo getTipoManteEquipoCorr() {
+        return tipoManteEquipoCorr;
+    }
+
+    /**
+     * Establece el valor de tipoManteEquipoCorr
+     * 
+     * @param tipoManteEquipoCorr
+     *            El valor por establecer para tipoManteEquipoCorr
+     */
+    public void setTipoManteEquipoCorr(TipoManteEquipo tipoManteEquipoCorr) {
+        this.tipoManteEquipoCorr = tipoManteEquipoCorr;
+    }
+
+    /**
+     * Establece el valor de newObject
+     * 
+     * @param newObject
+     *            El valor por establecer para newObject
+     */
+    public void setNewObject(EquipoHospitalario newObject) {
+        this.newObject = newObject;
+    }
+
+    /**
+     * Devuelve el valor de listaEquipos
+     * 
+     * @return El valor de listaEquipos
+     */
+    public List<EquipoHospitalario> getListaEquipos() {
+        return listaEquipos;
+    }
+
+    /**
+     * Establece el valor de listaEquipos
+     * 
+     * @param listaEquipos
+     *            El valor por establecer para listaEquipos
+     */
+    public void setListaEquipos(List<EquipoHospitalario> listaEquipos) {
+        this.listaEquipos = listaEquipos;
+    }
+
+    /**
+     * Devuelve el valor de selectEquipos
+     * 
+     * @return El valor de selectEquipos
+     */
+    public List<EquipoHospitalario> getSelectEquipos() {
+        if (selectEquipos == null) {
+            selectEquipos = new ArrayList<EquipoHospitalario>();
+        }
+        return selectEquipos;
+    }
+
+    /**
+     * Establece el valor de selectEquipos
+     * 
+     * @param selectEquipos
+     *            El valor por establecer para selectEquipos
+     */
+    public void setSelectEquipos(List<EquipoHospitalario> selectEquipos) {
+        this.selectEquipos = selectEquipos;
+    }
+
+    /**
+     * Devuelve el valor de ubicacionList
+     * 
+     * @return El valor de ubicacionList
+     */
+    public Map<String, String> getUbicacionList() {
+        return ubicacionList;
+    }
+
+    /**
+     * Establece el valor de ubicacionList
+     * 
+     * @param ubicacionList
+     *            El valor por establecer para ubicacionList
+     */
+    public void setUbicacionList(Map<String, String> ubicacionList) {
+        this.ubicacionList = ubicacionList;
+    }
+
+    /**
+     * Devuelve el valor de tecnologiaList
+     * 
+     * @return El valor de tecnologiaList
+     */
+    public List<String> getTecnologiaList() {
+        return tecnologiaList;
+    }
+
+    /**
+     * Establece el valor de tecnologiaList
+     * 
+     * @param tecnologiaList
+     *            El valor por establecer para tecnologiaList
+     */
+    public void setTecnologiaList(List<String> tecnologiaList) {
+        this.tecnologiaList = tecnologiaList;
+    }
+
+    /**
+     * Devuelve el valor de recomendacionesList
+     * 
+     * @return El valor de recomendacionesList
+     */
+    public DualListModel<String> getRecomendacionesList() {
+        return recomendacionesList;
+    }
+
+    /**
+     * Establece el valor de recomendacionesList
+     * 
+     * @param recomendacionesList
+     *            El valor por establecer para recomendacionesList
+     */
+    public void setRecomendacionesList(DualListModel<String> recomendacionesList) {
+        this.recomendacionesList = recomendacionesList;
+    }
+
+    /**
+     * Devuelve el valor de accion
+     * 
+     * @return El valor de accion
+     */
+    public String getAccion() {
+        return accion;
+    }
+
+    /**
+     * Establece el valor de accion
+     * 
+     * @param accion
+     *            El valor por establecer para accion
+     */
+    public void setAccion(String accion) {
+        this.accion = accion;
+    }
+
+    /**
+     * Devuelve el valor de newUsuario
+     * 
+     * @return El valor de newUsuario
+     */
+    public EquipoHospitalario getNewObject() {
+        return newObject;
+    }
+
+    /**
+     * Devuelve el valor de listaEmpresa
+     * 
+     * @return El valor de listaEmpresa
+     */
+    public List<Empresa> getListaEmpresa() {
+        return listaEmpresa;
+    }
+
+    /**
+     * Establece el valor de listaEmpresa
+     * 
+     * @param listaEmpresa
+     *            El valor por establecer para listaEmpresa
+     */
+    public void setListaEmpresa(List<Empresa> listaEmpresa) {
+        this.listaEmpresa = listaEmpresa;
+    }
+
+    /**
+     * Devuelve el valor de newObjectCo
+     * 
+     * @return El valor de newObjectCo
+     */
+    public EquipoHospitalario getNewObjectCo() {
+        return newObjectCo;
+    }
+
+    /**
+     * Establece el valor de newObjectCo
+     * 
+     * @param newObjectCo
+     *            El valor por establecer para newObjectCo
+     */
+    public void setNewObjectCo(EquipoHospitalario newObjectCo) {
+        this.newObjectCo = newObjectCo;
+    }
+
+    /**
+     * Devuelve el valor de parametrosBean
+     * 
+     * @return El valor de parametrosBean
+     */
+    public ParametrosBean getParametrosBean() {
+        return parametrosBean;
+    }
+
+    /**
+     * Establece el valor de parametrosBean
+     * 
+     * @param parametrosBean
+     *            El valor por establecer para parametrosBean
+     */
+    public void setParametrosBean(ParametrosBean parametrosBean) {
+        this.parametrosBean = parametrosBean;
+    }
+
+    /**
+     * Devuelve el valor de adquisicionEquipoCo
+     * 
+     * @return El valor de adquisicionEquipoCo
+     */
+    public AdquisicionEquipo getAdquisicionEquipoCo() {
+        return adquisicionEquipoCo;
+    }
+
+    /**
+     * Establece el valor de adquisicionEquipoCo
+     * 
+     * @param adquisicionEquipoCo
+     *            El valor por establecer para adquisicionEquipoCo
+     */
+    public void setAdquisicionEquipoCo(AdquisicionEquipo adquisicionEquipoCo) {
+        this.adquisicionEquipoCo = adquisicionEquipoCo;
+    }
+
+    /**
+     * Devuelve el valor de infoTecnicaCo
+     * 
+     * @return El valor de infoTecnicaCo
+     */
+    public EquipoInfoTecnica getInfoTecnicaCo() {
+        return infoTecnicaCo;
+    }
+
+    /**
+     * Establece el valor de infoTecnicaCo
+     * 
+     * @param infoTecnicaCo
+     *            El valor por establecer para infoTecnicaCo
+     */
+    public void setInfoTecnicaCo(EquipoInfoTecnica infoTecnicaCo) {
+        this.infoTecnicaCo = infoTecnicaCo;
+    }
+
+    /**
+     * Devuelve el valor de estadoEquipoCo
+     * 
+     * @return El valor de estadoEquipoCo
+     */
+    public EstadoEquipo getEstadoEquipoCo() {
+        return estadoEquipoCo;
+    }
+
+    /**
+     * Establece el valor de estadoEquipoCo
+     * 
+     * @param estadoEquipoCo
+     *            El valor por establecer para estadoEquipoCo
+     */
+    public void setEstadoEquipoCo(EstadoEquipo estadoEquipoCo) {
+        this.estadoEquipoCo = estadoEquipoCo;
+    }
+
+    /**
+     * Devuelve el valor de funcionamientoEquipoCo
+     * 
+     * @return El valor de funcionamientoEquipoCo
+     */
+    public FuncionamientoEquipo getFuncionamientoEquipoCo() {
+        return funcionamientoEquipoCo;
+    }
+
+    /**
+     * Establece el valor de funcionamientoEquipoCo
+     * 
+     * @param funcionamientoEquipoCo
+     *            El valor por establecer para funcionamientoEquipoCo
+     */
+    public void setFuncionamientoEquipoCo(FuncionamientoEquipo funcionamientoEquipoCo) {
+        this.funcionamientoEquipoCo = funcionamientoEquipoCo;
+    }
+
+    /**
+     * Devuelve el valor de planosEquipoCo
+     * 
+     * @return El valor de planosEquipoCo
+     */
+    public PlanosEquipo getPlanosEquipoCo() {
+        return planosEquipoCo;
+    }
+
+    /**
+     * Establece el valor de planosEquipoCo
+     * 
+     * @param planosEquipoCo
+     *            El valor por establecer para planosEquipoCo
+     */
+    public void setPlanosEquipoCo(PlanosEquipo planosEquipoCo) {
+        this.planosEquipoCo = planosEquipoCo;
+    }
+
+    /**
+     * Devuelve el valor de manualesEquipoCo
+     * 
+     * @return El valor de manualesEquipoCo
+     */
+    public ManualesEquipo getManualesEquipoCo() {
+        return manualesEquipoCo;
+    }
+
+    /**
+     * Establece el valor de manualesEquipoCo
+     * 
+     * @param manualesEquipoCo
+     *            El valor por establecer para manualesEquipoCo
+     */
+    public void setManualesEquipoCo(ManualesEquipo manualesEquipoCo) {
+        this.manualesEquipoCo = manualesEquipoCo;
+    }
+
+    /**
+     * Devuelve el valor de recomendacionesEquipoCo
+     * 
+     * @return El valor de recomendacionesEquipoCo
+     */
+    public RecomendacionesEquipo getRecomendacionesEquipoCo() {
+        return recomendacionesEquipoCo;
+    }
+
+    /**
+     * Establece el valor de recomendacionesEquipoCo
+     * 
+     * @param recomendacionesEquipoCo
+     *            El valor por establecer para recomendacionesEquipoCo
+     */
+    public void setRecomendacionesEquipoCo(RecomendacionesEquipo recomendacionesEquipoCo) {
+        this.recomendacionesEquipoCo = recomendacionesEquipoCo;
+    }
+
+    /**
+     * Devuelve el valor de tipoManteEquipoPreCo
+     * 
+     * @return El valor de tipoManteEquipoPreCo
+     */
+    public TipoManteEquipo getTipoManteEquipoPreCo() {
+        return tipoManteEquipoPreCo;
+    }
+
+    /**
+     * Establece el valor de tipoManteEquipoPreCo
+     * 
+     * @param tipoManteEquipoPreCo
+     *            El valor por establecer para tipoManteEquipoPreCo
+     */
+    public void setTipoManteEquipoPreCo(TipoManteEquipo tipoManteEquipoPreCo) {
+        this.tipoManteEquipoPreCo = tipoManteEquipoPreCo;
+    }
+
+    /**
+     * Devuelve el valor de tipoManteEquipoCorrCo
+     * 
+     * @return El valor de tipoManteEquipoCorrCo
+     */
+    public TipoManteEquipo getTipoManteEquipoCorrCo() {
+        return tipoManteEquipoCorrCo;
+    }
+
+    /**
+     * Establece el valor de tipoManteEquipoCorrCo
+     * 
+     * @param tipoManteEquipoCorrCo
+     *            El valor por establecer para tipoManteEquipoCorrCo
+     */
+    public void setTipoManteEquipoCorrCo(TipoManteEquipo tipoManteEquipoCorrCo) {
+        this.tipoManteEquipoCorrCo = tipoManteEquipoCorrCo;
+    }
 
 }

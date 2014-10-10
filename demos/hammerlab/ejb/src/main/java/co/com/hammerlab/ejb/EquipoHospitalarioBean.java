@@ -4,6 +4,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import co.com.hammerlab.model.EquipoHospitalario;
 
@@ -68,6 +69,17 @@ public class EquipoHospitalarioBean {
          */
         public List< EquipoHospitalario > getAll() {
                 return entityManager.createNamedQuery("equipoHospitalario.getAll", EquipoHospitalario.class).getResultList();
+        }
+        
+        /**
+         * Consulta todos los registro de un objeto
+         * @return Lista de objetos 
+         */
+        public EquipoHospitalario getAllRelations(Long id) {
+            Query q=entityManager.createNamedQuery("equipoHospitalario.getAllRelation", EquipoHospitalario.class);
+            q.setParameter("ID", id);
+            
+                return (EquipoHospitalario) q.getSingleResult();
         }
         
         

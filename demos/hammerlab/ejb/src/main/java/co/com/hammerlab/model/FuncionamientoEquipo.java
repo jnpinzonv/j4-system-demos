@@ -71,7 +71,7 @@ public class FuncionamientoEquipo implements Serializable {
     /**
      * Realacion con equiopo principal
      */
-    @OneToOne()
+    @OneToOne(mappedBy="funcionamientoEquipo")
     private EquipoHospitalario equipoHospitalario;
 
     /**

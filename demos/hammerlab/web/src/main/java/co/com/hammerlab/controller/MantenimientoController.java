@@ -13,16 +13,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import co.com.hammerlab.ejb.MantenimientoEquipoBean;
-import co.com.hammerlab.model.AdquisicionEquipo;
 import co.com.hammerlab.model.EquipoHospitalario;
-import co.com.hammerlab.model.EquipoInfoTecnica;
-import co.com.hammerlab.model.EstadoEquipo;
-import co.com.hammerlab.model.FuncionamientoEquipo;
 import co.com.hammerlab.model.MantenimientoEquipo;
-import co.com.hammerlab.model.ManualesEquipo;
-import co.com.hammerlab.model.PlanosEquipo;
-import co.com.hammerlab.model.RecomendacionesEquipo;
-import co.com.hammerlab.model.TipoManteEquipo;
 import co.com.hammerlab.util.ConstantesUtil;
 
 
@@ -66,19 +58,11 @@ public class MantenimientoController implements Serializable {
     @Inject
     private EquipoController controller;
   
+    @Inject
+    private EquipoHospitalario equipoHospitalario;
+
+
     
-   private EquipoHospitalario equipoHospitalario;
-
-   
-
-      /**
-     * Devuelve el valor de newUsuario
-     * 
-     * @return El valor de newUsuario
-     */   
-    public MantenimientoEquipo getNewObject() {
-        return newObject;
-    }
     
     /**
      * 
@@ -90,6 +74,9 @@ public class MantenimientoController implements Serializable {
      */
     private List<MantenimientoEquipo> selectMantenimiento;
     
+    /**
+     * 
+     */
     public void busqueda(){
         listaMantenimiento= mantenimientoEquipoBean.getAll();
     }
@@ -110,14 +97,19 @@ public class MantenimientoController implements Serializable {
     }
     
     public String initCrearModo(){
+        editMode = Boolean.FALSE;
+        newObject = new MantenimientoEquipo();
         return ConstantesUtil.CREAR_ACTU;
     }
     
     public String cancelar() {
+        
         return ConstantesUtil.ATRAS;
     }
     
     public String reiniciar() {
+        newObject = new MantenimientoEquipo();
+        busqueda();
         return ConstantesUtil.ATRAS;
     }
     /**
@@ -128,7 +120,8 @@ public class MantenimientoController implements Serializable {
         try {
             mantenimientoEquipoBean.update(newObject);
             editMode = Boolean.FALSE;
-            initNewObject();
+            addMessage(FacesMessage.SEVERITY_INFO, "El registro del Mantenimiento fue actualizado");
+            newObject = new MantenimientoEquipo();           
         } catch (Exception e) {
             String errorMessage = getRootErrorMessage(e);
             addMessage(FacesMessage.SEVERITY_ERROR, errorMessage);            
@@ -145,15 +138,27 @@ public class MantenimientoController implements Serializable {
      * @param id Identificador del objeto a eliminar
      * @return Retorna regla de nevagacion
      */
-    public void eliminar(Long idObject) {
+    public String eliminar() {
         try {
-            mantenimientoEquipoBean.delete(idObject);
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Empresa Eliminada!", "Exito!!"));
+            for (MantenimientoEquipo element : selectMantenimiento) {
+                mantenimientoEquipoBean.delete(element.getId());
+            }
+            
+            if(selectMantenimiento.size()>0){
+                addMessage(FacesMessage.SEVERITY_INFO, "Los clientes han sido eliminados");
+            }else{
+                addMessage(FacesMessage.SEVERITY_INFO, "El cliente a sido eliminado");
+            }
+            busqueda();
+            selectMantenimiento=null;
+            
         } catch (Exception e) {
             String errorMessage = getRootErrorMessage(e);
             addMessage(FacesMessage.SEVERITY_ERROR, errorMessage);
-            
+
         }
+        
+        return "";
     }
     /**
      * Registra un nuevo objeto en Base de datos
@@ -163,8 +168,9 @@ public class MantenimientoController implements Serializable {
     public String crear(){
         try {
             mantenimientoEquipoBean.save(newObject);
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Exito!", "Se guardo un registro de una Empresa"));
-            initNewObject();
+            addMessage(FacesMessage.SEVERITY_INFO, "Se guardo un registro de Mantenimiento");
+            newObject = new MantenimientoEquipo();
+            busqueda();
             return ConstantesUtil.ATRAS;
         } catch (Exception e) {
             String errorMessage = getRootErrorMessage(e);
@@ -172,6 +178,10 @@ public class MantenimientoController implements Serializable {
            
         }
         return "";
+    }
+    
+    public String visualizar() {
+        return ConstantesUtil.VER;
     }
     /**
      * Inicializa el bakinbean de control
@@ -184,10 +194,9 @@ public class MantenimientoController implements Serializable {
             }
             bandera = Boolean.TRUE;
             equipoHospitalario= controller.getSelectEquipos().get(0);
-            // TODO pendienta para inicializar el estado de editaod se deve mover
-            if (editMode == Boolean.FALSE) {
-                newObject = new MantenimientoEquipo();
-            }
+            newObject = new MantenimientoEquipo();
+            busqueda();
+            selectMantenimiento = null;
             
         }
         
@@ -297,7 +306,14 @@ public class MantenimientoController implements Serializable {
         this.newObject = newObject;
     }
   
-    
+    /**
+     * Devuelve el valor de newUsuario
+     * 
+     * @return El valor de newUsuario
+     */   
+    public MantenimientoEquipo getNewObject() {
+        return newObject;
+    }
     
     
 

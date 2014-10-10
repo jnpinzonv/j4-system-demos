@@ -11,7 +11,7 @@
 	<ui:define name="metadata">
 		<f:metadata>
 			<f:event type="preRenderView"
-				listener="#{mantenimientoController.initNewObject}" />
+				listener="#{firmasController.initNewObject}" />
 		</f:metadata>
 	</ui:define>
 
@@ -21,17 +21,17 @@
 			<p:panel id="panelEmpresas" header="Busqueda">
 
 				<p:inputText id="name" label="Nombre Empresa" title="Nombre Empresa"
-					value="#{mantenimientoController.newObject.idTransaccion}" />
+					value="#{firmasController.newObject.idTransaccion}" />
 
 
 				<div style="clear: both" />
 
 				<p:panel id="groupButton" align="right">
 					<p:commandButton id="search" value="Buscar"
-						action="#{mantenimientoController.busqueda}" />
+						action="#{firmasController.busqueda}" />
 
 					<p:commandButton id="reset" value="Reiniciar"
-						action="#{mantenimientoController.reiniciar}" immediate="true" />
+						action="#{firmasController.reiniciar}" immediate="true" />
 				</p:panel>
 
 				<div style="clear: both" />
@@ -42,30 +42,30 @@
 				header="Lista de Mantenimientos">
 
 				<h:panelGroup
-					rendered="#{empty mantenimientoController.listaMantenimiento}">
+					rendered="#{empty firmasController.listaMantenimiento}">
 					<em>No existen Mantenimientos para este equipo</em>
 				</h:panelGroup>
 
 				<p:panel id="groupButtonTop" align="right">
 
 					<p:commandButton id="createButtonTop"
-						action="#{mantenimientoController.initCrearModo}" immediate="true"
+						action="#{firmasController.initCrearModo}" immediate="true"
 						value="Crear" />
 
 					<p:commandButton id="editButtonTop"
-						action="#{mantenimientoController.initEditarModo}" value="Editar"
+						action="#{firmasController.initEditarModo}" value="Editar"
 						immediate="true"
-						disabled="#{mantenimientoController.selectMantenimiento.size()!= 1}" />
+						disabled="#{firmasController.selectMantenimiento.size()!= 1}" />
 
 					<p:commandButton id="viewButtonTop"
-						action="#{mantenimientoController.initVistaModo}" value="Ver"
+						action="#{firmasController.initVistaModo}" value="Ver"
 						immediate="true"
-						disabled="#{mantenimientoController.selectMantenimiento.size() != 1}" />
+						disabled="#{firmasController.selectMantenimiento.size() != 1}" />
 
 
 					<p:commandButton id="deleteButtonTop" value="Borrar"
 						immediate="true" ajax="true" ignoreAutoUpdate="true" async="true"
-						disabled="#{mantenimientoController.selectMantenimiento.size()  == 0}" />
+						disabled="#{firmasController.selectMantenimiento.size()  == 0}" />
 
 					<p:commandButton id="cancelarButtonTop" value="Cancelar"
 						immediate="true" ajax="true" ignoreAutoUpdate="true" async="true"
@@ -74,11 +74,11 @@
 				</p:panel>
 
 				<p:dataTable var="_object"
-					value="#{mantenimientoController.listaMantenimiento}"
-					rendered="#{not empty mantenimientoController.listaMantenimiento}"
+					value="#{firmasController.listaMantenimiento}"
+					rendered="#{not empty firmasController.listaMantenimiento}"
 					id="empresaList" paginator="true" paginatorPosition="bottom"
 					rowKey="#{_object.id}"
-					selection="#{mantenimientoController.selectMantenimiento}">
+					selection="#{firmasController.selectMantenimiento}">
 
 
 
@@ -123,25 +123,25 @@
 
 
 				<p:panel id="groupButtonBottom" align="right"
-					rendered="#{mantenimientoController.listaMantenimiento.size() > 0}">
+					rendered="#{firmasController.listaMantenimiento.size() > 0}">
 
 					<p:commandButton id="createButtonBottom"
-						action="#{mantenimientoController.initCrearModo}"
+						action="#{firmasController.initCrearModo}"
 						styleClass="pButtonEnabled" value="Crear" />
 
 					<p:commandButton id="editButtonBottom"
-						action="mantenimientoController.initEditarModo" immediate="true"
+						action="firmasController.initEditarModo" immediate="true"
 						value="Editar"
-						disabled="#{mantenimientoController.selectMantenimiento.size() != 1}" />
+						disabled="#{firmasController.selectMantenimiento.size() != 1}" />
 
 					<p:commandButton id="viewButtonBottom"
-						action="#{mantenimientoController.initVistaModo}" immediate="true"
+						action="#{firmasController.initVistaModo}" immediate="true"
 						value="Ver"
-						disabled="#{mantenimientoController.selectMantenimiento.size()!= 1}" />
+						disabled="#{firmasController.selectMantenimiento.size()!= 1}" />
 
 					<p:commandButton id="deleteButtonBottom" value="Borrar"
 						immediate="true" ajax="true" ignoreAutoUpdate="true" async="true"
-						disabled="#{mantenimientoController.selectMantenimiento.size() == 0}" />
+						disabled="#{firmasController.selectMantenimiento.size() == 0}" />
 
 					<p:commandButton id="cancelarButton" value="Cancelar"
 						immediate="true" ajax="true" ignoreAutoUpdate="true" async="true"

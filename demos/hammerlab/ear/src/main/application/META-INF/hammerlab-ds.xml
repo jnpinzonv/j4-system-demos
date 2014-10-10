@@ -22,14 +22,15 @@
     xsi:schemaLocation="http://www.jboss.org/ironjacamar/schema http://docs.jboss.org/ironjacamar/schema/datasources_1_0.xsd">
    <!-- The datasource is bound into JNDI at this location. We reference 
       this in META-INF/persistence.xml -->
+    
+    
     <datasource jndi-name="java:jboss/datasources/hammerlabDS" pool-name="hammerlab"
         enabled="true" use-java-context="true">
-        <connection-url>jdbc:h2:mem:hammerlab;DB_CLOSE_ON_EXIT=FALSE;DB_CLOSE_DELAY=-1</connection-url>
-        <driver>h2</driver>
+        <connection-url>jdbc:mysql://localhost:3306/hammerlab</connection-url>
+        <driver>mysql</driver>
         <security>
-            <user-name>sa</user-name>
-            <password>sa</password>
+            <user-name>admin</user-name>
+            <password>admin1234</password>
         </security>
     </datasource>
 </datasources>
- 

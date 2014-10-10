@@ -22,7 +22,8 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "mantenimiento_equipo")
-@NamedQueries({ @NamedQuery(name = "mantenimientoequipo.getAll", query = "select s from MantenimientoEquipo s") })
+@NamedQueries({ @NamedQuery(name = "mantenimientoequipo.getAll", query = "select s from MantenimientoEquipo s"),
+                @NamedQuery(name = "mantenimientoequipo.getfirmas", query = "select s from MantenimientoEquipo s where s.firmaAprobacion IS NULL or s.firmaAprobacionTecnico IS NULL")})
 public class MantenimientoEquipo implements Serializable {
 
     /**
@@ -80,12 +81,7 @@ public class MantenimientoEquipo implements Serializable {
     */
    @Lob
    private byte[] firmaAprobacionTecnico;
-
-    /**
-     * cedulaAprovacion
-     */
-
-    private String cedulaAprovacion;
+    
 
     /**
      * IdTransaccion
@@ -244,21 +240,7 @@ public class MantenimientoEquipo implements Serializable {
         this.firmaAprobacionTecnico = firmaAprobacionTecnico;
     }
 
-    /**
-     * Devuelve el valor de cedulaAprovacion
-     * @return El valor de cedulaAprovacion
-     */
-    public String getCedulaAprovacion() {
-        return cedulaAprovacion;
-    }
-
-    /**
-     * Establece el valor de cedulaAprovacion
-     * @param cedulaAprovacion El valor por establecer para cedulaAprovacion
-     */
-    public void setCedulaAprovacion(String cedulaAprovacion) {
-        this.cedulaAprovacion = cedulaAprovacion;
-    }
+  
 
     /**
      * Devuelve el valor de idTransaccion

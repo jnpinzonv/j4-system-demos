@@ -17,41 +17,41 @@
 
 -- You can use this file to load seed data into the database using SQL statements
 
-insert into empresa(id,razonSocial,nit,telefono,direccion,correoElectronico,sitioWeb) values(12,'HammerLab',870317945,'3123419478','Cra 6 #4 14','jnpinzonv@hotmail.com','www.hammerlab.com.co')
-insert into empresa(id,razonSocial,nit,telefono,direccion,correoElectronico,sitioWeb) values(13,'HammerLab',870317945,'3123419478','Cra 6 #4 14','jnpinzonv@hotmail.com','www.hammerlab.com.co')
+insert into empresa(id,razonSocial,nit,telefono,direccion,correoElectronico,sitioWeb) values(1,'HammerLab',870317945,'3123419478','Cra 6 #4 14','jnpinzonv@hotmail.com','www.hammerlab.com.co');
 
-insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(1,'ubicacion1','Urgencias','UBICACION','Ubicacion de equipos medicos')
-insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(2,'ubicacion2','Sala de Partos','UBICACION','Ubicacion de equipos medicos')
-insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(3,'ubicacion3','Sala de Cirujia','UBICACION','Ubicacion de equipos medicos')
-insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(4,'ubicacion4','Hospitalización','UBICACION','Ubicacion de equipos medicos')
-insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(5,'ubicacion5','Procedimientos','UBICACION','Ubicacion de equipos medicos')
-insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(6,'ubicacion6','Vacunación','UBICACION','Ubicacion de equipos medicos')
-insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(7,'ubicacion7','Odontologia','UBICACION','Ubicacion de equipos medicos')
-insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(8,'ubicacion8','Laboratorio','UBICACION','Ubicacion de equipos medicos')
-insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(9,'ubicacion9','Consulta Externa','UBICACION','Ubicacion de equipos medicos')
-insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(10,'ubicacion10','Rayos X','UBICACION','Ubicacion de equipos medicos')
-insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(11,'ubicacion11','Consultorio Medico 1','UBICACION','Ubicacion de equipos medicos')
-insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(12,'ubicacion12','Consultorio Medico 2','UBICACION','Ubicacion de equipos medicos')
-insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(13,'ubicacion13','Consultorio Medico 3','UBICACION','Ubicacion de equipos medicos')
-insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(14,'ubicacion14','Consultorio Medico 4','UBICACION','Ubicacion de equipos medicos')
-insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(15,'ubicacion15','Consultorio Medico 5','UBICACION','Ubicacion de equipos medicos')
-insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(16,'ubicacion16','Consultorio Medico 6','UBICACION','Ubicacion de equipos medicos')
-insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(17,'ubicacion17','Consultorio Medico 7','UBICACION','Ubicacion de equipos medicos')
-insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(18,'ubicacion18','Consultorio Medico 8','UBICACION','Ubicacion de equipos medicos')
-insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(19,'ubicacion19','Consultorio Medico 9','UBICACION','Ubicacion de equipos medicos')
-insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(20,'ubicacion20','Consultorio Medico 10','UBICACION','Ubicacion de equipos medicos')
-insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(21,'tecnologia1','Electrónica','TECNOLOGIA','Tecnologia de equipos medicos')
-insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(22,'tecnologia2','Electricidad','TECNOLOGIA','Tecnologia de equipos medicos')
-insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(23,'tecnologia3','Hidraulica','TECNOLOGIA','Tecnologia de equipos medicos')
-insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(24,'tecnologia4','Neumatica','TECNOLOGIA','Tecnologia de equipos medicos')
-insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(26,'tecnologia5','ElectroMecánica','TECNOLOGIA','Tecnologia de equipos medicos')
-insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(27,'tecnologia6','Mecánica','TECNOLOGIA','Tecnologia de equipos medicos')
-insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(28,'decreto1','Mecánica','TECNOLOGIA','Tecnologia de equipos medicos')
-insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(29,'decreto2','Mecánica','TECNOLOGIA','Tecnologia de equipos medicos')
-insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(30,'decreto3','Mecánica','TECNOLOGIA','Tecnologia de equipos medicos')
-insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(31,'decreto4','Mecánica','TECNOLOGIA','Tecnologia de equipos medicos')
-insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(32,'recomendaciones1','Temperatura 17° C','RECOMENDACIONES','Recomendaciones de equipos medicos')
-insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(33,'recomendaciones2','Humedad Relativa 45','RECOMENDACIONES','Recomendaciones de equipos medicos')
-insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(34,'recomendaciones3','115 V. AC, Red electrica','RECOMENDACIONES','Recomendaciones de equipos medicos')
+
+insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(1,'ubicacion1','Urgencias','UBICACION','Ubicacion de equipos medicos');
+insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(2,'ubicacion2','Sala de Partos','UBICACION','Ubicacion de equipos medicos');
+insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(3,'ubicacion3','Sala de Cirujia','UBICACION','Ubicacion de equipos medicos');
+insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(4,'ubicacion4','Hospitalización','UBICACION','Ubicacion de equipos medicos');
+insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(5,'ubicacion5','Procedimientos','UBICACION','Ubicacion de equipos medicos');
+insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(6,'ubicacion6','Vacunación','UBICACION','Ubicacion de equipos medicos');
+insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(7,'ubicacion7','Odontologia','UBICACION','Ubicacion de equipos medicos');
+insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(8,'ubicacion8','Laboratorio','UBICACION','Ubicacion de equipos medicos');
+insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(9,'ubicacion9','Consulta Externa','UBICACION','Ubicacion de equipos medicos');
+insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(10,'ubicacion10','Rayos X','UBICACION','Ubicacion de equipos medicos');
+insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(11,'ubicacion11','Consultorio Medico 1','UBICACION','Ubicacion de equipos medicos');
+insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(12,'ubicacion12','Consultorio Medico 2','UBICACION','Ubicacion de equipos medicos');
+insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(13,'ubicacion13','Consultorio Medico 3','UBICACION','Ubicacion de equipos medicos');
+insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(14,'ubicacion14','Consultorio Medico 4','UBICACION','Ubicacion de equipos medicos');
+insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(15,'ubicacion15','Consultorio Medico 5','UBICACION','Ubicacion de equipos medicos');
+insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(16,'ubicacion16','Consultorio Medico 6','UBICACION','Ubicacion de equipos medicos');
+insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(17,'ubicacion17','Consultorio Medico 7','UBICACION','Ubicacion de equipos medicos');
+insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(18,'ubicacion18','Consultorio Medico 8','UBICACION','Ubicacion de equipos medicos');
+insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(19,'ubicacion19','Consultorio Medico 9','UBICACION','Ubicacion de equipos medicos');
+insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(20,'ubicacion20','Consultorio Medico 10','UBICACION','Ubicacion de equipos medicos');
+insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(21,'tecnologia1','Electrónica','TECNOLOGIA','Tecnologia de equipos medicos');
+insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(22,'tecnologia2','Electricidad','TECNOLOGIA','Tecnologia de equipos medicos');
+insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(23,'tecnologia3','Hidraulica','TECNOLOGIA','Tecnologia de equipos medicos');
+insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(24,'tecnologia4','Neumatica','TECNOLOGIA','Tecnologia de equipos medicos');
+insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(26,'tecnologia5','ElectroMecánica','TECNOLOGIA','Tecnologia de equipos medicos');
+insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(27,'tecnologia6','Mecánica','TECNOLOGIA','Tecnologia de equipos medicos');
+insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(28,'decreto1','Clase I','DECRETO_4725','Decreto 4725 de clasificacion de equipos medicos');
+insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(29,'decreto2','Clase IIa','DECRETO_4725','Decreto 4725 de clasificacion de equipos medicos');
+insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(30,'decreto3','Clase IIb','DECRETO_4725','Decreto 4725 de clasificacion de equipos medicos');
+insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(31,'decreto4','clase III','DECRETO_4725','Decreto 4725 de clasificacion de equipos medicos');
+insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(32,'recomendaciones1','Temperatura 17° C','RECOMENDACIONES','Recomendaciones de equipos medicos');
+insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(33,'recomendaciones2','Humedad Relativa 45','RECOMENDACIONES','Recomendaciones de equipos medicos');
+insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(34,'recomendaciones3','115 V. AC, Red electrica','RECOMENDACIONES','Recomendaciones de equipos medicos');
 
 
