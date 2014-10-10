@@ -132,6 +132,7 @@ public class EquipoController implements Serializable {
 
     private String accion;
 
+    private String razonSocial = "";
     /**
      * 
      */
@@ -223,7 +224,12 @@ public class EquipoController implements Serializable {
      * 
      */
     public void busqueda() {
-        listaEquipos = equipoHospitalarioBean.getAll();
+
+        if (!razonSocial.isEmpty() || !newObject.getUbicacion().isEmpty() || !newObject.getNombreEquipo().isEmpty()) {
+            listaEquipos = equipoHospitalarioBean.search(razonSocial, newObject.getUbicacion(), newObject.getNombreEquipo());
+        } else {
+            listaEquipos = equipoHospitalarioBean.getAll();
+        }
     }
 
     /**
@@ -477,6 +483,7 @@ public class EquipoController implements Serializable {
             newObject.setInfoTecnica(infoTecnica);
             newObject.setFuncionamientoEquipo(funcionamientoEquipo);
             newObject.setPlanosEquipo(planosEquipo);
+            newObject.setEmpresa(listaEmpresa.get(0));
             equipoHospitalarioBean.save(newObject);
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Exito!", "Se guardo un registro de una Empresa"));
             inicializarVariables();
@@ -521,7 +528,7 @@ public class EquipoController implements Serializable {
         // This is the root cause message
         return errorMessage;
     }
-    
+
     /**
      * Método encargado de llenar los datos necesarios para la generación del archivo JasperPrint.
      * 
@@ -534,23 +541,20 @@ public class EquipoController implements Serializable {
         try {
             Map<String, Object> datosAdicionales = new TreeMap<String, Object>();
 
-            
-//            InputStream logoImpuestos = this.getClass().getResourceAsStream(ConstantesReportesEstadisticos.RUTA_LOGO);
-//            datosAdicionales.put(ConstantesReportesEstadisticos.NOMBRE_PARAMETRO, logoImpuestos);
+            // InputStream logoImpuestos = this.getClass().getResourceAsStream(ConstantesReportesEstadisticos.RUTA_LOGO);
+            // datosAdicionales.put(ConstantesReportesEstadisticos.NOMBRE_PARAMETRO, logoImpuestos);
 
-          
+            // JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(puntosAtencion);
 
-           // JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(puntosAtencion);
-
-           // print = JasperFillManager.fillReport(obtenerPlantilla(), datosAdicionales, dataSource);
-            print = JasperFillManager.fillReport(obtenerPlantilla(),datosAdicionales);
+            // print = JasperFillManager.fillReport(obtenerPlantilla(), datosAdicionales, dataSource);
+            print = JasperFillManager.fillReport(obtenerPlantilla(), datosAdicionales);
 
             enviarPDF(print);
         } catch (Exception e) {
-            
+
         }
     }
-    
+
     /**
      * Envía un xls como respuesta al cliente.
      * 
@@ -560,9 +564,9 @@ public class EquipoController implements Serializable {
      *             Se genera cuando se presenta un error al exportar el reporte como archivo xls.
      */
     private void enviarPDF(JasperPrint jasperPrint) throws Exception {
-        
-        String fileName ="Nombre del archivo";
-       
+
+        String fileName = "Nombre del archivo";
+
         JRXlsExporter exportador = new JRXlsExporter();
 
         exportador.setParameter(JRXlsExporterParameter.JASPER_PRINT, jasperPrint);
@@ -572,9 +576,9 @@ public class EquipoController implements Serializable {
         exportador.setParameter(JRXlsAbstractExporterParameter.IS_REMOVE_EMPTY_SPACE_BETWEEN_COLUMNS, false);
 
         exportador.exportReport();
-        //DescargarArchivosWeb.descargarArchivoExcel(fileName);
+        // DescargarArchivosWeb.descargarArchivoExcel(fileName);
     }
-    
+
     /**
      * Retorna la plantilla del reporte en un objeto <code>InputStream</code>.
      * 
@@ -583,9 +587,8 @@ public class EquipoController implements Serializable {
     private InputStream obtenerPlantilla() {
         InputStream reportStream = null;
         String ubicacionPlantilla;
-        
-            ubicacionPlantilla = "/Biomedico_subreport2.jasper";
-       
+
+        ubicacionPlantilla = "/Biomedico_subreport2.jasper";
 
         reportStream = this.getClass().getResourceAsStream(ubicacionPlantilla);
         return reportStream;
@@ -1175,6 +1178,25 @@ public class EquipoController implements Serializable {
      */
     public void setTipoManteEquipoCorrCo(TipoManteEquipo tipoManteEquipoCorrCo) {
         this.tipoManteEquipoCorrCo = tipoManteEquipoCorrCo;
+    }
+
+    /**
+     * Devuelve el valor de razonSocial
+     * 
+     * @return El valor de razonSocial
+     */
+    public String getRazonSocial() {
+        return razonSocial;
+    }
+
+    /**
+     * Establece el valor de razonSocial
+     * 
+     * @param razonSocial
+     *            El valor por establecer para razonSocial
+     */
+    public void setRazonSocial(String razonSocial) {
+        this.razonSocial = razonSocial;
     }
 
 }

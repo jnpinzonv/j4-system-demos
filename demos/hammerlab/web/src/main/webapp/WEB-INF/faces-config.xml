@@ -49,6 +49,10 @@
 			<to-view-id>#{not empty empresaController.refer ? empresaController.refer :'/'}</to-view-id>
 			<redirect />
 		</navigation-case>
+		<navigation-case>
+			<from-outcome>atras</from-outcome>
+			<to-view-id>/hojaVida/empresaList.xhtml</to-view-id>
+		</navigation-case>	
 	</navigation-rule>
 	
 	<navigation-rule>

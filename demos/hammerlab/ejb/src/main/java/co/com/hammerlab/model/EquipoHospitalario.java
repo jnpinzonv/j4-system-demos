@@ -24,8 +24,15 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "equipo_hospitalario")
-@NamedQueries({ @NamedQuery(name = "equipoHospitalario.getAll", query = "select s from EquipoHospitalario s "),
-                @NamedQuery(name = "equipoHospitalario.getAllRelation", query = "select s from EquipoHospitalario s fetch all properties where s.id=:ID") })
+@NamedQueries({
+        @NamedQuery(name = "equipoHospitalario.getAll", query = "select s from EquipoHospitalario s "),
+        @NamedQuery(name = "equipoHospitalario.getAllRelation", query = "select s from EquipoHospitalario s fetch all properties where s.id=:ID"),
+        @NamedQuery(name = "equipoHospitalario.getAllSearch", query = "select s from EquipoHospitalario s where s.ubicacion=:UBICACION and "
+                + Constants.replaceVocals1
+                + " s.nombreEquipo"
+                + Constants.replaceVocals2
+                + " like concat(:NOMBREEQUI,'%') and "
+                + Constants.replaceVocals1 + " s.empresa.razonSocial" + Constants.replaceVocals2 + " like concat(:EMPRESA,'%')") })
 public class EquipoHospitalario implements Serializable {
 
     /**
@@ -39,6 +46,11 @@ public class EquipoHospitalario implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    /**
+     * Nombre del equipo
+     */
+    private String nombreEquipo="";
 
     /**
      * fotoEquipo
@@ -59,7 +71,7 @@ public class EquipoHospitalario implements Serializable {
     /**
      * ubicacion
      */
-    private String ubicacion;
+    private String ubicacion="";
 
     /**
      * fabricante
@@ -80,66 +92,67 @@ public class EquipoHospitalario implements Serializable {
      * telefono
      */
     private String telefono;
-    
+
     @ManyToOne
     private Empresa empresa;
-    
+
     /**
      * 
      */
     @OneToOne
     private EquipoInfoTecnica infoTecnica;
-    
+
     /**
      * 
      */
     @OneToOne
     private EstadoEquipo estadoEquipo;
-    
+
     /**
      * 
      */
     @OneToOne
     private AdquisicionEquipo adquisicionEquipo;
-    
+
     /**
      * 
      */
     @OneToOne
     private FuncionamientoEquipo funcionamientoEquipo;
-    
+
     /**
      * 
      */
     @OneToMany
     private List<MantenimientoEquipo> mantenimientoEquipo;
-    
+
     /**
      * 
      */
     @OneToOne
     private ManualesEquipo manualesEquipo;
-    
+
     /**
      * 
      */
     @OneToOne
     private PlanosEquipo planosEquipo;
-    
+
     /**
      * 
      */
     @OneToOne
     private RecomendacionesEquipo recomendacionesEquipo;
-    
+
     /**
      * 
      */
-    @OneToMany(mappedBy="equipoHospitalario")
+    @OneToMany(mappedBy = "equipoHospitalario")
     private List<TipoManteEquipo> manteEquipo;
 
     /**
      * Devuelve el valor de id
+     * 
      * @return El valor de id
      */
     public Long getId() {
@@ -148,15 +161,17 @@ public class EquipoHospitalario implements Serializable {
 
     /**
      * Establece el valor de id
-     * @param id El valor por establecer para id
+     * 
+     * @param id
+     *            El valor por establecer para id
      */
     public void setId(Long id) {
         this.id = id;
     }
 
-
     /**
      * Devuelve el valor de fotoEquipo
+     * 
      * @return El valor de fotoEquipo
      */
     public byte[] getFotoEquipo() {
@@ -165,7 +180,9 @@ public class EquipoHospitalario implements Serializable {
 
     /**
      * Establece el valor de fotoEquipo
-     * @param fotoEquipo El valor por establecer para fotoEquipo
+     * 
+     * @param fotoEquipo
+     *            El valor por establecer para fotoEquipo
      */
     public void setFotoEquipo(byte[] fotoEquipo) {
         this.fotoEquipo = fotoEquipo;
@@ -173,6 +190,7 @@ public class EquipoHospitalario implements Serializable {
 
     /**
      * Devuelve el valor de marca
+     * 
      * @return El valor de marca
      */
     public String getMarca() {
@@ -181,7 +199,9 @@ public class EquipoHospitalario implements Serializable {
 
     /**
      * Establece el valor de marca
-     * @param marca El valor por establecer para marca
+     * 
+     * @param marca
+     *            El valor por establecer para marca
      */
     public void setMarca(String marca) {
         this.marca = marca;
@@ -189,6 +209,7 @@ public class EquipoHospitalario implements Serializable {
 
     /**
      * Devuelve el valor de modelo
+     * 
      * @return El valor de modelo
      */
     public String getModelo() {
@@ -197,7 +218,9 @@ public class EquipoHospitalario implements Serializable {
 
     /**
      * Establece el valor de modelo
-     * @param modelo El valor por establecer para modelo
+     * 
+     * @param modelo
+     *            El valor por establecer para modelo
      */
     public void setModelo(String modelo) {
         this.modelo = modelo;
@@ -205,6 +228,7 @@ public class EquipoHospitalario implements Serializable {
 
     /**
      * Devuelve el valor de ubicacion
+     * 
      * @return El valor de ubicacion
      */
     public String getUbicacion() {
@@ -213,7 +237,9 @@ public class EquipoHospitalario implements Serializable {
 
     /**
      * Establece el valor de ubicacion
-     * @param ubicacion El valor por establecer para ubicacion
+     * 
+     * @param ubicacion
+     *            El valor por establecer para ubicacion
      */
     public void setUbicacion(String ubicacion) {
         this.ubicacion = ubicacion;
@@ -221,6 +247,7 @@ public class EquipoHospitalario implements Serializable {
 
     /**
      * Devuelve el valor de fabricante
+     * 
      * @return El valor de fabricante
      */
     public String getFabricante() {
@@ -229,7 +256,9 @@ public class EquipoHospitalario implements Serializable {
 
     /**
      * Establece el valor de fabricante
-     * @param fabricante El valor por establecer para fabricante
+     * 
+     * @param fabricante
+     *            El valor por establecer para fabricante
      */
     public void setFabricante(String fabricante) {
         this.fabricante = fabricante;
@@ -237,6 +266,7 @@ public class EquipoHospitalario implements Serializable {
 
     /**
      * Devuelve el valor de representanteCol
+     * 
      * @return El valor de representanteCol
      */
     public String getRepresentanteCol() {
@@ -245,7 +275,9 @@ public class EquipoHospitalario implements Serializable {
 
     /**
      * Establece el valor de representanteCol
-     * @param representanteCol El valor por establecer para representanteCol
+     * 
+     * @param representanteCol
+     *            El valor por establecer para representanteCol
      */
     public void setRepresentanteCol(String representanteCol) {
         this.representanteCol = representanteCol;
@@ -253,6 +285,7 @@ public class EquipoHospitalario implements Serializable {
 
     /**
      * Devuelve el valor de direccion
+     * 
      * @return El valor de direccion
      */
     public String getDireccion() {
@@ -261,7 +294,9 @@ public class EquipoHospitalario implements Serializable {
 
     /**
      * Establece el valor de direccion
-     * @param direccion El valor por establecer para direccion
+     * 
+     * @param direccion
+     *            El valor por establecer para direccion
      */
     public void setDireccion(String direccion) {
         this.direccion = direccion;
@@ -269,6 +304,7 @@ public class EquipoHospitalario implements Serializable {
 
     /**
      * Devuelve el valor de telefono
+     * 
      * @return El valor de telefono
      */
     public String getTelefono() {
@@ -277,7 +313,9 @@ public class EquipoHospitalario implements Serializable {
 
     /**
      * Establece el valor de telefono
-     * @param telefono El valor por establecer para telefono
+     * 
+     * @param telefono
+     *            El valor por establecer para telefono
      */
     public void setTelefono(String telefono) {
         this.telefono = telefono;
@@ -285,6 +323,7 @@ public class EquipoHospitalario implements Serializable {
 
     /**
      * Devuelve el valor de infoTecnica
+     * 
      * @return El valor de infoTecnica
      */
     public EquipoInfoTecnica getInfoTecnica() {
@@ -293,7 +332,9 @@ public class EquipoHospitalario implements Serializable {
 
     /**
      * Establece el valor de infoTecnica
-     * @param infoTecnica El valor por establecer para infoTecnica
+     * 
+     * @param infoTecnica
+     *            El valor por establecer para infoTecnica
      */
     public void setInfoTecnica(EquipoInfoTecnica infoTecnica) {
         this.infoTecnica = infoTecnica;
@@ -301,6 +342,7 @@ public class EquipoHospitalario implements Serializable {
 
     /**
      * Devuelve el valor de estadoEquipo
+     * 
      * @return El valor de estadoEquipo
      */
     public EstadoEquipo getEstadoEquipo() {
@@ -309,7 +351,9 @@ public class EquipoHospitalario implements Serializable {
 
     /**
      * Establece el valor de estadoEquipo
-     * @param estadoEquipo El valor por establecer para estadoEquipo
+     * 
+     * @param estadoEquipo
+     *            El valor por establecer para estadoEquipo
      */
     public void setEstadoEquipo(EstadoEquipo estadoEquipo) {
         this.estadoEquipo = estadoEquipo;
@@ -317,6 +361,7 @@ public class EquipoHospitalario implements Serializable {
 
     /**
      * Devuelve el valor de adquisicionEquipo
+     * 
      * @return El valor de adquisicionEquipo
      */
     public AdquisicionEquipo getAdquisicionEquipo() {
@@ -325,7 +370,9 @@ public class EquipoHospitalario implements Serializable {
 
     /**
      * Establece el valor de adquisicionEquipo
-     * @param adquisicionEquipo El valor por establecer para adquisicionEquipo
+     * 
+     * @param adquisicionEquipo
+     *            El valor por establecer para adquisicionEquipo
      */
     public void setAdquisicionEquipo(AdquisicionEquipo adquisicionEquipo) {
         this.adquisicionEquipo = adquisicionEquipo;
@@ -333,6 +380,7 @@ public class EquipoHospitalario implements Serializable {
 
     /**
      * Devuelve el valor de funcionamientoEquipo
+     * 
      * @return El valor de funcionamientoEquipo
      */
     public FuncionamientoEquipo getFuncionamientoEquipo() {
@@ -341,7 +389,9 @@ public class EquipoHospitalario implements Serializable {
 
     /**
      * Establece el valor de funcionamientoEquipo
-     * @param funcionamientoEquipo El valor por establecer para funcionamientoEquipo
+     * 
+     * @param funcionamientoEquipo
+     *            El valor por establecer para funcionamientoEquipo
      */
     public void setFuncionamientoEquipo(FuncionamientoEquipo funcionamientoEquipo) {
         this.funcionamientoEquipo = funcionamientoEquipo;
@@ -349,6 +399,7 @@ public class EquipoHospitalario implements Serializable {
 
     /**
      * Devuelve el valor de mantenimientoEquipo
+     * 
      * @return El valor de mantenimientoEquipo
      */
     public List<MantenimientoEquipo> getMantenimientoEquipo() {
@@ -357,7 +408,9 @@ public class EquipoHospitalario implements Serializable {
 
     /**
      * Establece el valor de mantenimientoEquipo
-     * @param mantenimientoEquipo El valor por establecer para mantenimientoEquipo
+     * 
+     * @param mantenimientoEquipo
+     *            El valor por establecer para mantenimientoEquipo
      */
     public void setMantenimientoEquipo(List<MantenimientoEquipo> mantenimientoEquipo) {
         this.mantenimientoEquipo = mantenimientoEquipo;
@@ -365,6 +418,7 @@ public class EquipoHospitalario implements Serializable {
 
     /**
      * Devuelve el valor de manualesEquipo
+     * 
      * @return El valor de manualesEquipo
      */
     public ManualesEquipo getManualesEquipo() {
@@ -373,7 +427,9 @@ public class EquipoHospitalario implements Serializable {
 
     /**
      * Establece el valor de manualesEquipo
-     * @param manualesEquipo El valor por establecer para manualesEquipo
+     * 
+     * @param manualesEquipo
+     *            El valor por establecer para manualesEquipo
      */
     public void setManualesEquipo(ManualesEquipo manualesEquipo) {
         this.manualesEquipo = manualesEquipo;
@@ -381,6 +437,7 @@ public class EquipoHospitalario implements Serializable {
 
     /**
      * Devuelve el valor de planosEquipo
+     * 
      * @return El valor de planosEquipo
      */
     public PlanosEquipo getPlanosEquipo() {
@@ -389,7 +446,9 @@ public class EquipoHospitalario implements Serializable {
 
     /**
      * Establece el valor de planosEquipo
-     * @param planosEquipo El valor por establecer para planosEquipo
+     * 
+     * @param planosEquipo
+     *            El valor por establecer para planosEquipo
      */
     public void setPlanosEquipo(PlanosEquipo planosEquipo) {
         this.planosEquipo = planosEquipo;
@@ -397,6 +456,7 @@ public class EquipoHospitalario implements Serializable {
 
     /**
      * Devuelve el valor de recomendacionesEquipo
+     * 
      * @return El valor de recomendacionesEquipo
      */
     public RecomendacionesEquipo getRecomendacionesEquipo() {
@@ -405,7 +465,9 @@ public class EquipoHospitalario implements Serializable {
 
     /**
      * Establece el valor de recomendacionesEquipo
-     * @param recomendacionesEquipo El valor por establecer para recomendacionesEquipo
+     * 
+     * @param recomendacionesEquipo
+     *            El valor por establecer para recomendacionesEquipo
      */
     public void setRecomendacionesEquipo(RecomendacionesEquipo recomendacionesEquipo) {
         this.recomendacionesEquipo = recomendacionesEquipo;
@@ -413,6 +475,7 @@ public class EquipoHospitalario implements Serializable {
 
     /**
      * Devuelve el valor de manteEquipo
+     * 
      * @return El valor de manteEquipo
      */
     public List<TipoManteEquipo> getManteEquipo() {
@@ -421,7 +484,9 @@ public class EquipoHospitalario implements Serializable {
 
     /**
      * Establece el valor de manteEquipo
-     * @param manteEquipo El valor por establecer para manteEquipo
+     * 
+     * @param manteEquipo
+     *            El valor por establecer para manteEquipo
      */
     public void setManteEquipo(List<TipoManteEquipo> manteEquipo) {
         this.manteEquipo = manteEquipo;
@@ -429,6 +494,7 @@ public class EquipoHospitalario implements Serializable {
 
     /**
      * Devuelve el valor de empresa
+     * 
      * @return El valor de empresa
      */
     public Empresa getEmpresa() {
@@ -437,13 +503,30 @@ public class EquipoHospitalario implements Serializable {
 
     /**
      * Establece el valor de empresa
-     * @param empresa El valor por establecer para empresa
+     * 
+     * @param empresa
+     *            El valor por establecer para empresa
      */
     public void setEmpresa(Empresa empresa) {
         this.empresa = empresa;
     }
-    
-    
+
+    /**
+     * Devuelve el valor de nombreEquipo
+     * 
+     * @return El valor de nombreEquipo
+     */
+    public String getNombreEquipo() {
+        return nombreEquipo;
+    }
+
+    /**
+     * Establece el valor de nombreEquipo
+     * 
+     * @param nombreEquipo
+     *            El valor por establecer para nombreEquipo
+     */
+    public void setNombreEquipo(String nombreEquipo) {
+        this.nombreEquipo = nombreEquipo;
+    }
 }
-
-

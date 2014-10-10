@@ -20,8 +20,9 @@
 
 		<h:form id="formEmpresas">
 			<p:panel id="panelEmpresas" header="Busqueda">
-
-				<p:inputText id="name" label="Nombre Clientes" title="Nombre Clientes"
+			
+				<p:outputLabel for="razonSocial" value="Razón Social:" />
+				<p:inputText id="razonSocial" 
 					value="#{empresaController.newObject.razonSocial}" />
 
 
@@ -138,7 +139,7 @@
 						styleClass="pButtonEnabled" value="Crear" />
 
 					<p:commandButton id="editButtonBottom"
-						action="empresaController.initEditarModo" immediate="true"
+						action="#{empresaController.initEditarModo}" immediate="true"
 						value="Editar"
 						disabled="#{empresaController.selectEmpresas.size() != 1}" />
 
