@@ -1,30 +1,31 @@
 package co.com.hammerlab.controller;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.context.Conversation;
+import javax.enterprise.context.ConversationScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.application.FacesMessage.Severity;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.inject.Named;
 
-import co.com.hammerlab.ejb.EmpresaBean;
-import co.com.hammerlab.model.Empresa;
+import co.com.hammerlab.ejb.MantenimientoEquipoBean;
+import co.com.hammerlab.model.EquipoHospitalario;
+import co.com.hammerlab.model.MantenimientoEquipo;
 import co.com.hammerlab.util.ConstantesUtil;
 
-/**
- * <b>Descripcion:</b> Clase que <br/>
- * <b>Caso de Uso:</b> SOL_MOV- <br/>
- *
- * @author Josué Nicolás Pinzón Villamil <jnpinzonv@gmail.com>
- */
-public class FirmasController {
-    
+
+@Named("firmasController")
+@ConversationScoped
+public class FirmasController implements Serializable {
+
     /**
-     * Serialziacion 
+     * 
      */
-    private static final long serialVersionUID = -8515841786261886008L;
+    private static final long serialVersionUID = 2412744316675957914L;
     
     @Inject
     private Conversation conversation;
@@ -33,15 +34,11 @@ public class FirmasController {
      */
     @Inject
     private FacesContext facesContext;
-    /**
-     * Realcion con el EJB que controla las transacciones del objeto
-     */
-    @Inject
-    private EmpresaBean empresaBean;
+    
     /**
      * Entidad sobre la que se gestiona la transaccion
      */
-    private Empresa newObject;
+    private MantenimientoEquipo newObject;
     /**
      * Variable de control
      */
@@ -51,30 +48,37 @@ public class FirmasController {
      * Variable de control de conversacion 
      */
     private boolean bandera= Boolean.FALSE;
-
-   
-
-      /**
-     * Devuelve el valor de newUsuario
-     * 
-     * @return El valor de newUsuario
-     */   
-    public Empresa getNewObject() {
-        return newObject;
-    }
     
     /**
      * 
      */
-    private List<Empresa> listaEmpresa;
+    @Inject
+    private MantenimientoEquipoBean mantenimientoEquipoBean;
+    
+    @Inject
+    private EquipoController controller;
+  
+    @Inject
+    private EquipoHospitalario equipoHospitalario;
+
+
+    
     
     /**
      * 
      */
-    private List<Empresa> selectEmpresas;
+    private List<MantenimientoEquipo> listaMantenimiento;
     
+    /**
+     * 
+     */
+    private List<MantenimientoEquipo> selectMantenimiento;
+    
+    /**
+     * 
+     */
     public void busqueda(){
-        listaEmpresa= empresaBean.getAll();
+        listaMantenimiento= mantenimientoEquipoBean.getAllFirmas();
     }
     /**
      * Asigna el valor del objeto seleccionado pra su edicion
@@ -83,24 +87,29 @@ public class FirmasController {
      */
     public String initEditarModo() {
         editMode = Boolean.TRUE;
-        newObject = empresaBean.getByID(selectEmpresas.get(0).getId());
+        newObject = mantenimientoEquipoBean.getByID(selectMantenimiento.get(0).getId());
         return ConstantesUtil.CREAR_ACTU;
     }
     
     public String initVistaModo(){
-         newObject = empresaBean.getByID(selectEmpresas.get(0).getId());
+         newObject = mantenimientoEquipoBean.getByID(selectMantenimiento.get(0).getId());
          return ConstantesUtil.VER;
     }
     
     public String initCrearModo(){
+        editMode = Boolean.FALSE;
+        newObject = new MantenimientoEquipo();
         return ConstantesUtil.CREAR_ACTU;
     }
     
     public String cancelar() {
+        
         return ConstantesUtil.ATRAS;
     }
     
     public String reiniciar() {
+        newObject = new MantenimientoEquipo();
+        busqueda();
         return ConstantesUtil.ATRAS;
     }
     /**
@@ -109,9 +118,10 @@ public class FirmasController {
      */
     public String actualizar() {
         try {
-            empresaBean.update(newObject);
+            mantenimientoEquipoBean.update(newObject);
             editMode = Boolean.FALSE;
-            initNewObject();
+            addMessage(FacesMessage.SEVERITY_INFO, "El registro del Mantenimiento fue actualizado");
+            newObject = new MantenimientoEquipo();           
         } catch (Exception e) {
             String errorMessage = getRootErrorMessage(e);
             addMessage(FacesMessage.SEVERITY_ERROR, errorMessage);            
@@ -121,20 +131,34 @@ public class FirmasController {
     }
     
    
+    
+    
     /**
      * Elimina un objeto en base de datos
      * @param id Identificador del objeto a eliminar
      * @return Retorna regla de nevagacion
      */
-    public void eliminar(Long idObject) {
+    public String eliminar() {
         try {
-            empresaBean.delete(idObject);
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Empresa Eliminada!", "Exito!!"));
+            for (MantenimientoEquipo element : selectMantenimiento) {
+                mantenimientoEquipoBean.delete(element.getId());
+            }
+            
+            if(selectMantenimiento.size()>0){
+                addMessage(FacesMessage.SEVERITY_INFO, "Los clientes han sido eliminados");
+            }else{
+                addMessage(FacesMessage.SEVERITY_INFO, "El cliente a sido eliminado");
+            }
+            busqueda();
+            selectMantenimiento=null;
+            
         } catch (Exception e) {
             String errorMessage = getRootErrorMessage(e);
             addMessage(FacesMessage.SEVERITY_ERROR, errorMessage);
-            
+
         }
+        
+        return "";
     }
     /**
      * Registra un nuevo objeto en Base de datos
@@ -143,9 +167,10 @@ public class FirmasController {
      */
     public String crear(){
         try {
-            empresaBean.save(newObject);
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Exito!", "Se guardo un registro de una Empresa"));
-            initNewObject();
+            mantenimientoEquipoBean.save(newObject);
+            addMessage(FacesMessage.SEVERITY_INFO, "Se guardo un registro de Mantenimiento");
+            newObject = new MantenimientoEquipo();
+            busqueda();
             return ConstantesUtil.ATRAS;
         } catch (Exception e) {
             String errorMessage = getRootErrorMessage(e);
@@ -155,7 +180,7 @@ public class FirmasController {
         return "";
     }
     
-    public String visualizar(){
+    public String visualizar() {
         return ConstantesUtil.VER;
     }
     /**
@@ -168,11 +193,10 @@ public class FirmasController {
                 conversation.begin();
             }
             bandera = Boolean.TRUE;
-            
-            // TODO pendienta para inicializar el estado de editaod se deve mover
-            if (editMode == Boolean.FALSE) {
-                newObject = new Empresa();
-            }
+           // equipoHospitalario= controller.getSelectEquipos().get(0);
+            newObject = new MantenimientoEquipo();
+            busqueda();
+            selectMantenimiento = null;
             
         }
         
@@ -214,49 +238,83 @@ public class FirmasController {
         facesContext.addMessage(null, new FacesMessage(severidad, "",mensaje));
 
     }
-    
     /**
-     * Lista de objetos a ser consultados y visualizados en pantalla
-     * @return Retorna una lista de obejtos
-     */
-    public List< Empresa > getListaEmpresa() {
-        return empresaBean.getAll();
-    }
-
-    /**
-     * @return the selectEmpresas
-     */
-    public List<Empresa> getSelectEmpresas() {
-        if(selectEmpresas==null){
-            selectEmpresas= new ArrayList<Empresa>();
-        }       
-        return selectEmpresas;
-    }
-
-    /**
-     * @param selectEmpresas the selectEmpresas to set
-     */
-    public void setSelectEmpresas(List<Empresa> selectEmpresas) {
-        this.selectEmpresas = selectEmpresas;       
-    }
-
-    /**
-     * @param listaEmpresa the listaEmpresa to set
-     */
-    public void setListaEmpresa(List<Empresa> listaEmpresa) {
-        this.listaEmpresa = listaEmpresa;
-    }
-    /**
-     * @return the editMode
+     * Devuelve el valor de editMode
+     * @return El valor de editMode
      */
     public boolean isEditMode() {
         return editMode;
     }
     /**
-     * @param editMode the editMode to set
+     * Establece el valor de editMode
+     * @param editMode El valor por establecer para editMode
      */
     public void setEditMode(boolean editMode) {
         this.editMode = editMode;
     }
+    /**
+     * Devuelve el valor de bandera
+     * @return El valor de bandera
+     */
+    public boolean isBandera() {
+        return bandera;
+    }
+    /**
+     * Establece el valor de bandera
+     * @param bandera El valor por establecer para bandera
+     */
+    public void setBandera(boolean bandera) {
+        this.bandera = bandera;
+    }
+  
+    /**
+     * Devuelve el valor de listaMantenimiento
+     * @return El valor de listaMantenimiento
+     */
+    public List<MantenimientoEquipo> getListaMantenimiento() {
+        return listaMantenimiento;
+    }
+    /**
+     * Establece el valor de listaMantenimiento
+     * @param listaMantenimiento El valor por establecer para listaMantenimiento
+     */
+    public void setListaMantenimiento(List<MantenimientoEquipo> listaMantenimiento) {
+        this.listaMantenimiento = listaMantenimiento;
+    }
+    /**
+     * Devuelve el valor de selectMantenimiento
+     * @return El valor de selectMantenimiento
+     */
+    public List<MantenimientoEquipo> getSelectMantenimiento() {
+        if(selectMantenimiento==null){
+            selectMantenimiento= new ArrayList<MantenimientoEquipo>();
+        }
+        return selectMantenimiento;
+    }
+    /**
+     * Establece el valor de selectMantenimiento
+     * @param selectMantenimiento El valor por establecer para selectMantenimiento
+     */
+    public void setSelectMantenimiento(List<MantenimientoEquipo> selectMantenimiento) {
+        this.selectMantenimiento = selectMantenimiento;
+    }
+    /**
+     * Establece el valor de newObject
+     * @param newObject El valor por establecer para newObject
+     */
+    public void setNewObject(MantenimientoEquipo newObject) {
+        this.newObject = newObject;
+    }
+  
+    /**
+     * Devuelve el valor de newUsuario
+     * 
+     * @return El valor de newUsuario
+     */   
+    public MantenimientoEquipo getNewObject() {
+        return newObject;
+    }
+    
+    
 
 }

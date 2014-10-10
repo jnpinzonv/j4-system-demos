@@ -12,7 +12,7 @@
 
 		<h:form id="empresaEdit">
 			<p:panel id="empresaPanelEdit"
-				header="#{empresaController.editMode ? 'Actualizar Empresa' : 'Crear Empresa'}">
+				header="#{mantenimientoController.editMode ? 'Actualizar Empresa' : 'Crear Empresa'}">
 
 				<h:panelGrid columns="2" columnClasses="titleCell">
 
@@ -59,15 +59,15 @@
 
 				<p:panel id="groupButton" align="right">
 					<p:commandButton id="create" styleClass="" value="Guardar"
-						action="#{empresaController.crear}"
-						rendered="#{!empresaController.editMode}" update="@form"/>
+						action="#{mantenimientoController.crear}"
+						rendered="#{!mantenimientoController.editMode}" update="@form"/>
 
 					<p:commandButton id="update" styleClass="" type="complex"
-						value="Guardar" action="#{empresaController.actualizar}"
-						rendered="#{empresaController.editMode}" update="@form"/>
+						value="Guardar" action="#{mantenimientoController.actualizar}"
+						rendered="#{mantenimientoController.editMode}" update="@form"/>
 
 					<p:commandButton id="cancel" styleClass="" value="Cancelar"
-						action="#{empresaController.cancelar}" immediate="true" />
+						action="#{mantenimientoController.cancelar}" immediate="true" />
 				</p:panel>
 
 				<div style="clear: both" />

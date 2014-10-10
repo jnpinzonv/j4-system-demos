@@ -60,9 +60,12 @@
 						immediate="true"
 						disabled="#{equipoController.selectEquipos.size() != 1}" />
 
-					<p:commandButton id="manteButtonTop"
-						action="mante" value="Mantenimiento"
-						immediate="true"
+					<p:commandButton id="manteButtonTop" action="mante"
+						value="Mantenimiento" immediate="true"
+						disabled="#{equipoController.selectEquipos.size() != 1}" />
+
+					<p:commandButton id="reporteButtonTop" action="#{equipoController.generarJasperPrint}"
+						value="Reporte" immediate="true"
 						disabled="#{equipoController.selectEquipos.size() != 1}" />
 
 
@@ -144,9 +147,12 @@
 						value="Ver"
 						disabled="#{equipoController.selectEquipos.size()!= 1}" />
 
-					<p:commandButton id="manteButton"
-						action="mante" value="Mantenimiento"
-						immediate="true"
+					<p:commandButton id="manteButton" action="mante"
+						value="Mantenimiento" immediate="true"
+						disabled="#{equipoController.selectEquipos.size() != 1}" />
+						
+					<p:commandButton id="reporteButton" action="#{equipoController.generarJasperPrint}"
+						value="Reporte" immediate="true"
 						disabled="#{equipoController.selectEquipos.size() != 1}" />
 
 					<p:commandButton id="deleteButtonBottom" value="Borrar"

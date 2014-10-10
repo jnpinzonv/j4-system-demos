@@ -77,9 +77,9 @@ public class EquipoInfoTecnica implements Serializable {
     private String insumos;
     
     /**
-     * Realacion con equiopo principal
+     * Realacion con equipo principal
      */
-    @OneToOne()
+    @OneToOne(mappedBy="infoTecnica")
     private EquipoHospitalario equipoHospitalario;
     
     /**

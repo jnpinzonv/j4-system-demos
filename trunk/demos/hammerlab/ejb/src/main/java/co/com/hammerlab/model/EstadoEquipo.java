@@ -50,7 +50,7 @@ public class EstadoEquipo implements Serializable {
     /**
      * Realacion con equiopo principal
      */
-    @OneToOne()
+    @OneToOne(mappedBy="estadoEquipo")
     private EquipoHospitalario equipoHospitalario;
     
     /**

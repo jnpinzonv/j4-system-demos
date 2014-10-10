@@ -24,7 +24,8 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "equipo_hospitalario")
-@NamedQueries({ @NamedQuery(name = "equipoHospitalario.getAll", query = "select s from EquipoHospitalario s") })
+@NamedQueries({ @NamedQuery(name = "equipoHospitalario.getAll", query = "select s from EquipoHospitalario s "),
+                @NamedQuery(name = "equipoHospitalario.getAllRelation", query = "select s from EquipoHospitalario s fetch all properties where s.id=:ID") })
 public class EquipoHospitalario implements Serializable {
 
     /**
@@ -86,56 +87,56 @@ public class EquipoHospitalario implements Serializable {
     /**
      * 
      */
-    @OneToOne(mappedBy = "equipoHospitalario")
+    @OneToOne
     private EquipoInfoTecnica infoTecnica;
     
     /**
      * 
      */
-    @OneToOne(mappedBy = "equipoHospitalario")
+    @OneToOne
     private EstadoEquipo estadoEquipo;
     
     /**
      * 
      */
-    @OneToOne()
+    @OneToOne
     private AdquisicionEquipo adquisicionEquipo;
     
     /**
      * 
      */
-    @OneToOne(mappedBy = "equipoHospitalario")
+    @OneToOne
     private FuncionamientoEquipo funcionamientoEquipo;
     
     /**
      * 
      */
-    @OneToMany(mappedBy = "equipoHospitalario")
+    @OneToMany
     private List<MantenimientoEquipo> mantenimientoEquipo;
     
     /**
      * 
      */
-    @OneToOne(mappedBy = "equipoHospitalario")
+    @OneToOne
     private ManualesEquipo manualesEquipo;
     
     /**
      * 
      */
-    @OneToOne(mappedBy = "equipoHospitalario")
+    @OneToOne
     private PlanosEquipo planosEquipo;
     
     /**
      * 
      */
-    @OneToOne(mappedBy = "equipoHospitalario")
+    @OneToOne
     private RecomendacionesEquipo recomendacionesEquipo;
     
     /**
      * 
      */
-    @OneToOne(mappedBy = "equipoHospitalario")
-    private TipoManteEquipo manteEquipo;
+    @OneToMany(mappedBy="equipoHospitalario")
+    private List<TipoManteEquipo> manteEquipo;
 
     /**
      * Devuelve el valor de id
@@ -414,7 +415,7 @@ public class EquipoHospitalario implements Serializable {
      * Devuelve el valor de manteEquipo
      * @return El valor de manteEquipo
      */
-    public TipoManteEquipo getManteEquipo() {
+    public List<TipoManteEquipo> getManteEquipo() {
         return manteEquipo;
     }
 
@@ -422,7 +423,7 @@ public class EquipoHospitalario implements Serializable {
      * Establece el valor de manteEquipo
      * @param manteEquipo El valor por establecer para manteEquipo
      */
-    public void setManteEquipo(TipoManteEquipo manteEquipo) {
+    public void setManteEquipo(List<TipoManteEquipo> manteEquipo) {
         this.manteEquipo = manteEquipo;
     }
 

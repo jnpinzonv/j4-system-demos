@@ -58,5 +58,13 @@ public class MantenimientoEquipoBean {
         public List< MantenimientoEquipo > getAll() {
                 return entityManager.createNamedQuery("mantenimientoequipo.getAll", MantenimientoEquipo.class).getResultList();
         }
+        
+        /**
+         * Consulta todos los registro de un objeto
+         * @return Lista de objetos 
+         */
+        public List< MantenimientoEquipo > getAllFirmas() {
+                return entityManager.createNamedQuery("mantenimientoequipo.getfirmas", MantenimientoEquipo.class).getResultList();
+        }
 
 }
