@@ -147,6 +147,7 @@ public class EmpresaController implements Serializable {
 	 * @return
 	 */
 	public String reiniciar() {
+	    newObject= new Empresa();
 		busqueda();
 		return ConstantesUtil.ATRAS;
 	}
