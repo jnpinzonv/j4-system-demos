@@ -1,4 +1,4 @@
-package com.j4.reporte;
+package co.com.hammerlab.model;
 
 import java.util.ArrayList;
 import java.util.List;

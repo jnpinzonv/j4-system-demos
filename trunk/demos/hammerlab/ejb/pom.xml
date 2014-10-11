@@ -40,6 +40,19 @@
     </licenses>
 
     <dependencies>
+    
+    
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports</artifactId>
+			<scope>provided</scope>
+			<exclusions>
+				<exclusion>
+					<artifactId>stax-api</artifactId>
+					<groupId>stax</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
 
         <!-- Declare the APIs we depend on and need for compilation. All of 
             them are provided by JBoss AS 7 -->
