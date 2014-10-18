@@ -31,8 +31,18 @@ import javax.persistence.Table;
                 + Constants.replaceVocals1
                 + " s.nombreEquipo"
                 + Constants.replaceVocals2
-                + " like concat(:NOMBREEQUI,'%') and "
-                + Constants.replaceVocals1 + " s.empresa.razonSocial" + Constants.replaceVocals2 + " like concat(:EMPRESA,'%')") })
+                + " like concat('%',:NOMBREEQUI,'%') and "
+                + Constants.replaceVocals1 + " s.empresa.razonSocial" + Constants.replaceVocals2 + " like concat('%',:EMPRESA,'%')"), 
+         @NamedQuery(name = "equipoHospitalario.getAllSearchUbicacion", query = "select s from EquipoHospitalario s where s.ubicacion=:UBICACION and "
+               + Constants.replaceVocals1 + " s.empresa.razonSocial" + Constants.replaceVocals2 + " like concat('%',:EMPRESA,'%')"),
+        @NamedQuery(name = "equipoHospitalario.getAllSearchEquipo", query = "select s from EquipoHospitalario s where "
+                + Constants.replaceVocals1
+                + " s.nombreEquipo"
+                + Constants.replaceVocals2
+                + " like concat('%',:NOMBREEQUI,'%') and "
+                + Constants.replaceVocals1 + " s.empresa.razonSocial" + Constants.replaceVocals2 + " like concat('%',:EMPRESA,'%')"),
+        @NamedQuery(name = "equipoHospitalario.getAllSearchRazon", query = "select s from EquipoHospitalario s where "
+                + Constants.replaceVocals1 + " s.empresa.razonSocial" + Constants.replaceVocals2 + " like concat('%',:EMPRESA,'%')")})
 public class EquipoHospitalario implements Serializable {
 
     /**

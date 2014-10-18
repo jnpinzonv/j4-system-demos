@@ -92,7 +92,7 @@ public class EmpresaController implements Serializable {
      */
 	public void busqueda() {
 	    if(!newObject.getRazonSocial().isEmpty()){
-	        listaEmpresa = empresaBean.getAllName(newObject.getRazonSocial());
+	        listaEmpresa = empresaBean.getAllName(newObject.getRazonSocial().toLowerCase());
 	    }else{
 		listaEmpresa = empresaBean.getAll();
 	    }
@@ -140,6 +140,7 @@ public class EmpresaController implements Serializable {
 	 * @return
 	 */
 	public String cancelar() {
+	    newObject= new Empresa();
 		return ConstantesUtil.ATRAS;
 	}
 
