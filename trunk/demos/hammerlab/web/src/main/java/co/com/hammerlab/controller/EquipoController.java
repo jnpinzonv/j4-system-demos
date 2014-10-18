@@ -3,6 +3,7 @@ package co.com.hammerlab.controller;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -15,11 +16,9 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.export.JRXlsAbstractExporterParameter;
-import net.sf.jasperreports.engine.export.JRXlsExporter;
-import net.sf.jasperreports.engine.export.JRXlsExporterParameter;
 
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.DualListModel;
@@ -226,7 +225,19 @@ public class EquipoController implements Serializable {
     public void busqueda() {
 
         if (!razonSocial.isEmpty() || !newObject.getUbicacion().isEmpty() || !newObject.getNombreEquipo().isEmpty()) {
-            listaEquipos = equipoHospitalarioBean.search(razonSocial, newObject.getUbicacion(), newObject.getNombreEquipo());
+            if (!razonSocial.isEmpty() && newObject.getUbicacion().isEmpty() && newObject.getNombreEquipo().isEmpty()) {
+                listaEquipos = equipoHospitalarioBean.search("equipoHospitalario.getAllSearchRazon", razonSocial.toLowerCase());
+            } else if (!razonSocial.isEmpty() && !newObject.getUbicacion().isEmpty() && newObject.getNombreEquipo().isEmpty()) {
+                listaEquipos = equipoHospitalarioBean.search("equipoHospitalario.getAllSearchUbicacion", razonSocial.toLowerCase(),
+                        newObject.getUbicacion());
+            } else if (!razonSocial.isEmpty() && newObject.getUbicacion().isEmpty() && !newObject.getNombreEquipo().isEmpty()) {
+                listaEquipos = equipoHospitalarioBean.search("equipoHospitalario.getAllSearchEquipo", razonSocial.toLowerCase(),
+                        newObject.getNombreEquipo().toLowerCase());
+            } else {
+                listaEquipos = equipoHospitalarioBean.search("equipoHospitalario.getAllSearch", razonSocial.toLowerCase(), newObject.getUbicacion(),
+                        newObject.getNombreEquipo().toLowerCase());
+            }
+
         } else {
             listaEquipos = equipoHospitalarioBean.getAll();
         }
@@ -448,15 +459,28 @@ public class EquipoController implements Serializable {
      *            Identificador del objeto a eliminar
      * @return Retorna regla de nevagacion
      */
-    public void eliminar(Long idObject) {
+    public String eliminar() {
+
         try {
-            equipoHospitalarioBean.delete(idObject);
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Empresa Eliminada!", "Exito!!"));
+            for (EquipoHospitalario element : selectEquipos) {
+                equipoHospitalarioBean.delete(element.getId());
+            }
+
+            if (selectEquipos.size() > 0) {
+                addMessage(FacesMessage.SEVERITY_INFO, "Los Equipos Hospitalarios han sido eliminados");
+            } else {
+                addMessage(FacesMessage.SEVERITY_INFO, "El Equipo Hospitalario a sido eliminado");
+            }
+            busqueda();
+            selectEquipos = null;
+
         } catch (Exception e) {
             String errorMessage = getRootErrorMessage(e);
             addMessage(FacesMessage.SEVERITY_ERROR, errorMessage);
 
         }
+
+        return "";
     }
 
     /**
@@ -550,8 +574,10 @@ public class EquipoController implements Serializable {
             print = JasperFillManager.fillReport(obtenerPlantilla(), datosAdicionales);
 
             enviarPDF(print);
+            addMessage(FacesMessage.SEVERITY_INFO, "Se genero el informe");
         } catch (Exception e) {
 
+            addMessage(FacesMessage.SEVERITY_ERROR, "Error al generar el informe");
         }
     }
 
@@ -565,18 +591,9 @@ public class EquipoController implements Serializable {
      */
     private void enviarPDF(JasperPrint jasperPrint) throws Exception {
 
-        String fileName = "Nombre del archivo";
+        String fileName = "D://hammerlab//" + new Date().getTime() + ".pdf";
+        JasperExportManager.exportReportToPdfFile(jasperPrint, fileName);
 
-        JRXlsExporter exportador = new JRXlsExporter();
-
-        exportador.setParameter(JRXlsExporterParameter.JASPER_PRINT, jasperPrint);
-        exportador.setParameter(JRXlsExporterParameter.OUTPUT_FILE_NAME, fileName);
-        exportador.setParameter(JRXlsExporterParameter.IGNORE_PAGE_MARGINS, true);
-        exportador.setParameter(JRXlsAbstractExporterParameter.IS_IGNORE_CELL_BORDER, false);
-        exportador.setParameter(JRXlsAbstractExporterParameter.IS_REMOVE_EMPTY_SPACE_BETWEEN_COLUMNS, false);
-
-        exportador.exportReport();
-        // DescargarArchivosWeb.descargarArchivoExcel(fileName);
     }
 
     /**
@@ -588,7 +605,7 @@ public class EquipoController implements Serializable {
         InputStream reportStream = null;
         String ubicacionPlantilla;
 
-        ubicacionPlantilla = "/Biomedico_subreport2.jasper";
+        ubicacionPlantilla = "/recuperacion.jasper";
 
         reportStream = this.getClass().getResourceAsStream(ubicacionPlantilla);
         return reportStream;

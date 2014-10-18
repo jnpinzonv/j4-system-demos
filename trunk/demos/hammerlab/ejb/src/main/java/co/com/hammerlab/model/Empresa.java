@@ -11,6 +11,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Email;
 
@@ -24,7 +25,7 @@ import org.hibernate.validator.constraints.Email;
 @Entity
 @Table(name = "empresa")
 @NamedQueries({ @NamedQuery(name = "empresa.getAll", query = "select s from Empresa s"),
-                @NamedQuery(name = "empresa.getRazonSocial", query = "Select e from Empresa e where " + Constants.replaceVocals1 + " e.razonSocial " + Constants.replaceVocals2 + " like concat(:RAZONSOCIAL,'%') ")})
+                @NamedQuery(name = "empresa.getRazonSocial", query = "Select e from Empresa e where " + Constants.replaceVocals1 + " e.razonSocial " + Constants.replaceVocals2 + " like concat('%',:RAZONSOCIAL,'%') ")})
 public class Empresa implements Serializable {
 
     /**
@@ -44,12 +45,17 @@ public class Empresa implements Serializable {
      */
 
     private String razonSocial="";
+    
+    /**
+     * 
+     */
+    private String nombreCorto;
 
     /**
      * nit
      */
 
-    private Integer nit;
+    private String nit;
 
     /**
      * telefono
@@ -64,7 +70,7 @@ public class Empresa implements Serializable {
     /**
      * correoElectronico
      */
-    @Email
+    @Pattern(regexp="^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$", message="La dirección de correo no es correcta en su estructura")
     private String correoElectronico;
 
     /**
@@ -114,7 +120,7 @@ public class Empresa implements Serializable {
      * Devuelve el valor de nit
      * @return El valor de nit
      */
-    public Integer getNit() {
+    public String getNit() {
         return nit;
     }
 
@@ -122,7 +128,7 @@ public class Empresa implements Serializable {
      * Establece el valor de nit
      * @param nit El valor por establecer para nit
      */
-    public void setNit(Integer nit) {
+    public void setNit(String nit) {
         this.nit = nit;
     }
 
@@ -204,5 +210,23 @@ public class Empresa implements Serializable {
      */
     public void setListaEquipos(List<EquipoHospitalario> listaEquipos) {
         this.listaEquipos = listaEquipos;
-    }    
+    }
+
+    /**
+     * Devuelve el valor de nombreCorto
+     * @return El valor de nombreCorto
+     */
+    public String getNombreCorto() {
+        return nombreCorto;
+    }
+
+    /**
+     * Establece el valor de nombreCorto
+     * @param nombreCorto El valor por establecer para nombreCorto
+     */
+    public void setNombreCorto(String nombreCorto) {
+        this.nombreCorto = nombreCorto;
+    }  
+
+    
 }

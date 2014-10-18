@@ -106,11 +106,23 @@ public class EquipoHospitalarioBean {
      * 
      * @return Lista de objetos
      */
-    public List<EquipoHospitalario> search(String nombreEmpresa, String ubicacion, String nombreEquipo) {
-        Query q = entityManager.createNamedQuery("equipoHospitalario.getAllSearch", EquipoHospitalario.class);
-        q.setParameter("NOMBREEQUI", nombreEquipo);
-        q.setParameter("UBICACION", ubicacion);
-        q.setParameter("EMPRESA", nombreEmpresa);
+    public List<EquipoHospitalario> search(String consulta, String... parametros) {
+        Query q = entityManager.createNamedQuery(consulta, EquipoHospitalario.class);
+        if (parametros.length == 3) {
+            q.setParameter("EMPRESA", parametros[0]);
+            q.setParameter("UBICACION", parametros[1]);
+            q.setParameter("NOMBREEQUI", parametros[2]);
+        } else if (parametros.length == 2) {
+            if (consulta.equals("equipoHospitalario.getAllSearchEquipo")) {
+                q.setParameter("EMPRESA", parametros[0]);
+                q.setParameter("NOMBREEQUI", parametros[1]);
+            } else {
+                q.setParameter("EMPRESA", parametros[0]);
+                q.setParameter("UBICACION", parametros[1]);
+            }
+        } else {
+            q.setParameter("EMPRESA", parametros[0]);
+        }
         return q.getResultList();
     }
 
