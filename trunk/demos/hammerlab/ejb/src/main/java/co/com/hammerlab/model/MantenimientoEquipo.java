@@ -77,6 +77,9 @@ public class MantenimientoEquipo implements Serializable {
     @Enumerated(EnumType.STRING)
     private Estado estadoMantenimiento;
     
+    /**
+     * 
+     */
     private Long numeroHojaFisica;
 
     /**
