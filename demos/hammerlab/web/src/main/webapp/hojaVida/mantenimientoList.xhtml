@@ -71,6 +71,12 @@
 							message="¿Desea Eliminar los registros seleccionados?"
 							icon="ui-icon-alert" />
 					</p:commandButton>
+					
+					
+					<p:commandButton id="CerrarTop" value="Cerrar" immediate="true"
+						ajax="true" ignoreAutoUpdate="true" async="true"
+						disabled="#{mantenimientoController.selectMantenimiento.size()  == 0}"
+						action="#{mantenimientoController.cancelar}" />
 
 					<p:commandButton id="CancelarTop" value="Cancelar" immediate="true"
 						ajax="true" ignoreAutoUpdate="true" async="true"
@@ -96,21 +102,12 @@
 						<h:outputText value="#{_object.fecha}" />
 					</p:column>
 
-					<p:column id="c3" headerText="Dañio Falla">
-						<h:outputText value="#{_object.danioFalla}" />
+					<p:column id="c3" headerText="Estado">
+						<h:outputText value="#{_object.estadoMantenimiento}" />
 					</p:column>
 
-					<p:column id="c4" headerText="Reparaciones">
-						<h:outputText value="#{_object.reparaciones}" />
-					</p:column>
-
-					<p:column id="c5" headerText="Repuestos">
-						<h:outputText value="#{_object.repuestos}" />
-					</p:column>
-
-					<p:column id="c7" headerText="
-						observaciones">
-						<h:outputText value="#{_object.observaciones}" />
+					<p:column id="c4" headerText="Hoja Fisica #">
+						<h:outputText value="#{_object.numeroHojaFisica}" />
 					</p:column>
 
 					<p:column id="c10" headerText="N° Transaccion">
@@ -153,6 +150,11 @@
 							message="¿Desea Eliminar los registros seleccionados?"
 							icon="ui-icon-alert" />
 					</p:commandButton>
+					
+					<p:commandButton id="Cerrar" value="Cerrar" immediate="true"
+						ajax="true" ignoreAutoUpdate="true" async="true"
+						disabled="#{mantenimientoController.selectMantenimiento.size()  == 0}"
+						action="#{mantenimientoController.cancelar}" />
 
 					<p:commandButton id="cancelar" value="Cancelar" immediate="true"
 						ajax="true" ignoreAutoUpdate="true" async="true"

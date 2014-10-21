@@ -58,14 +58,6 @@
 				<!-- p:requiredFields /> -->
 
 				<p:panel id="groupButton" align="right">
-					<p:commandButton id="create" styleClass="" value="Guardar"
-						action="#{mantenimientoController.crear}"
-						rendered="#{!mantenimientoController.editMode}" update="@form"/>
-
-					<p:commandButton id="update" styleClass="" type="complex"
-						value="Guardar" action="#{mantenimientoController.actualizar}"
-						rendered="#{mantenimientoController.editMode}" update="@form"/>
-
 					<p:commandButton id="cancel" styleClass="" value="Cancelar"
 						action="#{mantenimientoController.cancelar}" immediate="true" />
 				</p:panel>

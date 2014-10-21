@@ -18,32 +18,13 @@
 	<ui:define name="content">
 
 		<h:form id="formEmpresas">
-			<p:panel id="panelEmpresas" header="Busqueda">
-
-				<p:inputText id="name" label="Nombre Empresa" title="Nombre Empresa"
-					value="#{firmasController.newObject.idTransaccion}" />
-
-
-				<div style="clear: both" />
-
-				<p:panel id="groupButton" align="right">
-					<p:commandButton id="search" value="Buscar"
-						action="#{firmasController.busqueda}" />
-
-					<p:commandButton id="reset" value="Reiniciar"
-						action="#{firmasController.reiniciar}" immediate="true" />
-				</p:panel>
-
-				<div style="clear: both" />
-			</p:panel>
-
 
 			<p:panel id="panellistaMantenimientos"
 				header="Lista de Mantenimientos">
 
 				<h:panelGroup
 					rendered="#{empty firmasController.listaMantenimiento}">
-					<em>No existen Mantenimientos para este equipo</em>
+					<em>No documentos por firmar</em>
 				</h:panelGroup>
 
 				<p:panel id="groupButtonTop" align="right">

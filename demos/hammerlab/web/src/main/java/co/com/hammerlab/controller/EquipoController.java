@@ -244,6 +244,9 @@ public class EquipoController implements Serializable {
      * 
      */
     public void agregarComentario() {
+        if (newObjectCo.getNombreEquipo() != null) {
+            newObject.setNombreEquipo(newObjectCo.getNombreEquipo());
+        }
         if (newObjectCo.getDireccion() != null) {
             newObject.setDireccion(newObjectCo.getDireccion());
         }

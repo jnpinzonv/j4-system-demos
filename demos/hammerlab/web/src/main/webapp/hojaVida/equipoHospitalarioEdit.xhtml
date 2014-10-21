@@ -37,7 +37,7 @@
 
 
 				<p:panel id="basicalEdit" header="DATOS GENERALES">
-					<h:panelGrid columns="4" columnClasses="titleCell"	>
+					<h:panelGrid columns="4" columnClasses="titleCell">
 
 						<p:outputLabel for="nombreEquipo" value="Nombre del Equipo:" />
 						<p:inputText id="nombreEquipo"
@@ -49,7 +49,8 @@
 							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
 							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
 							<p:ajax event="change"
-								listener="#{equipoController.agregarComentario}" update="nombreEquipo" />
+								listener="#{equipoController.agregarComentario}"
+								update="nombreEquipo" />
 						</p:selectOneMenu>
 						<p:message for="nombreEquipo" />
 
@@ -302,12 +303,11 @@
 					<h:panelGrid columns="4" columnClasses="titleCell">
 
 						<p:outputLabel for="fechaAdquisicion" value="Fecha Adquisición:" />
-						<p:calendar id="fechaAdquisicion"
+						<p:inputText id="fechaAdquisicion"
 							value="#{equipoController.adquisicionEquipo.fechaAdquisicion}"
 							required="true" />
 						<p:selectOneMenu id="console8"
-							value="#{equipoController.adquisicionEquipoCo.fechaAdquisicion }"
-							disabled="true">
+							value="#{equipoController.adquisicionEquipoCo.fechaAdquisicion }">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
 							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
 							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
@@ -319,12 +319,11 @@
 
 
 						<p:outputLabel for="fechaInstalacion" value="Fecha Instalación:" />
-						<p:calendar id="fechaInstalacion"
+						<p:inputText id="fechaInstalacion"
 							value="#{equipoController.adquisicionEquipo.fechaInstalacion }"
 							required="true" />
 						<p:selectOneMenu id="console9"
-							value="#{equipoController.adquisicionEquipoCo.fechaInstalacion}"
-							disabled="true">
+							value="#{equipoController.adquisicionEquipoCo.fechaInstalacion}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
 							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
 							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
@@ -449,10 +448,12 @@
 
 						<p:outputLabel for="clasificacionDecreto"
 							value="Clasificación según riesgo:" />
-						<p:inputText id="clasificacionDecreto"
-							value="#{equipoController.adquisicionEquipo.clasificacionDecreto }"
-							required="true" />
-						<p:selectOneMenu id="console152"
+						<p:selectOneMenu id="clasificacionDecreto" required="true"
+							value="#{equipoController.adquisicionEquipo.clasificacionDecreto}">
+							<f:selectItem itemLabel="Seleccione" itemValue="" />
+							<f:selectItems value="#{equipoController.decretoList}" />
+						</p:selectOneMenu>						
+						<p:selectOneMenu id="console152" disabled="true"
 							value="#{equipoController.adquisicionEquipoCo.clasificacionDecreto}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
 							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
@@ -717,11 +718,10 @@
 					header="RECOMENDACIONES DEL FABRICANTE Y CONDICIONES AMBIENTALES">
 					<h:panelGrid columns="4" columnClasses="titleCell">
 
-						<p:outputLabel for="detalle" value="Detalle:" />
-						<p:pickList id="detalle"
-							value="#{equipoController.recomendacionesList}"
-							var="recomendaciones" itemLabel="#{recomendaciones}"
-							itemValue="#{recomendaciones}" required="true" />
+						<p:outputLabel for="detalle" value="Detalle:" />						
+						<p:inputTextarea rows="6" cols="33" id="detalle"
+							value="#{equipoController.recomendacionesEquipo.detalle}"
+							required="true" />							
 						<p:message for="detalle" />
 
 					</h:panelGrid>
@@ -844,14 +844,14 @@
 					<h:panelGrid columns="4" columnClasses="titleCell">
 
 						<p:outputLabel for="tipoMantenimientoPre" value="Preventivo:" />
-						<p:selectOneMenu id="tipoMantenimientoPre" required="true"
-							value="#{equipoController.tipoManteEquipoCorr.propioStr}">
-							<f:selectItem itemLabel="Seleccione" itemValue="" />
+						<p:selectOneRadio id="tipoMantenimientoPre" required="true"
+							value="#{equipoController.tipoManteEquipoPre.valor}">
 							<f:selectItem itemLabel="Propio" itemValue="Propio" />
 							<f:selectItem itemLabel="Contratado" itemValue="Contratado" />
-						</p:selectOneMenu>
+						</p:selectOneRadio>
+
 						<p:selectOneMenu id="console44" disabled="true"
-							value="#{equipoController.tipoManteEquipoCorrCo.propioStr}">
+							value="#{equipoController.tipoManteEquipoPreCo.valor}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
 							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
 							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
@@ -863,7 +863,7 @@
 
 						<p:outputLabel for="cual" value="¿Cúal?:" />
 						<p:inputTextarea rows="6" cols="33" id="cual"
-							value="#{equipoController.tipoManteEquipoPre.cual }"
+							value="#{equipoController.tipoManteEquipoPre.cual}"
 							required="true" />
 						<p:selectOneMenu id="console47"
 							value="#{equipoController.tipoManteEquipoPreCo.cual}">
@@ -877,14 +877,13 @@
 
 
 						<p:outputLabel for="tipoMantenimientoCor" value="Correctivo:" />
-						<p:selectOneMenu id="tipoMantenimientoCor" required="true"
-							value="#{equipoController.tipoManteEquipoCorr.contratadoStr}">
-							<f:selectItem itemLabel="Seleccione" itemValue="" />
+						<p:selectOneRadio id="tipoMantenimientoCor" required="true"
+							value="#{equipoController.tipoManteEquipoCorr.valor}">
 							<f:selectItem itemLabel="Propio" itemValue="Propio" />
 							<f:selectItem itemLabel="Contratado" itemValue="Contratado" />
-						</p:selectOneMenu>
+						</p:selectOneRadio>
 						<p:selectOneMenu id="console461" disabled="true"
-							value="#{equipoController.tipoManteEquipoCorrCo.contratadoStr}">
+							value="#{equipoController.tipoManteEquipoCorrCo.valor}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
 							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
 							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />

@@ -15,6 +15,7 @@ import javax.inject.Named;
 
 import co.com.hammerlab.ejb.MantenimientoEquipoBean;
 import co.com.hammerlab.model.EquipoHospitalario;
+import co.com.hammerlab.model.Estado;
 import co.com.hammerlab.model.MantenimientoEquipo;
 import co.com.hammerlab.util.ConstantesUtil;
 
@@ -179,6 +180,7 @@ public class MantenimientoController implements Serializable {
     public String crear() {
         try {
             newObject.setEquipoHospitalario(equipoHospitalario);
+            newObject.setEstadoMantenimiento(Estado.ABIERTO);
             mantenimientoEquipoBean.save(newObject);
             newObject.setIdTransaccion(newObject.getId());
             mantenimientoEquipoBean.update(newObject);

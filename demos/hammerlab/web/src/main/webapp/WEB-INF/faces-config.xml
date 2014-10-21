@@ -145,5 +145,13 @@
 			<to-view-id>/hojaVida/mantenimientoList.xhtml</to-view-id>
 		</navigation-case>		
 	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>/hojaVida/mantenimientoView.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>atras</from-outcome>
+			<to-view-id>/hojaVida/mantenimientoList.xhtml</to-view-id>
+		</navigation-case>		
+	</navigation-rule>
 
 </faces-config>
