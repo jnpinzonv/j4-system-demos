@@ -3,7 +3,9 @@ package co.com.hammerlab.model;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -103,61 +105,61 @@ public class EquipoHospitalario implements Serializable {
      */
     private String telefono;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Empresa empresa;
 
     /**
      * 
      */
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private EquipoInfoTecnica infoTecnica;
 
     /**
      * 
      */
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private EstadoEquipo estadoEquipo;
 
     /**
      * 
      */
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private AdquisicionEquipo adquisicionEquipo;
 
     /**
      * 
      */
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private FuncionamientoEquipo funcionamientoEquipo;
 
     /**
      * 
      */
-    @OneToMany
+    @OneToMany(mappedBy = "equipoHospitalario",cascade = CascadeType.ALL)
     private List<MantenimientoEquipo> mantenimientoEquipo;
 
     /**
      * 
      */
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private ManualesEquipo manualesEquipo;
 
     /**
      * 
      */
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private PlanosEquipo planosEquipo;
 
     /**
      * 
      */
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private RecomendacionesEquipo recomendacionesEquipo;
 
     /**
      * 
      */
-    @OneToMany(mappedBy = "equipoHospitalario")
+    @OneToMany(mappedBy = "equipoHospitalario",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     private List<TipoManteEquipo> manteEquipo;
 
     /**

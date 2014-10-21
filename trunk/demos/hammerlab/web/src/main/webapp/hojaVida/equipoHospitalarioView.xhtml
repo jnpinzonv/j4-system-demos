@@ -19,86 +19,75 @@
 
 		<h:form id="empresaEdit">
 			<p:panel id="empresaPanelEdit"
-				header="Detalles de Equipo Hospitalario">				
+				header="Detalles de Equipo Hospitalario">
 
 
 				<p:panel id="basicalEdit" header="DATOS GENERALES">
-					<h:panelGrid columns="4" columnClasses="titleCell"	>
+					<h:panelGrid columns="4" columnClasses="titleCell">
 
 						<p:outputLabel for="nombreEquipo" value="Nombre del Equipo:" />
-						<p:inputText id="nombreEquipo"
-							value="#{equipoController.newObject.nombreEquipo}"
-							required="true" />
-						
+						<p:outputLabel id="nombreEquipo"
+							value="#{equipoController.newObject.nombreEquipo}" />
+
 						<p:outputLabel for="marca" value="Marca:" />
-						<p:inputText id="marca"
-							value="#{equipoController.newObject.marca}" required="true" />
-						
+						<p:outputLabel id="marca"
+							value="#{equipoController.newObject.marca}" />
+
 
 						<p:outputLabel for="modelo" value="Modelo:" />
-						<p:inputText id="modelo"
-							value="#{equipoController.newObject.modelo}" required="true" />
-						
+						<p:outputLabel id="modelo"
+							value="#{equipoController.newObject.modelo}" />
+
 
 
 						<p:outputLabel for="ubicacion" value="Ubicación:" />
-						<p:selectOneMenu id="ubicacion" required="true"
-							value="#{equipoController.newObject.ubicacion}">
-							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItems value="#{equipoController.ubicacionList}" />
-						</p:selectOneMenu>
+						<p:outputLabel id="ubicacion"
+							value="#{equipoController.newObject.ubicacion}" />
+
 						<p:outputLabel for="fabricante" value="Fabricante:" />
-						<p:inputText id="fabricante"
-							value="#{equipoController.newObject.fabricante }" required="true" />
+						<p:outputLabel id="fabricante"
+							value="#{equipoController.newObject.fabricante }" />
 						<p:outputLabel for="representanteCol"
 							value="Representante Colombia:" />
-						<p:inputText id="representanteCol"
-							value="#{equipoController.newObject.representanteCol }"
-							required="true" />
+						<p:outputLabel id="representanteCol"
+							value="#{equipoController.newObject.representanteCol }" />
 						<p:outputLabel for="direccion" value="Dirección:" />
-						<p:inputText id="direccion"
-							value="#{equipoController.newObject.direccion }" required="true" />
+						<p:outputLabel id="direccion"
+							value="#{equipoController.newObject.direccion }" />
 						<p:outputLabel for="telefono" value="Telefono:" />
-						<p:inputText id="telefono"
-							value="#{equipoController.newObject.telefono }" required="true" />
+						<p:outputLabel id="telefono"
+							value="#{equipoController.newObject.telefono }" />
 					</h:panelGrid>
 				</p:panel>
 				<p:panel id="tecnicalEdit" header="INFORMACION TECNICA">
 					<h:panelGrid columns="4" columnClasses="titleCell">
 
 						<p:outputLabel for="voltaje2" value="Voltaje (V):" />
-						<p:inputText id="voltaje2"
-							value="#{equipoController.infoTecnica.voltaje }" required="true" />
+						<p:outputLabel id="voltaje2"
+							value="#{equipoController.infoTecnica.voltaje }" />
 
 						<p:outputLabel for="instalaciones2" value="Instalaciones:" />
-						<p:inputText id="instalaciones2"
-							value="#{equipoController.infoTecnica.instalaciones }"
-							required="true" />
+						<p:outputLabel id="instalaciones2"
+							value="#{equipoController.infoTecnica.instalaciones }" />
 						<p:outputLabel for="potencia" value="Potencia: (Kw)" />
-						<p:inputText id="potencia"
-							value="#{equipoController.infoTecnica.potencia }" required="true" />
+						<p:outputLabel id="potencia"
+							value="#{equipoController.infoTecnica.potencia }" />
 						<p:outputLabel for="frecuencia" value="Frecuencia: (Hz)" />
-						<p:inputText id="frecuencia"
-							value="#{equipoController.infoTecnica.frecuencia }"
-							required="true" />
+						<p:outputLabel id="frecuencia"
+							value="#{equipoController.infoTecnica.frecuencia }" />
 						<p:outputLabel for="capacidadTeorica" value="Capacidad Teórica:" />
-						<p:inputText id="capacidadTeorica"
-							value="#{equipoController.infoTecnica.capacidadTeorica }"
-							required="true" />		
+						<p:outputLabel id="capacidadTeorica"
+							value="#{equipoController.infoTecnica.capacidadTeorica }" />
 						<p:outputLabel for="capacidadPractica" value="Capacidad Practica:" />
-						<p:inputText id="capacidadPractica"
-							value="#{equipoController.infoTecnica.capacidadPractica }"/>						<p:outputLabel for="tecnologia" value="Tecnología:" />
-						<p:selectOneMenu id="tecnologia" required="true"
-							value="#{equipoController.infoTecnica.tecnologia }">
-							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItems value="#{equipoController.tecnologiaList}" />
-						</p:selectOneMenu>
+						<p:outputLabel id="capacidadPractica"
+							value="#{equipoController.infoTecnica.capacidadPractica }" />
+						<p:outputLabel for="tecnologia" value="Tecnología:" />
+						<p:outputLabel id="tecnologia"
+							value="#{equipoController.infoTecnica.tecnologia }" />
 
 						<p:outputLabel for="insumos" value="Insumos:" />
-						<p:inputText id="insumos"
-							value="#{equipoController.infoTecnica.insumos }" required="true" />
-						
-
+						<p:outputLabel id="insumos"
+							value="#{equipoController.infoTecnica.insumos }" />
 					</h:panelGrid>
 				</p:panel>
 
@@ -107,79 +96,66 @@
 					<h:panelGrid columns="4" columnClasses="titleCell">
 
 						<p:outputLabel for="fechaAdquisicion" value="Fecha Adquisición:" />
-						<p:calendar id="fechaAdquisicion"
-							value="#{equipoController.adquisicionEquipo.fechaAdquisicion}"
-							required="true" />
-						
+						<p:outputLabel id="fechaAdquisicion"
+							value="#{equipoController.adquisicionEquipo.fechaAdquisicion}" />
+
 						<p:outputLabel for="fechaInstalacion" value="Fecha Instalación:" />
-						<p:calendar id="fechaInstalacion"
-							value="#{equipoController.adquisicionEquipo.fechaInstalacion }"
-							required="true" />
+						<p:outputLabel id="fechaInstalacion"
+							value="#{equipoController.adquisicionEquipo.fechaInstalacion }" />
 						<p:outputLabel for="aniosOperacion" value="Años Operación:" />
-						<p:inputText id="aniosOperacion"
-							value="#{equipoController.adquisicionEquipo.aniosOperacion }"
-							required="true" />
-						
+						<p:outputLabel id="aniosOperacion"
+							value="#{equipoController.adquisicionEquipo.aniosOperacion }" />
+
 
 						<p:outputLabel for="propiedadEquipo" value="Propiedad del Equipo:" />
-						<p:inputText id="propiedadEquipo"
-							value="#{equipoController.adquisicionEquipo.propiedadEquipo }"
-							required="true" />
-						
+						<p:outputLabel id="propiedadEquipo"
+							value="#{equipoController.adquisicionEquipo.propiedadEquipo }" />
+
 
 
 						<p:outputLabel for="aniosFueraServicio2"
 							value="Años Fuera de Servicio:" />
-						<p:inputText id="aniosFueraServicio2"
-							value="#{equipoController.adquisicionEquipo.aniosFueraServicio }"
-							required="true" />
-						
+						<p:outputLabel id="aniosFueraServicio2"
+							value="#{equipoController.adquisicionEquipo.aniosFueraServicio }" />
+
 
 						<p:outputLabel for="razon" value="Razón:" />
-						<p:inputText id="razon"
-							value="#{equipoController.adquisicionEquipo.razon }"
-							required="true" />
-						
+						<p:outputLabel id="razon"
+							value="#{equipoController.adquisicionEquipo.razon }" />
+
 
 
 						<p:outputLabel for="garantia" value="garantia:" />
-						<p:inputText id="garantia"
-							value="#{equipoController.adquisicionEquipo.garantia }"
-							required="true" />
-						
+						<p:outputLabel id="garantia"
+							value="#{equipoController.adquisicionEquipo.garantia }" />
+
 
 
 						<p:outputLabel for="peridoGarantia" value="Perido Garantia:" />
-						<p:inputText id="peridoGarantia"
-							value="#{equipoController.adquisicionEquipo.peridoGarantia }"
-							required="true" />
-						
+						<p:outputLabel id="peridoGarantia"
+							value="#{equipoController.adquisicionEquipo.peridoGarantia }" />
+
 
 						<p:outputLabel for="cubrimientoGarantia"
 							value="Cubrimiento Garantia:" />
-						<p:inputTextarea rows="6" cols="33" id="cubrimientoGarantia"
-							value="#{equipoController.adquisicionEquipo.cubrimientoGarantia }"
-							required="true" />
-						
+						<p:outputLabel rows="6" cols="33" id="cubrimientoGarantia"
+							value="#{equipoController.adquisicionEquipo.cubrimientoGarantia }" />
+
 
 						<p:outputLabel for="clasificacionDecreto"
 							value="Clasificación según riesgo:" />
-						<p:inputText id="clasificacionDecreto"
-							value="#{equipoController.adquisicionEquipo.clasificacionDecreto }"
-							required="true" />
-						
+						<p:outputLabel id="clasificacionDecreto"
+							value="#{equipoController.adquisicionEquipo.clasificacionDecreto }" />
+
 
 						<p:outputLabel for="calibracionTipo" value="Calibración Tipo:" />
-						<p:inputText id="calibracionTipo"
-							value="#{equipoController.adquisicionEquipo.calibracionTipo }"
-							required="true" />
-						
+						<p:outputLabel id="calibracionTipo"
+							value="#{equipoController.adquisicionEquipo.calibracionTipo }" />
+
 						<p:outputLabel for="calibracionPeriocidad"
 							value="Calibración Periocidad:" />
-						<p:inputText id="calibracionPeriocidad"
-							value="#{equipoController.adquisicionEquipo.calibracionPeriocidad }"
-							required="true" />
-						
+						<p:outputLabel id="calibracionPeriocidad"
+							value="#{equipoController.adquisicionEquipo.calibracionPeriocidad }" />
 
 
 					</h:panelGrid>
@@ -188,41 +164,36 @@
 					<h:panelGrid columns="4" columnClasses="titleCell" cellpadding="5">
 
 						<p:outputLabel for="instalacion_confirmar" value="Instalación:" />
-						<p:selectBooleanButton id="instalacion_confirmar"
+						<p:outputLabel id="instalacion_confirmar"
 							value="#{equipoController.planosEquipo.instalacionConfirmar }"
-							onLabel="SI" offLabel="NO" required="true" />
+							onLabel="SI" offLabel="NO" />
 						<p:outputLabel for="instalacion_ubicacion"
 							value="Ubicación Intalación:" />
-						<p:inputText id="instalacion_ubicacion"
-							value="#{equipoController.planosEquipo.instalacionUbicacion }"
-							required="true" />
-					
+						<p:outputLabel id="instalacion_ubicacion"
+							value="#{equipoController.planosEquipo.instalacionUbicacion }" />
+
 						<p:outputLabel for="partes_confirmar" value="Partes:" />
-						<p:selectBooleanButton id="partes_confirmar"
+						<p:outputLabel id="partes_confirmar"
 							value="#{equipoController.planosEquipo.partesConfirmar }"
-							onLabel="SI" offLabel="NO" required="true" />
-					
+							onLabel="SI" offLabel="NO" />
+
 
 
 						<p:outputLabel for="partes_ubicacion" value="Ubicación Partes:" />
-						<p:inputText id="partes_ubicacion"
-							value="#{equipoController.planosEquipo.partesUbicacion }"
-							required="true" />
-						
+						<p:outputLabel id="partes_ubicacion"
+							value="#{equipoController.planosEquipo.partesUbicacion }" />
+
 
 						<p:outputLabel for="funcionamiento_confirmar2"
 							value="Funcionamiento:" />
-						<p:selectBooleanButton id="funcionamiento_confirmar2"
+						<p:outputLabel id="funcionamiento_confirmar2"
 							value="#{equipoController.planosEquipo.instalacionConfirmar }"
-							onLabel="SI" offLabel="NO" required="true" />
-						
-
+							onLabel="SI" offLabel="NO" />
 
 						<p:outputLabel for="funcionamiento_ubicacion"
 							value="Ubicación Funcionamiento:" />
-						<p:inputText id="funcionamiento_ubicacion"
-							value="#{equipoController.planosEquipo.funcionamientoUbicacion }"
-							required="true" />
+						<p:outputLabel id="funcionamiento_ubicacion"
+							value="#{equipoController.planosEquipo.funcionamientoUbicacion }" />
 					</h:panelGrid>
 				</p:panel>
 
@@ -230,47 +201,44 @@
 					<h:panelGrid columns="4" columnClasses="titleCell">
 
 						<p:outputLabel for="tecnico_confirmar" value="Técnico:" />
-						<p:selectBooleanButton id="tecnico_confirmar"
+						<p:outputLabel id="tecnico_confirmar"
 							value="#{equipoController.manualesEquipo.tecnicoConfirmar }"
-							onLabel="SI" offLabel="NO" required="true" />
-						
+							onLabel="SI" offLabel="NO" />
+
 
 						<p:outputLabel for="tecnico_ubicacion" value="Ubicacion Técnico:" />
-						<p:inputText id="tecnico_ubicacion"
-							value="#{equipoController.manualesEquipo.tecnicoUbicacion }"
-							required="true" />
-					
+						<p:outputLabel id="tecnico_ubicacion"
+							value="#{equipoController.manualesEquipo.tecnicoUbicacion }" />
+
 
 
 						<p:outputLabel for="servicio_confirmar" value="De Servicio:" />
-						<p:selectBooleanButton id="servicio_confirmar"
+						<p:outputLabel id="servicio_confirmar"
 							value="#{equipoController.manualesEquipo.servicioConfirmar }"
-							onLabel="SI" offLabel="NO" required="true" />
-					
-					
+							onLabel="SI" offLabel="NO" />
+
+
 
 
 						<p:outputLabel for="servicio_ubicacion"
 							value="Ubicación Servicio:" />
-						<p:inputText id="servicio_ubicacion"
-							value="#{equipoController.manualesEquipo.servicioUbicacion }"
-							required="true" />
-						
+						<p:outputLabel id="servicio_ubicacion"
+							value="#{equipoController.manualesEquipo.servicioUbicacion }" />
+
 
 
 						<p:outputLabel for="usuario_confirmar" value="De Usuario:" />
-						<p:selectBooleanButton id="usuario_confirmar"
+						<p:outputLabel id="usuario_confirmar"
 							value="#{equipoController.manualesEquipo.usuarioConfirmar }"
-							onLabel="SI" offLabel="NO" required="true" />
-						
+							onLabel="SI" offLabel="NO" />
+
 
 
 
 						<p:outputLabel for="usuario_ubicacion" value="Ubicación Usuario:" />
-						<p:inputText id="usuario_ubicacion"
-							value="#{equipoController.manualesEquipo.usuarioUbicacion }"
-							required="true" />
-						
+						<p:outputLabel id="usuario_ubicacion"
+							value="#{equipoController.manualesEquipo.usuarioUbicacion }" />
+
 
 
 					</h:panelGrid>
@@ -282,11 +250,8 @@
 					<h:panelGrid columns="4" columnClasses="titleCell">
 
 						<p:outputLabel for="detalle" value="Detalle:" />
-						<p:pickList id="detalle"
-							value="#{equipoController.recomendacionesList}"
-							var="recomendaciones" itemLabel="#{recomendaciones}"
-							itemValue="#{recomendaciones}" required="true" />
-						<p:message for="detalle" />
+						<p:outputLabel rows="6" cols="33" id="detalle"
+							value="#{equipoController.recomendacionesEquipo.detalle}" />
 
 					</h:panelGrid>
 
@@ -296,21 +261,11 @@
 					<h:panelGrid columns="4" columnClasses="titleCell">
 
 						<p:outputLabel for="estado_confirmar" value="Estado:" />
-						<p:selectOneRadio id="estado_confirmar" required="true"
-							value="#{equipoController.estadoEquipo.estadoConfirmar }">
-							<f:selectItem itemLabel="Bueno" itemValue="Bueno" />
-							<f:selectItem itemLabel="Regular" itemValue="Regular" />
-							<f:selectItem itemLabel="Malo" itemValue="Malo" />
-						</p:selectOneRadio>
-						
-
-
+						<p:outputLabel id="estado_confirmar"
+							value="#{equipoController.estadoEquipo.estadoConfirmar }" />
 						<p:outputLabel for="causa2" value="Causas:" />
-						<p:inputTextarea rows="6" cols="33" id="causa2"
-							value="#{equipoController.estadoEquipo.causa }" required="true" />
-						
-						
-
+						<p:outputLabel rows="6" cols="33" id="causa2"
+							value="#{equipoController.estadoEquipo.causa }" />
 
 					</h:panelGrid>
 				</p:panel>
@@ -319,30 +274,24 @@
 
 						<p:outputLabel for="funcionamiento_confirmar"
 							value="Funcionamiento:" />
-						<p:selectOneRadio id="funcionamiento_confirmar" required="true"
-							value="#{equipoController.funcionamientoEquipo.funcionamientoConfirmar }">
-							<f:selectItem itemLabel="Bueno" itemValue="Bueno" />
-							<f:selectItem itemLabel="Regular" itemValue="Regular" />
-							<f:selectItem itemLabel="Malo" itemValue="Malo" />
-						</p:selectOneRadio>
-						
+						<p:outputLabel id="funcionamiento_confirmar"
+							value="#{equipoController.funcionamientoEquipo.funcionamientoConfirmar }" />
+
 
 						<p:outputLabel for="aniosFueraServicio"
 							value="Años Fuera Servicio:" />
-						<p:inputText id="aniosFueraServicio"
-							value="#{equipoController.funcionamientoEquipo.anioFueraServicio }"
-							required="true" />
+						<p:outputLabel id="aniosFueraServicio"
+							value="#{equipoController.funcionamientoEquipo.anioFueraServicio }" />
 
 						<p:outputLabel for="causa" value="Causas:" />
-						<p:inputTextarea rows="6" cols="33" id="causa"
-							value="#{equipoController.funcionamientoEquipo.causa }"
-							required="true" />
-					
+						<p:outputLabel rows="6" cols="33" id="causa"
+							value="#{equipoController.funcionamientoEquipo.causa }" />
+
 						<p:outputLabel for="fueraServicio" value="Fuera Servicio:" />
-						<p:selectBooleanButton id="fueraServicio"
+						<p:outputLabel id="fueraServicio"
 							value="#{equipoController.funcionamientoEquipo.fueraServicio }"
-							onLabel="SI" offLabel="NO" required="true" />
-						
+							onLabel="SI" offLabel="NO" />
+
 					</h:panelGrid>
 
 				</p:panel>
@@ -352,52 +301,23 @@
 					<h:panelGrid columns="4" columnClasses="titleCell">
 
 						<p:outputLabel for="tipoMantenimientoPre" value="Preventivo:" />
-						<p:selectOneMenu id="tipoMantenimientoPre" required="true"
-							value="#{equipoController.tipoManteEquipoCorr.propioStr}">
-							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItem itemLabel="Propio" itemValue="Propio" />
-							<f:selectItem itemLabel="Contratado" itemValue="Contratado" />
-						</p:selectOneMenu>
-					
+						<p:outputLabel id="tipoMantenimientoPre"
+							value="#{equipoController.tipoManteEquipoCorr.valor}" />
+
 
 						<p:outputLabel for="cual" value="¿Cúal?:" />
-						<p:inputTextarea rows="6" cols="33" id="cual"
-							value="#{equipoController.tipoManteEquipoPre.cual }"
-							required="true" />
-						
+						<p:outputLabel rows="6" cols="33" id="cual"
+							value="#{equipoController.tipoManteEquipoPre.cual }" />
+
 
 						<p:outputLabel for="tipoMantenimientoCor" value="Correctivo:" />
-						<p:selectOneMenu id="tipoMantenimientoCor" required="true"
-							value="#{equipoController.tipoManteEquipoCorr.contratadoStr}">
-							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItem itemLabel="Propio" itemValue="Propio" />
-							<f:selectItem itemLabel="Contratado" itemValue="Contratado" />
-						</p:selectOneMenu>
-						<p:selectOneMenu id="console461" disabled="true"
-							value="#{equipoController.tipoManteEquipoCorrCo.contratadoStr}">
-							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
-							<p:ajax event="change"
-								listener="#{equipoController.agregarComentario}"
-								update="tipoMantenimientoCor" />
-						</p:selectOneMenu>
-						<p:message for="tipoMantenimientoCor" />
-
+						<p:outputLabel id="tipoMantenimientoCor"
+							value="#{equipoController.tipoManteEquipoCorr.valor}" />
 
 						<p:outputLabel for="cual1" value="¿Cúal?:" />
-						<p:inputTextarea rows="6" cols="33" id="cual1"
-							value="#{equipoController.tipoManteEquipoCorr.cual }"
-							required="true" />
-						<p:selectOneMenu id="console471"
-							value="#{equipoController.tipoManteEquipoCorrCo.cual}">
-							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
-							<p:ajax event="change"
-								listener="#{equipoController.agregarComentario}" update="cual1" />
-						</p:selectOneMenu>
-						<p:message for="cual1" />
+						<p:outputLabel rows="6" cols="33" id="cual1"
+							value="#{equipoController.tipoManteEquipoCorr.cual }" />
+
 
 					</h:panelGrid>
 				</p:panel>
@@ -444,25 +364,10 @@
 							<h:outputText value="#{_object.sitioWeb}" />
 						</p:column>
 					</p:dataTable>
-
-					<p:panel id="empreTabButton" align="right">
-						<p:commandButton id="selectEmpresa" action="empresaSelecction"
-							update="@form"
-							value="#{empresaController.refer != null ?  'Cambiar Empresa' : 'Seleccionar'}" />
-					</p:panel>
-
 				</p:tab>
 			</p:tabView>
 
 			<p:panel id="groupButton" align="right">
-				<p:commandButton id="create" styleClass="" value="Guardar"
-					action="#{equipoController.crear}"
-					rendered="#{!equipoController.editMode}" update="@form" />
-
-				<p:commandButton id="update" styleClass="" value="Guardar"
-					action="#{equipoController.actualizar}"
-					rendered="#{equipoController.editMode}" update="@form" />
-
 				<p:commandButton id="cancel" styleClass="" value="Cancelar"
 					action="#{equipoController.cancelar}" immediate="true" />
 			</p:panel>

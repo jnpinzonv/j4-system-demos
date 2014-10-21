@@ -1,0 +1,79 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/default.xhtml">
+
+	<ui:define name="content">
+
+		<h:form id="empresaEdit">
+			<p:panel id="empresaPanelEdit"
+				header="#{mantenimientoController.editMode ? 'Actualizar Empresa' : 'Crear Empresa'}">
+
+				<h:panelGrid columns="2" columnClasses="titleCell">
+
+					<p:outputLabel for="fecha" value="Fecha:" />
+					<p:outputLabel id="fecha"
+						value="#{mantenimientoController.newObject.fecha}" required="true"/>
+
+					<p:outputLabel for="danioFalla" value="Daño, Falla o Averias:" />
+					<p:outputLabel rows="6" cols="33" id="danioFalla"
+						value="#{mantenimientoController.newObject.danioFalla }" required="true" />
+
+					<p:outputLabel for="reparaciones"
+						value="Reparaciones o Procedimientos:" />
+					<p:outputLabel rows="6" cols="33" id="reparaciones"
+						value="#{mantenimientoController.newObject.reparaciones }" required="true" />
+
+					<p:outputLabel for="repuestos" value="Repuestos Básicos:" />
+					<p:outputLabel rows="6" cols="33" id="repuestos"
+						value="#{mantenimientoController.newObject.repuestos }" required="true"/>
+
+					<p:outputLabel for="observaciones" value="Observaciones:" />
+					<p:outputLabel rows="6" cols="33" id="observaciones"
+						value="#{mantenimientoController.newObject.observaciones }" required="true"/>
+					
+
+					<p:outputLabel 
+						value="Firma Aprobación Tecnico:" />
+					<p:fileUpload
+						fileUploadListener="#{equipoController.handleFileUpload}"
+						mode="advanced" dragDropSupport="true" sizeLimit="100000"
+						allowTypes="/(\.|\/)(gif|jpe?g|png|jpg)$/" />
+
+					<p:outputLabel 
+						value="Firma Aprobación de Institución:" />
+					<p:fileUpload
+						fileUploadListener="#{equipoController.handleFileUpload}"
+						mode="advanced" dragDropSupport="true" sizeLimit="100000"
+						allowTypes="/(\.|\/)(gif|jpe?g|png|jpg)$/" />
+				</h:panelGrid>
+
+				<div style="clear: both" />
+
+				<!-- p:requiredFields /> -->
+
+				<p:panel id="groupButton" align="right">
+					<p:commandButton id="create" styleClass="" value="Guardar"
+						action="#{mantenimientoController.crear}"
+						rendered="#{!mantenimientoController.editMode}" update="@form"/>
+
+					<p:commandButton id="update" styleClass="" type="complex"
+						value="Guardar" action="#{mantenimientoController.actualizar}"
+						rendered="#{mantenimientoController.editMode}" update="@form"/>
+
+					<p:commandButton id="cancel" styleClass="" value="Cancelar"
+						action="#{mantenimientoController.cancelar}" immediate="true" />
+				</p:panel>
+
+				<div style="clear: both" />
+
+			</p:panel>
+		</h:form>
+
+	</ui:define>
+</ui:composition>

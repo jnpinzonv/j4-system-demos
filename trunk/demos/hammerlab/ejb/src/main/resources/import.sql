@@ -17,9 +17,6 @@
 
 -- You can use this file to load seed data into the database using SQL statements
 
-insert into empresa(id,razonSocial,nit,telefono,direccion,correoElectronico,sitioWeb) values(1,'HammerLab',870317945,'3123419478','Cra 6 #4 14','jnpinzonv@hotmail.com','www.hammerlab.com.co');
-
-
 insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(1,'ubicacion1','Urgencias','UBICACION','Ubicacion de equipos medicos');
 insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(2,'ubicacion2','Sala de Partos','UBICACION','Ubicacion de equipos medicos');
 insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(3,'ubicacion3','Sala de Cirujia','UBICACION','Ubicacion de equipos medicos');
@@ -39,7 +36,8 @@ insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) 
 insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(17,'ubicacion17','Consultorio Medico 7','UBICACION','Ubicacion de equipos medicos');
 insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(18,'ubicacion18','Consultorio Medico 8','UBICACION','Ubicacion de equipos medicos');
 insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(19,'ubicacion19','Consultorio Medico 9','UBICACION','Ubicacion de equipos medicos');
-insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(20,'ubicacion20','Consultorio Medico 10','UBICACION','Ubicacion de equipos medicos');
+insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(20,'ubicacion20','No Registra','UBICACION','Ubicacion de equipos medicos');
+insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(201,'ubicacion21','NO Aplica','UBICACION','Ubicacion de equipos medicos');
 insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(21,'tecnologia1','Electrónica','TECNOLOGIA','Tecnologia de equipos medicos');
 insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(22,'tecnologia2','Electricidad','TECNOLOGIA','Tecnologia de equipos medicos');
 insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(23,'tecnologia3','Hidraulica','TECNOLOGIA','Tecnologia de equipos medicos');

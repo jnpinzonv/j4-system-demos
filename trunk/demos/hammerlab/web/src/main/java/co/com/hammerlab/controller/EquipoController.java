@@ -21,7 +21,6 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 
 import org.primefaces.event.FileUploadEvent;
-import org.primefaces.model.DualListModel;
 
 import co.com.hammerlab.ejb.EquipoHospitalarioBean;
 import co.com.hammerlab.ejb.ParametrosBean;
@@ -37,6 +36,7 @@ import co.com.hammerlab.model.ParametrosGenerales;
 import co.com.hammerlab.model.PlanosEquipo;
 import co.com.hammerlab.model.RecomendacionesEquipo;
 import co.com.hammerlab.model.TipoManteEquipo;
+import co.com.hammerlab.model.TipoMantenimiento;
 import co.com.hammerlab.util.ConstantesUtil;
 
 @Named("equipoController")
@@ -127,7 +127,7 @@ public class EquipoController implements Serializable {
 
     private List<String> tecnologiaList;
 
-    private DualListModel<String> recomendacionesList = new DualListModel<String>();
+    private List<String> decretoList;
 
     private String accion;
 
@@ -147,15 +147,7 @@ public class EquipoController implements Serializable {
 	 */
     private List<Empresa> listaEmpresa;
 
-    /**
-	 * 
-	 */
-    private ArrayList<String> target = new ArrayList<String>();
-
-    /**
-     * 
-     */
-    private ArrayList<String> source = new ArrayList<String>();
+   
 
     /**
      * Inicializa el bakend bean de control
@@ -180,21 +172,25 @@ public class EquipoController implements Serializable {
         newObject = new EquipoHospitalario();
         ubicacionList = new TreeMap<String, String>();
         tecnologiaList = new ArrayList<String>();
+        decretoList= new ArrayList<String>();
         for (ParametrosGenerales element : parametrosBean.getAllCategoria(CategoriasParametros.UBICACION)) {
             ubicacionList.put(element.getPropiedad(), element.getPropiedad());
         }
         for (ParametrosGenerales elemen : parametrosBean.getAllCategoria(CategoriasParametros.TECNOLOGIA)) {
             tecnologiaList.add(elemen.getPropiedad());
         }
-
-        source = new ArrayList<String>();
-
-        for (ParametrosGenerales element : parametrosBean.getAllCategoria(CategoriasParametros.RECOMENDACIONES)) {
-            source.add(element.getPropiedad());
+        
+        for (ParametrosGenerales elemen : parametrosBean.getAllCategoria(CategoriasParametros.DECRETO_4725)) {
+            decretoList.add(elemen.getPropiedad());
         }
 
-        recomendacionesList.setSource(source);
-        recomendacionesList.setTarget(target);
+        StringBuilder var = new StringBuilder("");
+        for (ParametrosGenerales element : parametrosBean.getAllCategoria(CategoriasParametros.RECOMENDACIONES)) {
+            var.append(element.getPropiedad());
+            var.append(" , ");
+            var.append("\n");
+        }
+
         adquisicionEquipo = new AdquisicionEquipo();
         infoTecnica = new EquipoInfoTecnica();
         estadoEquipo = new EstadoEquipo();
@@ -202,6 +198,7 @@ public class EquipoController implements Serializable {
         planosEquipo = new PlanosEquipo();
         manualesEquipo = new ManualesEquipo();
         recomendacionesEquipo = new RecomendacionesEquipo();
+        recomendacionesEquipo.setDetalle(var.toString());
         tipoManteEquipoPre = new TipoManteEquipo();
         tipoManteEquipoCorr = new TipoManteEquipo();
 
@@ -231,11 +228,11 @@ public class EquipoController implements Serializable {
                 listaEquipos = equipoHospitalarioBean.search("equipoHospitalario.getAllSearchUbicacion", razonSocial.toLowerCase(),
                         newObject.getUbicacion());
             } else if (!razonSocial.isEmpty() && newObject.getUbicacion().isEmpty() && !newObject.getNombreEquipo().isEmpty()) {
-                listaEquipos = equipoHospitalarioBean.search("equipoHospitalario.getAllSearchEquipo", razonSocial.toLowerCase(),
-                        newObject.getNombreEquipo().toLowerCase());
+                listaEquipos = equipoHospitalarioBean.search("equipoHospitalario.getAllSearchEquipo", razonSocial.toLowerCase(), newObject
+                        .getNombreEquipo().toLowerCase());
             } else {
-                listaEquipos = equipoHospitalarioBean.search("equipoHospitalario.getAllSearch", razonSocial.toLowerCase(), newObject.getUbicacion(),
-                        newObject.getNombreEquipo().toLowerCase());
+                listaEquipos = equipoHospitalarioBean.search("equipoHospitalario.getAllSearch", razonSocial.toLowerCase(),
+                        newObject.getUbicacion(), newObject.getNombreEquipo().toLowerCase());
             }
 
         } else {
@@ -306,6 +303,14 @@ public class EquipoController implements Serializable {
 
         if (infoTecnicaCo.getInsumos() != null) {
             infoTecnica.setInsumos(infoTecnicaCo.getInsumos());
+        }
+
+        if (adquisicionEquipoCo.getFechaAdquisicion() != null) {
+            adquisicionEquipo.setFechaAdquisicion(adquisicionEquipoCo.getFechaAdquisicion());
+        }
+
+        if (adquisicionEquipoCo.getFechaInstalacion() != null) {
+            adquisicionEquipo.setFechaInstalacion(adquisicionEquipoCo.getFechaInstalacion());
         }
 
         if (adquisicionEquipoCo.getAniosOperacion() != null) {
@@ -395,6 +400,17 @@ public class EquipoController implements Serializable {
     public String initEditarModo() {
         editMode = Boolean.TRUE;
 
+        cargarInformacion();
+
+        return ConstantesUtil.CREAR_ACTU;
+    }
+
+    public String initVistaModo() {
+        cargarInformacion();
+        return ConstantesUtil.VER;
+    }
+
+    private void cargarInformacion() {
         newObject = equipoHospitalarioBean.getAllRelations(selectEquipos.get(0).getId());
         adquisicionEquipo = newObject.getAdquisicionEquipo();
         infoTecnica = newObject.getInfoTecnica();
@@ -403,15 +419,29 @@ public class EquipoController implements Serializable {
         planosEquipo = newObject.getPlanosEquipo();
         manualesEquipo = newObject.getManualesEquipo();
         recomendacionesEquipo = newObject.getRecomendacionesEquipo();
-        tipoManteEquipoPre = new TipoManteEquipo();
-        tipoManteEquipoCorr = new TipoManteEquipo();
+        for (TipoManteEquipo element : newObject.getManteEquipo()) {
+            if (element.getTipoMantenimiento().equals(TipoMantenimiento.PREVENTIVO)) {
+                tipoManteEquipoPre = element;
+                // Propio es TRUE
+                if (tipoManteEquipoPre.getTipoContrato()==Boolean.TRUE) {
+                    tipoManteEquipoPre.setValor("Propio");
+                } else {
+                    tipoManteEquipoPre.setValor("Contratado");
+                }
 
-        return ConstantesUtil.CREAR_ACTU;
-    }
-
-    public String initVistaModo() {
-        newObject = equipoHospitalarioBean.getByID(selectEquipos.get(0).getId());
-        return ConstantesUtil.VER;
+            } else {
+                tipoManteEquipoCorr = element;
+                // Propio es TRUE
+                if (tipoManteEquipoCorr.getTipoContrato()==Boolean.TRUE) {
+                    tipoManteEquipoCorr.setValor("Propio");
+                } else {
+                    tipoManteEquipoCorr.setValor("Contratado");
+                }
+            }
+        }
+        
+        listaEmpresa=new ArrayList<Empresa>();
+        listaEmpresa.add(newObject.getEmpresa());
     }
 
     public String initCrearModo() {
@@ -419,6 +449,8 @@ public class EquipoController implements Serializable {
     }
 
     public String cancelar() {
+        inicializarVariables();
+        selectEquipos=null;
         return ConstantesUtil.ATRAS;
     }
 
@@ -441,9 +473,32 @@ public class EquipoController implements Serializable {
      */
     public String actualizar() {
         try {
-            equipoHospitalarioBean.update(newObject);
+            equipoHospitalarioBean.update(recomendacionesEquipo, manualesEquipo, adquisicionEquipo, estadoEquipo, infoTecnica,
+                    funcionamientoEquipo, planosEquipo);           
+            newObject.setEmpresa(listaEmpresa.get(0));
+            equipoHospitalarioBean.update(newObject);            
+            tipoManteEquipoCorr.setTipoMantenimiento(TipoMantenimiento.CORRECTIVO);
+            // Propio es TRUE
+            if (tipoManteEquipoCorr.getValor().equals("Propio")) {
+                tipoManteEquipoCorr.setTipoContrato(Boolean.TRUE);
+            } else {
+                tipoManteEquipoCorr.setTipoContrato(Boolean.FALSE);
+            }           
+            tipoManteEquipoPre.setTipoMantenimiento(TipoMantenimiento.PREVENTIVO);
+            // Propio es TRUE
+            if (tipoManteEquipoPre.getValor().equals("Propio")) {
+                tipoManteEquipoPre.setTipoContrato(Boolean.TRUE);
+            } else {
+                tipoManteEquipoPre.setTipoContrato(Boolean.FALSE);
+            }
+
+            equipoHospitalarioBean.update(tipoManteEquipoCorr, tipoManteEquipoPre);
             editMode = Boolean.FALSE;
-            initNewObject();
+            inicializarVariables();
+            busqueda();
+            selectEquipos=null;
+            razonSocial="";
+            addMessage(FacesMessage.SEVERITY_INFO, "Se actualizo la información del equipo");
         } catch (Exception e) {
             String errorMessage = getRootErrorMessage(e);
             addMessage(FacesMessage.SEVERITY_ERROR, errorMessage);
@@ -466,7 +521,7 @@ public class EquipoController implements Serializable {
                 equipoHospitalarioBean.delete(element.getId());
             }
 
-            if (selectEquipos.size() > 0) {
+            if (selectEquipos.size() > 1) {
                 addMessage(FacesMessage.SEVERITY_INFO, "Los Equipos Hospitalarios han sido eliminados");
             } else {
                 addMessage(FacesMessage.SEVERITY_INFO, "El Equipo Hospitalario a sido eliminado");
@@ -492,14 +547,9 @@ public class EquipoController implements Serializable {
      */
     public String crear() {
         try {
-            StringBuilder nuevo = new StringBuilder();
-            for (String recomendaciones : target) {
-                nuevo.append(recomendaciones);
-                nuevo.append(",");
-            }
-
-            equipoHospitalarioBean.save(tipoManteEquipoCorr, tipoManteEquipoPre, recomendacionesEquipo, manualesEquipo, adquisicionEquipo,
-                    estadoEquipo, infoTecnica, funcionamientoEquipo, planosEquipo);
+           
+            equipoHospitalarioBean.save(recomendacionesEquipo, manualesEquipo, adquisicionEquipo, estadoEquipo, infoTecnica,
+                    funcionamientoEquipo, planosEquipo,newObject);
             newObject.setRecomendacionesEquipo(recomendacionesEquipo);
             newObject.setManualesEquipo(manualesEquipo);
             newObject.setAdquisicionEquipo(adquisicionEquipo);
@@ -508,17 +558,40 @@ public class EquipoController implements Serializable {
             newObject.setFuncionamientoEquipo(funcionamientoEquipo);
             newObject.setPlanosEquipo(planosEquipo);
             newObject.setEmpresa(listaEmpresa.get(0));
-            equipoHospitalarioBean.save(newObject);
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Exito!", "Se guardo un registro de una Empresa"));
+            equipoHospitalarioBean.update(newObject);
+
+            tipoManteEquipoCorr.setEquipoHospitalario(newObject);
+            tipoManteEquipoCorr.setTipoMantenimiento(TipoMantenimiento.CORRECTIVO);
+            // Propio es TRUE
+            if (tipoManteEquipoCorr.getValor().equals("Propio")) {
+                tipoManteEquipoCorr.setTipoContrato(Boolean.TRUE);
+            } else {
+                tipoManteEquipoCorr.setTipoContrato(Boolean.FALSE);
+            }
+
+            tipoManteEquipoPre.setEquipoHospitalario(newObject);
+            tipoManteEquipoPre.setTipoMantenimiento(TipoMantenimiento.PREVENTIVO);
+            // Propio es TRUE
+            if (tipoManteEquipoPre.getValor().equals("Propio")) {
+                tipoManteEquipoPre.setTipoContrato(Boolean.TRUE);
+            } else {
+                tipoManteEquipoPre.setTipoContrato(Boolean.FALSE);
+            }
+
+            equipoHospitalarioBean.save(tipoManteEquipoCorr, tipoManteEquipoPre);
+
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Exito!",
+                    "Se guardo un registro de una Equipo hospitalario"));
             inicializarVariables();
             busqueda();
+            razonSocial="";
             return ConstantesUtil.ATRAS;
         } catch (Exception e) {
             String errorMessage = getRootErrorMessage(e);
             addMessage(FacesMessage.SEVERITY_ERROR, errorMessage);
-
+            return "";
         }
-        return ConstantesUtil.ATRAS;
+       
     }
 
     public void handleFileUpload(FileUploadEvent event) {
@@ -923,25 +996,6 @@ public class EquipoController implements Serializable {
     }
 
     /**
-     * Devuelve el valor de recomendacionesList
-     * 
-     * @return El valor de recomendacionesList
-     */
-    public DualListModel<String> getRecomendacionesList() {
-        return recomendacionesList;
-    }
-
-    /**
-     * Establece el valor de recomendacionesList
-     * 
-     * @param recomendacionesList
-     *            El valor por establecer para recomendacionesList
-     */
-    public void setRecomendacionesList(DualListModel<String> recomendacionesList) {
-        this.recomendacionesList = recomendacionesList;
-    }
-
-    /**
      * Devuelve el valor de accion
      * 
      * @return El valor de accion
@@ -1216,4 +1270,21 @@ public class EquipoController implements Serializable {
         this.razonSocial = razonSocial;
     }
 
+    /**
+     * Devuelve el valor de decretoList
+     * @return El valor de decretoList
+     */
+    public List<String> getDecretoList() {
+        return decretoList;
+    }
+
+    /**
+     * Establece el valor de decretoList
+     * @param decretoList El valor por establecer para decretoList
+     */
+    public void setDecretoList(List<String> decretoList) {
+        this.decretoList = decretoList;
+    }
+
+    
 }

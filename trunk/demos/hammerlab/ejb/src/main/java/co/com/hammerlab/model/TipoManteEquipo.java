@@ -3,6 +3,8 @@ package co.com.hammerlab.model;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -42,20 +44,15 @@ public class TipoManteEquipo implements Serializable {
      * tipo_mantenimiento
      */
 
-    private String tipoMantenimiento;
+    @Enumerated(EnumType.STRING)
+    private TipoMantenimiento tipoMantenimiento;
 
     /**
      * propio
      */
 
-    private Boolean propio;
-
-    /**
-     * contratado
-     */
-
-    private Boolean contratado;
-
+    private Boolean tipoContrato;
+    
     /**
      * cual
      */
@@ -64,14 +61,9 @@ public class TipoManteEquipo implements Serializable {
     /**
      * 
      */
-    @Transient
-    private transient String contratadoStr;
+    private String valor;
     
-    /**
-     * 
-     */
-    @Transient
-    private transient String propioStr;
+   
 
     /**
      * Realacion con equiopo principal
@@ -116,7 +108,7 @@ public class TipoManteEquipo implements Serializable {
      * Devuelve el valor de tipoMantenimiento
      * @return El valor de tipoMantenimiento
      */
-    public String getTipoMantenimiento() {
+    public TipoMantenimiento getTipoMantenimiento() {
         return tipoMantenimiento;
     }
 
@@ -124,40 +116,24 @@ public class TipoManteEquipo implements Serializable {
      * Establece el valor de tipoMantenimiento
      * @param tipoMantenimiento El valor por establecer para tipoMantenimiento
      */
-    public void setTipoMantenimiento(String tipoMantenimiento) {
+    public void setTipoMantenimiento(TipoMantenimiento tipoMantenimiento) {
         this.tipoMantenimiento = tipoMantenimiento;
     }
 
     /**
-     * Devuelve el valor de propio
-     * @return El valor de propio
+     * Devuelve el valor de tipoContrato
+     * @return El valor de tipoContrato
      */
-    public Boolean getPropio() {
-        return propio;
+    public Boolean getTipoContrato() {
+        return tipoContrato;
     }
 
     /**
-     * Establece el valor de propio
-     * @param propio El valor por establecer para propio
+     * Establece el valor de tipoContrato
+     * @param tipoContrato El valor por establecer para tipoContrato
      */
-    public void setPropio(Boolean propio) {
-        this.propio = propio;
-    }
-
-    /**
-     * Devuelve el valor de contratado
-     * @return El valor de contratado
-     */
-    public Boolean getContratado() {
-        return contratado;
-    }
-
-    /**
-     * Establece el valor de contratado
-     * @param contratado El valor por establecer para contratado
-     */
-    public void setContratado(Boolean contratado) {
-        this.contratado = contratado;
+    public void setTipoContrato(Boolean tipoContrato) {
+        this.tipoContrato = tipoContrato;
     }
 
     /**
@@ -177,36 +153,22 @@ public class TipoManteEquipo implements Serializable {
     }
 
     /**
-     * Devuelve el valor de contratadoStr
-     * @return El valor de contratadoStr
+     * Devuelve el valor de valor
+     * @return El valor de valor
      */
-    public String getContratadoStr() {
-        return contratadoStr;
+    public String getValor() {
+        return valor;
     }
 
     /**
-     * Establece el valor de contratadoStr
-     * @param contratadoStr El valor por establecer para contratadoStr
+     * Establece el valor de valor
+     * @param valor El valor por establecer para valor
      */
-    public void setContratadoStr(String contratadoStr) {
-        this.contratadoStr = contratadoStr;
+    public void setValor(String valor) {
+        this.valor = valor;
     }
 
-    /**
-     * Devuelve el valor de propioStr
-     * @return El valor de propioStr
-     */
-    public String getPropioStr() {
-        return propioStr;
-    }
-
-    /**
-     * Establece el valor de propioStr
-     * @param propioStr El valor por establecer para propioStr
-     */
-    public void setPropioStr(String propioStr) {
-        this.propioStr = propioStr;
-    }
+    
 
     
 }
