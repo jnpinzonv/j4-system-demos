@@ -17,21 +17,21 @@
 
 	<ui:define name="content">
 
-		<h:form id="formEmpresas">
+		<h:form id="formManteni">
 			<p:panel id="panelEmpresas" header="Busqueda">
-
-				<p:inputText id="name" label="Nombre Empresa" title="Nombre Empresa"
+				<p:outputLabel for="IdTransaccion" value="Identificador de generación:" />
+				<p:inputText id="IdTransaccion" 
 					value="#{mantenimientoController.newObject.idTransaccion}" />
 
 
 				<div style="clear: both" />
 
 				<p:panel id="groupButton" align="right">
-					<p:commandButton id="search" value="Buscar"
+					<p:commandButton id="search" value="Buscar" update =":formManteni"
 						action="#{mantenimientoController.busqueda}" />
 
-					<p:commandButton id="reset" value="Reiniciar"
-						action="#{mantenimientoController.reiniciar}" immediate="true" />
+					<p:commandButton id="reset" value="Reiniciar" immediate="true" update =":formManteni"
+						action="#{mantenimientoController.reiniciar}" />
 				</p:panel>
 
 				<div style="clear: both" />
@@ -49,8 +49,8 @@
 				<p:panel id="groupButtonTop" align="right">
 
 					<p:commandButton id="createButtonTop"
-						action="#{mantenimientoController.initCrearModo}" immediate="true"
-						value="Crear" />
+						action="#{mantenimientoController.initCrearModo}" value="Crear"
+						immediate="true" />
 
 					<p:commandButton id="editButtonTop"
 						action="#{mantenimientoController.initEditarModo}" value="Editar"
@@ -62,14 +62,20 @@
 						immediate="true"
 						disabled="#{mantenimientoController.selectMantenimiento.size() != 1}" />
 
+					<p:commandButton id="borrarTop" value="Borrar" immediate="true"
+						ajax="true" update=":formManteni:message,:formManteni"
+						ignoreAutoUpdate="true" async="true"
+						action="#{mantenimientoController.eliminar}"
+						disabled="#{mantenimientoController.selectMantenimiento.size() == 0}">
+						<p:confirm header="Confirmation"
+							message="¿Desea Eliminar los registros seleccionados?"
+							icon="ui-icon-alert" />
+					</p:commandButton>
 
-					<p:commandButton id="deleteButtonTop" value="Borrar"
-						immediate="true" ajax="true" ignoreAutoUpdate="true" async="true"
-						disabled="#{mantenimientoController.selectMantenimiento.size()  == 0}" />
-
-					<p:commandButton id="cancelarButtonTop" value="Cancelar"
-						immediate="true" ajax="true" ignoreAutoUpdate="true" async="true"
-						action="atras" />
+					<p:commandButton id="CancelarTop" value="Cancelar" immediate="true"
+						ajax="true" ignoreAutoUpdate="true" async="true"
+						disabled="#{mantenimientoController.selectMantenimiento.size()  == 0}"
+						action="#{mantenimientoController.cancelar}" />
 
 				</p:panel>
 
@@ -100,12 +106,12 @@
 
 					<p:column id="c5" headerText="Repuestos">
 						<h:outputText value="#{_object.repuestos}" />
-					</p:column>					
+					</p:column>
 
 					<p:column id="c7" headerText="
 						observaciones">
 						<h:outputText value="#{_object.observaciones}" />
-					</p:column>					
+					</p:column>
 
 					<p:column id="c10" headerText="N° Transaccion">
 						<h:outputText value=" #{_object.idTransaccion}" />
@@ -114,9 +120,9 @@
 						style="width:16px;text-align:center" />
 
 					<p:ajax event="rowSelectCheckbox" immediate="true"
-						update=":formEmpresas:groupButtonBottom,:formEmpresas:groupButtonTop" />
+						update=":formManteni:groupButtonBottom,:formManteni:groupButtonTop" />
 					<p:ajax event="rowUnselectCheckbox" immediate="true"
-						update=":formEmpresas:groupButtonBottom,:formEmpresas:groupButtonTop" />
+						update=":formManteni:groupButtonBottom,:formManteni:groupButtonTop" />
 
 				</p:dataTable>
 
@@ -130,7 +136,7 @@
 						styleClass="pButtonEnabled" value="Crear" />
 
 					<p:commandButton id="editButtonBottom"
-						action="mantenimientoController.initEditarModo" immediate="true"
+						action="#{mantenimientoController.initEditarModo}" immediate="true"
 						value="Editar"
 						disabled="#{mantenimientoController.selectMantenimiento.size() != 1}" />
 
@@ -140,34 +146,33 @@
 						disabled="#{mantenimientoController.selectMantenimiento.size()!= 1}" />
 
 					<p:commandButton id="deleteButtonBottom" value="Borrar"
-						immediate="true" ajax="true" ignoreAutoUpdate="true" async="true"
-						disabled="#{mantenimientoController.selectMantenimiento.size() == 0}" />
+						immediate="true" update=":formManteni:message,:formManteni"
+						action="#{mantenimientoController.eliminar}"
+						disabled="#{mantenimientoController.selectMantenimiento.size() == 0}">
+						<p:confirm header="Confirmation"
+							message="¿Desea Eliminar los registros seleccionados?"
+							icon="ui-icon-alert" />
+					</p:commandButton>
 
-					<p:commandButton id="cancelarButton" value="Cancelar"
-						immediate="true" ajax="true" ignoreAutoUpdate="true" async="true"
-						action="atras" />
+					<p:commandButton id="cancelar" value="Cancelar" immediate="true"
+						ajax="true" ignoreAutoUpdate="true" async="true"
+						disabled="#{mantenimientoController.selectMantenimiento.size() == 0}"
+						action="#{mantenimientoController.cancelar}" />
+
+
 				</p:panel>
 			</p:panel>
-		</h:form>
-
-
-
-		<h:form id="idForm">
 			<p:growl id="message" showDetail="true" />
-
-			<p:commandButton value="Destroy the World"
-				actionListener="#{dialogView.destroyWorld}" update="message">
-				<p:confirm header="Confirmation" message="Are you sure?"
-					icon="ui-icon-alert" />
-			</p:commandButton>
-
 			<p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
-				<p:commandButton value="Yes" type="button"
+				<p:commandButton value="Aceptar" type="button"
 					styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-				<p:commandButton value="No" type="button"
+				<p:commandButton value="Cancelar" type="button"
 					styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
 			</p:confirmDialog>
 		</h:form>
+
+
+
 
 	</ui:define>
 </ui:composition>

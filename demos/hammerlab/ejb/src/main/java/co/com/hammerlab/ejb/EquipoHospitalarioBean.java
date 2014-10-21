@@ -57,6 +57,18 @@ public class EquipoHospitalarioBean {
     public void update(EquipoHospitalario obj) {
         entityManager.merge(obj);
     }
+    
+    /**
+     * Actualiza un objeto en base de datos
+     * 
+     * @param obj
+     *            Objeto a ser actualizado
+     */
+    public void update(Object... obj) {
+        for (Object object : obj) {
+        entityManager.merge(object);
+        }
+    }
 
     /**
      * Elimina un objeto en base de datos

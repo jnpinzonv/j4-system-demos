@@ -4,7 +4,9 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
+import co.com.hammerlab.model.EquipoHospitalario;
 import co.com.hammerlab.model.MantenimientoEquipo;
 
 /**
@@ -57,6 +59,26 @@ public class MantenimientoEquipoBean {
          */
         public List< MantenimientoEquipo > getAll() {
                 return entityManager.createNamedQuery("mantenimientoequipo.getAll", MantenimientoEquipo.class).getResultList();
+        }
+        
+        /**
+         * Consulta todos los registro de un objeto
+         * @return Lista de objetos 
+         */
+        public List< MantenimientoEquipo > getAll(EquipoHospitalario idEquipo) {
+                Query q= entityManager.createNamedQuery("mantenimientoequipo.getAllEquipo", MantenimientoEquipo.class);
+                q.setParameter("EQUIPO", idEquipo);
+                return q.getResultList();
+        }
+        
+        /**
+         * Consulta todos los registro de un objeto
+         * @return Lista de objetos 
+         */
+        public List< MantenimientoEquipo > getAllIDTra(Long idEquipo) {
+                Query q= entityManager.createNamedQuery("mantenimientoequipo.getAllIdTrans", MantenimientoEquipo.class);
+                q.setParameter("IDTRAN", idEquipo);
+                return q.getResultList();
         }
         
         /**

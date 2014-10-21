@@ -39,12 +39,12 @@ public class AdquisicionEquipo implements Serializable {
     /**
      * voltaje
      */
-    private  Date fechaAdquisicion;
+    private  String fechaAdquisicion;
 
     /**
      * instalaciones
      */
-    private Date fechaInstalacion;
+    private String fechaInstalacion;
 
     /**
      * potencia
@@ -134,12 +134,11 @@ public class AdquisicionEquipo implements Serializable {
         this.id = id;
     }
    
-
     /**
      * Devuelve el valor de fechaAdquisicion
      * @return El valor de fechaAdquisicion
      */
-    public Date getFechaAdquisicion() {
+    public String getFechaAdquisicion() {
         return fechaAdquisicion;
     }
 
@@ -147,7 +146,7 @@ public class AdquisicionEquipo implements Serializable {
      * Establece el valor de fechaAdquisicion
      * @param fechaAdquisicion El valor por establecer para fechaAdquisicion
      */
-    public void setFechaAdquisicion(Date fechaAdquisicion) {
+    public void setFechaAdquisicion(String fechaAdquisicion) {
         this.fechaAdquisicion = fechaAdquisicion;
     }
 
@@ -155,7 +154,7 @@ public class AdquisicionEquipo implements Serializable {
      * Devuelve el valor de fechaInstalacion
      * @return El valor de fechaInstalacion
      */
-    public Date getFechaInstalacion() {
+    public String getFechaInstalacion() {
         return fechaInstalacion;
     }
 
@@ -163,11 +162,9 @@ public class AdquisicionEquipo implements Serializable {
      * Establece el valor de fechaInstalacion
      * @param fechaInstalacion El valor por establecer para fechaInstalacion
      */
-    public void setFechaInstalacion(Date fechaInstalacion) {
+    public void setFechaInstalacion(String fechaInstalacion) {
         this.fechaInstalacion = fechaInstalacion;
     }
-
-   
 
     /**
      * Devuelve el valor de propiedadEquipo

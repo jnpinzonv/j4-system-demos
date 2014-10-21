@@ -151,7 +151,7 @@
 					rendered="#{equipoController.listaEquipos.size() > 0}">
 
 					<p:commandButton id="createButtonBottom"
-						action="#{equipoController.initEditarModo}"
+						action="#{equipoController.initCrearModo}" immediate="true"
 						styleClass="pButtonEnabled" value="Crear" />
 
 					<p:commandButton id="editButtonBottom"
@@ -183,9 +183,9 @@
 					</p:commandButton>
 				</p:panel>
 			</p:panel>
-				<p:growl id="message" showDetail="true" />
+			<p:growl id="message" showDetail="true" />
 			<p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
-				<p:commandButton value="Aceptar" type="button"					
+				<p:commandButton value="Aceptar" type="button"
 					styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
 				<p:commandButton value="Cancelar" type="button"
 					styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
