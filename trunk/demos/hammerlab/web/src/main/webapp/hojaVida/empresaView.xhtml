@@ -5,60 +5,56 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:c="http://java.sun.com/jstl/core"
-	xmlns:p="http://primefaces.org/ui"	
+	xmlns:p="http://primefaces.org/ui"
 	template="/WEB-INF/templates/default.xhtml">
 
-	<ui:define name="content">
+	<ui:define name="titulo">
+		<h:outputText value="Clientes"></h:outputText>
+	</ui:define>
 
-		<h:form id="empresa">
-			<p:panel id="empresaPanel" styleClass="pPanel"
-				header="Detalles de un Cliente">
+	<ui:define name="contenido">
+		<h:form id="empresaView">
+			<p:panel id="empresaPanel" styleClass="widthGeneral">
+				<f:facet name="header">
+					<h:outputLabel value="Detalle Cliente" />
+				</f:facet>
 
-				<h:panelGrid id="idForm" columns="2" columnClasses="titleCell">
+				<h:panelGrid id="idForm" columns="4" styleClass="widthGeneral"
+					columnClasses="col4,col4,col4,col4">
 
 					<p:outputLabel for="razonSocial" value="Razón Social:" />
 					<p:outputLabel id="razonSocial"
 						value="#{empresaController.newObject.razonSocial}" required="true" />
 
-
 					<p:outputLabel for="nit" value="NIT:" />
 					<p:outputLabel id="nit" value="#{empresaController.newObject.nit }"
 						required="true" />
-
 
 					<p:outputLabel for="telefono" value="Telefono:" />
 					<p:outputLabel id="telefono"
 						value="#{empresaController.newObject.telefono }" required="true" />
 
-
 					<p:outputLabel for="direccion" value="Dirección:" />
 					<p:outputLabel id="direccion"
 						value="#{empresaController.newObject.direccion }" required="true" />
-
 
 					<p:outputLabel for="correoElectronico" value="Correo Electronico:" />
 					<p:outputLabel id="correoElectronico"
 						value="#{empresaController.newObject.correoElectronico}"
 						required="true" />
 
-
-					<p:outputLabel for="sitioWeb" value="sitio Web:" />
+					<p:outputLabel for="sitioWeb" value="Sitio Web:" />
 					<p:outputLabel id="sitioWeb"
 						value="#{empresaController.newObject.sitioWeb }" required="true" />
 
-
 				</h:panelGrid>
 
-				<div style="clear: both" />
-
-				<p:panel id="groupButton" align="right">
+				<p:panel id="groupButton" styleClass="panelBotonHI"
+					style="border: transparent;">
 					<p:commandButton id="cancel" styleClass="pButtonEnabled"
-						value="Cancelar" 
-						action="#{empresaController.cancelar}"
+						value="Cancelar" action="#{empresaController.cancelar}"
 						immediate="true" />
 				</p:panel>
-
-				<div style="clear: both" />
 
 			</p:panel>
 		</h:form>

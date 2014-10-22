@@ -7,62 +7,75 @@
 	xmlns:c="http://java.sun.com/jstl/core"
 	xmlns:p="http://primefaces.org/ui"
 	template="/WEB-INF/templates/default.xhtml">
-
-	<ui:define name="content">
+	<ui:define name="titulo">
+		<h:outputText rendered="#{mantenimientoController.editMode}"
+			value="Actualizar Equipo" />
+		<h:outputText rendered="#{not mantenimientoController.editMode}"
+			value="Crear Equipo" />
+	</ui:define>
+	<ui:define name="contenido">
 
 		<h:form id="empresaEdit">
-			<p:panel id="empresaPanelEdit"
-				header="#{mantenimientoController.editMode ? 'Actualizar Empresa' : 'Crear Empresa'}">
+			<p:panel id="empresaPanelEdit" styleClass="widthGeneral">
+				<f:facet name="header">
+					<h:outputText rendered="#{mantenimientoController.editMode}"
+						value="Actualizar Equipo" />
+					<h:outputText rendered="#{not mantenimientoController.editMode}"
+						value="Crear Equipo" />
+				</f:facet>
 
-				<h:panelGrid columns="2" columnClasses="titleCell">
+				<h:panelGrid columns="4" styleClass="widthGeneral"
+					columnClasses="col4,col4,col4,col4">
 
 					<p:outputLabel for="fecha" value="Fecha:" />
 					<p:outputLabel id="fecha"
-						value="#{mantenimientoController.newObject.fecha}" required="true"/>
+						value="#{mantenimientoController.newObject.fecha}" required="true" />
+					<p:spacer />
+					<p:spacer />
 
 					<p:outputLabel for="danioFalla" value="Daño, Falla o Averias:" />
 					<p:outputLabel rows="6" cols="33" id="danioFalla"
-						value="#{mantenimientoController.newObject.danioFalla }" required="true" />
+						value="#{mantenimientoController.newObject.danioFalla }"
+						required="true" />
 
 					<p:outputLabel for="reparaciones"
 						value="Reparaciones o Procedimientos:" />
 					<p:outputLabel rows="6" cols="33" id="reparaciones"
-						value="#{mantenimientoController.newObject.reparaciones }" required="true" />
+						value="#{mantenimientoController.newObject.reparaciones }"
+						required="true" />
 
 					<p:outputLabel for="repuestos" value="Repuestos Básicos:" />
 					<p:outputLabel rows="6" cols="33" id="repuestos"
-						value="#{mantenimientoController.newObject.repuestos }" required="true"/>
+						value="#{mantenimientoController.newObject.repuestos }"
+						required="true" />
 
 					<p:outputLabel for="observaciones" value="Observaciones:" />
 					<p:outputLabel rows="6" cols="33" id="observaciones"
-						value="#{mantenimientoController.newObject.observaciones }" required="true"/>
-					
-
-					<p:outputLabel 
-						value="Firma Aprobación Tecnico:" />
+						value="#{mantenimientoController.newObject.observaciones }"
+						required="true" />
+				</h:panelGrid>
+				<h:panelGrid columns="2" styleClass="widthGeneral"
+					columnClasses="col2,col2">
+					<p:outputLabel value="Firma Aprobación Tecnico:" />
 					<p:fileUpload
 						fileUploadListener="#{equipoController.handleFileUpload}"
 						mode="advanced" dragDropSupport="true" sizeLimit="100000"
 						allowTypes="/(\.|\/)(gif|jpe?g|png|jpg)$/" />
 
-					<p:outputLabel 
-						value="Firma Aprobación de Institución:" />
+					<p:outputLabel value="Firma Aprobación de Institución:" />
 					<p:fileUpload
 						fileUploadListener="#{equipoController.handleFileUpload}"
 						mode="advanced" dragDropSupport="true" sizeLimit="100000"
 						allowTypes="/(\.|\/)(gif|jpe?g|png|jpg)$/" />
 				</h:panelGrid>
 
-				<div style="clear: both" />
 
-				<!-- p:requiredFields /> -->
-
-				<p:panel id="groupButton" align="right">
+				<p:panel id="groupButton" styleClass="panelBotonHI"
+					style="border: transparent;">
 					<p:commandButton id="cancel" styleClass="" value="Cancelar"
 						action="#{mantenimientoController.cancelar}" immediate="true" />
 				</p:panel>
 
-				<div style="clear: both" />
 
 			</p:panel>
 		</h:form>

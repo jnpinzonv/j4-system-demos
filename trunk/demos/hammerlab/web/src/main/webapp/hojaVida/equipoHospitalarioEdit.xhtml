@@ -6,7 +6,17 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:c="http://java.sun.com/jstl/core"
 	xmlns:p="http://primefaces.org/ui"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j"
 	template="/WEB-INF/templates/default.xhtml">
+
+	<ui:define name="titulo">
+		<h:outputText rendered="#{equipoController.editMode}"
+			value="Actualizar Equipo" />
+		<h:outputText rendered="#{not equipoController.editMode}"
+			value="Crear Equipo" />
+	</ui:define>
+
 	<ui:define name="metadata">
 		<f:metadata>
 			<f:viewParam name="accion" value="#{equipoController.accion}" />
@@ -15,36 +25,49 @@
 		</f:metadata>
 	</ui:define>
 
-	<ui:define name="content">
-
-		<h:form id="empresaEdit">
-			<p:panel id="empresaPanelEdit"
-				header="#{equipoController.editMode ? 'Actualizar Equipo' : 'Crear Equipo'}">
-
-				<p:panel id="groupButtonTop" align="right">
-					<p:commandButton id="createTop" styleClass="" value="Guardar"
+	<ui:define name="contenido">
+		<h:form id="equipoEdit">
+			<p:panel id="equipoPanelEdit" styleClass="widthGeneral">
+				<f:facet name="header">
+					<h:outputText rendered="#{equipoController.editMode}"
+						value="Actualizar Equipo" />
+					<h:outputText rendered="#{not equipoController.editMode}"
+						value="Crear Equipo" />
+				</f:facet>
+				<!-- Panel Botones Up -->
+				<p:panel id="groupButtonTop" styleClass="panelBotonHI"
+					style="border: transparent;">
+					<p:commandButton id="createTop" value="Guardar"
 						action="#{equipoController.crear}"
-						rendered="#{!equipoController.editMode}" update="@form" />
+						rendered="#{!equipoController.editMode}" />
 
-					<p:commandButton id="updateTop" styleClass="" value="Guardar"
+					<p:commandButton id="updateTop" value="Actualizar"
 						action="#{equipoController.actualizar}"
-						rendered="#{equipoController.editMode}" update="@form" />
+						rendered="#{equipoController.editMode}" />
 
-					<p:commandButton id="cancelTop" styleClass="" value="Cancelar"
+					<p:commandButton id="cancelTop" value="Cancelar"
 						action="#{equipoController.cancelar}" immediate="true" />
 				</p:panel>
+				<p:spacer height="10" />
+				<!-- Panel Datos Generales -->
+				<p:panel id="panelDatosGenerales" styleClass="widthGeneral"
+					toggleable="true">
+					<f:facet name="header">
+						<h:outputText value="Datos Generales" />
+					</f:facet>
 
-
-
-				<p:panel id="basicalEdit" header="DATOS GENERALES">
-					<h:panelGrid columns="4" columnClasses="titleCell">
+					<h:panelGrid columns="3" styleClass="widthGeneral" cellpadding="0"
+						cellspacing="0" columnClasses="col3,col3,col3">
 
 						<p:outputLabel for="nombreEquipo" value="Nombre del Equipo:" />
-						<p:inputText id="nombreEquipo"
-							value="#{equipoController.newObject.nombreEquipo}"
-							required="true" />
-						<p:selectOneMenu id="console0"
-							value="#{equipoController.newObjectCo.marca}">
+						<h:panelGrid>
+							<p:inputText id="nombreEquipo" style="width: 210px;"
+								value="#{equipoController.newObject.nombreEquipo}"
+								required="true" />
+							<p:message for="nombreEquipo" />
+						</h:panelGrid>
+						<p:selectOneMenu id="idNombre"
+							value="#{equipoController.newObject.nombreEquipo}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
 							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
 							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
@@ -52,24 +75,28 @@
 								listener="#{equipoController.agregarComentario}"
 								update="nombreEquipo" />
 						</p:selectOneMenu>
-						<p:message for="nombreEquipo" />
 
 						<p:outputLabel for="marca" value="Marca:" />
-						<p:inputText id="marca"
-							value="#{equipoController.newObject.marca}" required="true" />
-						<p:selectOneMenu id="console"
-							value="#{equipoController.newObjectCo.marca}">
+						<h:panelGrid>
+							<p:inputText id="marca" style="width: 210px;"
+								value="#{equipoController.newObject.marca}" required="true" />
+							<p:message for="marca" />
+						</h:panelGrid>
+						<p:selectOneMenu id="idMarca"
+							value="#{equipoController.newObject.marca}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
 							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
 							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
 							<p:ajax event="change"
 								listener="#{equipoController.agregarComentario}" update="marca" />
 						</p:selectOneMenu>
-						<p:message for="marca" />
 
 						<p:outputLabel for="modelo" value="Modelo:" />
-						<p:inputText id="modelo"
-							value="#{equipoController.newObject.modelo}" required="true" />
+						<h:panelGrid>
+							<p:inputText id="modelo" style="width: 210px;"
+								value="#{equipoController.newObject.modelo}" required="true" />
+							<p:message for="modelo" />
+						</h:panelGrid>
 						<p:selectOneMenu id="console2"
 							value="#{equipoController.newObjectCo.modelo}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
@@ -78,15 +105,17 @@
 							<p:ajax event="change"
 								listener="#{equipoController.agregarComentario}" update="modelo" />
 						</p:selectOneMenu>
-						<p:message for="modelo" />
-
 
 						<p:outputLabel for="ubicacion" value="Ubicación:" />
-						<p:selectOneMenu id="ubicacion" required="true"
-							value="#{equipoController.newObject.ubicacion}">
-							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItems value="#{equipoController.ubicacionList}" />
-						</p:selectOneMenu>
+						<h:panelGrid>
+							<p:selectOneMenu id="ubicacion" required="true"
+								style="width: 210px;"
+								value="#{equipoController.newObject.ubicacion}">
+								<f:selectItem itemLabel="Seleccione" itemValue="" />
+								<f:selectItems value="#{equipoController.ubicacionList}" />
+							</p:selectOneMenu>
+							<p:message for="ubicacion" />
+						</h:panelGrid>
 						<p:selectOneMenu id="console3"
 							value="#{equipoController.newObjectCo.ubicacion}" disabled="true">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
@@ -96,12 +125,14 @@
 								listener="#{equipoController.agregarComentario}"
 								update="ubicacion" />
 						</p:selectOneMenu>
-						<p:message for="ubicacion" />
-
 
 						<p:outputLabel for="fabricante" value="Fabricante:" />
-						<p:inputText id="fabricante"
-							value="#{equipoController.newObject.fabricante }" required="true" />
+						<h:panelGrid>
+							<p:inputText id="fabricante" style="width: 210px;"
+								value="#{equipoController.newObject.fabricante }"
+								required="true" />
+							<p:message for="fabricante" />
+						</h:panelGrid>
 						<p:selectOneMenu id="console4"
 							value="#{equipoController.newObjectCo.fabricante}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
@@ -111,14 +142,15 @@
 								listener="#{equipoController.agregarComentario}"
 								update="fabricante" />
 						</p:selectOneMenu>
-						<p:message for="fabricante" />
-
 
 						<p:outputLabel for="representanteCol"
 							value="Representante Colombia:" />
-						<p:inputText id="representanteCol"
-							value="#{equipoController.newObject.representanteCol }"
-							required="true" />
+						<h:panelGrid>
+							<p:inputText id="representanteCol" style="width: 210px;"
+								value="#{equipoController.newObject.representanteCol }"
+								required="true" />
+							<p:message for="representanteCol" />
+						</h:panelGrid>
 						<p:selectOneMenu id="console5"
 							value="#{equipoController.newObjectCo.representanteCol}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
@@ -128,12 +160,13 @@
 								listener="#{equipoController.agregarComentario}"
 								update="representanteCol" />
 						</p:selectOneMenu>
-						<p:message for="representanteCol" />
-
 
 						<p:outputLabel for="direccion" value="Dirección:" />
-						<p:inputText id="direccion"
-							value="#{equipoController.newObject.direccion }" required="true" />
+						<h:panelGrid>
+							<p:inputText id="direccion" style="width: 210px;"
+								value="#{equipoController.newObject.direccion }" required="true" />
+							<p:message for="direccion" />
+						</h:panelGrid>
 						<p:selectOneMenu id="console6"
 							value="#{equipoController.newObjectCo.direccion}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
@@ -143,13 +176,13 @@
 								listener="#{equipoController.agregarComentario}"
 								update="direccion" />
 						</p:selectOneMenu>
-						<p:message for="direccion" />
-
 
 						<p:outputLabel for="telefono" value="Telefono:" />
-						<p:inputText id="telefono"
-							value="#{equipoController.newObject.telefono }" required="true" />
-
+						<h:panelGrid>
+							<p:inputText id="telefono" style="width: 210px;"
+								value="#{equipoController.newObject.telefono }" required="true" />
+							<p:message for="telefono" />
+						</h:panelGrid>
 						<p:selectOneMenu id="console7"
 							value="#{equipoController.newObjectCo.telefono}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
@@ -159,17 +192,24 @@
 								listener="#{equipoController.agregarComentario}"
 								update="telefono" />
 						</p:selectOneMenu>
-						<p:message for="telefono" />
-
-
 					</h:panelGrid>
 				</p:panel>
-				<p:panel id="tecnicalEdit" header="INFORMACION TECNICA">
-					<h:panelGrid columns="4" columnClasses="titleCell">
+				<p:spacer height="10" />
+				<!-- Panel Info Tecnica -->
+				<p:panel id="tecnicalEdit" styleClass="widthGeneral"
+					toggleable="true">
+					<f:facet name="header">
+						<h:outputText value="Información Técnica" />
+					</f:facet>
+					<h:panelGrid columns="3" styleClass="widthGeneral"
+						columnClasses="col3,col3,col3">
 
 						<p:outputLabel for="voltaje2" value="Voltaje (V):" />
-						<p:inputText id="voltaje2"
-							value="#{equipoController.infoTecnica.voltaje }" required="true" />
+						<h:panelGrid>
+							<p:inputText id="voltaje2" style="width: 210px;"
+								value="#{equipoController.infoTecnica.voltaje }" required="true" />
+							<p:message for="voltaje2" />
+						</h:panelGrid>
 						<p:selectOneMenu id="console16"
 							value="#{equipoController.infoTecnicaCo.voltaje}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
@@ -179,14 +219,14 @@
 								listener="#{equipoController.agregarComentario}"
 								update="voltaje2" />
 						</p:selectOneMenu>
-						<p:message for="voltaje2" />
-
 
 						<p:outputLabel for="instalaciones2" value="Instalaciones:" />
-						<p:inputText id="instalaciones2"
-							value="#{equipoController.infoTecnica.instalaciones }"
-							required="true" />
-
+						<h:panelGrid>
+							<p:inputText id="instalaciones2" style="width: 210px;"
+								value="#{equipoController.infoTecnica.instalaciones }"
+								required="true" />
+							<p:message for="instalaciones2" />
+						</h:panelGrid>
 						<p:selectOneMenu id="console17"
 							value="#{equipoController.infoTecnicaCo.instalaciones}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
@@ -196,12 +236,14 @@
 								listener="#{equipoController.agregarComentario}"
 								update="instalaciones2" />
 						</p:selectOneMenu>
-						<p:message for="instalaciones2" />
-
 
 						<p:outputLabel for="potencia" value="Potencia: (Kw)" />
-						<p:inputText id="potencia"
-							value="#{equipoController.infoTecnica.potencia }" required="true" />
+						<h:panelGrid>
+							<p:inputText id="potencia" style="width: 210px;"
+								value="#{equipoController.infoTecnica.potencia }"
+								required="true" />
+							<p:message for="potencia" />
+						</h:panelGrid>
 						<p:selectOneMenu id="console18"
 							value="#{equipoController.infoTecnicaCo.potencia}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
@@ -211,13 +253,14 @@
 								listener="#{equipoController.agregarComentario}"
 								update="potencia" />
 						</p:selectOneMenu>
-						<p:message for="potencia" />
-
 
 						<p:outputLabel for="frecuencia" value="Frecuencia: (Hz)" />
-						<p:inputText id="frecuencia"
-							value="#{equipoController.infoTecnica.frecuencia }"
-							required="true" />
+						<h:panelGrid>
+							<p:inputText id="frecuencia" style="width: 210px;"
+								value="#{equipoController.infoTecnica.frecuencia }"
+								required="true" />
+							<p:message for="frecuencia" />
+						</h:panelGrid>
 						<p:selectOneMenu id="console19"
 							value="#{equipoController.infoTecnicaCo.frecuencia}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
@@ -227,13 +270,14 @@
 								listener="#{equipoController.agregarComentario}"
 								update="frecuencia" />
 						</p:selectOneMenu>
-						<p:message for="frecuencia" />
-
 
 						<p:outputLabel for="capacidadTeorica" value="Capacidad Teórica:" />
-						<p:inputText id="capacidadTeorica"
-							value="#{equipoController.infoTecnica.capacidadTeorica }"
-							required="true" />
+						<h:panelGrid>
+							<p:inputText id="capacidadTeorica" style="width: 210px;"
+								value="#{equipoController.infoTecnica.capacidadTeorica }"
+								required="true" />
+							<p:message for="capacidadTeorica" />
+						</h:panelGrid>
 						<p:selectOneMenu id="console20"
 							value="#{equipoController.infoTecnicaCo.capacidadTeorica}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
@@ -243,13 +287,14 @@
 								listener="#{equipoController.agregarComentario}"
 								update="capacidadTeorica" />
 						</p:selectOneMenu>
-						<p:message for="capacidadTeorica" />
-
 
 						<p:outputLabel for="capacidadPractica" value="Capacidad Practica:" />
-						<p:inputText id="capacidadPractica"
-							value="#{equipoController.infoTecnica.capacidadPractica }"
-							required="true" />
+						<h:panelGrid>
+							<p:inputText id="capacidadPractica" style="width: 210px;"
+								value="#{equipoController.infoTecnica.capacidadPractica }"
+								required="true" />
+							<p:message for="capacidadPractica" />
+						</h:panelGrid>
 						<p:selectOneMenu id="console21"
 							value="#{equipoController.infoTecnicaCo.capacidadPractica}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
@@ -259,15 +304,17 @@
 								listener="#{equipoController.agregarComentario}"
 								update="capacidadPractica" />
 						</p:selectOneMenu>
-						<p:message for="capacidadPractica" />
-
 
 						<p:outputLabel for="tecnologia" value="Tecnología:" />
-						<p:selectOneMenu id="tecnologia" required="true"
-							value="#{equipoController.infoTecnica.tecnologia }">
-							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItems value="#{equipoController.tecnologiaList}" />
-						</p:selectOneMenu>
+						<h:panelGrid>
+							<p:selectOneMenu id="tecnologia" required="true"
+								style="width: 210px;"
+								value="#{equipoController.infoTecnica.tecnologia }">
+								<f:selectItem itemLabel="Seleccione" itemValue="" />
+								<f:selectItems value="#{equipoController.tecnologiaList}" />
+							</p:selectOneMenu>
+							<p:message for="tecnologia" />
+						</h:panelGrid>
 						<p:selectOneMenu id="console22"
 							value="#{equipoController.infoTecnicaCo.tecnologia}"
 							disabled="true">
@@ -278,12 +325,13 @@
 								listener="#{equipoController.agregarComentario}"
 								update="tecnologia" />
 						</p:selectOneMenu>
-						<p:message for="tecnologia" />
-
 
 						<p:outputLabel for="insumos" value="Insumos:" />
-						<p:inputText id="insumos"
-							value="#{equipoController.infoTecnica.insumos }" required="true" />
+						<h:panelGrid>
+							<p:inputText id="insumos" style="width: 210px;"
+								value="#{equipoController.infoTecnica.insumos }" required="true" />
+							<p:message for="insumos" />
+						</h:panelGrid>
 						<p:selectOneMenu id="console23"
 							value="#{equipoController.infoTecnicaCo.insumos}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
@@ -293,19 +341,25 @@
 								listener="#{equipoController.agregarComentario}"
 								update="insumos" />
 						</p:selectOneMenu>
-						<p:message for="insumos" />
-
 					</h:panelGrid>
 				</p:panel>
-
-				<p:panel id="adquisicionlEdit"
-					header="PROPIEDAD, ADQUISICION, OPERACIÓN Y GARANTIA">
-					<h:panelGrid columns="4" columnClasses="titleCell">
+				<p:spacer height="10" />
+				<!-- Panel Info Propiedad -->
+				<p:panel id="adquisicionlEdit" toggleable="true"
+					styleClass="widthGeneral">
+					<f:facet name="header">
+						<h:outputText value="Propiedad, Adquisición, Operación y Garantía" />
+					</f:facet>
+					<h:panelGrid columns="3" styleClass="widthGeneral"
+						columnClasses="col3,col3,col3">
 
 						<p:outputLabel for="fechaAdquisicion" value="Fecha Adquisición:" />
-						<p:inputText id="fechaAdquisicion"
-							value="#{equipoController.adquisicionEquipo.fechaAdquisicion}"
-							required="true" />
+						<h:panelGrid>
+							<p:inputText id="fechaAdquisicion" style="width: 210px;"
+								value="#{equipoController.adquisicionEquipo.fechaAdquisicion}"
+								required="true" />
+							<p:message for="fechaAdquisicion" />
+						</h:panelGrid>
 						<p:selectOneMenu id="console8"
 							value="#{equipoController.adquisicionEquipoCo.fechaAdquisicion }">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
@@ -315,13 +369,14 @@
 								listener="#{equipoController.agregarComentario}"
 								update="fechaAdquisicion" />
 						</p:selectOneMenu>
-						<p:message for="fechaAdquisicion" />
-
 
 						<p:outputLabel for="fechaInstalacion" value="Fecha Instalación:" />
-						<p:inputText id="fechaInstalacion"
-							value="#{equipoController.adquisicionEquipo.fechaInstalacion }"
-							required="true" />
+						<h:panelGrid>
+							<p:inputText id="fechaInstalacion" style="width: 210px;"
+								value="#{equipoController.adquisicionEquipo.fechaInstalacion }"
+								required="true" />
+							<p:message for="fechaInstalacion" />
+						</h:panelGrid>
 						<p:selectOneMenu id="console9"
 							value="#{equipoController.adquisicionEquipoCo.fechaInstalacion}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
@@ -331,13 +386,14 @@
 								listener="#{equipoController.agregarComentario}"
 								update="fechaInstalacion" />
 						</p:selectOneMenu>
-						<p:message for="fechaInstalacion" />
-
 
 						<p:outputLabel for="aniosOperacion" value="Años Operación:" />
-						<p:inputText id="aniosOperacion"
-							value="#{equipoController.adquisicionEquipo.aniosOperacion }"
-							required="true" />
+						<h:panelGrid>
+							<p:inputText id="aniosOperacion" style="width: 210px;"
+								value="#{equipoController.adquisicionEquipo.aniosOperacion }"
+								required="true" />
+							<p:message for="aniosOperacion" />
+						</h:panelGrid>
 						<p:selectOneMenu id="console10"
 							value="#{equipoController.adquisicionEquipoCo.aniosOperacion}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
@@ -347,13 +403,14 @@
 								listener="#{equipoController.agregarComentario}"
 								update="aniosOperacion" />
 						</p:selectOneMenu>
-						<p:message for="aniosOperacion" />
-
 
 						<p:outputLabel for="propiedadEquipo" value="Propiedad del Equipo:" />
-						<p:inputText id="propiedadEquipo"
-							value="#{equipoController.adquisicionEquipo.propiedadEquipo }"
-							required="true" />
+						<h:panelGrid>
+							<p:inputText id="propiedadEquipo" style="width: 210px;"
+								value="#{equipoController.adquisicionEquipo.propiedadEquipo }"
+								required="true" />
+							<p:message for="propiedadEquipo" />
+						</h:panelGrid>
 						<p:selectOneMenu id="console11"
 							value="#{equipoController.adquisicionEquipoCo.propiedadEquipo}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
@@ -363,14 +420,15 @@
 								listener="#{equipoController.agregarComentario}"
 								update="propiedadEquipo" />
 						</p:selectOneMenu>
-						<p:message for="propiedadEquipo" />
-
 
 						<p:outputLabel for="aniosFueraServicio2"
 							value="Años Fuera de Servicio:" />
-						<p:inputText id="aniosFueraServicio2"
-							value="#{equipoController.adquisicionEquipo.aniosFueraServicio }"
-							required="true" />
+						<h:panelGrid>
+							<p:inputText id="aniosFueraServicio2" style="width: 210px;"
+								value="#{equipoController.adquisicionEquipo.aniosFueraServicio }"
+								required="true" />
+							<p:message for="aniosFueraServicio2" />
+						</h:panelGrid>
 						<p:selectOneMenu id="console12"
 							value="#{equipoController.adquisicionEquipoCo.aniosFueraServicio}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
@@ -380,13 +438,14 @@
 								listener="#{equipoController.agregarComentario}"
 								update="aniosFueraServicio2" />
 						</p:selectOneMenu>
-						<p:message for="aniosFueraServicio2" />
-
 
 						<p:outputLabel for="razon" value="Razón:" />
-						<p:inputText id="razon"
-							value="#{equipoController.adquisicionEquipo.razon }"
-							required="true" />
+						<h:panelGrid>
+							<p:inputText id="razon" style="width: 210px;"
+								value="#{equipoController.adquisicionEquipo.razon }"
+								required="true" />
+							<p:message for="razon" />
+						</h:panelGrid>
 						<p:selectOneMenu id="console13"
 							value="#{equipoController.adquisicionEquipoCo.razon}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
@@ -395,13 +454,14 @@
 							<p:ajax event="change"
 								listener="#{equipoController.agregarComentario}" update="razon" />
 						</p:selectOneMenu>
-						<p:message for="razon" />
 
-
-						<p:outputLabel for="garantia" value="garantia:" />
-						<p:inputText id="garantia"
-							value="#{equipoController.adquisicionEquipo.garantia }"
-							required="true" />
+						<p:outputLabel for="garantia" value="Garantía:" />
+						<h:panelGrid>
+							<p:inputText id="garantia" style="width: 210px;"
+								value="#{equipoController.adquisicionEquipo.garantia }"
+								required="true" />
+							<p:message for="garantia" />
+						</h:panelGrid>
 						<p:selectOneMenu id="console14"
 							value="#{equipoController.adquisicionEquipoCo.garantia}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
@@ -411,13 +471,14 @@
 								listener="#{equipoController.agregarComentario}"
 								update="garantia" />
 						</p:selectOneMenu>
-						<p:message for="garantia" />
 
-
-						<p:outputLabel for="peridoGarantia" value="Perido Garantia:" />
-						<p:inputText id="peridoGarantia"
-							value="#{equipoController.adquisicionEquipo.peridoGarantia }"
-							required="true" />
+						<p:outputLabel for="peridoGarantia" value="Perido Garantía:" />
+						<h:panelGrid>
+							<p:inputText id="peridoGarantia" style="width: 210px;"
+								value="#{equipoController.adquisicionEquipo.peridoGarantia }"
+								required="true" />
+							<p:message for="peridoGarantia" />
+						</h:panelGrid>
 						<p:selectOneMenu id="console15"
 							value="#{equipoController.adquisicionEquipoCo.peridoGarantia}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
@@ -427,13 +488,15 @@
 								listener="#{equipoController.agregarComentario}"
 								update="peridoGarantia" />
 						</p:selectOneMenu>
-						<p:message for="peridoGarantia" />
 
 						<p:outputLabel for="cubrimientoGarantia"
-							value="Cubrimiento Garantia:" />
-						<p:inputTextarea rows="6" cols="33" id="cubrimientoGarantia"
-							value="#{equipoController.adquisicionEquipo.cubrimientoGarantia }"
-							required="true" />
+							value="Cubrimiento Garantía:" />
+						<h:panelGrid>
+							<p:inputTextarea rows="6" cols="33" id="cubrimientoGarantia"
+								value="#{equipoController.adquisicionEquipo.cubrimientoGarantia }"
+								required="true" />
+							<p:message for="cubrimientoGarantia" />
+						</h:panelGrid>
 						<p:selectOneMenu id="console151"
 							value="#{equipoController.adquisicionEquipoCo.cubrimientoGarantia}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
@@ -443,16 +506,18 @@
 								listener="#{equipoController.agregarComentario}"
 								update="cubrimientoGarantia" />
 						</p:selectOneMenu>
-						<p:message for="cubrimientoGarantia" />
-
 
 						<p:outputLabel for="clasificacionDecreto"
 							value="Clasificación según riesgo:" />
-						<p:selectOneMenu id="clasificacionDecreto" required="true"
-							value="#{equipoController.adquisicionEquipo.clasificacionDecreto}">
-							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItems value="#{equipoController.decretoList}" />
-						</p:selectOneMenu>						
+						<h:panelGrid>
+							<p:selectOneMenu id="clasificacionDecreto" required="true"
+								style="width: 210px;"
+								value="#{equipoController.adquisicionEquipo.clasificacionDecreto}">
+								<f:selectItem itemLabel="Seleccione" itemValue="" />
+								<f:selectItems value="#{equipoController.decretoList}" />
+							</p:selectOneMenu>
+							<p:message for="clasificacionDecreto" />
+						</h:panelGrid>
 						<p:selectOneMenu id="console152" disabled="true"
 							value="#{equipoController.adquisicionEquipoCo.clasificacionDecreto}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
@@ -462,12 +527,14 @@
 								listener="#{equipoController.agregarComentario}"
 								update="clasificacionDecreto" />
 						</p:selectOneMenu>
-						<p:message for="clasificacionDecreto" />
 
 						<p:outputLabel for="calibracionTipo" value="Calibración Tipo:" />
-						<p:inputText id="calibracionTipo"
-							value="#{equipoController.adquisicionEquipo.calibracionTipo }"
-							required="true" />
+						<h:panelGrid>
+							<p:inputText id="calibracionTipo" style="width: 210px;"
+								value="#{equipoController.adquisicionEquipo.calibracionTipo }"
+								required="true" />
+							<p:message for="calibracionTipo" />
+						</h:panelGrid>
 						<p:selectOneMenu id="console153"
 							value="#{equipoController.adquisicionEquipoCo.calibracionTipo}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
@@ -477,13 +544,15 @@
 								listener="#{equipoController.agregarComentario}"
 								update="calibracionTipo" />
 						</p:selectOneMenu>
-						<p:message for="calibracionTipo" />
 
 						<p:outputLabel for="calibracionPeriocidad"
 							value="Calibración Periocidad:" />
-						<p:inputText id="calibracionPeriocidad"
-							value="#{equipoController.adquisicionEquipo.calibracionPeriocidad }"
-							required="true" />
+						<h:panelGrid>
+							<p:inputText id="calibracionPeriocidad" style="width: 210px;"
+								value="#{equipoController.adquisicionEquipo.calibracionPeriocidad }"
+								required="true" />
+							<p:message for="calibracionPeriocidad" />
+						</h:panelGrid>
 						<p:selectOneMenu id="console154"
 							value="#{equipoController.adquisicionEquipoCo.calibracionPeriocidad}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
@@ -493,18 +562,25 @@
 								listener="#{equipoController.agregarComentario}"
 								update="calibracionPeriocidad" />
 						</p:selectOneMenu>
-						<p:message for="calibracionPeriocidad" />
-
 
 					</h:panelGrid>
 				</p:panel>
-				<p:panel id="planoslEdit" header="PLANOS">
-					<h:panelGrid columns="4" columnClasses="titleCell" cellpadding="5">
+				<p:spacer height="10" />
+				<p:panel id="planoslEdit" styleClass="widthGeneral"
+					toggleable="true">
+					<f:facet name="header">
+						<h:outputText value="Planos" />
+					</f:facet>
+					<h:panelGrid columns="3" styleClass="widthGeneral"
+						columnClasses="col3,col3,col3">
 
 						<p:outputLabel for="instalacion_confirmar" value="Instalación:" />
-						<p:selectBooleanButton id="instalacion_confirmar"
-							value="#{equipoController.planosEquipo.instalacionConfirmar }"
-							onLabel="SI" offLabel="NO" required="true" />
+						<h:panelGrid>
+							<p:selectBooleanButton id="instalacion_confirmar"
+								value="#{equipoController.planosEquipo.instalacionConfirmar }"
+								onLabel="SI" offLabel="NO" required="true" />
+							<p:message for="instalacion_confirmar" />
+						</h:panelGrid>
 						<p:selectOneMenu id="console30"
 							value="#{equipoController.planosEquipoCo.instalacionConfirmar}"
 							disabled="true">
@@ -515,14 +591,16 @@
 								listener="#{equipoController.agregarComentario}"
 								update="instalacion_confirmar" />
 						</p:selectOneMenu>
-						<p:message for="instalacion_confirmar" />
 
 
 						<p:outputLabel for="instalacion_ubicacion"
 							value="Ubicación Intalación:" />
-						<p:inputText id="instalacion_ubicacion"
-							value="#{equipoController.planosEquipo.instalacionUbicacion }"
-							required="true" />
+						<h:panelGrid>
+							<p:inputText id="instalacion_ubicacion" style="width: 210px;"
+								value="#{equipoController.planosEquipo.instalacionUbicacion }"
+								required="true" />
+							<p:message for="instalacion_ubicacion" />
+						</h:panelGrid>
 						<p:selectOneMenu id="console32"
 							value="#{equipoController.planosEquipoCo.instalacionUbicacion}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
@@ -532,13 +610,15 @@
 								listener="#{equipoController.agregarComentario}"
 								update="instalacion_ubicacion" />
 						</p:selectOneMenu>
-						<p:message for="instalacion_ubicacion" />
 
 
 						<p:outputLabel for="partes_confirmar" value="Partes:" />
-						<p:selectBooleanButton id="partes_confirmar"
-							value="#{equipoController.planosEquipo.partesConfirmar }"
-							onLabel="SI" offLabel="NO" required="true" />
+						<h:panelGrid>
+							<p:selectBooleanButton id="partes_confirmar"
+								value="#{equipoController.planosEquipo.partesConfirmar }"
+								onLabel="SI" offLabel="NO" required="true" />
+							<p:message for="partes_confirmar" />
+						</h:panelGrid>
 						<p:selectOneMenu id="console33"
 							value="#{equipoController.planosEquipoCo.partesConfirmar}"
 							disabled="true">
@@ -549,13 +629,16 @@
 								listener="#{equipoController.agregarComentario}"
 								update="partes_confirmar" />
 						</p:selectOneMenu>
-						<p:message for="partes_confirmar" />
+
 
 
 						<p:outputLabel for="partes_ubicacion" value="Ubicación Partes:" />
-						<p:inputText id="partes_ubicacion"
-							value="#{equipoController.planosEquipo.partesUbicacion }"
-							required="true" />
+						<h:panelGrid>
+							<p:inputText id="partes_ubicacion" style="width: 210px;"
+								value="#{equipoController.planosEquipo.partesUbicacion }"
+								required="true" />
+							<p:message for="partes_ubicacion" />
+						</h:panelGrid>
 						<p:selectOneMenu id="console34"
 							value="#{equipoController.planosEquipoCo.partesUbicacion}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
@@ -565,14 +648,16 @@
 								listener="#{equipoController.agregarComentario}"
 								update="partes_ubicacion" />
 						</p:selectOneMenu>
-						<p:message for="partes_ubicacion" />
 
 
 						<p:outputLabel for="funcionamiento_confirmar2"
 							value="Funcionamiento:" />
-						<p:selectBooleanButton id="funcionamiento_confirmar2"
-							value="#{equipoController.planosEquipo.instalacionConfirmar }"
-							onLabel="SI" offLabel="NO" required="true" />
+						<h:panelGrid>
+							<p:selectBooleanButton id="funcionamiento_confirmar2"
+								value="#{equipoController.planosEquipo.instalacionConfirmar }"
+								onLabel="SI" offLabel="NO" required="true" />
+							<p:message for="funcionamiento_confirmar2" />
+						</h:panelGrid>
 						<p:selectOneMenu id="console35"
 							value="#{equipoController.planosEquipoCo.funcionamientoConfirmar}"
 							disabled="true">
@@ -583,14 +668,17 @@
 								listener="#{equipoController.agregarComentario}"
 								update="funcionamiento_confirmar2" />
 						</p:selectOneMenu>
-						<p:message for="funcionamiento_confirmar2" />
+
 
 
 						<p:outputLabel for="funcionamiento_ubicacion"
 							value="Ubicación Funcionamiento:" />
-						<p:inputText id="funcionamiento_ubicacion"
-							value="#{equipoController.planosEquipo.funcionamientoUbicacion }"
-							required="true" />
+						<h:panelGrid>
+							<p:inputText id="funcionamiento_ubicacion" style="width: 210px;"
+								value="#{equipoController.planosEquipo.funcionamientoUbicacion }"
+								required="true" />
+							<p:message for="funcionamiento_ubicacion" />
+						</h:panelGrid>
 						<p:selectOneMenu id="console36"
 							value="#{equipoController.planosEquipoCo.funcionamientoUbicacion}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
@@ -600,19 +688,28 @@
 								listener="#{equipoController.agregarComentario}"
 								update="funcionamiento_ubicacion" />
 						</p:selectOneMenu>
-						<p:message for="funcionamiento_ubicacion" />
+
 
 
 					</h:panelGrid>
 				</p:panel>
+				<p:spacer height="10" />
 
-				<p:panel id="manualeslEdit" header="MANUALES">
-					<h:panelGrid columns="4" columnClasses="titleCell">
+				<p:panel id="manualeslEdit" styleClass="widthGeneral"
+					toggleable="true">
+					<f:facet name="header">
+						<h:outputText value="Manuales" />
+					</f:facet>
+					<h:panelGrid columns="3" styleClass="widthGeneral"
+						columnClasses="col3,col3,col3">
 
 						<p:outputLabel for="tecnico_confirmar" value="Técnico:" />
-						<p:selectBooleanButton id="tecnico_confirmar"
-							value="#{equipoController.manualesEquipo.tecnicoConfirmar }"
-							onLabel="SI" offLabel="NO" required="true" />
+						<h:panelGrid>
+							<p:selectBooleanButton id="tecnico_confirmar"
+								value="#{equipoController.manualesEquipo.tecnicoConfirmar }"
+								onLabel="SI" offLabel="NO" required="true" />
+							<p:message for="tecnico_confirmar" />
+						</h:panelGrid>
 						<p:selectOneMenu id="console37"
 							value="#{equipoController.manualesEquipoCo.tecnicoConfirmar }"
 							disabled="true">
@@ -623,13 +720,16 @@
 								listener="#{equipoController.agregarComentario}"
 								update="tecnico_confirmar" />
 						</p:selectOneMenu>
-						<p:message for="tecnico_confirmar" />
+
 
 
 						<p:outputLabel for="tecnico_ubicacion" value="Ubicacion Técnico:" />
-						<p:inputText id="tecnico_ubicacion"
-							value="#{equipoController.manualesEquipo.tecnicoUbicacion }"
-							required="true" />
+						<h:panelGrid>
+							<p:inputText id="tecnico_ubicacion" style="width: 210px;"
+								value="#{equipoController.manualesEquipo.tecnicoUbicacion }"
+								required="true" />
+							<p:message for="tecnico_ubicacion" />
+						</h:panelGrid>
 						<p:selectOneMenu id="console38"
 							value="#{equipoController.manualesEquipoCo.tecnicoUbicacion}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
@@ -639,13 +739,16 @@
 								listener="#{equipoController.agregarComentario}"
 								update="tecnico_ubicacion" />
 						</p:selectOneMenu>
-						<p:message for="tecnico_ubicacion" />
+
 
 
 						<p:outputLabel for="servicio_confirmar" value="De Servicio:" />
-						<p:selectBooleanButton id="servicio_confirmar"
-							value="#{equipoController.manualesEquipo.servicioConfirmar }"
-							onLabel="SI" offLabel="NO" required="true" />
+						<h:panelGrid>
+							<p:selectBooleanButton id="servicio_confirmar"
+								value="#{equipoController.manualesEquipo.servicioConfirmar }"
+								onLabel="SI" offLabel="NO" required="true" />
+							<p:message for="servicio_confirmar" />
+						</h:panelGrid>
 						<p:selectOneMenu id="console39"
 							value="#{equipoController.manualesEquipoCo.servicioConfirmar}"
 							disabled="true">
@@ -656,14 +759,17 @@
 								listener="#{equipoController.agregarComentario}"
 								update="servicio_confirmar" />
 						</p:selectOneMenu>
-						<p:message for="servicio_confirmar" />
+
 
 
 						<p:outputLabel for="servicio_ubicacion"
 							value="Ubicación Servicio:" />
-						<p:inputText id="servicio_ubicacion"
-							value="#{equipoController.manualesEquipo.servicioUbicacion }"
-							required="true" />
+						<h:panelGrid>
+							<p:inputText id="servicio_ubicacion" style="width: 210px;"
+								value="#{equipoController.manualesEquipo.servicioUbicacion }"
+								required="true" />
+							<p:message for="servicio_ubicacion" />
+						</h:panelGrid>
 						<p:selectOneMenu id="console40"
 							value="#{equipoController.manualesEquipoCo.servicioUbicacion}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
@@ -673,13 +779,16 @@
 								listener="#{equipoController.agregarComentario}"
 								update="servicio_ubicacion" />
 						</p:selectOneMenu>
-						<p:message for="servicio_ubicacion" />
+
 
 
 						<p:outputLabel for="usuario_confirmar" value="De Usuario:" />
-						<p:selectBooleanButton id="usuario_confirmar"
-							value="#{equipoController.manualesEquipo.usuarioConfirmar }"
-							onLabel="SI" offLabel="NO" required="true" />
+						<h:panelGrid>
+							<p:selectBooleanButton id="usuario_confirmar"
+								value="#{equipoController.manualesEquipo.usuarioConfirmar }"
+								onLabel="SI" offLabel="NO" required="true" />
+							<p:message for="usuario_confirmar" />
+						</h:panelGrid>
 						<p:selectOneMenu id="console41"
 							value="#{equipoController.manualesEquipoCo.usuarioConfirmar}"
 							disabled="true">
@@ -690,15 +799,19 @@
 								listener="#{equipoController.agregarComentario}"
 								update="usuario_confirmar" />
 						</p:selectOneMenu>
-						<p:message for="usuario_confirmar" />
+
+
 
 
 
 						<p:outputLabel for="usuario_ubicacion" value="Ubicación Usuario:" />
-						<p:inputText id="usuario_ubicacion"
-							value="#{equipoController.manualesEquipo.usuarioUbicacion }"
-							required="true" />
-						<p:selectOneMenu id="console42"
+						<h:panelGrid>
+							<p:inputText id="usuario_ubicacion" style="width: 210px;"
+								value="#{equipoController.manualesEquipo.usuarioUbicacion }"
+								required="true" />
+							<p:message for="usuario_ubicacion" />
+						</h:panelGrid>
+						<p:selectOneMenu id="selectUsuario"
 							value="#{equipoController.manualesEquipoCo.usuarioUbicacion}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
 							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
@@ -707,37 +820,54 @@
 								listener="#{equipoController.agregarComentario}"
 								update="usuario_ubicacion" />
 						</p:selectOneMenu>
-						<p:message for="usuario_ubicacion" />
+
 
 
 					</h:panelGrid>
 				</p:panel>
+				<p:spacer height="10" />
 
+				<p:panel id="recomendacionesEdit" styleClass="widthGeneral"
+					toggleable="true">
+					<f:facet name="header">
+						<h:outputText
+							value="Recomendaciones del Fabricante y Condiciones Ambientales" />
+					</f:facet>
+					<h:panelGrid columns="3" styleClass="widthGeneral"
+						columnClasses="col3,col3,col3">
 
-				<p:panel id="recomendacionesEdit"
-					header="RECOMENDACIONES DEL FABRICANTE Y CONDICIONES AMBIENTALES">
-					<h:panelGrid columns="4" columnClasses="titleCell">
-
-						<p:outputLabel for="detalle" value="Detalle:" />						
-						<p:inputTextarea rows="6" cols="33" id="detalle"
-							value="#{equipoController.recomendacionesEquipo.detalle}"
-							required="true" />							
-						<p:message for="detalle" />
+						<p:outputLabel for="detalle" value="Detalle:" />
+						<h:panelGrid>
+							<p:inputTextarea rows="6" cols="33" id="detalle"
+								value="#{equipoController.recomendacionesEquipo.detalle}"
+								required="true" />
+							<p:message for="detalle" />
+						</h:panelGrid>
+						<p:spacer />
 
 					</h:panelGrid>
-
 				</p:panel>
+				<p:spacer height="10" />
 
-				<p:panel id="estadolEdit" header="ESTADO GENERAL DEL EQUIPO">
-					<h:panelGrid columns="4" columnClasses="titleCell">
+				<p:panel id="estadolEdit" styleClass="widthGeneral"
+					toggleable="true">
+					<f:facet name="header">
+						<h:outputText value="Estado general del Equipo" />
+					</f:facet>
+					<h:panelGrid columns="3" styleClass="widthGeneral"
+						columnClasses="col3,col3,col3">
 
 						<p:outputLabel for="estado_confirmar" value="Estado:" />
-						<p:selectOneRadio id="estado_confirmar" required="true"
-							value="#{equipoController.estadoEquipo.estadoConfirmar }">
-							<f:selectItem itemLabel="Bueno" itemValue="Bueno" />
-							<f:selectItem itemLabel="Regular" itemValue="Regular" />
-							<f:selectItem itemLabel="Malo" itemValue="Malo" />
-						</p:selectOneRadio>
+						<h:panelGrid>
+							<p:selectOneRadio id="estado_confirmar" required="true"
+								style="width: 210px;"
+								value="#{equipoController.estadoEquipo.estadoConfirmar }">
+								<f:selectItem itemLabel="Bueno" itemValue="Bueno" />
+								<f:selectItem itemLabel="Regular" itemValue="Regular" />
+								<f:selectItem itemLabel="Malo" itemValue="Malo" />
+							</p:selectOneRadio>
+							<p:message for="estado_confirmar" />
+						</h:panelGrid>
 						<p:selectOneMenu id="console24" disabled="true"
 							value="#{equipoController.estadoEquipoCo.estadoConfirmar}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
@@ -747,12 +877,13 @@
 								listener="#{equipoController.agregarComentario}"
 								update="estado_confirmar" />
 						</p:selectOneMenu>
-						<p:message for="estado_confirmar" />
-
 
 						<p:outputLabel for="causa2" value="Causas:" />
-						<p:inputTextarea rows="6" cols="33" id="causa2"
-							value="#{equipoController.estadoEquipo.causa }" required="true" />
+						<h:panelGrid>
+							<p:inputTextarea rows="6" cols="33" id="causa2"
+								value="#{equipoController.estadoEquipo.causa }" required="true" />
+							<p:message for="causa2" />
+						</h:panelGrid>
 						<p:selectOneMenu id="console25"
 							value="#{equipoController.estadoEquipoCo.causa}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
@@ -761,22 +892,32 @@
 							<p:ajax event="change"
 								listener="#{equipoController.agregarComentario}" update="causa2" />
 						</p:selectOneMenu>
-						<p:message for="causa2" />
+
 
 
 					</h:panelGrid>
 				</p:panel>
-				<p:panel id="funcionamiemtolEdit" header="FUNCIONAMIENTO DEL EQUIPO">
-					<h:panelGrid columns="4" columnClasses="titleCell">
+				<p:spacer height="10" />
+				<p:panel id="funcionamiemtolEdit" styleClass="widthGeneral"
+					toggleable="true">
+					<f:facet name="header">
+						<h:outputText value="Funcionamiento del Equipo" />
+					</f:facet>
+					<h:panelGrid columns="3" styleClass="widthGeneral"
+						columnClasses="col3,col3,col3">
 
 						<p:outputLabel for="funcionamiento_confirmar"
 							value="Funcionamiento:" />
-						<p:selectOneRadio id="funcionamiento_confirmar" required="true"
-							value="#{equipoController.funcionamientoEquipo.funcionamientoConfirmar }">
-							<f:selectItem itemLabel="Bueno" itemValue="Bueno" />
-							<f:selectItem itemLabel="Regular" itemValue="Regular" />
-							<f:selectItem itemLabel="Malo" itemValue="Malo" />
-						</p:selectOneRadio>
+						<h:panelGrid>
+							<p:selectOneRadio id="funcionamiento_confirmar" required="true"
+								style="width: 210px;"
+								value="#{equipoController.funcionamientoEquipo.funcionamientoConfirmar }">
+								<f:selectItem itemLabel="Bueno" itemValue="Bueno" />
+								<f:selectItem itemLabel="Regular" itemValue="Regular" />
+								<f:selectItem itemLabel="Malo" itemValue="Malo" />
+							</p:selectOneRadio>
+							<p:message for="funcionamiento_confirmar" />
+						</h:panelGrid>
 						<p:selectOneMenu id="console26" disabled="true"
 							value="#{equipoController.funcionamientoEquipoCo.funcionamientoConfirmar}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
@@ -786,14 +927,15 @@
 								listener="#{equipoController.agregarComentario}"
 								update="funcionamiento_confirmar" />
 						</p:selectOneMenu>
-						<p:message for="funcionamiento_confirmar" />
-
 
 						<p:outputLabel for="aniosFueraServicio"
 							value="Años Fuera Servicio:" />
-						<p:inputText id="aniosFueraServicio"
-							value="#{equipoController.funcionamientoEquipo.anioFueraServicio }"
-							required="true" />
+						<h:panelGrid>
+							<p:inputText id="aniosFueraServicio" style="width: 210px;"
+								value="#{equipoController.funcionamientoEquipo.anioFueraServicio }"
+								required="true" />
+							<p:message for="aniosFueraServicio" />
+						</h:panelGrid>
 						<p:selectOneMenu id="console27"
 							value="#{equipoController.funcionamientoEquipoCo.anioFueraServicio}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
@@ -803,13 +945,14 @@
 								listener="#{equipoController.agregarComentario}"
 								update="aniosFueraServicio" />
 						</p:selectOneMenu>
-						<p:message for="aniosFueraServicio" />
-
 
 						<p:outputLabel for="causa" value="Causas:" />
-						<p:inputTextarea rows="6" cols="33" id="causa"
-							value="#{equipoController.funcionamientoEquipo.causa }"
-							required="true" />
+						<h:panelGrid>
+							<p:inputTextarea rows="6" cols="33" id="causa"
+								value="#{equipoController.funcionamientoEquipo.causa }"
+								required="true" />
+							<p:message for="causa" />
+						</h:panelGrid>
 						<p:selectOneMenu id="console28"
 							value="#{equipoController.funcionamientoEquipoCo.causa}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
@@ -818,12 +961,14 @@
 							<p:ajax event="change"
 								listener="#{equipoController.agregarComentario}" update="causa" />
 						</p:selectOneMenu>
-						<p:message for="causa" />
 
 						<p:outputLabel for="fueraServicio" value="Fuera Servicio:" />
-						<p:selectBooleanButton id="fueraServicio"
-							value="#{equipoController.funcionamientoEquipo.fueraServicio }"
-							onLabel="SI" offLabel="NO" required="true" />
+						<h:panelGrid>
+							<p:selectBooleanButton id="fueraServicio"
+								value="#{equipoController.funcionamientoEquipo.fueraServicio }"
+								onLabel="SI" offLabel="NO" required="true" />
+							<p:message for="fueraServicio" />
+						</h:panelGrid>
 						<p:selectOneMenu id="console29" disabled="true"
 							value="#{equipoController.funcionamientoEquipoCo.fueraServicio}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
@@ -833,23 +978,29 @@
 								listener="#{equipoController.agregarComentario}"
 								update="fueraServicio" />
 						</p:selectOneMenu>
-						<p:message for="fueraServicio" />
 
 					</h:panelGrid>
-
 				</p:panel>
-
-				<p:panel id="tipoMantenimientoEdit"
-					header="TIPO DE MANTENIMIENTO AL QUE ES SOMETIDO EL EQUIPO">
-					<h:panelGrid columns="4" columnClasses="titleCell">
+				<p:spacer height="10" />
+				<p:panel id="tipoMantenimientoEdit" styleClass="widthGeneral"
+					toggleable="true">
+					<f:facet name="header">
+						<h:outputText
+							value="Tipo de Mantenimiendo al que es sometido el Equipo" />
+					</f:facet>
+					<h:panelGrid columns="3" styleClass="widthGeneral"
+						columnClasses="col3,col3,col3">
 
 						<p:outputLabel for="tipoMantenimientoPre" value="Preventivo:" />
-						<p:selectOneRadio id="tipoMantenimientoPre" required="true"
-							value="#{equipoController.tipoManteEquipoPre.valor}">
-							<f:selectItem itemLabel="Propio" itemValue="Propio" />
-							<f:selectItem itemLabel="Contratado" itemValue="Contratado" />
-						</p:selectOneRadio>
-
+						<h:panelGrid>
+							<p:selectOneRadio id="tipoMantenimientoPre" required="true"
+								style="width: 210px;"
+								value="#{equipoController.tipoManteEquipoPre.valor}">
+								<f:selectItem itemLabel="Propio" itemValue="Propio" />
+								<f:selectItem itemLabel="Contratado" itemValue="Contratado" />
+							</p:selectOneRadio>
+							<p:message for="tipoMantenimientoPre" />
+						</h:panelGrid>
 						<p:selectOneMenu id="console44" disabled="true"
 							value="#{equipoController.tipoManteEquipoPreCo.valor}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
@@ -859,12 +1010,15 @@
 								listener="#{equipoController.agregarComentario}"
 								update="tipoMantenimientoPre" />
 						</p:selectOneMenu>
-						<p:message for="tipoMantenimientoPre" />
+
 
 						<p:outputLabel for="cual" value="¿Cúal?:" />
-						<p:inputTextarea rows="6" cols="33" id="cual"
-							value="#{equipoController.tipoManteEquipoPre.cual}"
-							required="true" />
+						<h:panelGrid>
+							<p:inputTextarea rows="6" cols="33" id="cual"
+								value="#{equipoController.tipoManteEquipoPre.cual }"
+								required="true" />
+							<p:message for="cual" />
+						</h:panelGrid>
 						<p:selectOneMenu id="console47"
 							value="#{equipoController.tipoManteEquipoPreCo.cual}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
@@ -873,15 +1027,17 @@
 							<p:ajax event="change"
 								listener="#{equipoController.agregarComentario}" update="cual" />
 						</p:selectOneMenu>
-						<p:message for="cual" />
-
 
 						<p:outputLabel for="tipoMantenimientoCor" value="Correctivo:" />
-						<p:selectOneRadio id="tipoMantenimientoCor" required="true"
-							value="#{equipoController.tipoManteEquipoCorr.valor}">
-							<f:selectItem itemLabel="Propio" itemValue="Propio" />
-							<f:selectItem itemLabel="Contratado" itemValue="Contratado" />
-						</p:selectOneRadio>
+						<h:panelGrid>
+							<p:selectOneRadio id="tipoMantenimientoCor" required="true"
+								style="width: 210px;"
+								value="#{equipoController.tipoManteEquipoCorr.valor}">
+								<f:selectItem itemLabel="Propio" itemValue="Propio" />
+								<f:selectItem itemLabel="Contratado" itemValue="Contratado" />
+							</p:selectOneRadio>
+							<p:message for="tipoMantenimientoCor" />
+						</h:panelGrid>
 						<p:selectOneMenu id="console461" disabled="true"
 							value="#{equipoController.tipoManteEquipoCorrCo.valor}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
@@ -891,13 +1047,16 @@
 								listener="#{equipoController.agregarComentario}"
 								update="tipoMantenimientoCor" />
 						</p:selectOneMenu>
-						<p:message for="tipoMantenimientoCor" />
+
 
 
 						<p:outputLabel for="cual1" value="¿Cúal?:" />
-						<p:inputTextarea rows="6" cols="33" id="cual1"
-							value="#{equipoController.tipoManteEquipoCorr.cual }"
-							required="true" />
+						<h:panelGrid>
+							<p:inputTextarea rows="6" cols="33" id="cual1"
+								value="#{equipoController.tipoManteEquipoCorr.cual }"
+								required="true" />
+							<p:message for="cual1" />
+						</h:panelGrid>
 						<p:selectOneMenu id="console471"
 							value="#{equipoController.tipoManteEquipoCorrCo.cual}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
@@ -906,27 +1065,24 @@
 							<p:ajax event="change"
 								listener="#{equipoController.agregarComentario}" update="cual1" />
 						</p:selectOneMenu>
-						<p:message for="cual1" />
+
 
 					</h:panelGrid>
 				</p:panel>
+				<p:spacer height="10" />
+				<p:panel id="panelDatosEmpresa" styleClass="widthGeneral"
+					toggleable="true">
+					<f:facet name="header">
+						<h:outputText value="Empresa" />
+					</f:facet>
 
-				<div style="clear: both" />
-
-
-			</p:panel>
-
-			<p:tabView>
-				<p:tab title="Empresa" id="empresaTab">
-
-					<h:panelGroup rendered="#{empty equipoController.listaEmpresa}">
-						<em>No existen Empresas</em>
-					</h:panelGroup>
+					<h:outputLabel rendered="#{empty equipoController.listaEmpresa}"
+						value="No existen Empresas" />
 
 					<p:dataTable var="_object" value="#{equipoController.listaEmpresa}"
 						rendered="#{not empty equipoController.listaEmpresa}"
 						id="empresaList" paginator="true" paginatorPosition="bottom"
-						rowKey="#{_object.id}"
+						rowKey="#{_object.id}" styleClass="widthGeneral"
 						selection="#{empresaController.selectEmpresas}">
 
 						<p:column id="c1" headerText="Razón Social">
@@ -954,28 +1110,28 @@
 						</p:column>
 					</p:dataTable>
 
-					<p:panel id="empreTabButton" align="right">
+					<p:panel id="empreTabButton" styleClass="panelBotonHI"
+						style="border: transparent;">
 						<p:commandButton id="selectEmpresa" action="empresaSelecction"
 							update="@form"
 							value="#{empresaController.refer != null ?  'Cambiar Empresa' : 'Seleccionar'}" />
 					</p:panel>
+				</p:panel>
+				<p:panel id="groupButtonBottom" styleClass="panelBotonHI"
+					style="border: transparent;">
+					<p:commandButton id="create" value="Guardar"
+						action="#{equipoController.crear}"
+						rendered="#{!equipoController.editMode}" update="@form" />
 
-				</p:tab>
-			</p:tabView>
+					<p:commandButton id="update" value="Guardar"
+						action="#{equipoController.actualizar}"
+						rendered="#{equipoController.editMode}" update="@form" />
 
-			<p:panel id="groupButton" align="right">
-				<p:commandButton id="create" styleClass="" value="Guardar"
-					action="#{equipoController.crear}"
-					rendered="#{!equipoController.editMode}" update="@form" />
+					<p:commandButton id="cancel" value="Cancelar"
+						action="#{equipoController.cancelar}" immediate="true" />
+				</p:panel>
 
-				<p:commandButton id="update" styleClass="" value="Guardar"
-					action="#{equipoController.actualizar}"
-					rendered="#{equipoController.editMode}" update="@form" />
-
-				<p:commandButton id="cancel" styleClass="" value="Cancelar"
-					action="#{equipoController.cancelar}" immediate="true" />
 			</p:panel>
-
 		</h:form>
 
 	</ui:define>

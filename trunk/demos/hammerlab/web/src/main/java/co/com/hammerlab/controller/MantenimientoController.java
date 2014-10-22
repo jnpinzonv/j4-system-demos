@@ -210,7 +210,7 @@ public class MantenimientoController implements Serializable {
                 conversation.begin();
             }
             bandera = Boolean.TRUE;
-            equipoHospitalario = controller.getSelectEquipos().get(0);
+            equipoHospitalario = !controller.getSelectEquipos().isEmpty() ? controller.getSelectEquipos().get(0) : null;
             newObject = new MantenimientoEquipo();
             busqueda();
             selectMantenimiento = null;

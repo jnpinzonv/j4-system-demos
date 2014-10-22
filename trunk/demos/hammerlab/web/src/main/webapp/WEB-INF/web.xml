@@ -29,7 +29,6 @@
 		<param-value>server</param-value>
 	</context-param>
 	
-	
 	<!-- Filtro para cargar archivos -->
 	<filter>
 		<filter-name>PrimeFaces FileUpload Filter</filter-name>
@@ -40,6 +39,10 @@
 		<servlet-name>Faces Servlet</servlet-name>
 	</filter-mapping>
 	
+	<context-param>
+		<param-name>primefaces.THEME</param-name>
+		<param-value>redmond</param-value>
+	</context-param>
 	
 
 	<!-- Lista de las paginas de inicio -->

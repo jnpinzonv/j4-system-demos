@@ -8,6 +8,10 @@
 	xmlns:p="http://primefaces.org/ui"
 	template="/WEB-INF/templates/default.xhtml">
 
+	<ui:define name="titulo">
+		<h:outputText value="Mantenimiento" />
+	</ui:define>
+
 	<ui:define name="metadata">
 		<f:metadata>
 			<f:event type="preRenderView"
@@ -15,38 +19,44 @@
 		</f:metadata>
 	</ui:define>
 
-	<ui:define name="content">
+	<ui:define name="contenido">
 
 		<h:form id="formManteni">
-			<p:panel id="panelEmpresas" header="Busqueda">
-				<p:outputLabel for="IdTransaccion" value="Identificador de generación:" />
-				<p:inputText id="IdTransaccion" 
-					value="#{mantenimientoController.newObject.idTransaccion}" />
+			<p:panel id="panelEmpresas" styleClass="widthGeneral">
+				<f:facet name="header">
+					<h:outputLabel value="Busqueda" />
+				</f:facet>
+				<h:panelGrid columns="2" styleClass="widthGeneral"
+					columnClasses="col2,col2">
+					<p:outputLabel for="IdTransaccion"
+						value="Identificador de generación:" />
+					<p:inputText id="IdTransaccion"
+						value="#{mantenimientoController.newObject.idTransaccion}" />
+				</h:panelGrid>
 
-
-				<div style="clear: both" />
-
-				<p:panel id="groupButton" align="right">
-					<p:commandButton id="search" value="Buscar" update =":formManteni"
+				<p:panel id="groupButton" styleClass="panelBotonHI"
+					style="border: transparent;">
+					<p:commandButton id="search" value="Buscar" update=":formManteni"
 						action="#{mantenimientoController.busqueda}" />
 
-					<p:commandButton id="reset" value="Reiniciar" immediate="true" update =":formManteni"
+					<p:commandButton id="reset" value="Reiniciar" immediate="true"
+						update=":formManteni"
 						action="#{mantenimientoController.reiniciar}" />
 				</p:panel>
 
-				<div style="clear: both" />
 			</p:panel>
 
+			<p:spacer height="10" />
+			<p:panel id="panellistaMantenimientos" styleClass="widthGeneral">
+				<f:facet name="header">
+					<h:outputLabel value="Lista de Mantenimientos" />
+				</f:facet>
 
-			<p:panel id="panellistaMantenimientos"
-				header="Lista de Mantenimientos">
+				<h:outputLabel rendered="#{empty empresaController.listaEmpresa}"
+					value="No existen Mantenimientos para este equipo" />
 
-				<h:panelGroup
-					rendered="#{empty mantenimientoController.listaMantenimiento}">
-					<em>No existen Mantenimientos para este equipo</em>
-				</h:panelGroup>
-
-				<p:panel id="groupButtonTop" align="right">
+				<p:panel id="groupButtonTop" styleClass="panelBotonHI"
+					style="border: transparent;">
 
 					<p:commandButton id="createButtonTop"
 						action="#{mantenimientoController.initCrearModo}" value="Crear"
@@ -89,10 +99,8 @@
 					value="#{mantenimientoController.listaMantenimiento}"
 					rendered="#{not empty mantenimientoController.listaMantenimiento}"
 					id="empresaList" paginator="true" paginatorPosition="bottom"
-					rowKey="#{_object.id}"
+					rowKey="#{_object.id}" styleClass="widthGeneral"
 					selection="#{mantenimientoController.selectMantenimiento}">
-
-
 
 					<p:column id="c1" headerText="id">
 						<h:outputText value="#{_object.id}" />
@@ -106,7 +114,7 @@
 						<h:outputText value="#{_object.estadoMantenimiento}" />
 					</p:column>
 
-					<p:column id="c4" headerText="Hoja Fisica #">
+					<p:column id="c4" headerText="No. Hoja Fisica">
 						<h:outputText value="#{_object.numeroHojaFisica}" />
 					</p:column>
 
@@ -125,16 +133,17 @@
 
 
 
-				<p:panel id="groupButtonBottom" align="right"
-					rendered="#{mantenimientoController.listaMantenimiento.size() > 0}">
+				<p:panel id="groupButtonBottom" styleClass="panelBotonHI"
+					style="border: transparent;"
+					rendered="#{mantenimientoController.listaMantenimiento.size() > 10}">
 
 					<p:commandButton id="createButtonBottom"
 						action="#{mantenimientoController.initCrearModo}"
 						styleClass="pButtonEnabled" value="Crear" />
 
 					<p:commandButton id="editButtonBottom"
-						action="#{mantenimientoController.initEditarModo}" immediate="true"
-						value="Editar"
+						action="#{mantenimientoController.initEditarModo}"
+						immediate="true" value="Editar"
 						disabled="#{mantenimientoController.selectMantenimiento.size() != 1}" />
 
 					<p:commandButton id="viewButtonBottom"
@@ -172,9 +181,6 @@
 					styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
 			</p:confirmDialog>
 		</h:form>
-
-
-
 
 	</ui:define>
 </ui:composition>

@@ -7,6 +7,11 @@
 	xmlns:c="http://java.sun.com/jstl/core"
 	xmlns:p="http://primefaces.org/ui"
 	template="/WEB-INF/templates/default.xhtml">
+
+	<ui:define name="titulo">
+		<h:outputText value="Detalle de Equipo Hospitalario" />
+	</ui:define>
+
 	<ui:define name="metadata">
 		<f:metadata>
 			<f:viewParam name="accion" value="#{equipoController.accion}" />
@@ -15,15 +20,22 @@
 		</f:metadata>
 	</ui:define>
 
-	<ui:define name="content">
+	<ui:define name="contenido">
 
 		<h:form id="empresaEdit">
-			<p:panel id="empresaPanelEdit"
-				header="Detalles de Equipo Hospitalario">
+			<p:panel id="empresaPanelEdit" styleClass="widthGeneral">
+				<f:facet name="header">
+					<h:outputText value="Detalle de Equipo Hospitalario" />
+				</f:facet>
 
+				<p:panel id="basicalEdit" styleClass="widthGeneral"
+					toggleable="true">
+					<f:facet name="header">
+						<h:outputText value="Datos Generales" />
+					</f:facet>
 
-				<p:panel id="basicalEdit" header="DATOS GENERALES">
-					<h:panelGrid columns="4" columnClasses="titleCell">
+					<h:panelGrid columns="4" styleClass="widthGeneral" cellpadding="0"
+						cellspacing="0" columnClasses="col4,col4,col4,col4">
 
 						<p:outputLabel for="nombreEquipo" value="Nombre del Equipo:" />
 						<p:outputLabel id="nombreEquipo"
@@ -33,12 +45,9 @@
 						<p:outputLabel id="marca"
 							value="#{equipoController.newObject.marca}" />
 
-
 						<p:outputLabel for="modelo" value="Modelo:" />
 						<p:outputLabel id="modelo"
 							value="#{equipoController.newObject.modelo}" />
-
-
 
 						<p:outputLabel for="ubicacion" value="Ubicación:" />
 						<p:outputLabel id="ubicacion"
@@ -47,20 +56,30 @@
 						<p:outputLabel for="fabricante" value="Fabricante:" />
 						<p:outputLabel id="fabricante"
 							value="#{equipoController.newObject.fabricante }" />
+
 						<p:outputLabel for="representanteCol"
 							value="Representante Colombia:" />
 						<p:outputLabel id="representanteCol"
 							value="#{equipoController.newObject.representanteCol }" />
+
 						<p:outputLabel for="direccion" value="Dirección:" />
 						<p:outputLabel id="direccion"
 							value="#{equipoController.newObject.direccion }" />
+
 						<p:outputLabel for="telefono" value="Telefono:" />
 						<p:outputLabel id="telefono"
 							value="#{equipoController.newObject.telefono }" />
+
 					</h:panelGrid>
 				</p:panel>
-				<p:panel id="tecnicalEdit" header="INFORMACION TECNICA">
-					<h:panelGrid columns="4" columnClasses="titleCell">
+				<p:spacer height="10" />
+				<p:panel id="tecnicalEdit" styleClass="widthGeneral"
+					toggleable="true">
+					<f:facet name="header">
+						<h:outputText value="Información Técnica" />
+					</f:facet>
+					<h:panelGrid columns="4" styleClass="widthGeneral" cellpadding="0"
+						cellspacing="0" columnClasses="col4,col4,col4,col4">
 
 						<p:outputLabel for="voltaje2" value="Voltaje (V):" />
 						<p:outputLabel id="voltaje2"
@@ -90,10 +109,14 @@
 							value="#{equipoController.infoTecnica.insumos }" />
 					</h:panelGrid>
 				</p:panel>
-
-				<p:panel id="adquisicionlEdit"
-					header="PROPIEDAD, ADQUISICION, OPERACIÓN Y GARANTIA">
-					<h:panelGrid columns="4" columnClasses="titleCell">
+				<p:spacer height="10" />
+				<p:panel id="adquisicionlEdit" toggleable="true"
+					styleClass="widthGeneral">
+					<f:facet name="header">
+						<h:outputText value="Propiedad, Adquisición, Operación y Garantía" />
+					</f:facet>
+					<h:panelGrid columns="4" styleClass="widthGeneral" cellpadding="0"
+						cellspacing="0" columnClasses="col4,col4,col4,col4">
 
 						<p:outputLabel for="fechaAdquisicion" value="Fecha Adquisición:" />
 						<p:outputLabel id="fechaAdquisicion"
@@ -160,8 +183,13 @@
 
 					</h:panelGrid>
 				</p:panel>
-				<p:panel id="planoslEdit" header="PLANOS">
-					<h:panelGrid columns="4" columnClasses="titleCell" cellpadding="5">
+				<p:spacer height="10" />
+				<p:panel id="planosEdit" styleClass="widthGeneral" toggleable="true">
+					<f:facet name="header">
+						<h:outputText value="Planos" />
+					</f:facet>
+					<h:panelGrid columns="4" styleClass="widthGeneral" cellpadding="0"
+						cellspacing="0" columnClasses="col4,col4,col4,col4">
 
 						<p:outputLabel for="instalacion_confirmar" value="Instalación:" />
 						<p:outputLabel id="instalacion_confirmar"
@@ -177,12 +205,9 @@
 							value="#{equipoController.planosEquipo.partesConfirmar }"
 							onLabel="SI" offLabel="NO" />
 
-
-
 						<p:outputLabel for="partes_ubicacion" value="Ubicación Partes:" />
 						<p:outputLabel id="partes_ubicacion"
 							value="#{equipoController.planosEquipo.partesUbicacion }" />
-
 
 						<p:outputLabel for="funcionamiento_confirmar2"
 							value="Funcionamiento:" />
@@ -197,8 +222,14 @@
 					</h:panelGrid>
 				</p:panel>
 
-				<p:panel id="manualeslEdit" header="MANUALES">
-					<h:panelGrid columns="4" columnClasses="titleCell">
+				<p:spacer height="10" />
+				<p:panel id="manualeslEdit" styleClass="widthGeneral"
+					toggleable="true">
+					<f:facet name="header">
+						<h:outputText value="Manuales" />
+					</f:facet>
+					<h:panelGrid columns="4" styleClass="widthGeneral" cellpadding="0"
+						cellspacing="0" columnClasses="col4,col4,col4,col4">
 
 						<p:outputLabel for="tecnico_confirmar" value="Técnico:" />
 						<p:outputLabel id="tecnico_confirmar"
@@ -210,55 +241,55 @@
 						<p:outputLabel id="tecnico_ubicacion"
 							value="#{equipoController.manualesEquipo.tecnicoUbicacion }" />
 
-
-
 						<p:outputLabel for="servicio_confirmar" value="De Servicio:" />
 						<p:outputLabel id="servicio_confirmar"
 							value="#{equipoController.manualesEquipo.servicioConfirmar }"
 							onLabel="SI" offLabel="NO" />
-
-
-
 
 						<p:outputLabel for="servicio_ubicacion"
 							value="Ubicación Servicio:" />
 						<p:outputLabel id="servicio_ubicacion"
 							value="#{equipoController.manualesEquipo.servicioUbicacion }" />
 
-
-
 						<p:outputLabel for="usuario_confirmar" value="De Usuario:" />
 						<p:outputLabel id="usuario_confirmar"
 							value="#{equipoController.manualesEquipo.usuarioConfirmar }"
 							onLabel="SI" offLabel="NO" />
 
-
-
-
 						<p:outputLabel for="usuario_ubicacion" value="Ubicación Usuario:" />
 						<p:outputLabel id="usuario_ubicacion"
 							value="#{equipoController.manualesEquipo.usuarioUbicacion }" />
 
-
-
 					</h:panelGrid>
 				</p:panel>
+				<p:spacer height="10" />
 
-
-				<p:panel id="recomendacionesEdit"
-					header="RECOMENDACIONES DEL FABRICANTE Y CONDICIONES AMBIENTALES">
-					<h:panelGrid columns="4" columnClasses="titleCell">
+				<p:panel id="recomendacionesEdit" styleClass="widthGeneral"
+					toggleable="true">
+					<f:facet name="header">
+						<h:outputText
+							value="Recomendaciones del Fabricante y Condiciones Ambientales" />
+					</f:facet>
+					<h:panelGrid columns="4" styleClass="widthGeneral" cellpadding="0"
+						cellspacing="0" columnClasses="col4,col4,col4,col4">
 
 						<p:outputLabel for="detalle" value="Detalle:" />
 						<p:outputLabel rows="6" cols="33" id="detalle"
 							value="#{equipoController.recomendacionesEquipo.detalle}" />
-
+						<p:spacer />
+						<p:spacer />
 					</h:panelGrid>
 
 				</p:panel>
 
-				<p:panel id="estadolEdit" header="ESTADO GENERAL DEL EQUIPO">
-					<h:panelGrid columns="4" columnClasses="titleCell">
+				<p:spacer height="10" />
+				<p:panel id="estadolEdit" styleClass="widthGeneral"
+					toggleable="true">
+					<f:facet name="header">
+						<h:outputText value="Estado general del Equipo" />
+					</f:facet>
+					<h:panelGrid columns="4" styleClass="widthGeneral" cellpadding="0"
+						cellspacing="0" columnClasses="col4,col4,col4,col4">
 
 						<p:outputLabel for="estado_confirmar" value="Estado:" />
 						<p:outputLabel id="estado_confirmar"
@@ -269,14 +300,19 @@
 
 					</h:panelGrid>
 				</p:panel>
-				<p:panel id="funcionamiemtolEdit" header="FUNCIONAMIENTO DEL EQUIPO">
-					<h:panelGrid columns="4" columnClasses="titleCell">
+				<p:spacer height="10" />
+				<p:panel id="funcionamiemtolEdit" styleClass="widthGeneral"
+					toggleable="true">
+					<f:facet name="header">
+						<h:outputText value="Funcionamiento del Equipo" />
+					</f:facet>
+					<h:panelGrid columns="4" styleClass="widthGeneral" cellpadding="0"
+						cellspacing="0" columnClasses="col4,col4,col4,col4">
 
 						<p:outputLabel for="funcionamiento_confirmar"
 							value="Funcionamiento:" />
 						<p:outputLabel id="funcionamiento_confirmar"
 							value="#{equipoController.funcionamientoEquipo.funcionamientoConfirmar }" />
-
 
 						<p:outputLabel for="aniosFueraServicio"
 							value="Años Fuera Servicio:" />
@@ -296,19 +332,23 @@
 
 				</p:panel>
 
-				<p:panel id="tipoMantenimientoEdit"
-					header="TIPO DE MANTENIMIENTO AL QUE ES SOMETIDO EL EQUIPO">
-					<h:panelGrid columns="4" columnClasses="titleCell">
+				<p:spacer height="10" />
+				<p:panel id="tipoMantenimientoEdit" styleClass="widthGeneral"
+					toggleable="true">
+					<f:facet name="header">
+						<h:outputText
+							value="Tipo de Mantenimiendo al que es sometido el Equipo" />
+					</f:facet>
+					<h:panelGrid columns="4" styleClass="widthGeneral" cellpadding="0"
+						cellspacing="0" columnClasses="col4,col4,col4,col4">
 
 						<p:outputLabel for="tipoMantenimientoPre" value="Preventivo:" />
 						<p:outputLabel id="tipoMantenimientoPre"
 							value="#{equipoController.tipoManteEquipoCorr.valor}" />
 
-
 						<p:outputLabel for="cual" value="¿Cúal?:" />
 						<p:outputLabel rows="6" cols="33" id="cual"
 							value="#{equipoController.tipoManteEquipoPre.cual }" />
-
 
 						<p:outputLabel for="tipoMantenimientoCor" value="Correctivo:" />
 						<p:outputLabel id="tipoMantenimientoCor"
@@ -318,21 +358,17 @@
 						<p:outputLabel rows="6" cols="33" id="cual1"
 							value="#{equipoController.tipoManteEquipoCorr.cual }" />
 
-
 					</h:panelGrid>
 				</p:panel>
+				<p:spacer height="10" />
+				<p:panel id="panelDatosEmpresa" styleClass="widthGeneral"
+					toggleable="true">
+					<f:facet name="header">
+						<h:outputText value="Empresa" />
+					</f:facet>
 
-				<div style="clear: both" />
-
-
-			</p:panel>
-
-			<p:tabView>
-				<p:tab title="Empresa" id="empresaTab">
-
-					<h:panelGroup rendered="#{empty equipoController.listaEmpresa}">
-						<em>No existen Empresas</em>
-					</h:panelGroup>
+					<h:outputLabel rendered="#{empty equipoController.listaEmpresa}"
+						value="No existen Empresas" />
 
 					<p:dataTable var="_object" value="#{equipoController.listaEmpresa}"
 						rendered="#{not empty equipoController.listaEmpresa}"
@@ -364,14 +400,15 @@
 							<h:outputText value="#{_object.sitioWeb}" />
 						</p:column>
 					</p:dataTable>
-				</p:tab>
-			</p:tabView>
 
-			<p:panel id="groupButton" align="right">
-				<p:commandButton id="cancel" styleClass="" value="Cancelar"
-					action="#{equipoController.cancelar}" immediate="true" />
+
+				</p:panel>
+				<p:panel id="empreTabButton" styleClass="panelBotonHI"
+					style="border: transparent;">
+					<p:commandButton id="cancel" styleClass="" value="Cancelar"
+						action="#{equipoController.cancelar}" immediate="true" />
+				</p:panel>
 			</p:panel>
-
 		</h:form>
 
 	</ui:define>
