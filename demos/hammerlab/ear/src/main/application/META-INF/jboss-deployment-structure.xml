@@ -7,15 +7,15 @@
 			<module name="org.apache.log4j" export="true" />
 			<module name="org.dom4j" export="true" />
 			<module name="org.apache.commons.logging" export="true" />
-			<module name="org.apache.commons.collections" export="true"/>
+			<module name="org.apache.commons.collections" export="true" />
 			<module name="javax.faces.api" slot="main" export="true" />
 			<module name="com.sun.jsf-impl" slot="main" export="true" />
-			
+
 			<module name="com.sun.xml.messaging.saaj" export="true" />
 			<module name="org.apache.xerces" export="true" />
-			<module name="org.apache.commons.codec" export="true"/>
-			<module name="org.apache.commons.lang" export="true"/>
-			
+			<module name="org.apache.commons.codec" export="true" />
+			<module name="org.apache.commons.lang" export="true" />
+
 		</dependencies>
 	</deployment>
 	
@@ -27,4 +27,4 @@
 		</dependencies>
 	</sub-deployment>
 
-	</jboss-deployment-structure>
+</jboss-deployment-structure>

@@ -6,54 +6,79 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:c="http://java.sun.com/jstl/core"
 	xmlns:p="http://primefaces.org/ui"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j"
 	template="/WEB-INF/templates/default.xhtml">
 
-	<ui:define name="content">
+	<ui:define name="titulo">
+		<h:outputLabel value="Actualizar Cliente"
+			rendered="#{empresaController.editMode}" />
+		<h:outputLabel value="Crear Cliente"
+			rendered="#{not empresaController.editMode}" />
+	</ui:define>
 
+	<ui:define name="contenido">
 		<h:form id="empresaEdit">
-			<p:panel id="empresaPanelEdit"
-				header="#{empresaController.editMode ? 'Actualizar Cliente' : 'Crear Cliente'}">
-
-				<h:panelGrid id="idForm" columns="3" columnClasses="titleCell">
+			<p:panel id="empresaPanelEdit" styleClass="widthGeneral">
+				<f:facet name="header">
+					<h:outputLabel value="Actualizar Cliente"
+						rendered="#{empresaController.editMode}" />
+					<h:outputLabel value="Crear Cliente"
+						rendered="#{not empresaController.editMode}" />
+				</f:facet>
+				<h:panelGrid id="idForm" columns="4" styleClass="widthGeneral"
+					columnClasses="col4,col4,col4,col4">
 
 					<p:outputLabel for="razonSocial" value="Razón Social:" />
-					<p:inputText id="razonSocial"
-						value="#{empresaController.newObject.razonSocial}" required="true" />
-					<p:message for="razonSocial" />
+					<h:panelGrid>
+						<p:inputText id="razonSocial"
+							value="#{empresaController.newObject.razonSocial}"
+							required="true" />
+						<p:message for="razonSocial" />
+					</h:panelGrid>
 
 					<p:outputLabel for="nit" value="NIT:" />
-					<p:inputText id="nit" value="#{empresaController.newObject.nit }"
-						required="true" />
-					<p:message for="nit" />
+					<h:panelGrid>
+						<p:inputText id="nit" value="#{empresaController.newObject.nit }"
+							required="true" />
+						<p:message for="nit" />
+					</h:panelGrid>
 
 					<p:outputLabel for="telefono" value="Telefono:" />
-					<p:inputText id="telefono"
-						value="#{empresaController.newObject.telefono }" required="true" />
-					<p:message for="telefono" />
+					<h:panelGrid>
+						<p:inputText id="telefono"
+							value="#{empresaController.newObject.telefono }" required="true" />
+						<p:message for="telefono" />
+					</h:panelGrid>
 
 					<p:outputLabel for="direccion" value="Dirección:" />
-					<p:inputText id="direccion"
-						value="#{empresaController.newObject.direccion }" required="false" />
-					<p:message for="direccion" />
+					<h:panelGrid>
+						<p:inputText id="direccion"
+							value="#{empresaController.newObject.direccion }"
+							required="false" />
+						<p:message for="direccion" />
+					</h:panelGrid>
 
 					<p:outputLabel for="correoElectronico" value="Correo Electronico:" />
-					<p:inputText id="correoElectronico"
-						value="#{empresaController.newObject.correoElectronico}"
-						required="true" />
-					<p:message for="correoElectronico" />
+					<h:panelGrid>
+						<p:inputText id="correoElectronico"
+							value="#{empresaController.newObject.correoElectronico}"
+							required="true" />
+						<p:message for="correoElectronico" />
+					</h:panelGrid>
 
-					<p:outputLabel for="sitioWeb" value="sitio Web:" />
-					<p:inputText id="sitioWeb"
-						value="#{empresaController.newObject.sitioWeb }" required="false" />
-					<p:message for="sitioWeb" />
+					<p:outputLabel for="sitioWeb" value="Sitio Web:" />
+					<h:panelGrid>
+						<p:inputText id="sitioWeb"
+							value="#{empresaController.newObject.sitioWeb }" required="false" />
+						<p:message for="sitioWeb" />
+					</h:panelGrid>
 
 				</h:panelGrid>
 
-				<div style="clear: both" />
 
-				<!-- p:requiredFields /> -->
-
-				<p:panel id="groupButton" align="right">
+				<p:panel id="groupButton" styleClass="panelBotonHI"
+					style="border: transparent;">
 					<p:commandButton id="create" styleClass="" value="Guardar"
 						action="#{empresaController.crear}"
 						rendered="#{!empresaController.editMode}" update="@form" />
@@ -66,7 +91,6 @@
 						action="#{empresaController.cancelar}" immediate="true" />
 				</p:panel>
 
-				<div style="clear: both" />
 
 			</p:panel>
 		</h:form>
