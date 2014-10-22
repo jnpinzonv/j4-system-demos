@@ -16,17 +16,19 @@
     limitations under the License.
 -->
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui"
-	template="/WEB-INF/templates/default.xhtml"
-	xmlns:a4j="http://richfaces.org/a4j"
-	xmlns:rich="http://richfaces.org/rich">
-	<ui:define name="titulo">
-		<h:outputText value="Inicio"></h:outputText>
-	</ui:define>
-	<ui:define name="contenido">
-		<ui:include src="/comun/bienvenida.xhtml" />
-	</ui:define>
+   xmlns:ui="http://java.sun.com/jsf/facelets"
+   xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:h="http://java.sun.com/jsf/html"
+   template="/WEB-INF/templates/default.xhtml">
+   <ui:define name="content">
+     
+
+      
+
+      <h:form id="reg">
+         <h2>Member Registration</h2>
+  		<ui:include src="/comun/bienvenida.xhtml" />
+      </h:form>
+     
+   </ui:define>
 </ui:composition>
