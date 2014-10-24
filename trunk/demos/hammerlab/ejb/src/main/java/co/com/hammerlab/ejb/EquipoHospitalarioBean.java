@@ -2,10 +2,14 @@ package co.com.hammerlab.ejb;
 
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.ejb.Stateless;
+import javax.ejb.TransactionManagement;
+import javax.ejb.TransactionManagementType;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.transaction.UserTransaction;
 
 import co.com.hammerlab.model.EquipoHospitalario;
 
@@ -17,6 +21,7 @@ import co.com.hammerlab.model.EquipoHospitalario;
  * @author Josué Nicolás Pinzón Villamil <jnpinzonv@gmail.com>
  */
 @Stateless
+@TransactionManagement(TransactionManagementType.BEAN)
 public class EquipoHospitalarioBean {
 
     /**
@@ -26,16 +31,31 @@ public class EquipoHospitalarioBean {
     private EntityManager entityManager;
 
     /**
+     * Manejador de transacciones para el EJB
+     */
+    @Resource
+    private UserTransaction tx;
+
+    /**
      * Persiste un objeto en la base de datos
      * 
      * @param obj
      *            Onjeto a ser persistido
+     * @throws Exception
      */
-    public void save(Object... obj) {
-        for (Object object : obj) {
-            entityManager.persist(object);
+    public void save(Object... obj) throws Exception {
+
+        try {
+
+            tx.begin();
+            for (Object object : obj) {
+                entityManager.persist(object);
+            }
+            tx.commit();
+        } catch (Exception e) {
+            tx.rollback();
+            throw new Exception(e);
         }
-
     }
 
     /**
@@ -44,8 +64,16 @@ public class EquipoHospitalarioBean {
      * @param obj
      *            Onjeto a ser persistido
      */
-    public void save(EquipoHospitalario obj) {
-        entityManager.persist(obj);
+    public void save(EquipoHospitalario obj) throws Exception{
+        try {
+
+            tx.begin();
+            entityManager.persist(obj);
+            tx.commit();
+        } catch (Exception e) {
+            tx.rollback();
+            throw new Exception(e);
+        }
     }
 
     /**
@@ -54,19 +82,35 @@ public class EquipoHospitalarioBean {
      * @param obj
      *            Objeto a ser actualizado
      */
-    public void update(EquipoHospitalario obj) {
-        entityManager.merge(obj);
+    public void update(EquipoHospitalario obj)throws Exception {
+        try {
+
+            tx.begin();
+            entityManager.merge(obj);
+            tx.commit();
+        } catch (Exception e) {
+            tx.rollback();
+            throw new Exception(e);
+        }
     }
-    
+
     /**
      * Actualiza un objeto en base de datos
      * 
      * @param obj
      *            Objeto a ser actualizado
      */
-    public void update(Object... obj) {
-        for (Object object : obj) {
-        entityManager.merge(object);
+    public void update(Object... obj)throws Exception {
+        try {
+
+            tx.begin();
+            for (Object object : obj) {
+                entityManager.merge(object);
+            }
+            tx.commit();
+        } catch (Exception e) {
+            tx.rollback();
+            throw new Exception(e);
         }
     }
 
@@ -75,10 +119,41 @@ public class EquipoHospitalarioBean {
      * 
      * @param idObj
      *            Parametro de filtro de eliminacion
+     * @throws Exception 
      */
-    public void delete(Long idObj) {
-        EquipoHospitalario obj = entityManager.find(EquipoHospitalario.class, idObj);
-        entityManager.remove(obj);
+    public void delete(Long idObj) throws Exception {
+        try {
+
+            tx.begin();
+            EquipoHospitalario obj = entityManager.find(EquipoHospitalario.class, idObj);
+            entityManager.remove(obj);
+            tx.commit();
+        } catch (Exception e) {
+            tx.rollback();
+            throw new Exception(e);
+        }
+    }
+
+    /**
+     * Elimina un objeto en base de datos
+     * 
+     * @param idObj
+     *            Parametro de filtro de eliminacion
+     * @throws Exception
+     */
+    public void delete(Object... obj) throws Exception {
+
+        try {
+
+            tx.begin();
+            for (Object object : obj) {
+                entityManager.remove(object);
+            }
+            tx.commit();
+        } catch (Exception e) {
+            tx.rollback();
+            throw new Exception(e);
+        }
     }
 
     /**

@@ -16,7 +16,7 @@
 --
 
 -- You can use this file to load seed data into the database using SQL statements
-truncate parametros_generales
+truncate parametros_generales;
 
 insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(1,'ubicacion1','Urgencias','UBICACION','Ubicacion de equipos medicos');
 insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(2,'ubicacion2','Sala de Partos','UBICACION','Ubicacion de equipos medicos');

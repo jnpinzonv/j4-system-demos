@@ -70,6 +70,12 @@
             <artifactId>cdi-api</artifactId>
             <scope>provided</scope>
         </dependency>
+        
+        <dependency>
+				<groupId>javax</groupId>
+				<artifactId>javaee-api</artifactId>
+				<scope>provided</scope>
+			</dependency>
 
         <!-- Import the JPA API, we use provided scope as the API is included in JBoss AS 7 -->
         <dependency>

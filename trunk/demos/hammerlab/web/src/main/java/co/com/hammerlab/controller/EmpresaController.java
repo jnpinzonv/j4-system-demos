@@ -194,9 +194,10 @@ public class EmpresaController implements Serializable {
 			busqueda();
 			selectEmpresas=null;
 			
-		} catch (Exception e) {
+		} 
+		catch (Exception e) {
 			String errorMessage = getRootErrorMessage(e);
-			addMessage(FacesMessage.SEVERITY_ERROR, errorMessage);
+			addMessage(FacesMessage.SEVERITY_ERROR, "No es posible eliminar el Cliente por que tiene equipos asociados");
 
 		}
 		
