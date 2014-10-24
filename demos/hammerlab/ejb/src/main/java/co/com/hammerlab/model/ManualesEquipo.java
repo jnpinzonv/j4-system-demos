@@ -10,6 +10,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 /**
  * <b>Descripcion:</b> Clase que <br/>
@@ -44,7 +45,7 @@ public class ManualesEquipo implements Serializable {
     /**
      * tecnico_ubicacion
      */
-
+    @Size(max=255, min=0)
     private String tecnicoUbicacion;
 
     /**
@@ -56,7 +57,7 @@ public class ManualesEquipo implements Serializable {
     /**
      * servicio_ubicacion
      */
-
+    @Size(max=255, min=0)
     private String servicioUbicacion;
 
     /**
@@ -68,7 +69,7 @@ public class ManualesEquipo implements Serializable {
     /**
      * usuario_ubicacion
      */
-
+    @Size(max=255, min=0)
     private String usuarioUbicacion;
 
   

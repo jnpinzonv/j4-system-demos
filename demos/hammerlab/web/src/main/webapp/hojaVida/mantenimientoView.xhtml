@@ -12,7 +12,8 @@
 			value="Actualizar Equipo" />
 		<h:outputText rendered="#{not mantenimientoController.editMode}"
 			value="Crear Equipo" />
-	</ui:define>
+	</ui:define>	
+
 	<ui:define name="content">
 
 		<h:form id="empresaEdit">
@@ -29,44 +30,54 @@
 
 					<p:outputLabel for="fecha" value="Fecha:" />
 					<p:outputLabel id="fecha"
-						value="#{mantenimientoController.newObject.fecha}" required="true" />
+						value="#{mantenimientoController.newObject.fecha}"  />
 					<p:spacer />
 					<p:spacer />
 
 					<p:outputLabel for="danioFalla" value="Daño, Falla o Averias:" />
 					<p:outputLabel rows="6" cols="33" id="danioFalla"
 						value="#{mantenimientoController.newObject.danioFalla }"
-						required="true" />
+						 />
 
 					<p:outputLabel for="reparaciones"
 						value="Reparaciones o Procedimientos:" />
 					<p:outputLabel rows="6" cols="33" id="reparaciones"
 						value="#{mantenimientoController.newObject.reparaciones }"
-						required="true" />
+						 />
 
 					<p:outputLabel for="repuestos" value="Repuestos Básicos:" />
 					<p:outputLabel rows="6" cols="33" id="repuestos"
 						value="#{mantenimientoController.newObject.repuestos }"
-						required="true" />
+						 />
 
 					<p:outputLabel for="observaciones" value="Observaciones:" />
 					<p:outputLabel rows="6" cols="33" id="observaciones"
 						value="#{mantenimientoController.newObject.observaciones }"
-						required="true" />
+						 />
+					<p:outputLabel for="hojaFisica"
+						value="Número de hoja de las firmas:" />
+					<p:outputLabel rows="6" cols="33" id="hojaFisica"
+						value="#{mantenimientoController.newObject.numeroHojaFisica }" />
 				</h:panelGrid>
 				<h:panelGrid columns="2" styleClass="widthGeneral"
 					columnClasses="col2,col2">
-					<p:outputLabel value="Firma Aprobación Tecnico:" />
-					<p:fileUpload
-						fileUploadListener="#{equipoController.handleFileUpload}"
-						mode="advanced" dragDropSupport="true" sizeLimit="100000"
-						allowTypes="/(\.|\/)(gif|jpe?g|png|jpg)$/" />
-
 					<p:outputLabel value="Firma Aprobación de Institución:" />
-					<p:fileUpload
-						fileUploadListener="#{equipoController.handleFileUpload}"
-						mode="advanced" dragDropSupport="true" sizeLimit="100000"
-						allowTypes="/(\.|\/)(gif|jpe?g|png|jpg)$/" />
+					<p:graphicImage id="idImagen" value="#{cargarImagenes.funcionario}"
+						width="200" height="171">
+						<f:param name="id" value="#{mantenimientoController.newObject.id}" />
+					</p:graphicImage>
+
+					<p:outputLabel value="Firma Aprobación Ingeniero/Tecnico:" />
+					<p:graphicImage value="#{cargarImagenes.tecnico}" width="200"
+						height="171">
+						<f:param name="id" value="#{mantenimientoController.newObject.id}" />
+					</p:graphicImage>
+					
+					<p:outputLabel value="Firma Aprobación Contratista:" />
+					<p:graphicImage value="#{cargarImagenes.contratista}" width="200" height="171">
+						<f:param name="id" value="#{mantenimientoController.newObject.id}" />
+					</p:graphicImage>
+					
 				</h:panelGrid>
 
 

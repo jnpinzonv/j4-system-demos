@@ -2,7 +2,7 @@ package co.com.hammerlab.controller;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.enterprise.context.Conversation;
@@ -12,6 +12,10 @@ import javax.faces.application.FacesMessage.Severity;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.print.attribute.standard.JobState;
+
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.StreamedContent;
 
 import co.com.hammerlab.ejb.MantenimientoEquipoBean;
 import co.com.hammerlab.model.EquipoHospitalario;
@@ -50,6 +54,8 @@ public class MantenimientoController implements Serializable {
      */
     private boolean bandera = Boolean.FALSE;
 
+    private StreamedContent imagenFuncionario;
+
     /**
      * 
      */
@@ -71,15 +77,21 @@ public class MantenimientoController implements Serializable {
      * 
      */
     private List<MantenimientoEquipo> selectMantenimiento;
+    
+    private List<Estado> listEstado;
 
     /**
      * 
      */
     public void busqueda() {
-        if (newObject.getIdTransaccion() == null) {
+        if (newObject.getIdTransaccion() != null && newObject.getEstadoMantenimiento() == null ) {
+            listaMantenimiento = mantenimientoEquipoBean.getAllIDTra(newObject.getIdTransaccion());            
+        } else if (newObject.getEstadoMantenimiento() != null && newObject.getIdTransaccion() == null) {
+            listaMantenimiento = mantenimientoEquipoBean.getAllESTADO(newObject.getEstadoMantenimiento());
+        } else if (newObject.getEstadoMantenimiento() != null && (newObject.getIdTransaccion() == null||newObject.getIdTransaccion() >0)) {
+            listaMantenimiento = mantenimientoEquipoBean.getAll(newObject.getIdTransaccion(),newObject.getEstadoMantenimiento());
+        } else {
             listaMantenimiento = mantenimientoEquipoBean.getAll(equipoHospitalario);
-        }else{
-            listaMantenimiento = mantenimientoEquipoBean.getAllIDTra(newObject.getIdTransaccion()); 
         }
     }
 
@@ -116,7 +128,7 @@ public class MantenimientoController implements Serializable {
     public String reiniciar() {
         newObject = new MantenimientoEquipo();
         busqueda();
-        return ConstantesUtil.ATRAS+"R";
+        return ConstantesUtil.ATRAS + "R";
     }
 
     /**
@@ -181,6 +193,14 @@ public class MantenimientoController implements Serializable {
         try {
             newObject.setEquipoHospitalario(equipoHospitalario);
             newObject.setEstadoMantenimiento(Estado.ABIERTO);
+            if (newObject.getNumeroHojaFisica() == 0 || newObject.getNumeroHojaFisica() == null) {
+                newObject.setNumeroHojaFisica(null);
+            }
+
+            if (newObject.getNumeroHojaFisica() != null && newObject.getNumeroHojaFisica() > 0 && newObject.getFirmaAprobacion() != null
+                    && newObject.getFirmaAprobacionContrato() != null && newObject.getFirmaAprobacionTecnico() != null) {
+                newObject.setEstadoMantenimiento(Estado.FIRMADO);
+            }
             mantenimientoEquipoBean.save(newObject);
             newObject.setIdTransaccion(newObject.getId());
             mantenimientoEquipoBean.update(newObject);
@@ -194,6 +214,32 @@ public class MantenimientoController implements Serializable {
             return "";
         }
 
+    }
+
+    public boolean listoParaCerrar() {
+        boolean cerrar = true;
+        for (MantenimientoEquipo element : selectMantenimiento) {
+            if (!element.getEstadoMantenimiento().equals(Estado.FIRMADO)) {
+                cerrar = false;
+                return cerrar;
+            }
+        }
+
+        return true;
+    }
+
+    public void cerrarMantenimiento() {
+        try {
+
+            for (MantenimientoEquipo element : selectMantenimiento) {
+                element.setEstadoMantenimiento(Estado.CERRADO);
+                mantenimientoEquipoBean.update(element);
+            }
+            addMessage(FacesMessage.SEVERITY_INFO, "Se cerrarron los mantenimientos seleccionados");
+        } catch (Exception e) {
+            String errorMessage = getRootErrorMessage(e);
+            addMessage(FacesMessage.SEVERITY_ERROR, errorMessage);
+        }
     }
 
     public String visualizar() {
@@ -217,6 +263,30 @@ public class MantenimientoController implements Serializable {
 
         }
 
+    }
+
+    /**
+     * @param event
+     */
+    public void firmaAprobacionFuncionario(FileUploadEvent event) {
+        newObject.setFirmaAprobacion(event.getFile().getContents());
+        addMessage(FacesMessage.SEVERITY_INFO, event.getFile().getFileName() + " Fue cargado.");
+    }
+
+    /**
+     * @param event
+     */
+    public void firmaAprobacionTecnico(FileUploadEvent event) {
+        newObject.setFirmaAprobacionTecnico(event.getFile().getContents());
+        addMessage(FacesMessage.SEVERITY_INFO, event.getFile().getFileName() + " Fue cargado.");
+    }
+
+    /**
+     * @param event
+     */
+    public void firmaAprobacionContrato(FileUploadEvent event) {
+        newObject.setFirmaAprobacionContrato(event.getFile().getContents());
+        addMessage(FacesMessage.SEVERITY_INFO, event.getFile().getFileName() + " Fue cargado.");
     }
 
     /**
@@ -352,8 +422,46 @@ public class MantenimientoController implements Serializable {
      * 
      * @return El valor de newUsuario
      */
+
     public MantenimientoEquipo getNewObject() {
         return newObject;
     }
 
+    /**
+     * Devuelve el valor de imagenFuncionario
+     * 
+     * @return El valor de imagenFuncionario
+     */
+    public StreamedContent getImagenFuncionario() {
+        return imagenFuncionario;
+    }
+
+    /**
+     * Establece el valor de imagenFuncionario
+     * 
+     * @param imagenFuncionario
+     *            El valor por establecer para imagenFuncionario
+     */
+    public void setImagenFuncionario(StreamedContent imagenFuncionario) {
+        this.imagenFuncionario = imagenFuncionario;
+    }
+
+    /**
+     * Devuelve el valor de listEstado
+     * @return El valor de listEstado
+     */
+    public List<Estado> getListEstado() {
+        listEstado= Arrays.asList(Estado.values());
+        return listEstado;
+    }
+
+    /**
+     * Establece el valor de listEstado
+     * @param listEstado El valor por establecer para listEstado
+     */
+    public void setListEstado(List<Estado> listEstado) {
+        this.listEstado = listEstado;
+    }
+
+    
 }

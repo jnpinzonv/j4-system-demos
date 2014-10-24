@@ -32,40 +32,12 @@
 				<h:outputLabel
 					rendered="#{empty firmasController.listaMantenimiento}"
 					value="No existen documentos por firmar" />
-
-				<p:panel id="groupButtonTop" styleClass="panelBotonHI"
-					style="border: transparent;">
-
-					<p:commandButton id="createButtonTop"
-						action="#{firmasController.initCrearModo}" immediate="true"
-						value="Crear" />
-
-					<p:commandButton id="editButtonTop"
-						action="#{firmasController.initEditarModo}" value="Editar"
-						immediate="true"
-						disabled="#{firmasController.selectMantenimiento.size()!= 1}" />
-
-					<p:commandButton id="viewButtonTop"
-						action="#{firmasController.initVistaModo}" value="Ver"
-						immediate="true"
-						disabled="#{firmasController.selectMantenimiento.size() != 1}" />
-
-
-					<p:commandButton id="deleteButtonTop" value="Borrar"
-						immediate="true" ajax="true" ignoreAutoUpdate="true" async="true"
-						disabled="#{firmasController.selectMantenimiento.size()  == 0}" />
-
-					<p:commandButton id="cancelarButtonTop" value="Cancelar"
-						immediate="true" ajax="true" ignoreAutoUpdate="true" async="true"
-						action="atras" />
-
-				</p:panel>
-
+					
 				<p:dataTable var="_object"
 					value="#{firmasController.listaMantenimiento}"
 					rendered="#{not empty firmasController.listaMantenimiento}"
 					id="empresaList" paginator="true" paginatorPosition="bottom"
-					rowKey="#{_object.id}" styleClass="widthGeneral"
+					rowKey="#{_object.id}" styleClass="widthGeneral" rows="15"
 					selection="#{firmasController.selectMantenimiento}">
 
 					<p:column id="c1" headerText="id">
@@ -76,21 +48,12 @@
 						<h:outputText value="#{_object.fecha}" />
 					</p:column>
 
-					<p:column id="c3" headerText="Dañio Falla">
-						<h:outputText value="#{_object.danioFalla}" />
+					<p:column id="c3" headerText="Estado">
+						<h:outputText value="#{_object.estadoMantenimiento}" />
 					</p:column>
 
-					<p:column id="c4" headerText="Reparaciones">
-						<h:outputText value="#{_object.reparaciones}" />
-					</p:column>
-
-					<p:column id="c5" headerText="Repuestos">
-						<h:outputText value="#{_object.repuestos}" />
-					</p:column>
-
-					<p:column id="c7" headerText="
-						observaciones">
-						<h:outputText value="#{_object.observaciones}" />
+					<p:column id="c4" headerText="No. Hoja Fisica">
+						<h:outputText value="#{_object.numeroHojaFisica}" />
 					</p:column>
 
 					<p:column id="c10" headerText="N° Transaccion">
@@ -100,56 +63,24 @@
 						style="width:16px;text-align:center" />
 
 					<p:ajax event="rowSelectCheckbox" immediate="true"
-						update=":formEmpresas:groupButtonBottom,:formEmpresas:groupButtonTop" />
+						update=":formEmpresas:groupButtonBottom" />
 					<p:ajax event="rowUnselectCheckbox" immediate="true"
-						update=":formEmpresas:groupButtonBottom,:formEmpresas:groupButtonTop" />
+						update=":formEmpresas:groupButtonBottom" />
 
 				</p:dataTable>
+				
 
 
 
 				<p:panel id="groupButtonBottom" styleClass="panelBotonHI"
-					style="border: transparent;"
-					rendered="#{firmasController.listaMantenimiento.size() > 10}">
+					style="border: transparent;">
 
-					<p:commandButton id="createButtonBottom"
+					<p:commandButton id="Agregar"
 						action="#{firmasController.initCrearModo}"
-						styleClass="pButtonEnabled" value="Crear" />
-
-					<p:commandButton id="editButtonBottom"
-						action="firmasController.initEditarModo" immediate="true"
-						value="Editar"
-						disabled="#{firmasController.selectMantenimiento.size() != 1}" />
-
-					<p:commandButton id="viewButtonBottom"
-						action="#{firmasController.initVistaModo}" immediate="true"
-						value="Ver"
-						disabled="#{firmasController.selectMantenimiento.size()!= 1}" />
-
-					<p:commandButton id="deleteButtonBottom" value="Borrar"
-						immediate="true" ajax="true" ignoreAutoUpdate="true" async="true"
-						disabled="#{firmasController.selectMantenimiento.size() == 0}" />
-
-					<p:commandButton id="cancelarButton" value="Cancelar"
-						immediate="true" ajax="true" ignoreAutoUpdate="true" async="true"
-						action="atras" />
+						styleClass="pButtonEnabled" value="Agregar firmas" immediate="true" 
+						disabled="#{firmasController.selectMantenimiento.size() != 1}"   />
 				</p:panel>
-			</p:panel>
-
-			<p:growl id="message" showDetail="true" />
-
-			<p:commandButton value="Destroy the World"
-				actionListener="#{dialogView.destroyWorld}" update="message">
-				<p:confirm header="Confirmation" message="Are you sure?"
-					icon="ui-icon-alert" />
-			</p:commandButton>
-
-			<p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
-				<p:commandButton value="Yes" type="button"
-					styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-				<p:commandButton value="No" type="button"
-					styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-			</p:confirmDialog>
+			</p:panel>			
 		</h:form>
 
 	</ui:define>

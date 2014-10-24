@@ -102,7 +102,7 @@
 				<p:dataTable var="_object" value="#{empresaController.listaEmpresa}"
 					rendered="#{not empty empresaController.listaEmpresa}" styleClass="widthGeneral"
 					id="empresaList" paginator="true" paginatorPosition="bottom"
-					rowKey="#{_object.id}"
+					rowKey="#{_object.id}" rows="15"
 					selection="#{empresaController.selectEmpresas}">
 
 					<p:column id="c1" headerText="Razón Social">
