@@ -264,6 +264,7 @@ public class EquipoController implements Serializable {
         
         if (newObjectCo.getNombreEquipo() != null) {
             newObject.setNombreEquipo(newObjectCo.getNombreEquipo());
+            newObjectCo.setNombreEquipo(null);
         }
         if (newObjectCo.getDireccion() != null) {
             newObject.setDireccion(newObjectCo.getDireccion());
@@ -390,6 +391,10 @@ public class EquipoController implements Serializable {
 
         if (manualesEquipoCo.getTecnicoUbicacion() != null) {
             manualesEquipo.setTecnicoUbicacion(manualesEquipoCo.getTecnicoUbicacion());
+        }
+        
+        if (manualesEquipoCo.getUsuarioUbicacion() != null) {
+            manualesEquipo.setUsuarioUbicacion(manualesEquipoCo.getUsuarioUbicacion());
         }
 
         if (estadoEquipoCo.getCausa() != null) {
@@ -544,7 +549,19 @@ public class EquipoController implements Serializable {
 
         try {
             for (EquipoHospitalario element : selectEquipos) {
-                equipoHospitalarioBean.delete(element.getId());
+                
+                newObject = equipoHospitalarioBean.getAllRelations(element.getId());
+                adquisicionEquipo = newObject.getAdquisicionEquipo();
+                infoTecnica = newObject.getInfoTecnica();
+                estadoEquipo = newObject.getEstadoEquipo();
+                funcionamientoEquipo = newObject.getFuncionamientoEquipo();
+                planosEquipo = newObject.getPlanosEquipo();
+                manualesEquipo = newObject.getManualesEquipo();
+                recomendacionesEquipo = newObject.getRecomendacionesEquipo();
+                for (TipoManteEquipo element2 : newObject.getManteEquipo()) {
+                    equipoHospitalarioBean.delete(element2);
+                 }
+                equipoHospitalarioBean.delete(newObject,adquisicionEquipo, infoTecnica ,estadoEquipo,funcionamientoEquipo,planosEquipo,manualesEquipo, recomendacionesEquipo);
             }
 
             if (selectEquipos.size() > 1) {
@@ -557,7 +574,7 @@ public class EquipoController implements Serializable {
 
         } catch (Exception e) {
             String errorMessage = getRootErrorMessage(e);
-            addMessage(FacesMessage.SEVERITY_ERROR, errorMessage);
+            addMessage(FacesMessage.SEVERITY_ERROR, "No se puede eliminar el Equipo, por que tiene mantenimientos asociados");
 
         }
 

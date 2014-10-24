@@ -109,11 +109,11 @@
 				<type>war</type>
 				<scope>compile</scope>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>net.sf.jasperreports</groupId>
 				<artifactId>jasperreports</artifactId>
-				<version>4.5.1</version>				
+				<version>4.5.1</version>
 				<exclusions>
 					<exclusion>
 						<artifactId>stax-api</artifactId>
@@ -144,6 +144,12 @@
 				<version>${version.jboss.bom}</version>
 				<type>pom</type>
 				<scope>import</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>javax</groupId>
+				<artifactId>javaee-api</artifactId>
+				<version>6.0</version>
 			</dependency>
 
 			<!-- Dependencias de Primefaces -->
