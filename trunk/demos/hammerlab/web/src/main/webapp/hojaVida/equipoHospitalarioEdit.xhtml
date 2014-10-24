@@ -58,13 +58,17 @@
 						cellspacing="0" columnClasses="col3,col3,col3">
 
 						<p:outputLabel value="Foto del Equipo:" />
-						<p:fileUpload
-							fileUploadListener="#{equipoController.cargarFotoEquipo}"
-							mode="advanced" dragDropSupport="true" sizeLimit="100000"
-							allowTypes="/(\.|\/)(gif|jpe?g|png|jpg)$/" />
+						<p:outputPanel>
+							<p:fileUpload required="true" id="fotoequipo"
+								fileUploadListener="#{equipoController.cargarFotoEquipo}"
+								mode="advanced" dragDropSupport="true" sizeLimit="100000"
+								allowTypes="/(\.|\/)(gif|jpe?g|png|jpg)$/" />
+								<p:message for="fotoequipo" />
+						</p:outputPanel>
 						<h:outputText value="" />
+
 						<p:outputLabel for="nombreEquipo" value="Nombre del Equipo:" />
-						
+
 						<h:panelGrid>
 							<p:inputText id="nombreEquipo" style="width: 210px;"
 								value="#{equipoController.newObject.nombreEquipo}"
@@ -74,8 +78,10 @@
 						<p:selectOneMenu id="idNombre"
 							value="#{equipoController.newObjectCo.nombreEquipo}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
+
+							<f:selectItems var="_eachItem" itemLabel="#{_eachItem.variable}"
+								value="#{equipoController.listaSinInformacion}"
+								itemValue="#{_eachItem.variable}" />
 							<p:ajax event="change"
 								listener="#{equipoController.agregarComentario}"
 								update="nombreEquipo" />
@@ -90,8 +96,10 @@
 						<p:selectOneMenu id="idMarca"
 							value="#{equipoController.newObjectCo.marca}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
+
+							<f:selectItems var="_eachItem" itemLabel="#{_eachItem.variable}"
+								value="#{equipoController.listaSinInformacion}"
+								itemValue="#{_eachItem.variable}" />
 							<p:ajax event="change"
 								listener="#{equipoController.agregarComentario}" update="marca" />
 						</p:selectOneMenu>
@@ -105,8 +113,25 @@
 						<p:selectOneMenu id="console2"
 							value="#{equipoController.newObjectCo.modelo}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
+							<f:selectItems var="_eachItem" itemLabel="#{_eachItem.variable}"
+								value="#{equipoController.listaSinInformacion}"
+								itemValue="#{_eachItem.variable}" />
+							<p:ajax event="change"
+								listener="#{equipoController.agregarComentario}" update="modelo" />
+						</p:selectOneMenu>
+						
+						<p:outputLabel for="numInventario" value="Numero Inventario:" />
+						<h:panelGrid>
+							<p:inputText id="numInventario" style="width: 210px;"
+								value="#{equipoController.newObject.numInventario}" required="true" />
+							<p:message for="numInventario" />
+						</h:panelGrid>
+						<p:selectOneMenu id="console278"
+							value="#{equipoController.newObjectCo.numInventario}">
+							<f:selectItem itemLabel="Seleccione" itemValue="" />
+							<f:selectItems var="_eachItem" itemLabel="#{_eachItem.variable}"
+								value="#{equipoController.listaSinInformacion}"
+								itemValue="#{_eachItem.variable}" />
 							<p:ajax event="change"
 								listener="#{equipoController.agregarComentario}" update="modelo" />
 						</p:selectOneMenu>
@@ -133,8 +158,10 @@
 						<p:selectOneMenu id="console4"
 							value="#{equipoController.newObjectCo.fabricante}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
+
+							<f:selectItems var="_eachItem" itemLabel="#{_eachItem.variable}"
+								value="#{equipoController.listaSinInformacion}"
+								itemValue="#{_eachItem.variable}" />
 							<p:ajax event="change"
 								listener="#{equipoController.agregarComentario}"
 								update="fabricante" />
@@ -151,8 +178,10 @@
 						<p:selectOneMenu id="console5"
 							value="#{equipoController.newObjectCo.representanteCol}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
+
+							<f:selectItems var="_eachItem" itemLabel="#{_eachItem.variable}"
+								value="#{equipoController.listaSinInformacion}"
+								itemValue="#{_eachItem.variable}" />
 							<p:ajax event="change"
 								listener="#{equipoController.agregarComentario}"
 								update="representanteCol" />
@@ -167,8 +196,10 @@
 						<p:selectOneMenu id="console6"
 							value="#{equipoController.newObjectCo.direccion}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
+
+							<f:selectItems var="_eachItem" itemLabel="#{_eachItem.variable}"
+								value="#{equipoController.listaSinInformacion}"
+								itemValue="#{_eachItem.variable}" />
 							<p:ajax event="change"
 								listener="#{equipoController.agregarComentario}"
 								update="direccion" />
@@ -183,8 +214,10 @@
 						<p:selectOneMenu id="console7"
 							value="#{equipoController.newObjectCo.telefono}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
+
+							<f:selectItems var="_eachItem" itemLabel="#{_eachItem.variable}"
+								value="#{equipoController.listaSinInformacion}"
+								itemValue="#{_eachItem.variable}" />
 							<p:ajax event="change"
 								listener="#{equipoController.agregarComentario}"
 								update="telefono" />
@@ -210,8 +243,10 @@
 						<p:selectOneMenu id="console16"
 							value="#{equipoController.infoTecnicaCo.voltaje}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
+
+							<f:selectItems var="_eachItem" itemLabel="#{_eachItem.variable}"
+								value="#{equipoController.listaSinInformacion}"
+								itemValue="#{_eachItem.variable}" />
 							<p:ajax event="change"
 								listener="#{equipoController.agregarComentario}"
 								update="voltaje2" />
@@ -227,8 +262,10 @@
 						<p:selectOneMenu id="console17"
 							value="#{equipoController.infoTecnicaCo.instalaciones}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
+
+							<f:selectItems var="_eachItem" itemLabel="#{_eachItem.variable}"
+								value="#{equipoController.listaSinInformacion}"
+								itemValue="#{_eachItem.variable}" />
 							<p:ajax event="change"
 								listener="#{equipoController.agregarComentario}"
 								update="instalaciones2" />
@@ -244,8 +281,10 @@
 						<p:selectOneMenu id="console18"
 							value="#{equipoController.infoTecnicaCo.potencia}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
+
+							<f:selectItems var="_eachItem" itemLabel="#{_eachItem.variable}"
+								value="#{equipoController.listaSinInformacion}"
+								itemValue="#{_eachItem.variable}" />
 							<p:ajax event="change"
 								listener="#{equipoController.agregarComentario}"
 								update="potencia" />
@@ -261,8 +300,10 @@
 						<p:selectOneMenu id="console19"
 							value="#{equipoController.infoTecnicaCo.frecuencia}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
+
+							<f:selectItems var="_eachItem" itemLabel="#{_eachItem.variable}"
+								value="#{equipoController.listaSinInformacion}"
+								itemValue="#{_eachItem.variable}" />
 							<p:ajax event="change"
 								listener="#{equipoController.agregarComentario}"
 								update="frecuencia" />
@@ -278,8 +319,10 @@
 						<p:selectOneMenu id="console20"
 							value="#{equipoController.infoTecnicaCo.capacidadTeorica}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
+
+							<f:selectItems var="_eachItem" itemLabel="#{_eachItem.variable}"
+								value="#{equipoController.listaSinInformacion}"
+								itemValue="#{_eachItem.variable}" />
 							<p:ajax event="change"
 								listener="#{equipoController.agregarComentario}"
 								update="capacidadTeorica" />
@@ -295,8 +338,10 @@
 						<p:selectOneMenu id="console21"
 							value="#{equipoController.infoTecnicaCo.capacidadPractica}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
+
+							<f:selectItems var="_eachItem" itemLabel="#{_eachItem.variable}"
+								value="#{equipoController.listaSinInformacion}"
+								itemValue="#{_eachItem.variable}" />
 							<p:ajax event="change"
 								listener="#{equipoController.agregarComentario}"
 								update="capacidadPractica" />
@@ -323,8 +368,10 @@
 						<p:selectOneMenu id="console23"
 							value="#{equipoController.infoTecnicaCo.insumos}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
+
+							<f:selectItems var="_eachItem" itemLabel="#{_eachItem.variable}"
+								value="#{equipoController.listaSinInformacion}"
+								itemValue="#{_eachItem.variable}" />
 							<p:ajax event="change"
 								listener="#{equipoController.agregarComentario}"
 								update="insumos" />
@@ -351,8 +398,10 @@
 						<p:selectOneMenu id="console8"
 							value="#{equipoController.adquisicionEquipoCo.fechaAdquisicion }">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
+
+							<f:selectItems var="_eachItem" itemLabel="#{_eachItem.variable}"
+								value="#{equipoController.listaSinInformacion}"
+								itemValue="#{_eachItem.variable}" />
 							<p:ajax event="change"
 								listener="#{equipoController.agregarComentario}"
 								update="fechaAdquisicion" />
@@ -368,8 +417,10 @@
 						<p:selectOneMenu id="console9"
 							value="#{equipoController.adquisicionEquipoCo.fechaInstalacion}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
+
+							<f:selectItems var="_eachItem" itemLabel="#{_eachItem.variable}"
+								value="#{equipoController.listaSinInformacion}"
+								itemValue="#{_eachItem.variable}" />
 							<p:ajax event="change"
 								listener="#{equipoController.agregarComentario}"
 								update="fechaInstalacion" />
@@ -385,8 +436,10 @@
 						<p:selectOneMenu id="console10"
 							value="#{equipoController.adquisicionEquipoCo.aniosOperacion}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
+
+							<f:selectItems var="_eachItem" itemLabel="#{_eachItem.variable}"
+								value="#{equipoController.listaSinInformacion}"
+								itemValue="#{_eachItem.variable}" />
 							<p:ajax event="change"
 								listener="#{equipoController.agregarComentario}"
 								update="aniosOperacion" />
@@ -402,8 +455,10 @@
 						<p:selectOneMenu id="console11"
 							value="#{equipoController.adquisicionEquipoCo.propiedadEquipo}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
+
+							<f:selectItems var="_eachItem" itemLabel="#{_eachItem.variable}"
+								value="#{equipoController.listaSinInformacion}"
+								itemValue="#{_eachItem.variable}" />
 							<p:ajax event="change"
 								listener="#{equipoController.agregarComentario}"
 								update="propiedadEquipo" />
@@ -420,8 +475,10 @@
 						<p:selectOneMenu id="console12"
 							value="#{equipoController.adquisicionEquipoCo.aniosFueraServicio}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
+
+							<f:selectItems var="_eachItem" itemLabel="#{_eachItem.variable}"
+								value="#{equipoController.listaSinInformacion}"
+								itemValue="#{_eachItem.variable}" />
 							<p:ajax event="change"
 								listener="#{equipoController.agregarComentario}"
 								update="aniosFueraServicio2" />
@@ -437,8 +494,10 @@
 						<p:selectOneMenu id="console13"
 							value="#{equipoController.adquisicionEquipoCo.razon}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
+
+							<f:selectItems var="_eachItem" itemLabel="#{_eachItem.variable}"
+								value="#{equipoController.listaSinInformacion}"
+								itemValue="#{_eachItem.variable}" />
 							<p:ajax event="change"
 								listener="#{equipoController.agregarComentario}" update="razon" />
 						</p:selectOneMenu>
@@ -453,8 +512,10 @@
 						<p:selectOneMenu id="console14"
 							value="#{equipoController.adquisicionEquipoCo.garantia}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
+
+							<f:selectItems var="_eachItem" itemLabel="#{_eachItem.variable}"
+								value="#{equipoController.listaSinInformacion}"
+								itemValue="#{_eachItem.variable}" />
 							<p:ajax event="change"
 								listener="#{equipoController.agregarComentario}"
 								update="garantia" />
@@ -470,8 +531,10 @@
 						<p:selectOneMenu id="console15"
 							value="#{equipoController.adquisicionEquipoCo.peridoGarantia}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
+
+							<f:selectItems var="_eachItem" itemLabel="#{_eachItem.variable}"
+								value="#{equipoController.listaSinInformacion}"
+								itemValue="#{_eachItem.variable}" />
 							<p:ajax event="change"
 								listener="#{equipoController.agregarComentario}"
 								update="peridoGarantia" />
@@ -488,8 +551,10 @@
 						<p:selectOneMenu id="console151"
 							value="#{equipoController.adquisicionEquipoCo.cubrimientoGarantia}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
+
+							<f:selectItems var="_eachItem" itemLabel="#{_eachItem.variable}"
+								value="#{equipoController.listaSinInformacion}"
+								itemValue="#{_eachItem.variable}" />
 							<p:ajax event="change"
 								listener="#{equipoController.agregarComentario}"
 								update="cubrimientoGarantia" />
@@ -518,8 +583,10 @@
 						<p:selectOneMenu id="console153"
 							value="#{equipoController.adquisicionEquipoCo.calibracionTipo}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
+
+							<f:selectItems var="_eachItem" itemLabel="#{_eachItem.variable}"
+								value="#{equipoController.listaSinInformacion}"
+								itemValue="#{_eachItem.variable}" />
 							<p:ajax event="change"
 								listener="#{equipoController.agregarComentario}"
 								update="calibracionTipo" />
@@ -536,8 +603,10 @@
 						<p:selectOneMenu id="console154"
 							value="#{equipoController.adquisicionEquipoCo.calibracionPeriocidad}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
+
+							<f:selectItems var="_eachItem" itemLabel="#{_eachItem.variable}"
+								value="#{equipoController.listaSinInformacion}"
+								itemValue="#{_eachItem.variable}" />
 							<p:ajax event="change"
 								listener="#{equipoController.agregarComentario}"
 								update="calibracionPeriocidad" />
@@ -574,8 +643,10 @@
 						<p:selectOneMenu id="console32"
 							value="#{equipoController.planosEquipoCo.instalacionUbicacion}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
+
+							<f:selectItems var="_eachItem" itemLabel="#{_eachItem.variable}"
+								value="#{equipoController.listaSinInformacion}"
+								itemValue="#{_eachItem.variable}" />
 							<p:ajax event="change"
 								listener="#{equipoController.agregarComentario}"
 								update="instalacion_ubicacion" />
@@ -603,8 +674,10 @@
 						<p:selectOneMenu id="console34"
 							value="#{equipoController.planosEquipoCo.partesUbicacion}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
+
+							<f:selectItems var="_eachItem" itemLabel="#{_eachItem.variable}"
+								value="#{equipoController.listaSinInformacion}"
+								itemValue="#{_eachItem.variable}" />
 							<p:ajax event="change"
 								listener="#{equipoController.agregarComentario}"
 								update="partes_ubicacion" />
@@ -634,8 +707,10 @@
 						<p:selectOneMenu id="console36"
 							value="#{equipoController.planosEquipoCo.funcionamientoUbicacion}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
+
+							<f:selectItems var="_eachItem" itemLabel="#{_eachItem.variable}"
+								value="#{equipoController.listaSinInformacion}"
+								itemValue="#{_eachItem.variable}" />
 							<p:ajax event="change"
 								listener="#{equipoController.agregarComentario}"
 								update="funcionamiento_ubicacion" />
@@ -676,8 +751,10 @@
 						<p:selectOneMenu id="console38"
 							value="#{equipoController.manualesEquipoCo.tecnicoUbicacion}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
+
+							<f:selectItems var="_eachItem" itemLabel="#{_eachItem.variable}"
+								value="#{equipoController.listaSinInformacion}"
+								itemValue="#{_eachItem.variable}" />
 							<p:ajax event="change"
 								listener="#{equipoController.agregarComentario}"
 								update="tecnico_ubicacion" />
@@ -707,8 +784,10 @@
 						<p:selectOneMenu id="console40"
 							value="#{equipoController.manualesEquipoCo.servicioUbicacion}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
+
+							<f:selectItems var="_eachItem" itemLabel="#{_eachItem.variable}"
+								value="#{equipoController.listaSinInformacion}"
+								itemValue="#{_eachItem.variable}" />
 							<p:ajax event="change"
 								listener="#{equipoController.agregarComentario}"
 								update="servicio_ubicacion" />
@@ -739,8 +818,10 @@
 						<p:selectOneMenu id="selectUsuario"
 							value="#{equipoController.manualesEquipoCo.usuarioUbicacion}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
+
+							<f:selectItems var="_eachItem" itemLabel="#{_eachItem.variable}"
+								value="#{equipoController.listaSinInformacion}"
+								itemValue="#{_eachItem.variable}" />
 							<p:ajax event="change"
 								listener="#{equipoController.agregarComentario}"
 								update="usuario_ubicacion" />
@@ -804,8 +885,10 @@
 						<p:selectOneMenu id="console25"
 							value="#{equipoController.estadoEquipoCo.causa}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
+
+							<f:selectItems var="_eachItem" itemLabel="#{_eachItem.variable}"
+								value="#{equipoController.listaSinInformacion}"
+								itemValue="#{_eachItem.variable}" />
 							<p:ajax event="change"
 								listener="#{equipoController.agregarComentario}" update="causa2" />
 						</p:selectOneMenu>
@@ -848,8 +931,10 @@
 						<p:selectOneMenu id="console27"
 							value="#{equipoController.funcionamientoEquipoCo.anioFueraServicio}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
+
+							<f:selectItems var="_eachItem" itemLabel="#{_eachItem.variable}"
+								value="#{equipoController.listaSinInformacion}"
+								itemValue="#{_eachItem.variable}" />
 							<p:ajax event="change"
 								listener="#{equipoController.agregarComentario}"
 								update="aniosFueraServicio" />
@@ -865,8 +950,10 @@
 						<p:selectOneMenu id="console28"
 							value="#{equipoController.funcionamientoEquipoCo.causa}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
+
+							<f:selectItems var="_eachItem" itemLabel="#{_eachItem.variable}"
+								value="#{equipoController.listaSinInformacion}"
+								itemValue="#{_eachItem.variable}" />
 							<p:ajax event="change"
 								listener="#{equipoController.agregarComentario}" update="causa" />
 						</p:selectOneMenu>
@@ -915,8 +1002,10 @@
 						<p:selectOneMenu id="console47"
 							value="#{equipoController.tipoManteEquipoPreCo.cual}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
+
+							<f:selectItems var="_eachItem" itemLabel="#{_eachItem.variable}"
+								value="#{equipoController.listaSinInformacion}"
+								itemValue="#{_eachItem.variable}" />
 							<p:ajax event="change"
 								listener="#{equipoController.agregarComentario}" update="cual" />
 						</p:selectOneMenu>
@@ -945,8 +1034,10 @@
 						<p:selectOneMenu id="console471"
 							value="#{equipoController.tipoManteEquipoCorrCo.cual}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
+
+							<f:selectItems var="_eachItem" itemLabel="#{_eachItem.variable}"
+								value="#{equipoController.listaSinInformacion}"
+								itemValue="#{_eachItem.variable}" />
 							<p:ajax event="change"
 								listener="#{equipoController.agregarComentario}" update="cual1" />
 						</p:selectOneMenu>

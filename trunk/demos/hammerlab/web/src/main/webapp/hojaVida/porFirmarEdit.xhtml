@@ -1,0 +1,67 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/default.xhtml">
+
+	<ui:define name="titulo">
+		<h:outputText rendered="#{not firmasController.editMode}"
+			value="Agregar Firmas" />
+	</ui:define>
+	<ui:define name="content">
+
+		<h:form id="empresaEdit" enctype="multipart/form-data">
+
+			<h:panelGrid columns="2" styleClass="widthGeneral"
+				columnClasses="col2,col2">
+				<p:outputLabel for="hojaFisica"
+					value="Número de hoja de las firmas:" />
+				<p:inputText rows="6" cols="33" id="hojaFisica" required="true"
+					value="#{firmasController.newObject.numeroHojaFisica }" />
+					<p:message for="hojaFisica" />
+
+				<p:outputLabel value="Firma Aprobación de Institución:" />
+				<p:fileUpload required="true" id="institucion"
+					fileUploadListener="#{firmasController.firmaAprobacionFuncionario}"
+					mode="advanced" dragDropSupport="true" sizeLimit="100000"
+					allowTypes="/(\.|\/)(gif|jpe?g|png|jpg)$/" />
+				<p:message for="institucion" />
+
+
+				<p:outputLabel value="Firma Aprobación Ingeniero \ Tecnico:" />
+				<p:fileUpload required="true" id="tecnico"
+					fileUploadListener="#{firmasController.firmaAprobacionTecnico}"
+					mode="advanced" dragDropSupport="true" sizeLimit="100000"
+					allowTypes="/(\.|\/)(gif|jpe?g|png|jpg)$/" />
+				<p:message for="tecnico" />
+
+				<p:outputLabel value="Firma Aprobación Contratista:" />
+				<p:fileUpload required="true" id="contrarto"
+					fileUploadListener="#{firmasController.firmaAprobacionContrato}"
+					mode="advanced" dragDropSupport="true" sizeLimit="100000"
+					allowTypes="/(\.|\/)(gif|jpe?g|png|jpg)$/" />
+				<p:message for="contrarto" />
+			</h:panelGrid>
+
+
+			<p:panel id="groupButton" styleClass="panelBotonHI"
+				style="border: transparent;">				
+
+				<p:commandButton id="update" styleClass="" value="Guardar"
+					action="#{firmasController.actualizar}"
+					update="@form" />
+
+				<p:commandButton id="cancel" styleClass="" value="Cancelar"
+					action="#{firmasController.cancelar}" immediate="true" />
+			</p:panel>
+
+
+			</p:panel>
+		</h:form>
+
+	</ui:define>
+</ui:composition>

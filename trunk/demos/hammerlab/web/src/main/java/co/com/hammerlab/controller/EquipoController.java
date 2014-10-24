@@ -3,6 +3,7 @@ package co.com.hammerlab.controller;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -29,12 +30,14 @@ import co.com.hammerlab.model.CategoriasParametros;
 import co.com.hammerlab.model.Empresa;
 import co.com.hammerlab.model.EquipoHospitalario;
 import co.com.hammerlab.model.EquipoInfoTecnica;
+import co.com.hammerlab.model.Estado;
 import co.com.hammerlab.model.EstadoEquipo;
 import co.com.hammerlab.model.FuncionamientoEquipo;
 import co.com.hammerlab.model.ManualesEquipo;
 import co.com.hammerlab.model.ParametrosGenerales;
 import co.com.hammerlab.model.PlanosEquipo;
 import co.com.hammerlab.model.RecomendacionesEquipo;
+import co.com.hammerlab.model.SinInformacion;
 import co.com.hammerlab.model.TipoManteEquipo;
 import co.com.hammerlab.model.TipoMantenimiento;
 import co.com.hammerlab.util.ConstantesUtil;
@@ -147,6 +150,7 @@ public class EquipoController implements Serializable {
 	 */
     private List<Empresa> listaEmpresa;
 
+    private List<SinInformacion> listaSinInformacion;
    
 
     /**
@@ -265,6 +269,9 @@ public class EquipoController implements Serializable {
 
         if (newObjectCo.getModelo() != null) {
             newObject.setModelo(newObjectCo.getModelo());
+        }
+        if (newObjectCo.getNumInventario() != null) {
+            newObject.setNumInventario(newObjectCo.getNumInventario());
         }
         if (newObjectCo.getUbicacion() != null) {
             newObject.setUbicacion(newObjectCo.getUbicacion());
@@ -467,6 +474,8 @@ public class EquipoController implements Serializable {
     }
 
     public String reiniciar() {
+        newObject= new EquipoHospitalario();
+        busqueda();
         return ConstantesUtil.ATRAS;
     }
 
@@ -1301,5 +1310,23 @@ public class EquipoController implements Serializable {
         this.decretoList = decretoList;
     }
 
+    /**
+     * Devuelve el valor de listaSinInformacion
+     * @return El valor de listaSinInformacion
+     */
+    public List<SinInformacion> getListaSinInformacion() {
+        listaSinInformacion=Arrays.asList(SinInformacion.values());
+        return listaSinInformacion;
+    }
+
+    /**
+     * Establece el valor de listaSinInformacion
+     * @param listaSinInformacion El valor por establecer para listaSinInformacion
+     */
+    public void setListaSinInformacion(List<SinInformacion> listaSinInformacion) {
+        this.listaSinInformacion = listaSinInformacion;
+    }
+
+    
     
 }

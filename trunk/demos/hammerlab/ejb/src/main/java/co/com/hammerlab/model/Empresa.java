@@ -45,13 +45,8 @@ public class Empresa implements Serializable {
      * razonSocial
      */
     @Size(max=255, min=0)
-    private String razonSocial="";
+    private String razonSocial="";   
     
-    /**
-     * 
-     */
-    @Size(max=255, min=0)
-    private String nombreCorto;
 
     /**
      * nit
@@ -218,21 +213,7 @@ public class Empresa implements Serializable {
         this.listaEquipos = listaEquipos;
     }
 
-    /**
-     * Devuelve el valor de nombreCorto
-     * @return El valor de nombreCorto
-     */
-    public String getNombreCorto() {
-        return nombreCorto;
-    }
-
-    /**
-     * Establece el valor de nombreCorto
-     * @param nombreCorto El valor por establecer para nombreCorto
-     */
-    public void setNombreCorto(String nombreCorto) {
-        this.nombreCorto = nombreCorto;
-    }  
+   
 
     
 }
