@@ -37,6 +37,13 @@
 					<h:panelGrid columns="4" styleClass="widthGeneral" cellpadding="0"
 						cellspacing="0" columnClasses="col4,col4,col4,col4">
 
+						<p:outputLabel value="Foto Equipo:" />
+						<p:graphicImage id="idImagen"
+							value="#{cargarImagenes.fotoEquipo}" width="200" height="171">
+							<f:param name="id"
+								value="#{equipoController.newObject.id}" />
+						</p:graphicImage>
+
 						<p:outputLabel for="nombreEquipo" value="Nombre del Equipo:" />
 						<p:outputLabel id="nombreEquipo"
 							value="#{equipoController.newObject.nombreEquipo}" />

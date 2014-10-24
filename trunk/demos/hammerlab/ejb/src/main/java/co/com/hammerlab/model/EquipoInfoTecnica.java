@@ -10,6 +10,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 /**
  * <b>Descripcion:</b> Clase que <br/>
@@ -38,42 +39,49 @@ public class EquipoInfoTecnica implements Serializable {
     /**
      * voltaje
      */
-
+    @Size(max=255, min=0)
     private String voltaje;
 
     /**
      * instalaciones
      */
+    @Size(max=255, min=0)
     private String instalaciones;
 
     /**
      * potencia
      */
+    @Size(max=255, min=0)
     private String potencia;
 
     /**
      * frecuencia
      */
+    @Size(max=255, min=0)
     private String frecuencia;
 
     /**
      * capacidadTeorica
      */
+    @Size(max=255, min=0)
     private String capacidadTeorica;
 
     /**
      * capacidadPractica
      */
+    @Size(max=255, min=0)
     private String capacidadPractica;
 
     /**
      * tecnologia
      */
+    @Size(max=255, min=0)
     private String tecnologia;
 
     /**
      * insumos
      */
+    @Size(max=255, min=0)
     private String insumos;
     
     /**

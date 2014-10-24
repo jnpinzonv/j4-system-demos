@@ -12,6 +12,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
 
@@ -43,39 +44,44 @@ public class Empresa implements Serializable {
     /**
      * razonSocial
      */
-
+    @Size(max=255, min=0)
     private String razonSocial="";
     
     /**
      * 
      */
+    @Size(max=255, min=0)
     private String nombreCorto;
 
     /**
      * nit
      */
-
+    @Size(max=255, min=0)
     private String nit;
 
     /**
      * telefono
      */
+    @Size(max=255, min=0)
     private String telefono;
 
     /**
      * direccion
      */
+    @Size(max=255, min=0)
     private String direccion;
 
     /**
      * correoElectronico
      */
+    @Size(max=255, min=0)
     @Pattern(regexp="^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$", message="La dirección de correo no es correcta en su estructura")
     private String correoElectronico;
 
     /**
      * sitioWeb
      */
+    @Size(max=255, min=0)
     private String sitioWeb;
     
     /**

@@ -239,11 +239,20 @@ public class EquipoController implements Serializable {
             listaEquipos = equipoHospitalarioBean.getAll();
         }
     }
+    
+    /**
+     * @param event
+     */
+    public void cargarFotoEquipo(FileUploadEvent event) {
+        newObject.setFotoEquipo(event.getFile().getContents());
+        addMessage(FacesMessage.SEVERITY_INFO, event.getFile().getFileName() + " Fue cargado.");
+    }
 
     /**
      * 
      */
     public void agregarComentario() {
+        
         if (newObjectCo.getNombreEquipo() != null) {
             newObject.setNombreEquipo(newObjectCo.getNombreEquipo());
         }
@@ -597,6 +606,9 @@ public class EquipoController implements Serializable {
        
     }
 
+    /**
+     * @param event
+     */
     public void handleFileUpload(FileUploadEvent event) {
         newObject.setFotoEquipo(event.getFile().getContents());
 

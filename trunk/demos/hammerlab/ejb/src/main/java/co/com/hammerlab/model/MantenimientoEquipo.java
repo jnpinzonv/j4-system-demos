@@ -27,9 +27,11 @@ import javax.persistence.Table;
 @Table(name = "mantenimiento_equipo")
 @NamedQueries({
         @NamedQuery(name = "mantenimientoequipo.getAll", query = "select s from MantenimientoEquipo s"),
+        @NamedQuery(name = "mantenimientoequipo.getAllDOS", query = "select s from MantenimientoEquipo s where s.estadoMantenimiento=:ESTADO and s.idTransaccion=:IDTRAN "),
+        @NamedQuery(name = "mantenimientoequipo.getAllESTADO", query = "select s from MantenimientoEquipo s where s.estadoMantenimiento=:ESTADO"),
         @NamedQuery(name = "mantenimientoequipo.getAllIdTrans", query = "select s from MantenimientoEquipo s  where s.idTransaccion=:IDTRAN"),
         @NamedQuery(name = "mantenimientoequipo.getAllEquipo", query = "select s from MantenimientoEquipo s where s.equipoHospitalario=:EQUIPO"),
-        @NamedQuery(name = "mantenimientoequipo.getfirmas", query = "select s from MantenimientoEquipo s where s.firmaAprobacion IS NULL or s.firmaAprobacionTecnico IS NULL") })
+        @NamedQuery(name = "mantenimientoequipo.getfirmas", query = "select s from MantenimientoEquipo s where s.firmaAprobacion IS NULL or s.firmaAprobacionTecnico IS NULL or s.firmaAprobacionContrato IS NULL or s.numeroHojaFisica  IS NULL") })
 public class MantenimientoEquipo implements Serializable {
 
     /**

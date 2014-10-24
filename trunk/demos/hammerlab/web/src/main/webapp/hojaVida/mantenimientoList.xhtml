@@ -26,12 +26,20 @@
 				<f:facet name="header">
 					<h:outputLabel value="Busqueda" />
 				</f:facet>
-				<h:panelGrid columns="2" styleClass="widthGeneral"
+				<h:panelGrid columns="3" styleClass="widthGeneral"
 					columnClasses="col2,col2">
 					<p:outputLabel for="IdTransaccion"
 						value="Identificador de generación:" />
 					<p:inputText id="IdTransaccion"
 						value="#{mantenimientoController.newObject.idTransaccion}" />
+					<p:selectOneMenu id="idNombre"
+						value="#{mantenimientoController.newObject.estadoMantenimiento}">
+						<f:selectItem itemLabel="Seleccione" itemValue="" />
+						<f:selectItems var="_eachItem"
+							itemLabel="#{_eachItem}"
+							value="#{mantenimientoController.listEstado}" itemValue="#{_eachItem}" />
+
+					</p:selectOneMenu>
 				</h:panelGrid>
 
 				<p:panel id="groupButton" styleClass="panelBotonHI"
@@ -81,12 +89,13 @@
 							message="¿Desea Eliminar los registros seleccionados?"
 							icon="ui-icon-alert" />
 					</p:commandButton>
-					
-					
+
+
 					<p:commandButton id="CerrarTop" value="Cerrar" immediate="true"
 						ajax="true" ignoreAutoUpdate="true" async="true"
-						disabled="#{mantenimientoController.selectMantenimiento.size()  == 0}"
-						action="#{mantenimientoController.cancelar}" />
+						disabled="#{!mantenimientoController.listoParaCerrar() or (mantenimientoController.selectMantenimiento.size()  == 0)}"
+						action="#{mantenimientoController.cerrarMantenimiento}"
+						update=":formManteni" />
 
 					<p:commandButton id="CancelarTop" value="Cancelar" immediate="true"
 						ajax="true" ignoreAutoUpdate="true" async="true"
@@ -99,7 +108,7 @@
 					value="#{mantenimientoController.listaMantenimiento}"
 					rendered="#{not empty mantenimientoController.listaMantenimiento}"
 					id="empresaList" paginator="true" paginatorPosition="bottom"
-					rowKey="#{_object.id}" styleClass="widthGeneral"
+					rowKey="#{_object.id}" styleClass="widthGeneral" rows="15"
 					selection="#{mantenimientoController.selectMantenimiento}">
 
 					<p:column id="c1" headerText="id">
@@ -159,11 +168,12 @@
 							message="¿Desea Eliminar los registros seleccionados?"
 							icon="ui-icon-alert" />
 					</p:commandButton>
-					
+
 					<p:commandButton id="Cerrar" value="Cerrar" immediate="true"
 						ajax="true" ignoreAutoUpdate="true" async="true"
-						disabled="#{mantenimientoController.selectMantenimiento.size()  == 0}"
-						action="#{mantenimientoController.cancelar}" />
+						disabled="#{!mantenimientoController.listoParaCerrar() or (mantenimientoController.selectMantenimiento.size()  == 0)}"
+						action="#{mantenimientoController.cerrarMantenimiento}"
+						update=":formManteni" />
 
 					<p:commandButton id="cancelar" value="Cancelar" immediate="true"
 						ajax="true" ignoreAutoUpdate="true" async="true"

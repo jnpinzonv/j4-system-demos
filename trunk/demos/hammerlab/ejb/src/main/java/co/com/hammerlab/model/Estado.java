@@ -8,5 +8,5 @@ package co.com.hammerlab.model;
  */
 public enum Estado {
 
-    CERRADO, ABIERTO
+    CERRADO, ABIERTO,FIRMADO
 }

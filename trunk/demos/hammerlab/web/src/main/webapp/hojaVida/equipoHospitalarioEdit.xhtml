@@ -5,7 +5,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:c="http://java.sun.com/jstl/core"
-	xmlns:p="http://primefaces.org/ui"	
+	xmlns:p="http://primefaces.org/ui"
 	template="/WEB-INF/templates/default.xhtml">
 
 	<ui:define name="titulo">
@@ -39,7 +39,7 @@
 						action="#{equipoController.crear}"
 						rendered="#{!equipoController.editMode}" />
 
-					<p:commandButton id="updateTop" value="Actualizar"
+					<p:commandButton id="updateTop" value="Guardar"
 						action="#{equipoController.actualizar}"
 						rendered="#{equipoController.editMode}" />
 
@@ -57,7 +57,14 @@
 					<h:panelGrid columns="3" styleClass="widthGeneral" cellpadding="0"
 						cellspacing="0" columnClasses="col3,col3,col3">
 
+						<p:outputLabel value="Foto del Equipo:" />
+						<p:fileUpload
+							fileUploadListener="#{equipoController.cargarFotoEquipo}"
+							mode="advanced" dragDropSupport="true" sizeLimit="100000"
+							allowTypes="/(\.|\/)(gif|jpe?g|png|jpg)$/" />
+						<h:outputText value="" />
 						<p:outputLabel for="nombreEquipo" value="Nombre del Equipo:" />
+						
 						<h:panelGrid>
 							<p:inputText id="nombreEquipo" style="width: 210px;"
 								value="#{equipoController.newObject.nombreEquipo}"
@@ -65,7 +72,7 @@
 							<p:message for="nombreEquipo" />
 						</h:panelGrid>
 						<p:selectOneMenu id="idNombre"
-							value="#{equipoController.newObject.nombreEquipo}">
+							value="#{equipoController.newObjectCo.nombreEquipo}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
 							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
 							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
@@ -81,7 +88,7 @@
 							<p:message for="marca" />
 						</h:panelGrid>
 						<p:selectOneMenu id="idMarca"
-							value="#{equipoController.newObject.marca}">
+							value="#{equipoController.newObjectCo.marca}">
 							<f:selectItem itemLabel="Seleccione" itemValue="" />
 							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
 							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
@@ -114,15 +121,7 @@
 							</p:selectOneMenu>
 							<p:message for="ubicacion" />
 						</h:panelGrid>
-						<p:selectOneMenu id="console3"
-							value="#{equipoController.newObjectCo.ubicacion}" disabled="true">
-							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
-							<p:ajax event="change"
-								listener="#{equipoController.agregarComentario}"
-								update="ubicacion" />
-						</p:selectOneMenu>
+						<h:outputText value="" />
 
 						<p:outputLabel for="fabricante" value="Fabricante:" />
 						<h:panelGrid>
@@ -313,16 +312,7 @@
 							</p:selectOneMenu>
 							<p:message for="tecnologia" />
 						</h:panelGrid>
-						<p:selectOneMenu id="console22"
-							value="#{equipoController.infoTecnicaCo.tecnologia}"
-							disabled="true">
-							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
-							<p:ajax event="change"
-								listener="#{equipoController.agregarComentario}"
-								update="tecnologia" />
-						</p:selectOneMenu>
+						<h:outputText value="" />
 
 						<p:outputLabel for="insumos" value="Insumos:" />
 						<h:panelGrid>
@@ -516,15 +506,7 @@
 							</p:selectOneMenu>
 							<p:message for="clasificacionDecreto" />
 						</h:panelGrid>
-						<p:selectOneMenu id="console152" disabled="true"
-							value="#{equipoController.adquisicionEquipoCo.clasificacionDecreto}">
-							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
-							<p:ajax event="change"
-								listener="#{equipoController.agregarComentario}"
-								update="clasificacionDecreto" />
-						</p:selectOneMenu>
+						<h:outputText value="" />
 
 						<p:outputLabel for="calibracionTipo" value="Calibración Tipo:" />
 						<h:panelGrid>
@@ -579,17 +561,7 @@
 								onLabel="SI" offLabel="NO" required="true" />
 							<p:message for="instalacion_confirmar" />
 						</h:panelGrid>
-						<p:selectOneMenu id="console30"
-							value="#{equipoController.planosEquipoCo.instalacionConfirmar}"
-							disabled="true">
-							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
-							<p:ajax event="change"
-								listener="#{equipoController.agregarComentario}"
-								update="instalacion_confirmar" />
-						</p:selectOneMenu>
-
+						<h:outputText value="" />
 
 						<p:outputLabel for="instalacion_ubicacion"
 							value="Ubicación Intalación:" />
@@ -617,16 +589,7 @@
 								onLabel="SI" offLabel="NO" required="true" />
 							<p:message for="partes_confirmar" />
 						</h:panelGrid>
-						<p:selectOneMenu id="console33"
-							value="#{equipoController.planosEquipoCo.partesConfirmar}"
-							disabled="true">
-							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
-							<p:ajax event="change"
-								listener="#{equipoController.agregarComentario}"
-								update="partes_confirmar" />
-						</p:selectOneMenu>
+						<h:outputText value="" />
 
 
 
@@ -656,16 +619,7 @@
 								onLabel="SI" offLabel="NO" required="true" />
 							<p:message for="funcionamiento_confirmar2" />
 						</h:panelGrid>
-						<p:selectOneMenu id="console35"
-							value="#{equipoController.planosEquipoCo.funcionamientoConfirmar}"
-							disabled="true">
-							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
-							<p:ajax event="change"
-								listener="#{equipoController.agregarComentario}"
-								update="funcionamiento_confirmar2" />
-						</p:selectOneMenu>
+						<h:outputText value="" />
 
 
 
@@ -708,16 +662,7 @@
 								onLabel="SI" offLabel="NO" required="true" />
 							<p:message for="tecnico_confirmar" />
 						</h:panelGrid>
-						<p:selectOneMenu id="console37"
-							value="#{equipoController.manualesEquipoCo.tecnicoConfirmar }"
-							disabled="true">
-							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
-							<p:ajax event="change"
-								listener="#{equipoController.agregarComentario}"
-								update="tecnico_confirmar" />
-						</p:selectOneMenu>
+						<h:outputText value="" />
 
 
 
@@ -747,16 +692,7 @@
 								onLabel="SI" offLabel="NO" required="true" />
 							<p:message for="servicio_confirmar" />
 						</h:panelGrid>
-						<p:selectOneMenu id="console39"
-							value="#{equipoController.manualesEquipoCo.servicioConfirmar}"
-							disabled="true">
-							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
-							<p:ajax event="change"
-								listener="#{equipoController.agregarComentario}"
-								update="servicio_confirmar" />
-						</p:selectOneMenu>
+						<h:outputText value="" />
 
 
 
@@ -787,16 +723,7 @@
 								onLabel="SI" offLabel="NO" required="true" />
 							<p:message for="usuario_confirmar" />
 						</h:panelGrid>
-						<p:selectOneMenu id="console41"
-							value="#{equipoController.manualesEquipoCo.usuarioConfirmar}"
-							disabled="true">
-							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
-							<p:ajax event="change"
-								listener="#{equipoController.agregarComentario}"
-								update="usuario_confirmar" />
-						</p:selectOneMenu>
+						<h:outputText value="" />
 
 
 
@@ -866,15 +793,7 @@
 							</p:selectOneRadio>
 							<p:message for="estado_confirmar" />
 						</h:panelGrid>
-						<p:selectOneMenu id="console24" disabled="true"
-							value="#{equipoController.estadoEquipoCo.estadoConfirmar}">
-							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
-							<p:ajax event="change"
-								listener="#{equipoController.agregarComentario}"
-								update="estado_confirmar" />
-						</p:selectOneMenu>
+						<h:outputText value="" />
 
 						<p:outputLabel for="causa2" value="Causas:" />
 						<h:panelGrid>
@@ -916,15 +835,7 @@
 							</p:selectOneRadio>
 							<p:message for="funcionamiento_confirmar" />
 						</h:panelGrid>
-						<p:selectOneMenu id="console26" disabled="true"
-							value="#{equipoController.funcionamientoEquipoCo.funcionamientoConfirmar}">
-							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
-							<p:ajax event="change"
-								listener="#{equipoController.agregarComentario}"
-								update="funcionamiento_confirmar" />
-						</p:selectOneMenu>
+						<h:outputText value="" />
 
 						<p:outputLabel for="aniosFueraServicio"
 							value="Años Fuera Servicio:" />
@@ -967,15 +878,7 @@
 								onLabel="SI" offLabel="NO" required="true" />
 							<p:message for="fueraServicio" />
 						</h:panelGrid>
-						<p:selectOneMenu id="console29" disabled="true"
-							value="#{equipoController.funcionamientoEquipoCo.fueraServicio}">
-							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
-							<p:ajax event="change"
-								listener="#{equipoController.agregarComentario}"
-								update="fueraServicio" />
-						</p:selectOneMenu>
+						<h:outputText value="" />
 
 					</h:panelGrid>
 				</p:panel>
@@ -999,15 +902,7 @@
 							</p:selectOneRadio>
 							<p:message for="tipoMantenimientoPre" />
 						</h:panelGrid>
-						<p:selectOneMenu id="console44" disabled="true"
-							value="#{equipoController.tipoManteEquipoPreCo.valor}">
-							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
-							<p:ajax event="change"
-								listener="#{equipoController.agregarComentario}"
-								update="tipoMantenimientoPre" />
-						</p:selectOneMenu>
+						<h:outputText value="" />
 
 
 						<p:outputLabel for="cual" value="¿Cúal?:" />
@@ -1036,15 +931,7 @@
 							</p:selectOneRadio>
 							<p:message for="tipoMantenimientoCor" />
 						</h:panelGrid>
-						<p:selectOneMenu id="console461" disabled="true"
-							value="#{equipoController.tipoManteEquipoCorrCo.valor}">
-							<f:selectItem itemLabel="Seleccione" itemValue="" />
-							<f:selectItem itemLabel="No Aplica" itemValue="No Aplica" />
-							<f:selectItem itemLabel="No Registra" itemValue="No Registra" />
-							<p:ajax event="change"
-								listener="#{equipoController.agregarComentario}"
-								update="tipoMantenimientoCor" />
-						</p:selectOneMenu>
+						<h:outputText value="" />
 
 
 

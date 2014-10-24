@@ -10,6 +10,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 /**
  * <b>Descripcion:</b> Clase que <br/>
@@ -38,13 +39,13 @@ public class EstadoEquipo implements Serializable {
     /**
      * estado_confirmar
      */
-
+    @Size(max=255, min=0)
     private String estadoConfirmar;
 
     /**
      * causa
      */
-
+    @Size(max=255, min=0)
     private String causa;
 
     /**

@@ -16,6 +16,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 /**
  * <b>Descripcion:</b> Clase que <br/>
@@ -62,6 +63,7 @@ public class EquipoHospitalario implements Serializable {
     /**
      * Nombre del equipo
      */
+    @Size(max=255, min=0)
     private String nombreEquipo="";
 
     /**
@@ -73,36 +75,43 @@ public class EquipoHospitalario implements Serializable {
     /**
      * marca
      */
+    @Size(max=255, min=0)
     private String marca;
 
     /**
      * modelo
      */
+    @Size(max=255, min=0)
     private String modelo;
 
     /**
      * ubicacion
      */
+    @Size(max=255, min=0)
     private String ubicacion="";
 
     /**
      * fabricante
      */
+    @Size(max=255, min=0)
     private String fabricante;
 
     /**
      * representanteCol
      */
+    @Size(max=255, min=0)
     private String representanteCol;
 
     /**
      * direccion
      */
+    @Size(max=255, min=0)
     private String direccion;
 
     /**
      * telefono
      */
+    @Size(max=255, min=0)
     private String telefono;
 
     @ManyToOne(cascade = CascadeType.ALL)

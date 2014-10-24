@@ -10,6 +10,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 /**
  * <b>Descripcion:</b> Clase que <br/>
@@ -43,19 +44,19 @@ public class PlanosEquipo implements Serializable {
     /**
      * instalacion_ubicacion
      */
-
+    @Size(max=255, min=0)
     private String instalacionUbicacion;
 
     /**
      * partes_confirmar
      */
-
+    
     private Boolean partesConfirmar;
 
     /**
      * partes_ubicacion
      */
-
+    @Size(max=255, min=0)
     private String partesUbicacion;
 
     /**
@@ -67,7 +68,7 @@ public class PlanosEquipo implements Serializable {
     /**
      * funcionamiento_ubicacion
      */
-
+    @Size(max=255, min=0)
     private String funcionamientoUbicacion;
 
     /**

@@ -11,6 +11,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 /**
  * <b>Descripcion:</b> Clase que <br/>
@@ -39,61 +40,73 @@ public class AdquisicionEquipo implements Serializable {
     /**
      * voltaje
      */
+    @Size(max=255, min=0)
     private  String fechaAdquisicion;
 
     /**
      * instalaciones
      */
+    @Size(max=255, min=0)
     private String fechaInstalacion;
 
     /**
      * potencia
      */
+    @Size(max=255, min=0)
     private String aniosOperacion;
 
     /**
      * frecuencia
      */
+    @Size(max=255, min=0)
     private String propiedadEquipo;
 
     /**
      * capacidadTeorica
      */
+    @Size(max=255, min=0)
     private String aniosFueraServicio;
 
     /**
      * capacidadPractica
      */
+    @Size(max=255, min=0)
     private String razon;
 
     /**
      * tecnologia
      */
+    @Size(max=255, min=0)
     private String garantia;
 
     /**
      * Perido de Garantia
      */   
+    @Size(max=255, min=0)
     private String peridoGarantia;
     
     /**
      * 
      */
+    @Size(max=255, min=0)
     private String cubrimientoGarantia;
     
     /**
      * 
      */
+    @Size(max=255, min=0)
     private String clasificacionDecreto;
     
     /**
      * 
      */
+    @Size(max=255, min=0)
     private String calibracionTipo;
     
     /**
      * 
      */
+    @Size(max=255, min=0)
     private String calibracionPeriocidad;
     
     /**

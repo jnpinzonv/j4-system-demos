@@ -49,7 +49,7 @@
 						action="#{equipoController.busqueda}" update =":formEquipos"/>
 
 					<p:commandButton id="reset" value="Reiniciar"
-						action="equipoController.reiniciar" immediate="true" update =":formEquipos"/>
+						action="#{equipoController.reiniciar}" immediate="true" update =":formEquipos"/>
 				</p:panel>
 
 			</p:panel>
@@ -104,16 +104,12 @@
 				<p:dataTable var="_object" value="#{equipoController.listaEquipos}"
 					rendered="#{not empty equipoController.listaEquipos}"
 					id="EquipoList" paginator="true" paginatorPosition="bottom"
-					rowKey="#{_object.id}" styleClass="widthGeneral"
+					rowKey="#{_object.id}" styleClass="widthGeneral" rows="15"
 					selection="#{equipoController.selectEquipos}">
 
 					<p:column id="c1" headerText="id">
 						<h:outputText value="#{_object.id}" />
-					</p:column>
-
-					<p:column id="c2" headerText="fotoEquipo">
-						<h:outputText value=" #{_object.fotoEquipo}" />
-					</p:column>
+					</p:column>					
 
 					<p:column id="c3" headerText="marca">
 						<h:outputText value=" #{_object.marca}" />

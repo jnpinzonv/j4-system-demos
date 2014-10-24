@@ -15,6 +15,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.Size;
 
 /**
  * <b>Descripcion:</b> Clase que <br/>
@@ -56,11 +57,13 @@ public class TipoManteEquipo implements Serializable {
     /**
      * cual
      */
+    @Size(max=255, min=0)
     private String cual;
     
     /**
      * 
      */
+    @Size(max=255, min=0)
     private String valor;
     
    
