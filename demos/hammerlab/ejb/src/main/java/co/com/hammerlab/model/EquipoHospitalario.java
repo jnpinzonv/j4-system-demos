@@ -101,6 +101,13 @@ public class EquipoHospitalario implements Serializable {
      */
     @Size(max=255, min=0)
     private String representanteCol;
+    
+    /**
+     * representanteCol
+     */
+    @Size(max=255, min=0)
+    private String numInventario;
+    
 
     /**
      * direccion
@@ -550,4 +557,22 @@ public class EquipoHospitalario implements Serializable {
     public void setNombreEquipo(String nombreEquipo) {
         this.nombreEquipo = nombreEquipo;
     }
+
+    /**
+     * Devuelve el valor de numInventario
+     * @return El valor de numInventario
+     */
+    public String getNumInventario() {
+        return numInventario;
+    }
+
+    /**
+     * Establece el valor de numInventario
+     * @param numInventario El valor por establecer para numInventario
+     */
+    public void setNumInventario(String numInventario) {
+        this.numInventario = numInventario;
+    }
+    
+    
 }

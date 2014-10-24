@@ -38,10 +38,9 @@
 						cellspacing="0" columnClasses="col4,col4,col4,col4">
 
 						<p:outputLabel value="Foto Equipo:" />
-						<p:graphicImage id="idImagen"
-							value="#{cargarImagenes.fotoEquipo}" width="200" height="171">
-							<f:param name="id"
-								value="#{equipoController.newObject.id}" />
+						<p:graphicImage id="idImagen" value="#{cargarImagenes.fotoEquipo}"
+							width="200" height="171">
+							<f:param name="id" value="#{equipoController.newObject.id}" />
 						</p:graphicImage>
 
 						<p:outputLabel for="nombreEquipo" value="Nombre del Equipo:" />
@@ -55,6 +54,11 @@
 						<p:outputLabel for="modelo" value="Modelo:" />
 						<p:outputLabel id="modelo"
 							value="#{equipoController.newObject.modelo}" />
+
+						<p:outputLabel for="numInventario" value="Numero Inventario:" />
+						<p:inputText id="numInventario"
+							value="#{equipoController.newObject.numInventario}" />
+
 
 						<p:outputLabel for="ubicacion" value="Ubicación:" />
 						<p:outputLabel id="ubicacion"

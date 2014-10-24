@@ -35,9 +35,9 @@
 					<p:selectOneMenu id="idNombre"
 						value="#{mantenimientoController.newObject.estadoMantenimiento}">
 						<f:selectItem itemLabel="Seleccione" itemValue="" />
-						<f:selectItems var="_eachItem"
-							itemLabel="#{_eachItem}"
-							value="#{mantenimientoController.listEstado}" itemValue="#{_eachItem}" />
+						<f:selectItems var="_eachItem" itemLabel="#{_eachItem}"
+							value="#{mantenimientoController.listEstado}"
+							itemValue="#{_eachItem}" />
 
 					</p:selectOneMenu>
 				</h:panelGrid>
