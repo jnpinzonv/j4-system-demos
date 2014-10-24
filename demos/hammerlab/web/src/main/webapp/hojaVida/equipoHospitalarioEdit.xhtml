@@ -36,11 +36,11 @@
 				<p:panel id="groupButtonTop" styleClass="panelBotonHI"
 					style="border: transparent;">
 					<p:commandButton id="createTop" value="Guardar"
-						action="#{equipoController.crear}"
+						action="#{equipoController.crear}"  update="@form"
 						rendered="#{!equipoController.editMode}" />
 
 					<p:commandButton id="updateTop" value="Guardar"
-						action="#{equipoController.actualizar}"
+						action="#{equipoController.actualizar}" update="@form"
 						rendered="#{equipoController.editMode}" />
 
 					<p:commandButton id="cancelTop" value="Cancelar"
@@ -58,14 +58,20 @@
 						cellspacing="0" columnClasses="col3,col3,col3">
 
 						<p:outputLabel value="Foto del Equipo:" />
+						<h:panelGrid>
+							<p:inputText id="nombreFoto" style="width: 210px;"
+								value="#{equipoController.nombreFoto}"
+								required="true" />
+							<p:message for="nombreFoto" />
+						</h:panelGrid>
 						<p:outputPanel>
-							<p:fileUpload required="true" id="fotoequipo"
+							<p:fileUpload id="fotoequipo"
 								fileUploadListener="#{equipoController.cargarFotoEquipo}"
 								mode="advanced" dragDropSupport="true" sizeLimit="100000"
-								allowTypes="/(\.|\/)(gif|jpe?g|png|jpg)$/" />
+								allowTypes="/(\.|\/)(gif|jpe?g|png|jpg)$/" update="nombreFoto"/>
 								<p:message for="fotoequipo" />
 						</p:outputPanel>
-						<h:outputText value="" />
+						
 
 						<p:outputLabel for="nombreEquipo" value="Nombre del Equipo:" />
 

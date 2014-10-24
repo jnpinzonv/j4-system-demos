@@ -16,6 +16,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
@@ -69,6 +70,7 @@ public class EquipoHospitalario implements Serializable {
     /**
      * fotoEquipo
      */
+    @NotNull(message="Este Campo es obligatorio")
     @Lob
     private byte[] fotoEquipo;
 
