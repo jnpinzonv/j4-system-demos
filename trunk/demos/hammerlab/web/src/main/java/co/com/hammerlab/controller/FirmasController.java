@@ -15,6 +15,7 @@ import javax.inject.Named;
 import org.primefaces.event.FileUploadEvent;
 
 import co.com.hammerlab.ejb.MantenimientoEquipoBean;
+import co.com.hammerlab.model.Estado;
 import co.com.hammerlab.model.MantenimientoEquipo;
 import co.com.hammerlab.util.ConstantesUtil;
 
@@ -103,6 +104,7 @@ public class FirmasController implements Serializable {
                 element.setFirmaAprobacionContrato(newObject.getFirmaAprobacionContrato());
                 element.setFirmaAprobacion(newObject.getFirmaAprobacion());
                 element.setNumeroHojaFisica(newObject.getNumeroHojaFisica());
+                element.setEstadoMantenimiento(Estado.FIRMADO);
                 mantenimientoEquipoBean.update(element);
             }
 
@@ -112,7 +114,8 @@ public class FirmasController implements Serializable {
             String errorMessage = getRootErrorMessage(e);
             addMessage(FacesMessage.SEVERITY_ERROR, errorMessage);
         }
-
+        busqueda();
+        selectMantenimiento=null;
         return ConstantesUtil.ATRAS;
     }
 

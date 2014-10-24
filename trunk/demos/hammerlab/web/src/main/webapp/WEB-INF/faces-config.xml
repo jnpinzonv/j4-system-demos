@@ -160,5 +160,23 @@
 			<to-view-id>/hojaVida/mantenimientoList.xhtml</to-view-id>
 		</navigation-case>		
 	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>/hojaVida/porFirmarList.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>crear_actu</from-outcome>
+			<to-view-id>/hojaVida/porFirmarEdit.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>			
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>/hojaVida/porFirmarEdit.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>atras</from-outcome>
+			<to-view-id>/hojaVida/porFirmarList.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>			
+	</navigation-rule>
 
 </faces-config>

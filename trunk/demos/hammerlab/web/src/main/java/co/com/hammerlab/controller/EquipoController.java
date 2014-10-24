@@ -135,6 +135,8 @@ public class EquipoController implements Serializable {
     private String accion;
 
     private String razonSocial = "";
+    
+    private String nombreFoto;
     /**
      * 
      */
@@ -174,6 +176,8 @@ public class EquipoController implements Serializable {
      */
     private void inicializarVariables() {
         newObject = new EquipoHospitalario();
+        nombreFoto="";
+        razonSocial="";
         ubicacionList = new TreeMap<String, String>();
         tecnologiaList = new ArrayList<String>();
         decretoList= new ArrayList<String>();
@@ -249,6 +253,7 @@ public class EquipoController implements Serializable {
      */
     public void cargarFotoEquipo(FileUploadEvent event) {
         newObject.setFotoEquipo(event.getFile().getContents());
+        nombreFoto=event.getFile().getFileName();
         addMessage(FacesMessage.SEVERITY_INFO, event.getFile().getFileName() + " Fue cargado.");
     }
 
@@ -1325,6 +1330,22 @@ public class EquipoController implements Serializable {
      */
     public void setListaSinInformacion(List<SinInformacion> listaSinInformacion) {
         this.listaSinInformacion = listaSinInformacion;
+    }
+
+    /**
+     * Devuelve el valor de nombreFoto
+     * @return El valor de nombreFoto
+     */
+    public String getNombreFoto() {
+        return nombreFoto;
+    }
+
+    /**
+     * Establece el valor de nombreFoto
+     * @param nombreFoto El valor por establecer para nombreFoto
+     */
+    public void setNombreFoto(String nombreFoto) {
+        this.nombreFoto = nombreFoto;
     }
 
     
