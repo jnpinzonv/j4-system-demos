@@ -1,10 +1,14 @@
 package co.com.hammerlab.controller;
 
+import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
+import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -20,27 +24,36 @@ import javax.inject.Named;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.util.JRLoader;
 
 import org.primefaces.event.FileUploadEvent;
 
 import co.com.hammerlab.ejb.EquipoHospitalarioBean;
+import co.com.hammerlab.ejb.MantenimientoEquipoBean;
 import co.com.hammerlab.ejb.ParametrosBean;
 import co.com.hammerlab.model.AdquisicionEquipo;
 import co.com.hammerlab.model.CategoriasParametros;
 import co.com.hammerlab.model.Empresa;
 import co.com.hammerlab.model.EquipoHospitalario;
 import co.com.hammerlab.model.EquipoInfoTecnica;
-import co.com.hammerlab.model.Estado;
 import co.com.hammerlab.model.EstadoEquipo;
 import co.com.hammerlab.model.FuncionamientoEquipo;
+import co.com.hammerlab.model.MantenimientoEquipo;
 import co.com.hammerlab.model.ManualesEquipo;
 import co.com.hammerlab.model.ParametrosGenerales;
 import co.com.hammerlab.model.PlanosEquipo;
 import co.com.hammerlab.model.RecomendacionesEquipo;
+import co.com.hammerlab.model.RegistroActividadesDTO;
+import co.com.hammerlab.model.ReporteDTO;
 import co.com.hammerlab.model.SinInformacion;
 import co.com.hammerlab.model.TipoManteEquipo;
 import co.com.hammerlab.model.TipoMantenimiento;
 import co.com.hammerlab.util.ConstantesUtil;
+import co.com.hammerlab.util.ConvertidorUtils;
+import co.com.hammerlab.util.FechaUtils;
+import co.com.hammerlab.util.ReporteConstants;
 
 @Named("equipoController")
 @ConversationScoped
@@ -83,6 +96,9 @@ public class EquipoController implements Serializable {
      */
     @Inject
     private EquipoHospitalarioBean equipoHospitalarioBean;
+    
+    @Inject
+    private MantenimientoEquipoBean mantenimientoEquipoBean;
 
     @Inject
     private ParametrosBean parametrosBean;
@@ -131,6 +147,15 @@ public class EquipoController implements Serializable {
     private List<String> tecnologiaList;
 
     private List<String> decretoList;
+    
+    private List<MantenimientoEquipo> mantenimientoEquipo;
+    
+    /**
+     * Atributo encargado de cargar los parametros del reporte
+     */
+    private Map<String,String> reporteList;
+    
+    
 
     private String accion;
 
@@ -180,7 +205,8 @@ public class EquipoController implements Serializable {
         razonSocial="";
         ubicacionList = new TreeMap<String, String>();
         tecnologiaList = new ArrayList<String>();
-        decretoList= new ArrayList<String>();
+		decretoList = new ArrayList<String>();
+        reporteList = new TreeMap<String, String>();
         for (ParametrosGenerales element : parametrosBean.getAllCategoria(CategoriasParametros.UBICACION)) {
             ubicacionList.put(element.getPropiedad(), element.getPropiedad());
         }
@@ -190,6 +216,9 @@ public class EquipoController implements Serializable {
         
         for (ParametrosGenerales elemen : parametrosBean.getAllCategoria(CategoriasParametros.DECRETO_4725)) {
             decretoList.add(elemen.getPropiedad());
+        }
+        for (ParametrosGenerales elemen : parametrosBean.getAllCategoria(CategoriasParametros.REPORTES)) {
+            reporteList.put(elemen.getValorClave(), elemen.getPropiedad()); 
         }
 
         StringBuilder var = new StringBuilder("");
@@ -441,6 +470,7 @@ public class EquipoController implements Serializable {
 
     private void cargarInformacion() {
         newObject = equipoHospitalarioBean.getAllRelations(selectEquipos.get(0).getId());
+        mantenimientoEquipo = mantenimientoEquipoBean.getAll(newObject);
         adquisicionEquipo = newObject.getAdquisicionEquipo();
         infoTecnica = newObject.getInfoTecnica();
         estadoEquipo = newObject.getEstadoEquipo();
@@ -679,42 +709,161 @@ public class EquipoController implements Serializable {
      *             Se genera cuando ocurre un error al generar el JasperPrint del reporte.
      */
     public void generarJasperPrint() {
-        JasperPrint print = null;
-
         try {
-            Map<String, Object> datosAdicionales = new TreeMap<String, Object>();
-
-            // InputStream logoImpuestos = this.getClass().getResourceAsStream(ConstantesReportesEstadisticos.RUTA_LOGO);
-            // datosAdicionales.put(ConstantesReportesEstadisticos.NOMBRE_PARAMETRO, logoImpuestos);
-
-            // JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(puntosAtencion);
-
-            // print = JasperFillManager.fillReport(obtenerPlantilla(), datosAdicionales, dataSource);
-            print = JasperFillManager.fillReport(obtenerPlantilla(), datosAdicionales);
-
-            enviarPDF(print);
+        	cargarInformacion();
+        	HashMap<String,Object> parametros = new HashMap<String,Object>();
+        	//pie de pagina
+        	parametros.put("direccion_empresa", reporteList.get(ReporteConstants.DIRECCION));
+        	parametros.put("telefonos_empresa", reporteList.get(ReporteConstants.TELEFONOS));
+        	parametros.put("email_empresa", reporteList.get(ReporteConstants.EMAIL));
+        	parametros.put("web_empresa", reporteList.get(ReporteConstants.WEB));
+        	
+        	//Datos Generales
+        	parametros.put("nombre_equipo",newObject.getNombreEquipo());
+        	parametros.put("marca_equipo",newObject.getMarca());
+			parametros.put("modelo_equipo",newObject.getModelo());
+			parametros.put("inventario_equipo",newObject.getNumInventario());
+			parametros.put("ubicacion_equipo",newObject.getUbicacion());
+			parametros.put("fabricante_equipo",newObject.getFabricante());
+			parametros.put("representante_equipo",newObject.getRepresentanteCol());
+			parametros.put("direccion",newObject.getDireccion());
+			parametros.put("telefono",newObject.getTelefono());
+			
+			//Informacion Tecnica
+			parametros.put("voltaje", infoTecnica.getVoltaje()+ " V.");
+			parametros.put("potencia",infoTecnica.getPotencia() + " Kw.");
+			parametros.put("capacidad_teorica",infoTecnica.getCapacidadTeorica());
+			parametros.put("capacidad_practica",infoTecnica.getCapacidadPractica());
+			parametros.put("instalaciones",infoTecnica.getInstalaciones());
+			parametros.put("frecuencia",infoTecnica.getFrecuencia() + " Hz");
+			parametros.put("tecnologia",infoTecnica.getTecnologia());
+			parametros.put("insumos",infoTecnica.getInsumos());
+			
+			// Propiedad, adquisicion y garantia
+			parametros.put("fecha_adquisicion",adquisicionEquipo.getFechaAdquisicion());
+			parametros.put("fecha_instalacion",adquisicionEquipo.getFechaInstalacion());
+			parametros.put("anios_operacion",adquisicionEquipo.getAniosOperacion());
+			parametros.put("propiedad",adquisicionEquipo.getPropiedadEquipo());
+			parametros.put("anios_fuera_servicio",adquisicionEquipo.getAniosFueraServicio());
+			parametros.put("razon",adquisicionEquipo.getRazon());
+			parametros.put("garantia",adquisicionEquipo.getGarantia());
+			parametros.put("periodo_garantia",adquisicionEquipo.getPeridoGarantia());
+			parametros.put("cubrimiento_garantia",adquisicionEquipo.getCubrimientoGarantia());
+			parametros.put("clasificacion_decreto",adquisicionEquipo.getClasificacionDecreto());
+			parametros.put("calibracion",adquisicionEquipo.getCalibracionTipo());
+			
+			//Planos
+			parametros.put("si_instalacion",planosEquipo.getInstalacionConfirmar()!=null && planosEquipo.getInstalacionConfirmar()?"SI":"NO");
+			parametros.put("si_partes",planosEquipo.getPartesConfirmar()!=null && planosEquipo.getPartesConfirmar()?"SI":"NO");
+			parametros.put("si_funcionamiento",planosEquipo.getFuncionamientoConfirmar()!=null && planosEquipo.getFuncionamientoConfirmar()?"SI":"NO");
+			parametros.put("instalacion_ubicacion",planosEquipo.getInstalacionUbicacion());
+			parametros.put("partes_ubicacion",planosEquipo.getPartesUbicacion());
+			parametros.put("funcionamiento_ubicacion",planosEquipo.getFuncionamientoUbicacion());
+			
+			//Manuales
+			parametros.put("si_tecnico",manualesEquipo.getTecnicoConfirmar()!=null && manualesEquipo.getTecnicoConfirmar()?"SI":"NO");
+			parametros.put("si_servicio",manualesEquipo.getServicioConfirmar()!=null && manualesEquipo.getServicioConfirmar()?"SI":"NO");
+			parametros.put("si_usuario",manualesEquipo.getUsuarioConfirmar()!=null && manualesEquipo.getUsuarioConfirmar()?"SI":"NO");
+			parametros.put("tecnico_ubicacion",manualesEquipo.getTecnicoUbicacion());
+			parametros.put("servicio_ubicacion",manualesEquipo.getServicioUbicacion());
+			parametros.put("usuario_ubicacion",manualesEquipo.getUsuarioUbicacion());
+			
+			//Recomendaciones
+			parametros.put("recomendaciones",recomendacionesEquipo.getDetalle());
+			
+			//Estado
+			parametros.put("estado",estadoEquipo.getEstadoConfirmar());
+			parametros.put("causas_estado",estadoEquipo.getCausa());
+			
+			//Funcionamiento
+			parametros.put("estado_funcionamiento",funcionamientoEquipo.getFuncionamientoConfirmar());
+			parametros.put("fuera_servicio",funcionamientoEquipo.getFueraServicio()!=null && funcionamientoEquipo.getFueraServicio()?"SI":"NO");
+			parametros.put("anios_fuera_servicios",funcionamientoEquipo.getAnioFueraServicio());
+			parametros.put("causas_funcionamiento",funcionamientoEquipo.getCausa());
+			
+			//Tipo Mantenimiento
+			if (tipoManteEquipoPre.getTipoContrato()!=null && tipoManteEquipoPre.getTipoContrato()) {
+				parametros.put("preventivo_propio","X");
+			}else{
+				parametros.put("preventivo_contratado","X");
+			}
+			if (tipoManteEquipoCorr.getTipoContrato()!=null && tipoManteEquipoCorr.getTipoContrato()) {
+				parametros.put("correctivo_propio","X");
+			}else{
+				parametros.put("correctivo_contratado","X");
+			}
+			parametros.put("preventivo_cual",tipoManteEquipoPre.getCual());
+			parametros.put("correctivo_cual",tipoManteEquipoCorr.getCual());
+			
+			//Imagen
+			if (newObject.getFotoEquipo()!=null && newObject.getFotoEquipo().length > 0) {
+				InputStream in = new ByteArrayInputStream(newObject.getFotoEquipo());
+				parametros.put("imagen", new BufferedInputStream(in));
+			}
+			
+			//Lista de mantenimiento
+			ReporteDTO reportee = new ReporteDTO();
+			List<ReporteDTO> listaReporte = new ArrayList<ReporteDTO>();
+			List<RegistroActividadesDTO> listaRegistro = new ArrayList<RegistroActividadesDTO>();
+			if (mantenimientoEquipo != null && !mantenimientoEquipo.isEmpty()) {				
+				for (MantenimientoEquipo mantenimiento : mantenimientoEquipo) {
+					RegistroActividadesDTO registroActividadesDTO = new RegistroActividadesDTO();
+					registroActividadesDTO.setDanio(mantenimiento
+							.getDanioFalla());
+					registroActividadesDTO.setFecha(FechaUtils
+							.formatearfechaSinHora(mantenimiento.getFecha()));
+					if (mantenimiento.getFirmaAprobacion() != null
+							&& mantenimiento.getFirmaAprobacion().length > 0) {
+						InputStream in = new ByteArrayInputStream(
+								mantenimiento.getFirmaAprobacion());
+						registroActividadesDTO
+								.setFirmaAprobacion(new BufferedInputStream(in));
+					}
+					if (mantenimiento.getFirmaAprobacionContrato() != null
+							&& mantenimiento.getFirmaAprobacionContrato().length > 0) {
+						InputStream in = new ByteArrayInputStream(
+								mantenimiento.getFirmaAprobacionContrato());
+						registroActividadesDTO
+								.setFirmaContratista(new BufferedInputStream(in));
+					}
+					if (mantenimiento.getFirmaAprobacionTecnico() != null
+							&& mantenimiento.getFirmaAprobacionTecnico().length > 0) {
+						InputStream in = new ByteArrayInputStream(
+								mantenimiento.getFirmaAprobacionTecnico());
+						registroActividadesDTO
+								.setFirmaIngeniero(new BufferedInputStream(in));
+					}
+					registroActividadesDTO
+							.setNroTransaccion(ConvertidorUtils
+									.convertirACadenas(mantenimiento
+											.getIdTransaccion()));
+					registroActividadesDTO.setObservaciones(mantenimiento
+							.getObservaciones());
+					registroActividadesDTO.setReparacion(mantenimiento
+							.getReparaciones());
+					registroActividadesDTO.setRepuesto(mantenimiento
+							.getRepuestos());
+					listaRegistro.add(registroActividadesDTO);
+				}
+			}        	
+        	reportee.setListaRegistro(listaRegistro);
+        	listaReporte.add(reportee);
+        	
+        	JasperPrint jasperPrint = JasperFillManager.fillReport(obtenerPlantilla(),
+					parametros, new JRBeanCollectionDataSource(listaReporte));
+        	
+			String nombreReporte = FechaUtils
+							.formatearfechaConHoraGuion(Calendar.getInstance()
+									.getTime())
+							+ "_" + newObject.getNombreEquipo();
+			
+			enviarPDF(jasperPrint, nombreReporte);
             addMessage(FacesMessage.SEVERITY_INFO, "Se genero el informe");
         } catch (Exception e) {
-
             addMessage(FacesMessage.SEVERITY_ERROR, "Error al generar el informe");
         }
     }
-
-    /**
-     * Envía un xls como respuesta al cliente.
-     * 
-     * @param jasperPrint
-     *            con el reporte xls.
-     * @throws Exception
-     *             Se genera cuando se presenta un error al exportar el reporte como archivo xls.
-     */
-    private void enviarPDF(JasperPrint jasperPrint) throws Exception {
-
-        String fileName = "D://hammerlab//" + new Date().getTime() + ".pdf";
-        JasperExportManager.exportReportToPdfFile(jasperPrint, fileName);
-
-    }
-
+    
     /**
      * Retorna la plantilla del reporte en un objeto <code>InputStream</code>.
      * 
@@ -728,6 +877,31 @@ public class EquipoController implements Serializable {
 
         reportStream = this.getClass().getResourceAsStream(ubicacionPlantilla);
         return reportStream;
+    }
+
+    /**
+     * Envía un xls como respuesta al cliente.
+     * 
+     * @param jasperPrint
+     *            con el reporte xls.
+     * @throws Exception
+     *             Se genera cuando se presenta un error al exportar el reporte como archivo xls.
+     */
+    private void enviarPDF(JasperPrint jasperPrint, String nombreReporte) throws Exception {
+		String fileName = ConvertidorUtils
+				.convertirEspaciosAUnderscore(reporteList
+						.get(ReporteConstants.RUTA)
+						+ newObject.getEmpresa().getRazonSocial()
+						+ "//"
+						+ newObject.getUbicacion()
+						+ "//");
+		boolean archvoCreado = false;
+		File archivo = new File(fileName);
+		if (!archivo.exists()) {
+			archvoCreado = archivo.mkdirs();
+		}
+		JasperExportManager.exportReportToPdfFile(jasperPrint, fileName
+				+ nombreReporte + ".pdf");
     }
 
     /**
@@ -1366,5 +1540,19 @@ public class EquipoController implements Serializable {
     }
 
     
-    
+	/**
+	 * Metodo encargado de obtener el valor de la variable reporteList
+	 * @return el valor de la variable reporteList 
+	 */
+	public Map<String, String> getReporteList() {
+		return reporteList;
+	}
+
+	/**
+	 * Metodo encargado de asignar el valor de parametro reporteList a la variable reporteList 
+	 * @param reporteList valor a asignar a la variable almidon
+	 */
+	public void setReporteList(Map<String, String> reporteList) {
+		this.reporteList = reporteList;
+	}	
 }
