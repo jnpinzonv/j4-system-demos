@@ -2,215 +2,171 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Biomedico_subreport2" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="8098f9e1-bd19-42f0-acf9-737d78f8b0d7">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="226"/>
+	<property name="ireport.y" value="0"/>
 	<field name="fecha" class="java.lang.String"/>
 	<field name="reparacion" class="java.lang.String"/>
 	<field name="danio" class="java.lang.String"/>
 	<field name="repuesto" class="java.lang.String"/>
-	<field name="interna" class="java.lang.String"/>
-	<field name="costo" class="java.lang.String"/>
 	<field name="nroTransaccion" class="java.lang.String"/>
+	<field name="firmaAprobacion" class="java.io.BufferedInputStream"/>
+	<field name="firmaIngeniero" class="java.io.BufferedInputStream"/>
+	<field name="firmaContratista" class="java.io.BufferedInputStream"/>
+	<field name="observaciones" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<detail>
-		<band height="352" splitType="Stretch">
+		<band height="311" splitType="Stretch">
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="20" y="112" width="526" height="30" isPrintWhenDetailOverflows="true" uuid="965869b6-5575-4065-bd8b-95507b42d749"/>
-				<box>
-					<pen lineWidth="0.5"/>
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
+				<reportElement x="20" y="102" width="526" height="30" isPrintWhenDetailOverflows="true" uuid="965869b6-5575-4065-bd8b-95507b42d749"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{reparacion} != null ? $F{reparacion} : "No Aplica"]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="20" y="65" width="526" height="30" isPrintWhenDetailOverflows="true" uuid="c651ff07-595a-45c1-a8fe-a5c77be3afb2"/>
-				<box>
-					<pen lineWidth="0.5"/>
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
+				<reportElement x="20" y="55" width="526" height="30" isPrintWhenDetailOverflows="true" uuid="c651ff07-595a-45c1-a8fe-a5c77be3afb2"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{danio} != null ? $F{danio} : "No Aplica"]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="20" y="159" width="526" height="30" isPrintWhenDetailOverflows="true" uuid="a028bc0c-cd88-45c3-916b-357cef2db5b0"/>
-				<box>
-					<pen lineWidth="0.5"/>
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
+				<reportElement x="20" y="149" width="526" height="30" isPrintWhenDetailOverflows="true" uuid="a028bc0c-cd88-45c3-916b-357cef2db5b0"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{repuesto} != null ? $F{repuesto} : "No Aplica"]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="109" y="240" width="437" height="30" uuid="7d8d8f81-ebef-4d1b-9a9d-0223cf18e8a6"/>
-				<box>
-					<pen lineWidth="0.5"/>
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{costo} != null ? $F{costo} : "No Aplica"]]></textFieldExpression>
-			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="109" y="16" width="163" height="30" uuid="b833c535-da61-4df9-ac27-ef972c40eabf"/>
-				<box>
-					<pen lineWidth="0.5"/>
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
+				<reportElement x="60" y="16" width="181" height="20" uuid="b833c535-da61-4df9-ac27-ef972c40eabf"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement mode="Opaque" x="20" y="52" width="160" height="13" backcolor="#CCCCFF" uuid="6177161c-73b0-41ef-8833-ed8b97dc8f97"/>
-				<box>
-					<pen lineWidth="0.5"/>
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
+				<reportElement mode="Transparent" x="20" y="36" width="195" height="19" backcolor="#FFFFFF" uuid="6177161c-73b0-41ef-8833-ed8b97dc8f97"/>
 				<textElement verticalAlignment="Top">
-					<font isBold="true"/>
+					<font fontName="Times New Roman" size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[ Daños, fallas o averías]]></text>
+				<text><![CDATA[Daños, fallas o averías]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="20" y="99" width="160" height="13" backcolor="#CCCCFF" uuid="285aba10-35e7-4234-9b91-5654d9c6b2ee"/>
-				<box>
-					<pen lineWidth="0.5"/>
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
+				<reportElement mode="Transparent" x="20" y="85" width="195" height="17" backcolor="#FFFFFF" uuid="285aba10-35e7-4234-9b91-5654d9c6b2ee"/>
 				<textElement verticalAlignment="Top">
-					<font isBold="true"/>
+					<font fontName="Times New Roman" size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[ Reparaciones o procedimientos]]></text>
+				<text><![CDATA[Reparaciones o procedimientos]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="20" y="146" width="160" height="13" backcolor="#CCCCFF" uuid="e1bcc6f3-f31a-41cd-8456-378c395a0ac6"/>
-				<box>
-					<pen lineWidth="0.5"/>
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
+				<reportElement mode="Transparent" x="20" y="132" width="195" height="17" backcolor="#FFFFFF" uuid="e1bcc6f3-f31a-41cd-8456-378c395a0ac6"/>
 				<textElement>
-					<font isBold="true"/>
+					<font fontName="Times New Roman" size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[ Repuestos Básicos]]></text>
+				<text><![CDATA[Repuestos Básicos]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="20" y="16" width="89" height="30" backcolor="#CCCCFF" uuid="80f1c357-2899-4d31-9658-4eff80e1ce73"/>
-				<box>
-					<pen lineWidth="0.5"/>
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement verticalAlignment="Middle">
-					<font isBold="true"/>
+				<reportElement mode="Transparent" x="20" y="16" width="50" height="20" backcolor="#FFFFFF" uuid="80f1c357-2899-4d31-9658-4eff80e1ce73"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[ Fecha]]></text>
-			</staticText>
-			<staticText>
-				<reportElement mode="Opaque" x="20" y="240" width="89" height="30" backcolor="#CCCCFF" uuid="16197130-ba94-44b1-a4ec-47531842af85"/>
-				<box>
-					<pen lineWidth="0.5"/>
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[ Costo Total]]></text>
+				<text><![CDATA[ Fecha:]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement x="383" y="16" width="163" height="30" uuid="c1f31a3b-8da0-4af1-84ad-f2fef81c1b44"/>
-				<box>
-					<pen lineWidth="0.5"/>
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
+				<reportElement x="357" y="16" width="189" height="20" uuid="c1f31a3b-8da0-4af1-84ad-f2fef81c1b44"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{nroTransaccion}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement mode="Opaque" x="20" y="193" width="160" height="13" backcolor="#CCCCFF" uuid="ec6ba382-831c-4b46-bad7-a7a67a890032"/>
-				<box>
-					<pen lineWidth="0.5"/>
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
+				<reportElement mode="Transparent" x="20" y="179" width="179" height="17" backcolor="#FFFFFF" uuid="ec6ba382-831c-4b46-bad7-a7a67a890032"/>
 				<textElement>
-					<font isBold="true"/>
+					<font fontName="Times New Roman" size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Observaciones]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="20" y="206" width="526" height="30" isPrintWhenDetailOverflows="true" uuid="faf2ba89-b931-42a9-8c41-4482facbf589"/>
-				<box>
-					<pen lineWidth="0.5"/>
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textFieldExpression><![CDATA[$F{repuesto} != null ? $F{repuesto} : "No Aplica"]]></textFieldExpression>
+				<reportElement x="20" y="196" width="526" height="30" isPrintWhenDetailOverflows="true" uuid="faf2ba89-b931-42a9-8c41-4482facbf589"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{observaciones} != null ? $F{observaciones} : "No Aplica"]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement mode="Opaque" x="294" y="16" width="89" height="30" backcolor="#CCCCFF" uuid="174ce5ba-514f-4805-89e9-949d85b56592"/>
-				<box>
-					<pen lineWidth="0.5"/>
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
+				<reportElement mode="Transparent" x="255" y="16" width="103" height="20" backcolor="#FFFFFF" uuid="174ce5ba-514f-4805-89e9-949d85b56592"/>
 				<textElement verticalAlignment="Middle">
-					<font isBold="true"/>
+					<font fontName="Times New Roman" size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[No. Transacción]]></text>
+				<text><![CDATA[No. Transacción:]]></text>
 			</staticText>
 			<line>
-				<reportElement x="77" y="328" width="192" height="1" uuid="9adca339-caff-4204-aaea-cece79a4d532"/>
+				<reportElement x="20" y="286" width="160" height="1" uuid="9adca339-caff-4204-aaea-cece79a4d532"/>
 			</line>
 			<line>
-				<reportElement x="291" y="328" width="192" height="1" uuid="e77fed62-eb6b-490e-8b72-1846b32b4b16"/>
+				<reportElement x="199" y="286" width="158" height="1" uuid="e77fed62-eb6b-490e-8b72-1846b32b4b16"/>
 			</line>
 			<staticText>
-				<reportElement x="77" y="328" width="192" height="20" uuid="2f486803-e8b1-4e93-9fae-75b59aad200d"/>
+				<reportElement x="20" y="286" width="160" height="20" uuid="2f486803-e8b1-4e93-9fae-75b59aad200d"/>
 				<textElement textAlignment="Center">
-					<font isBold="true"/>
+					<font fontName="Times New Roman" size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Funcionario]]></text>
+				<text><![CDATA[Aprobación Institución]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="289" y="328" width="197" height="20" uuid="0e16dff5-c000-41d6-9d76-b9cce5aaca6f"/>
+				<reportElement x="197" y="286" width="160" height="20" uuid="0e16dff5-c000-41d6-9d76-b9cce5aaca6f"/>
 				<textElement textAlignment="Center">
-					<font isBold="true"/>
+					<font fontName="Times New Roman" size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Técnico - Ingeniero]]></text>
+				<text><![CDATA[Aprobación Técnico - Ingeniero]]></text>
 			</staticText>
+			<line>
+				<reportElement x="375" y="286" width="158" height="1" uuid="bec9bc64-b52d-4ee1-b985-c343999a4256"/>
+			</line>
+			<staticText>
+				<reportElement x="373" y="286" width="160" height="20" uuid="5961e662-2c5e-48d1-9289-8ac9ca40ff8e"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Aprobación Contratista]]></text>
+			</staticText>
+			<image>
+				<reportElement x="20" y="235" width="160" height="50" uuid="31c6eac4-9cb8-44d6-8991-40067558fc52"/>
+				<imageExpression><![CDATA[$F{firmaAprobacion}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="197" y="235" width="160" height="50" uuid="b9ce7272-d003-4e37-9cf4-5727228ae614"/>
+				<imageExpression><![CDATA[$F{firmaIngeniero}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="373" y="235" width="160" height="50" uuid="180e066f-8601-476e-b72c-691609a96a01"/>
+				<imageExpression><![CDATA[$F{firmaContratista}]]></imageExpression>
+			</image>
+			<rectangle>
+				<reportElement mode="Transparent" x="20" y="16" width="50" height="20" uuid="70e32490-9b76-497f-9533-0a95f6aa5406"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="70" y="16" width="171" height="20" uuid="8edc0256-adab-4669-ac1b-3711419fc5ad"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="255" y="16" width="102" height="20" uuid="ad38f5d6-f87d-4fcb-911d-ae36aac73390"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="357" y="16" width="189" height="20" uuid="f85dd09b-246b-4322-9e50-a9caecc13502"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="20" y="55" width="526" height="30" isPrintWhenDetailOverflows="true" uuid="54d72bac-ded4-4057-9f67-b94c09ef34fb"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="20" y="102" width="526" height="30" isPrintWhenDetailOverflows="true" uuid="26012b99-49a7-43fb-88bc-d065d3e55af5"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="20" y="149" width="526" height="30" isPrintWhenDetailOverflows="true" uuid="c76aa40b-6df3-4590-a854-e5dbad6fe0f4"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="20" y="196" width="526" height="30" isPrintWhenDetailOverflows="true" uuid="d2a9fbb6-6225-4878-af5a-73ac38be429e"/>
+			</rectangle>
 		</band>
 	</detail>
 </jasperReport>
