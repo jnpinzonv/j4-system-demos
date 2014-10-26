@@ -22,7 +22,13 @@ public enum CategoriasParametros {
     
     DECRETO_4725("Decreto 4725b de 2005"),
     
-    RECOMENDACIONES("Recomendaciones");
+    RECOMENDACIONES("Recomendaciones"),
+    
+    /**
+     * REPORTES
+     */
+    REPORTES("Reportes");    
+    
 
     private String variable;
 
