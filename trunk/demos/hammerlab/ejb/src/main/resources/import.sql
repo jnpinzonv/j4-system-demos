@@ -52,5 +52,8 @@ insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) 
 insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(32,'recomendaciones1','Temperatura 17° C','RECOMENDACIONES','Recomendaciones de equipos medicos');
 insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(33,'recomendaciones2','Humedad Relativa 45','RECOMENDACIONES','Recomendaciones de equipos medicos');
 insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(34,'recomendaciones3','115 V. AC, Red electrica','RECOMENDACIONES','Recomendaciones de equipos medicos');
-
-
+insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(35,'reporte_direccion','Carrera 13 #4-43 Tunja (Boyacá)','REPORTES','Propiedades de reportes - Direccion');
+insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(36,'reporte_telefonos','3133360828-(8)7435635','REPORTES','Propiedades de reportes - Telefonos');
+insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(37,'reporte_email','comprashammerlabmetrocal@gmail.com','REPORTES','Propiedades de reportes - Correo');
+insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(38,'reporte_web','www.hammerlabmetrocal.com.co','REPORTES','Propiedades de reportes - Web');
+insert into parametros_generales(id,valorClave,propiedad,categoria,descripcion) values(39,'reporte_ruta','C://hammerlab//reportes//','REPORTES','Propiedades de reportes - Ruta');
