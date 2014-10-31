@@ -72,7 +72,7 @@
 		<band height="842" splitType="Stretch">
 			<image>
 				<reportElement x="0" y="0" width="595" height="842" uuid="ea188807-aac7-4699-a3b1-9363671123d7"/>
-				<imageExpression><![CDATA["\\fondo.jpg"]]></imageExpression>
+				<imageExpression><![CDATA[this.getClass().getResourceAsStream("/fondo.jpg")]]></imageExpression>
 			</image>
 		</band>
 	</background>
@@ -108,7 +108,7 @@
 			</staticText>
 			<image>
 				<reportElement x="47" y="4" width="78" height="78" uuid="8260cb1d-15f3-4867-b05e-48238c4e1c8a"/>
-				<imageExpression><![CDATA["\\logo.gif"]]></imageExpression>
+				<imageExpression><![CDATA[this.getClass().getResourceAsStream("/HammerlabLogo.png")]]></imageExpression>
 			</image>
 		</band>
 	</pageHeader>
@@ -142,7 +142,7 @@
 				<text><![CDATA[I. DATOS GENERALES]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="18" y="31" width="126" height="20" backcolor="#FFFFFF" uuid="3db6bf48-ca21-4c55-9ff0-565208a40c51"/>
+				<reportElement mode="Transparent" x="18" y="31" width="144" height="20" backcolor="#FFFFFF" uuid="3db6bf48-ca21-4c55-9ff0-565208a40c51"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="14" isBold="true"/>
 				</textElement>
@@ -213,7 +213,7 @@
 				<text><![CDATA[ Teléfono:]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement x="145" y="31" width="430" height="20" isPrintWhenDetailOverflows="true" backcolor="#FFFFFF" uuid="13ecf33a-50a2-480b-b798-bdea8bbe110d"/>
+				<reportElement x="162" y="31" width="413" height="20" isPrintWhenDetailOverflows="true" backcolor="#FFFFFF" uuid="13ecf33a-50a2-480b-b798-bdea8bbe110d"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
@@ -314,21 +314,21 @@
 			<textField>
 				<reportElement mode="Transparent" x="80" y="43" width="216" height="20" uuid="c9ac3dc3-b2ef-4d92-8e42-e70ac031de31"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Times New Roman" size="14"/>
+					<font fontName="Times New Roman" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{voltaje}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="99" y="103" width="475" height="20" uuid="c610a9ea-f74e-4f7a-87f8-29f678944655"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Times New Roman" size="14"/>
+					<font fontName="Times New Roman" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{tecnologia}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="87" y="123" width="487" height="20" uuid="f58aa1a4-6c3b-482b-9a46-e1379f24a9b5"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Times New Roman" size="14"/>
+					<font fontName="Times New Roman" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{insumos}]]></textFieldExpression>
 			</textField>
@@ -349,14 +349,14 @@
 			<textField>
 				<reportElement x="87" y="63" width="209" height="20" uuid="695b7c8b-6d8d-463d-aaf6-487a778d2e55"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Times New Roman" size="14"/>
+					<font fontName="Times New Roman" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{potencia}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="148" y="83" width="148" height="20" uuid="24a98739-7c8e-46a3-bda7-b8cf223a7670"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Times New Roman" size="14"/>
+					<font fontName="Times New Roman" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{capacidad_teorica}]]></textFieldExpression>
 			</textField>
@@ -377,7 +377,7 @@
 			<textField>
 				<reportElement x="389" y="43" width="185" height="20" uuid="18991f3f-6fe1-4bdb-8a58-59f272f7dbdd"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Times New Roman" size="14"/>
+					<font fontName="Times New Roman" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{instalaciones}]]></textFieldExpression>
 			</textField>
@@ -391,14 +391,14 @@
 			<textField>
 				<reportElement x="379" y="63" width="194" height="20" uuid="c7adc415-884a-4c06-b3a2-aa7a7edccb50"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Times New Roman" size="14"/>
+					<font fontName="Times New Roman" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{frecuencia}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="424" y="83" width="150" height="20" uuid="f40dbf91-d883-4924-87a9-cd16f8cbbb22"/>
+				<reportElement x="436" y="83" width="138" height="20" uuid="f40dbf91-d883-4924-87a9-cd16f8cbbb22"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Times New Roman" size="14"/>
+					<font fontName="Times New Roman" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{capacidad_practica}]]></textFieldExpression>
 			</textField>
@@ -406,7 +406,7 @@
 				<reportElement mode="Transparent" x="19" y="43" width="277" height="20" backcolor="#FFFFFF" uuid="754b7d3f-b15d-4891-90c0-220e8dda3044"/>
 			</rectangle>
 			<staticText>
-				<reportElement mode="Transparent" x="296" y="83" width="128" height="20" backcolor="#FFFFFF" uuid="eaac2d5f-1238-4f3d-af8c-f68a80d6fb72"/>
+				<reportElement mode="Transparent" x="296" y="83" width="143" height="20" backcolor="#FFFFFF" uuid="eaac2d5f-1238-4f3d-af8c-f68a80d6fb72"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="14" isBold="true"/>
 				</textElement>
@@ -471,14 +471,14 @@
 				<text><![CDATA[Fecha de Instalación:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="22" y="138" width="330" height="20" backcolor="#CCCCFF" uuid="ef6ee375-40da-4252-848f-7a96205146e1"/>
+				<reportElement mode="Transparent" x="22" y="138" width="345" height="20" backcolor="#CCCCFF" uuid="ef6ee375-40da-4252-848f-7a96205146e1"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Clasificación según el Riesgo (Decreto 4725 de 2005):]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="433" y="58" width="141" height="20" uuid="b080fb2e-0068-496f-914b-d6a6a1995be7"/>
+				<reportElement x="439" y="58" width="135" height="20" uuid="b080fb2e-0068-496f-914b-d6a6a1995be7"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
@@ -492,7 +492,7 @@
 				<text><![CDATA[III. PROPIEDAD, ADQUISICIÓN, OPERACIÓN Y GARANTÍA]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="352" y="139" width="222" height="19" uuid="9e228f5a-d5b9-4a11-9f64-ccaa8dcf88de"/>
+				<reportElement x="367" y="139" width="207" height="19" uuid="9e228f5a-d5b9-4a11-9f64-ccaa8dcf88de"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
@@ -506,14 +506,14 @@
 				<text><![CDATA[Fecha Adquisición:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="341" y="79" width="233" height="20" uuid="f1a6c806-3063-4ea8-8189-73227d7113ee"/>
+				<reportElement x="353" y="79" width="221" height="20" uuid="f1a6c806-3063-4ea8-8189-73227d7113ee"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{razon}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement mode="Transparent" x="298" y="79" width="43" height="20" backcolor="#CCCCFF" uuid="6a3bad85-1ff6-46eb-b557-de45ccf21ad9"/>
+				<reportElement mode="Transparent" x="298" y="79" width="54" height="20" backcolor="#CCCCFF" uuid="6a3bad85-1ff6-46eb-b557-de45ccf21ad9"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="14" isBold="true"/>
 				</textElement>
@@ -541,7 +541,7 @@
 				<text><![CDATA[Cubrimiento de la Garantía:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="163" y="79" width="136" height="20" uuid="13d01191-bbcf-4df4-91a6-f06db6f8521a"/>
+				<reportElement x="169" y="79" width="130" height="20" uuid="13d01191-bbcf-4df4-91a6-f06db6f8521a"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
@@ -555,14 +555,14 @@
 				<text><![CDATA[Años Operación:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="299" y="59" width="136" height="20" backcolor="#CCCCFF" uuid="a764ec42-cc26-4026-a243-cce03eafc134"/>
+				<reportElement mode="Transparent" x="299" y="59" width="140" height="20" backcolor="#CCCCFF" uuid="a764ec42-cc26-4026-a243-cce03eafc134"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Propiedad del Equipo:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="21" y="78" width="142" height="20" backcolor="#CCCCFF" uuid="c9fdee95-85a9-4d37-8332-626b59c1df5b"/>
+				<reportElement mode="Transparent" x="21" y="78" width="149" height="20" backcolor="#CCCCFF" uuid="c9fdee95-85a9-4d37-8332-626b59c1df5b"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="14" isBold="true"/>
 				</textElement>
@@ -573,7 +573,7 @@
 				<textElement verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[ Periodo de Garantía:]]></text>
+				<text><![CDATA[Periodo de Garantía:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Transparent" x="22" y="99" width="62" height="20" backcolor="#CCCCFF" uuid="aa8a2483-e4c8-4fca-ab30-4cfb87e10494"/>
