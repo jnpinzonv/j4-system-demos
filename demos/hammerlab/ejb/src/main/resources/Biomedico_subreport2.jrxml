@@ -74,7 +74,7 @@
 				<text><![CDATA[ Fecha:]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement x="357" y="16" width="189" height="20" uuid="c1f31a3b-8da0-4af1-84ad-f2fef81c1b44"/>
+				<reportElement x="373" y="16" width="173" height="20" uuid="c1f31a3b-8da0-4af1-84ad-f2fef81c1b44"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
@@ -95,7 +95,7 @@
 				<textFieldExpression><![CDATA[$F{observaciones} != null ? $F{observaciones} : "No Aplica"]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement mode="Transparent" x="255" y="16" width="103" height="20" backcolor="#FFFFFF" uuid="174ce5ba-514f-4805-89e9-949d85b56592"/>
+				<reportElement mode="Transparent" x="256" y="16" width="120" height="20" backcolor="#FFFFFF" uuid="174ce5ba-514f-4805-89e9-949d85b56592"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="14" isBold="true"/>
 				</textElement>
@@ -150,10 +150,10 @@
 				<reportElement mode="Transparent" x="70" y="16" width="171" height="20" uuid="8edc0256-adab-4669-ac1b-3711419fc5ad"/>
 			</rectangle>
 			<rectangle>
-				<reportElement mode="Transparent" x="255" y="16" width="102" height="20" uuid="ad38f5d6-f87d-4fcb-911d-ae36aac73390"/>
+				<reportElement mode="Transparent" x="255" y="16" width="118" height="20" uuid="ad38f5d6-f87d-4fcb-911d-ae36aac73390"/>
 			</rectangle>
 			<rectangle>
-				<reportElement mode="Transparent" x="357" y="16" width="189" height="20" uuid="f85dd09b-246b-4322-9e50-a9caecc13502"/>
+				<reportElement mode="Transparent" x="373" y="16" width="173" height="20" uuid="f85dd09b-246b-4322-9e50-a9caecc13502"/>
 			</rectangle>
 			<rectangle>
 				<reportElement mode="Transparent" x="20" y="55" width="526" height="30" isPrintWhenDetailOverflows="true" uuid="54d72bac-ded4-4057-9f67-b94c09ef34fb"/>
