@@ -900,7 +900,7 @@ public class EquipoController implements Serializable {
 		if (!archivo.exists()) {
 			archvoCreado = archivo.mkdirs();
 		}
-		if (archvoCreado) {
+		if (archvoCreado || archivo.exists()) {
 			JasperExportManager.exportReportToPdfFile(jasperPrint, fileName
 					+ nombreReporte + ".pdf");
 		}		
