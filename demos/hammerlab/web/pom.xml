@@ -113,12 +113,12 @@
 			<artifactId>primefaces-extensions</artifactId>
 			<scope>provided</scope>
 		</dependency>
-		
+
 		<dependency>
-				<groupId>org.primefaces.themes</groupId>
-				<artifactId>all-themes</artifactId>
-				<scope>provided</scope>
-			</dependency>
+			<groupId>org.primefaces.themes</groupId>
+			<artifactId>all-themes</artifactId>
+			<scope>provided</scope>
+		</dependency>
 
 	</dependencies>
 
