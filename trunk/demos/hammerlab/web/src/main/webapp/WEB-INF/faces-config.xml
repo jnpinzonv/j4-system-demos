@@ -28,22 +28,31 @@
 		</locale-config>
 	</application>
 
+	<application>
+		<resource-bundle>
+			<base-name>co.com.hammerlab.util.Messsage</base-name>
+			<var>message</var>
+		</resource-bundle>
+	</application>
+
+
 	<navigation-rule>
 		<from-view-id>/hojaVida/empresaList.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>crear_actu</from-outcome>
 			<to-view-id>/hojaVida/empresaEdit.xhtml</to-view-id>
-			<redirect/>
+			<redirect />
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>ver</from-outcome>
 			<to-view-id>/hojaVida/empresaView.xhtml</to-view-id>
-			<redirect/>
+			<redirect />
 		</navigation-case>
-		
+
 		<navigation-case>
 			<from-outcome>refer</from-outcome>
-			<to-view-id>#{not empty empresaController.refer ? empresaController.refer :'/'}</to-view-id>
+			<to-view-id>#{not empty empresaController.refer ?
+				empresaController.refer :'/'}</to-view-id>
 			<redirect>
 				<view-param>
 					<name>accion</name>
@@ -53,50 +62,51 @@
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>cancelSelect</from-outcome>
-			<to-view-id>#{not empty empresaController.refer ? empresaController.refer :'/'}</to-view-id>
+			<to-view-id>#{not empty empresaController.refer ?
+				empresaController.refer :'/'}</to-view-id>
 			<redirect />
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>atras</from-outcome>
 			<to-view-id>/hojaVida/empresaList.xhtml</to-view-id>
-		</navigation-case>	
+		</navigation-case>
 	</navigation-rule>
-	
+
 	<navigation-rule>
 		<from-view-id>/hojaVida/empresaEdit.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>atras</from-outcome>
 			<to-view-id>/hojaVida/empresaList.xhtml</to-view-id>
-		</navigation-case>		
+		</navigation-case>
 	</navigation-rule>
-	
+
 	<navigation-rule>
 		<from-view-id>/hojaVida/empresaView.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>atras</from-outcome>
 			<to-view-id>/hojaVida/empresaList.xhtml</to-view-id>
-		</navigation-case>		
+		</navigation-case>
 	</navigation-rule>
-	
+
 	<navigation-rule>
 		<from-view-id>/hojaVida/equipoHospitalarioList.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>crear_actu</from-outcome>
 			<to-view-id>/hojaVida/equipoHospitalarioEdit.xhtml</to-view-id>
-			<redirect/>
+			<redirect />
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>ver</from-outcome>
 			<to-view-id>/hojaVida/equipoHospitalarioView.xhtml</to-view-id>
-			<redirect/>
+			<redirect />
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>mante</from-outcome>
 			<to-view-id>/hojaVida/mantenimientoList.xhtml</to-view-id>
-			<redirect/>
+			<redirect />
 		</navigation-case>
 	</navigation-rule>
-	
+
 	<navigation-rule>
 		<from-view-id>/hojaVida/equipoHospitalarioEdit.xhtml</from-view-id>
 		<navigation-case>
@@ -112,71 +122,71 @@
 					<value>/hojaVida/equipoHospitalarioEdit.xhtml</value>
 				</view-param>
 			</redirect>
-		</navigation-case>		
+		</navigation-case>
 	</navigation-rule>
-	
+
 	<navigation-rule>
 		<from-view-id>/hojaVida/equipoHospitalarioView.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>atras</from-outcome>
 			<to-view-id>/hojaVida/equipoHospitalarioList.xhtml</to-view-id>
-		</navigation-case>		
+		</navigation-case>
 	</navigation-rule>
-	
+
 	<navigation-rule>
 		<from-view-id>/hojaVida/mantenimientoList.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>crear_actu</from-outcome>
 			<to-view-id>/hojaVida/mantenimientoEdit.xhtml</to-view-id>
-			<redirect/>
+			<redirect />
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>ver</from-outcome>
 			<to-view-id>/hojaVida/mantenimientoView.xhtml</to-view-id>
-			<redirect/>
+			<redirect />
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>atras</from-outcome>
 			<to-view-id>/hojaVida/equipoHospitalarioList.xhtml</to-view-id>
-		</navigation-case>	
+		</navigation-case>
 		<navigation-case>
 			<from-outcome>atrasR</from-outcome>
 			<to-view-id>/hojaVida/mantenimientoList.xhtml</to-view-id>
-		</navigation-case>	
+		</navigation-case>
 	</navigation-rule>
-	
+
 	<navigation-rule>
 		<from-view-id>/hojaVida/mantenimientoEdit.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>atras</from-outcome>
 			<to-view-id>/hojaVida/mantenimientoList.xhtml</to-view-id>
-		</navigation-case>		
+		</navigation-case>
 	</navigation-rule>
-	
+
 	<navigation-rule>
 		<from-view-id>/hojaVida/mantenimientoView.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>atras</from-outcome>
 			<to-view-id>/hojaVida/mantenimientoList.xhtml</to-view-id>
-		</navigation-case>		
+		</navigation-case>
 	</navigation-rule>
-	
+
 	<navigation-rule>
 		<from-view-id>/hojaVida/porFirmarList.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>crear_actu</from-outcome>
 			<to-view-id>/hojaVida/porFirmarEdit.xhtml</to-view-id>
-			<redirect/>
-		</navigation-case>			
+			<redirect />
+		</navigation-case>
 	</navigation-rule>
-	
+
 	<navigation-rule>
 		<from-view-id>/hojaVida/porFirmarEdit.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>atras</from-outcome>
 			<to-view-id>/hojaVida/porFirmarList.xhtml</to-view-id>
-			<redirect/>
-		</navigation-case>			
+			<redirect />
+		</navigation-case>
 	</navigation-rule>
 
 </faces-config>
