@@ -147,6 +147,7 @@ public class EquipoHospitalarioBean {
 
             tx.begin();
             for (Object object : obj) {
+                object=entityManager.merge(object);
                 entityManager.remove(object);
             }
             tx.commit();

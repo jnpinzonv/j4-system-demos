@@ -96,7 +96,7 @@ public class EquipoController implements Serializable {
      */
     @Inject
     private EquipoHospitalarioBean equipoHospitalarioBean;
-    
+
     @Inject
     private MantenimientoEquipoBean mantenimientoEquipoBean;
 
@@ -147,20 +147,18 @@ public class EquipoController implements Serializable {
     private List<String> tecnologiaList;
 
     private List<String> decretoList;
-    
+
     private List<MantenimientoEquipo> mantenimientoEquipo;
-    
+
     /**
      * Atributo encargado de cargar los parametros del reporte
      */
-    private Map<String,String> reporteList;
-    
-    
+    private Map<String, String> reporteList;
 
     private String accion;
 
     private String razonSocial = "";
-    
+
     private String nombreFoto;
     /**
      * 
@@ -178,7 +176,6 @@ public class EquipoController implements Serializable {
     private List<Empresa> listaEmpresa;
 
     private List<SinInformacion> listaSinInformacion;
-   
 
     /**
      * Inicializa el bakend bean de control
@@ -201,11 +198,11 @@ public class EquipoController implements Serializable {
      */
     private void inicializarVariables() {
         newObject = new EquipoHospitalario();
-        nombreFoto="";
-        razonSocial="";
+        nombreFoto = "";
+        razonSocial = "";
         ubicacionList = new TreeMap<String, String>();
         tecnologiaList = new ArrayList<String>();
-		decretoList = new ArrayList<String>();
+        decretoList = new ArrayList<String>();
         reporteList = new TreeMap<String, String>();
         for (ParametrosGenerales element : parametrosBean.getAllCategoria(CategoriasParametros.UBICACION)) {
             ubicacionList.put(element.getPropiedad(), element.getPropiedad());
@@ -213,12 +210,12 @@ public class EquipoController implements Serializable {
         for (ParametrosGenerales elemen : parametrosBean.getAllCategoria(CategoriasParametros.TECNOLOGIA)) {
             tecnologiaList.add(elemen.getPropiedad());
         }
-        
+
         for (ParametrosGenerales elemen : parametrosBean.getAllCategoria(CategoriasParametros.DECRETO_4725)) {
             decretoList.add(elemen.getPropiedad());
         }
         for (ParametrosGenerales elemen : parametrosBean.getAllCategoria(CategoriasParametros.REPORTES)) {
-            reporteList.put(elemen.getValorClave(), elemen.getPropiedad()); 
+            reporteList.put(elemen.getValorClave(), elemen.getPropiedad());
         }
 
         StringBuilder var = new StringBuilder("");
@@ -276,13 +273,13 @@ public class EquipoController implements Serializable {
             listaEquipos = equipoHospitalarioBean.getAll();
         }
     }
-    
+
     /**
      * @param event
      */
     public void cargarFotoEquipo(FileUploadEvent event) {
         newObject.setFotoEquipo(event.getFile().getContents());
-        nombreFoto=event.getFile().getFileName();
+        nombreFoto = event.getFile().getFileName();
         addMessage(FacesMessage.SEVERITY_INFO, event.getFile().getFileName() + " Fue cargado.");
     }
 
@@ -290,7 +287,7 @@ public class EquipoController implements Serializable {
      * 
      */
     public void agregarComentario() {
-        
+
         if (newObjectCo.getNombreEquipo() != null) {
             newObject.setNombreEquipo(newObjectCo.getNombreEquipo());
             newObjectCo.setNombreEquipo(null);
@@ -421,7 +418,7 @@ public class EquipoController implements Serializable {
         if (manualesEquipoCo.getTecnicoUbicacion() != null) {
             manualesEquipo.setTecnicoUbicacion(manualesEquipoCo.getTecnicoUbicacion());
         }
-        
+
         if (manualesEquipoCo.getUsuarioUbicacion() != null) {
             manualesEquipo.setUsuarioUbicacion(manualesEquipoCo.getUsuarioUbicacion());
         }
@@ -482,7 +479,7 @@ public class EquipoController implements Serializable {
             if (element.getTipoMantenimiento().equals(TipoMantenimiento.PREVENTIVO)) {
                 tipoManteEquipoPre = element;
                 // Propio es TRUE
-                if (tipoManteEquipoPre.getTipoContrato()==Boolean.TRUE) {
+                if (tipoManteEquipoPre.getTipoContrato() == Boolean.TRUE) {
                     tipoManteEquipoPre.setValor("Propio");
                 } else {
                     tipoManteEquipoPre.setValor("Contratado");
@@ -491,15 +488,15 @@ public class EquipoController implements Serializable {
             } else {
                 tipoManteEquipoCorr = element;
                 // Propio es TRUE
-                if (tipoManteEquipoCorr.getTipoContrato()==Boolean.TRUE) {
+                if (tipoManteEquipoCorr.getTipoContrato() == Boolean.TRUE) {
                     tipoManteEquipoCorr.setValor("Propio");
                 } else {
                     tipoManteEquipoCorr.setValor("Contratado");
                 }
             }
         }
-        
-        listaEmpresa=new ArrayList<Empresa>();
+
+        listaEmpresa = new ArrayList<Empresa>();
         listaEmpresa.add(newObject.getEmpresa());
     }
 
@@ -509,12 +506,12 @@ public class EquipoController implements Serializable {
 
     public String cancelar() {
         inicializarVariables();
-        selectEquipos=null;
+        selectEquipos = null;
         return ConstantesUtil.ATRAS;
     }
 
     public String reiniciar() {
-        newObject= new EquipoHospitalario();
+        newObject = new EquipoHospitalario();
         busqueda();
         return ConstantesUtil.ATRAS;
     }
@@ -535,16 +532,16 @@ public class EquipoController implements Serializable {
     public String actualizar() {
         try {
             equipoHospitalarioBean.update(recomendacionesEquipo, manualesEquipo, adquisicionEquipo, estadoEquipo, infoTecnica,
-                    funcionamientoEquipo, planosEquipo);           
+                    funcionamientoEquipo, planosEquipo);
             newObject.setEmpresa(listaEmpresa.get(0));
-            equipoHospitalarioBean.update(newObject);            
+            equipoHospitalarioBean.update(newObject);
             tipoManteEquipoCorr.setTipoMantenimiento(TipoMantenimiento.CORRECTIVO);
             // Propio es TRUE
             if (tipoManteEquipoCorr.getValor().equals("Propio")) {
                 tipoManteEquipoCorr.setTipoContrato(Boolean.TRUE);
             } else {
                 tipoManteEquipoCorr.setTipoContrato(Boolean.FALSE);
-            }           
+            }
             tipoManteEquipoPre.setTipoMantenimiento(TipoMantenimiento.PREVENTIVO);
             // Propio es TRUE
             if (tipoManteEquipoPre.getValor().equals("Propio")) {
@@ -557,8 +554,8 @@ public class EquipoController implements Serializable {
             editMode = Boolean.FALSE;
             inicializarVariables();
             busqueda();
-            selectEquipos=null;
-            razonSocial="";
+            selectEquipos = null;
+            razonSocial = "";
             addMessage(FacesMessage.SEVERITY_INFO, "Se actualizo la información del equipo");
         } catch (Exception e) {
             String errorMessage = getRootErrorMessage(e);
@@ -579,7 +576,7 @@ public class EquipoController implements Serializable {
 
         try {
             for (EquipoHospitalario element : selectEquipos) {
-                
+
                 newObject = equipoHospitalarioBean.getAllRelations(element.getId());
                 adquisicionEquipo = newObject.getAdquisicionEquipo();
                 infoTecnica = newObject.getInfoTecnica();
@@ -590,8 +587,9 @@ public class EquipoController implements Serializable {
                 recomendacionesEquipo = newObject.getRecomendacionesEquipo();
                 for (TipoManteEquipo element2 : newObject.getManteEquipo()) {
                     equipoHospitalarioBean.delete(element2);
-                 }
-                equipoHospitalarioBean.delete(newObject,adquisicionEquipo, infoTecnica ,estadoEquipo,funcionamientoEquipo,planosEquipo,manualesEquipo, recomendacionesEquipo);
+                }
+                equipoHospitalarioBean.delete(newObject, adquisicionEquipo, infoTecnica, estadoEquipo, funcionamientoEquipo, planosEquipo,
+                        manualesEquipo, recomendacionesEquipo);
             }
 
             if (selectEquipos.size() > 1) {
@@ -599,6 +597,7 @@ public class EquipoController implements Serializable {
             } else {
                 addMessage(FacesMessage.SEVERITY_INFO, "El Equipo Hospitalario a sido eliminado");
             }
+            inicializarVariables();
             busqueda();
             selectEquipos = null;
 
@@ -620,51 +619,61 @@ public class EquipoController implements Serializable {
      */
     public String crear() {
         try {
+            if (newObject.getEmpresa() == null) {
+                addMessage(FacesMessage.SEVERITY_ERROR, "Debe Seleccionar un Cliente");
+                return "";
+            }
+            if (newObject.getFotoEquipo() == null) {
+                addMessage(FacesMessage.SEVERITY_ERROR, "Debe Seleccionar una Foto para el equipo");
+                return "";
+            } else {
+
+                equipoHospitalarioBean.save(recomendacionesEquipo, manualesEquipo, adquisicionEquipo, estadoEquipo, infoTecnica,
+                        funcionamientoEquipo, planosEquipo, newObject);
+                newObject.setRecomendacionesEquipo(recomendacionesEquipo);
+                newObject.setManualesEquipo(manualesEquipo);
+                newObject.setAdquisicionEquipo(adquisicionEquipo);
+                newObject.setEstadoEquipo(estadoEquipo);
+                newObject.setInfoTecnica(infoTecnica);
+                newObject.setFuncionamientoEquipo(funcionamientoEquipo);
+                newObject.setPlanosEquipo(planosEquipo);
+                newObject.setEmpresa(listaEmpresa.get(0));
+                equipoHospitalarioBean.update(newObject);
+
+                tipoManteEquipoCorr.setEquipoHospitalario(newObject);
+                tipoManteEquipoCorr.setTipoMantenimiento(TipoMantenimiento.CORRECTIVO);
+                // Propio es TRUE
+                if (tipoManteEquipoCorr.getValor().equals("Propio")) {
+                    tipoManteEquipoCorr.setTipoContrato(Boolean.TRUE);
+                } else {
+                    tipoManteEquipoCorr.setTipoContrato(Boolean.FALSE);
+                }
+
+                tipoManteEquipoPre.setEquipoHospitalario(newObject);
+                tipoManteEquipoPre.setTipoMantenimiento(TipoMantenimiento.PREVENTIVO);
+                // Propio es TRUE
+                if (tipoManteEquipoPre.getValor().equals("Propio")) {
+                    tipoManteEquipoPre.setTipoContrato(Boolean.TRUE);
+                } else {
+                    tipoManteEquipoPre.setTipoContrato(Boolean.FALSE);
+                }
+
+                equipoHospitalarioBean.save(tipoManteEquipoCorr, tipoManteEquipoPre);
+
+                facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Exito!",
+                        "Se guardo un registro de una Equipo hospitalario"));
+                inicializarVariables();
+                busqueda();
+                razonSocial = "";
+            }
+                return ConstantesUtil.ATRAS;
            
-            equipoHospitalarioBean.save(recomendacionesEquipo, manualesEquipo, adquisicionEquipo, estadoEquipo, infoTecnica,
-                    funcionamientoEquipo, planosEquipo,newObject);
-            newObject.setRecomendacionesEquipo(recomendacionesEquipo);
-            newObject.setManualesEquipo(manualesEquipo);
-            newObject.setAdquisicionEquipo(adquisicionEquipo);
-            newObject.setEstadoEquipo(estadoEquipo);
-            newObject.setInfoTecnica(infoTecnica);
-            newObject.setFuncionamientoEquipo(funcionamientoEquipo);
-            newObject.setPlanosEquipo(planosEquipo);
-            newObject.setEmpresa(listaEmpresa.get(0));
-            equipoHospitalarioBean.update(newObject);
-
-            tipoManteEquipoCorr.setEquipoHospitalario(newObject);
-            tipoManteEquipoCorr.setTipoMantenimiento(TipoMantenimiento.CORRECTIVO);
-            // Propio es TRUE
-            if (tipoManteEquipoCorr.getValor().equals("Propio")) {
-                tipoManteEquipoCorr.setTipoContrato(Boolean.TRUE);
-            } else {
-                tipoManteEquipoCorr.setTipoContrato(Boolean.FALSE);
-            }
-
-            tipoManteEquipoPre.setEquipoHospitalario(newObject);
-            tipoManteEquipoPre.setTipoMantenimiento(TipoMantenimiento.PREVENTIVO);
-            // Propio es TRUE
-            if (tipoManteEquipoPre.getValor().equals("Propio")) {
-                tipoManteEquipoPre.setTipoContrato(Boolean.TRUE);
-            } else {
-                tipoManteEquipoPre.setTipoContrato(Boolean.FALSE);
-            }
-
-            equipoHospitalarioBean.save(tipoManteEquipoCorr, tipoManteEquipoPre);
-
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Exito!",
-                    "Se guardo un registro de una Equipo hospitalario"));
-            inicializarVariables();
-            busqueda();
-            razonSocial="";
-            return ConstantesUtil.ATRAS;
         } catch (Exception e) {
             String errorMessage = getRootErrorMessage(e);
             addMessage(FacesMessage.SEVERITY_ERROR, errorMessage);
             return "";
         }
-       
+
     }
 
     /**
@@ -710,160 +719,147 @@ public class EquipoController implements Serializable {
      */
     public void generarJasperPrint() {
         try {
-        	cargarInformacion();
-        	HashMap<String,Object> parametros = new HashMap<String,Object>();
-        	//pie de pagina
-        	parametros.put("direccion_empresa", reporteList.get(ReporteConstants.DIRECCION));
-        	parametros.put("telefonos_empresa", reporteList.get(ReporteConstants.TELEFONOS));
-        	parametros.put("email_empresa", reporteList.get(ReporteConstants.EMAIL));
-        	parametros.put("web_empresa", reporteList.get(ReporteConstants.WEB));
-        	
-        	//Datos Generales
-        	parametros.put("nombre_equipo",newObject.getNombreEquipo());
-        	parametros.put("marca_equipo",newObject.getMarca());
-			parametros.put("modelo_equipo",newObject.getModelo());
-			parametros.put("inventario_equipo",newObject.getNumInventario());
-			parametros.put("ubicacion_equipo",newObject.getUbicacion());
-			parametros.put("fabricante_equipo",newObject.getFabricante());
-			parametros.put("representante_equipo",newObject.getRepresentanteCol());
-			parametros.put("direccion",newObject.getDireccion());
-			parametros.put("telefono",newObject.getTelefono());
-			
-			//Informacion Tecnica
-			parametros.put("voltaje", infoTecnica.getVoltaje()+ " V.");
-			parametros.put("potencia",infoTecnica.getPotencia() + " Kw.");
-			parametros.put("capacidad_teorica",infoTecnica.getCapacidadTeorica());
-			parametros.put("capacidad_practica",infoTecnica.getCapacidadPractica());
-			parametros.put("instalaciones",infoTecnica.getInstalaciones());
-			parametros.put("frecuencia",infoTecnica.getFrecuencia() + " Hz");
-			parametros.put("tecnologia",infoTecnica.getTecnologia());
-			parametros.put("insumos",infoTecnica.getInsumos());
-			
-			// Propiedad, adquisicion y garantia
-			parametros.put("fecha_adquisicion",adquisicionEquipo.getFechaAdquisicion());
-			parametros.put("fecha_instalacion",adquisicionEquipo.getFechaInstalacion());
-			parametros.put("anios_operacion",adquisicionEquipo.getAniosOperacion());
-			parametros.put("propiedad",adquisicionEquipo.getPropiedadEquipo());
-			parametros.put("anios_fuera_servicio",adquisicionEquipo.getAniosFueraServicio());
-			parametros.put("razon",adquisicionEquipo.getRazon());
-			parametros.put("garantia",adquisicionEquipo.getGarantia());
-			parametros.put("periodo_garantia",adquisicionEquipo.getPeridoGarantia());
-			parametros.put("cubrimiento_garantia",adquisicionEquipo.getCubrimientoGarantia());
-			parametros.put("clasificacion_decreto",adquisicionEquipo.getClasificacionDecreto());
-			parametros.put("calibracion",adquisicionEquipo.getCalibracionTipo());
-			
-			//Planos
-			parametros.put("si_instalacion",planosEquipo.getInstalacionConfirmar()!=null && planosEquipo.getInstalacionConfirmar()?"SI":"NO");
-			parametros.put("si_partes",planosEquipo.getPartesConfirmar()!=null && planosEquipo.getPartesConfirmar()?"SI":"NO");
-			parametros.put("si_funcionamiento",planosEquipo.getFuncionamientoConfirmar()!=null && planosEquipo.getFuncionamientoConfirmar()?"SI":"NO");
-			parametros.put("instalacion_ubicacion",planosEquipo.getInstalacionUbicacion());
-			parametros.put("partes_ubicacion",planosEquipo.getPartesUbicacion());
-			parametros.put("funcionamiento_ubicacion",planosEquipo.getFuncionamientoUbicacion());
-			
-			//Manuales
-			parametros.put("si_tecnico",manualesEquipo.getTecnicoConfirmar()!=null && manualesEquipo.getTecnicoConfirmar()?"SI":"NO");
-			parametros.put("si_servicio",manualesEquipo.getServicioConfirmar()!=null && manualesEquipo.getServicioConfirmar()?"SI":"NO");
-			parametros.put("si_usuario",manualesEquipo.getUsuarioConfirmar()!=null && manualesEquipo.getUsuarioConfirmar()?"SI":"NO");
-			parametros.put("tecnico_ubicacion",manualesEquipo.getTecnicoUbicacion());
-			parametros.put("servicio_ubicacion",manualesEquipo.getServicioUbicacion());
-			parametros.put("usuario_ubicacion",manualesEquipo.getUsuarioUbicacion());
-			
-			//Recomendaciones
-			parametros.put("recomendaciones",recomendacionesEquipo.getDetalle());
-			
-			//Estado
-			parametros.put("estado",estadoEquipo.getEstadoConfirmar());
-			parametros.put("causas_estado",estadoEquipo.getCausa());
-			
-			//Funcionamiento
-			parametros.put("estado_funcionamiento",funcionamientoEquipo.getFuncionamientoConfirmar());
-			parametros.put("fuera_servicio",funcionamientoEquipo.getFueraServicio()!=null && funcionamientoEquipo.getFueraServicio()?"SI":"NO");
-			parametros.put("anios_fuera_servicios",funcionamientoEquipo.getAnioFueraServicio());
-			parametros.put("causas_funcionamiento",funcionamientoEquipo.getCausa());
-			
-			//Tipo Mantenimiento
-			if (tipoManteEquipoPre.getTipoContrato()!=null && tipoManteEquipoPre.getTipoContrato()) {
-				parametros.put("preventivo_propio","X");
-			}else{
-				parametros.put("preventivo_contratado","X");
-			}
-			if (tipoManteEquipoCorr.getTipoContrato()!=null && tipoManteEquipoCorr.getTipoContrato()) {
-				parametros.put("correctivo_propio","X");
-			}else{
-				parametros.put("correctivo_contratado","X");
-			}
-			parametros.put("preventivo_cual",tipoManteEquipoPre.getCual());
-			parametros.put("correctivo_cual",tipoManteEquipoCorr.getCual());
-			
-			//Imagen
-			if (newObject.getFotoEquipo()!=null && newObject.getFotoEquipo().length > 0) {
-				InputStream in = new ByteArrayInputStream(newObject.getFotoEquipo());
-				parametros.put("imagen", new BufferedInputStream(in));
-			}
-			
-			//Lista de mantenimiento
-			ReporteDTO reportee = new ReporteDTO();
-			List<ReporteDTO> listaReporte = new ArrayList<ReporteDTO>();
-			List<RegistroActividadesDTO> listaRegistro = new ArrayList<RegistroActividadesDTO>();
-			if (mantenimientoEquipo != null && !mantenimientoEquipo.isEmpty()) {				
-				for (MantenimientoEquipo mantenimiento : mantenimientoEquipo) {
-					RegistroActividadesDTO registroActividadesDTO = new RegistroActividadesDTO();
-					registroActividadesDTO.setDanio(mantenimiento
-							.getDanioFalla());
-					registroActividadesDTO.setFecha(FechaUtils
-							.formatearfechaSinHora(mantenimiento.getFecha()));
-					if (mantenimiento.getFirmaAprobacion() != null
-							&& mantenimiento.getFirmaAprobacion().length > 0) {
-						InputStream in = new ByteArrayInputStream(
-								mantenimiento.getFirmaAprobacion());
-						registroActividadesDTO
-								.setFirmaAprobacion(new BufferedInputStream(in));
-					}
-					if (mantenimiento.getFirmaAprobacionContrato() != null
-							&& mantenimiento.getFirmaAprobacionContrato().length > 0) {
-						InputStream in = new ByteArrayInputStream(
-								mantenimiento.getFirmaAprobacionContrato());
-						registroActividadesDTO
-								.setFirmaContratista(new BufferedInputStream(in));
-					}
-					if (mantenimiento.getFirmaAprobacionTecnico() != null
-							&& mantenimiento.getFirmaAprobacionTecnico().length > 0) {
-						InputStream in = new ByteArrayInputStream(
-								mantenimiento.getFirmaAprobacionTecnico());
-						registroActividadesDTO
-								.setFirmaIngeniero(new BufferedInputStream(in));
-					}
-					registroActividadesDTO
-							.setNroTransaccion(ConvertidorUtils
-									.convertirACadenas(mantenimiento
-											.getIdTransaccion()));
-					registroActividadesDTO.setObservaciones(mantenimiento
-							.getObservaciones());
-					registroActividadesDTO.setReparacion(mantenimiento
-							.getReparaciones());
-					registroActividadesDTO.setRepuesto(mantenimiento
-							.getRepuestos());
-					listaRegistro.add(registroActividadesDTO);
-				}
-			}        	
-        	reportee.setListaRegistro(listaRegistro);
-        	listaReporte.add(reportee);
-        	
-        	JasperPrint jasperPrint = JasperFillManager.fillReport(obtenerPlantilla(),
-					parametros, new JRBeanCollectionDataSource(listaReporte));
-        	
-			String nombreReporte = FechaUtils
-							.formatearfechaConHoraGuion(Calendar.getInstance()
-									.getTime())
-							+ "_" + newObject.getNombreEquipo();
-			
-			enviarPDF(jasperPrint, nombreReporte);
+            cargarInformacion();
+            HashMap<String, Object> parametros = new HashMap<String, Object>();
+            // pie de pagina
+            parametros.put("direccion_empresa", reporteList.get(ReporteConstants.DIRECCION));
+            parametros.put("telefonos_empresa", reporteList.get(ReporteConstants.TELEFONOS));
+            parametros.put("email_empresa", reporteList.get(ReporteConstants.EMAIL));
+            parametros.put("web_empresa", reporteList.get(ReporteConstants.WEB));
+
+            // Datos Generales
+            parametros.put("nombre_equipo", newObject.getNombreEquipo());
+            parametros.put("marca_equipo", newObject.getMarca());
+            parametros.put("modelo_equipo", newObject.getModelo());
+            parametros.put("inventario_equipo", newObject.getNumInventario());
+            parametros.put("ubicacion_equipo", newObject.getUbicacion());
+            parametros.put("fabricante_equipo", newObject.getFabricante());
+            parametros.put("representante_equipo", newObject.getRepresentanteCol());
+            parametros.put("direccion", newObject.getDireccion());
+            parametros.put("telefono", newObject.getTelefono());
+
+            // Informacion Tecnica
+            parametros.put("voltaje", infoTecnica.getVoltaje() + " V.");
+            parametros.put("potencia", infoTecnica.getPotencia() + " Kw.");
+            parametros.put("capacidad_teorica", infoTecnica.getCapacidadTeorica());
+            parametros.put("capacidad_practica", infoTecnica.getCapacidadPractica());
+            parametros.put("instalaciones", infoTecnica.getInstalaciones());
+            parametros.put("frecuencia", infoTecnica.getFrecuencia() + " Hz");
+            parametros.put("tecnologia", infoTecnica.getTecnologia());
+            parametros.put("insumos", infoTecnica.getInsumos());
+
+            // Propiedad, adquisicion y garantia
+            parametros.put("fecha_adquisicion", adquisicionEquipo.getFechaAdquisicion());
+            parametros.put("fecha_instalacion", adquisicionEquipo.getFechaInstalacion());
+            parametros.put("anios_operacion", adquisicionEquipo.getAniosOperacion());
+            parametros.put("propiedad", adquisicionEquipo.getPropiedadEquipo());
+            parametros.put("anios_fuera_servicio", adquisicionEquipo.getAniosFueraServicio());
+            parametros.put("razon", adquisicionEquipo.getRazon());
+            parametros.put("garantia", adquisicionEquipo.getGarantia());
+            parametros.put("periodo_garantia", adquisicionEquipo.getPeridoGarantia());
+            parametros.put("cubrimiento_garantia", adquisicionEquipo.getCubrimientoGarantia());
+            parametros.put("clasificacion_decreto", adquisicionEquipo.getClasificacionDecreto());
+            parametros.put("calibracion", adquisicionEquipo.getCalibracionTipo());
+
+            // Planos
+            parametros.put("si_instalacion",
+                    planosEquipo.getInstalacionConfirmar() != null && planosEquipo.getInstalacionConfirmar() ? "SI" : "NO");
+            parametros.put("si_partes", planosEquipo.getPartesConfirmar() != null && planosEquipo.getPartesConfirmar() ? "SI" : "NO");
+            parametros.put("si_funcionamiento",
+                    planosEquipo.getFuncionamientoConfirmar() != null && planosEquipo.getFuncionamientoConfirmar() ? "SI" : "NO");
+            parametros.put("instalacion_ubicacion", planosEquipo.getInstalacionUbicacion());
+            parametros.put("partes_ubicacion", planosEquipo.getPartesUbicacion());
+            parametros.put("funcionamiento_ubicacion", planosEquipo.getFuncionamientoUbicacion());
+
+            // Manuales
+            parametros
+                    .put("si_tecnico", manualesEquipo.getTecnicoConfirmar() != null && manualesEquipo.getTecnicoConfirmar() ? "SI" : "NO");
+            parametros.put("si_servicio", manualesEquipo.getServicioConfirmar() != null && manualesEquipo.getServicioConfirmar() ? "SI"
+                    : "NO");
+            parametros
+                    .put("si_usuario", manualesEquipo.getUsuarioConfirmar() != null && manualesEquipo.getUsuarioConfirmar() ? "SI" : "NO");
+            parametros.put("tecnico_ubicacion", manualesEquipo.getTecnicoUbicacion());
+            parametros.put("servicio_ubicacion", manualesEquipo.getServicioUbicacion());
+            parametros.put("usuario_ubicacion", manualesEquipo.getUsuarioUbicacion());
+
+            // Recomendaciones
+            parametros.put("recomendaciones", recomendacionesEquipo.getDetalle());
+
+            // Estado
+            parametros.put("estado", estadoEquipo.getEstadoConfirmar());
+            parametros.put("causas_estado", estadoEquipo.getCausa());
+
+            // Funcionamiento
+            parametros.put("estado_funcionamiento", funcionamientoEquipo.getFuncionamientoConfirmar());
+            parametros.put("fuera_servicio",
+                    funcionamientoEquipo.getFueraServicio() != null && funcionamientoEquipo.getFueraServicio() ? "SI" : "NO");
+            parametros.put("anios_fuera_servicios", funcionamientoEquipo.getAnioFueraServicio());
+            parametros.put("causas_funcionamiento", funcionamientoEquipo.getCausa());
+
+            // Tipo Mantenimiento
+            if (tipoManteEquipoPre.getTipoContrato() != null && tipoManteEquipoPre.getTipoContrato()) {
+                parametros.put("preventivo_propio", "X");
+            } else {
+                parametros.put("preventivo_contratado", "X");
+            }
+            if (tipoManteEquipoCorr.getTipoContrato() != null && tipoManteEquipoCorr.getTipoContrato()) {
+                parametros.put("correctivo_propio", "X");
+            } else {
+                parametros.put("correctivo_contratado", "X");
+            }
+            parametros.put("preventivo_cual", tipoManteEquipoPre.getCual());
+            parametros.put("correctivo_cual", tipoManteEquipoCorr.getCual());
+
+            // Imagen
+            if (newObject.getFotoEquipo() != null && newObject.getFotoEquipo().length > 0) {
+                InputStream in = new ByteArrayInputStream(newObject.getFotoEquipo());
+                parametros.put("imagen", new BufferedInputStream(in));
+            }
+
+            // Lista de mantenimiento
+            ReporteDTO reportee = new ReporteDTO();
+            List<ReporteDTO> listaReporte = new ArrayList<ReporteDTO>();
+            List<RegistroActividadesDTO> listaRegistro = new ArrayList<RegistroActividadesDTO>();
+            if (mantenimientoEquipo != null && !mantenimientoEquipo.isEmpty()) {
+                for (MantenimientoEquipo mantenimiento : mantenimientoEquipo) {
+                    RegistroActividadesDTO registroActividadesDTO = new RegistroActividadesDTO();
+                    registroActividadesDTO.setDanio(mantenimiento.getDanioFalla());
+                    registroActividadesDTO.setFecha(FechaUtils.formatearfechaSinHora(mantenimiento.getFecha()));
+                    if (mantenimiento.getFirmaAprobacion() != null && mantenimiento.getFirmaAprobacion().length > 0) {
+                        InputStream in = new ByteArrayInputStream(mantenimiento.getFirmaAprobacion());
+                        registroActividadesDTO.setFirmaAprobacion(new BufferedInputStream(in));
+                    }
+                    if (mantenimiento.getFirmaAprobacionContrato() != null && mantenimiento.getFirmaAprobacionContrato().length > 0) {
+                        InputStream in = new ByteArrayInputStream(mantenimiento.getFirmaAprobacionContrato());
+                        registroActividadesDTO.setFirmaContratista(new BufferedInputStream(in));
+                    }
+                    if (mantenimiento.getFirmaAprobacionTecnico() != null && mantenimiento.getFirmaAprobacionTecnico().length > 0) {
+                        InputStream in = new ByteArrayInputStream(mantenimiento.getFirmaAprobacionTecnico());
+                        registroActividadesDTO.setFirmaIngeniero(new BufferedInputStream(in));
+                    }
+                    registroActividadesDTO.setNroTransaccion(ConvertidorUtils.convertirACadenas(mantenimiento.getIdTransaccion()));
+                    registroActividadesDTO.setObservaciones(mantenimiento.getObservaciones());
+                    registroActividadesDTO.setReparacion(mantenimiento.getReparaciones());
+                    registroActividadesDTO.setRepuesto(mantenimiento.getRepuestos());
+                    listaRegistro.add(registroActividadesDTO);
+                }
+            }
+            reportee.setListaRegistro(listaRegistro);
+            listaReporte.add(reportee);
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(obtenerPlantilla(), parametros, new JRBeanCollectionDataSource(
+                    listaReporte));
+
+            String nombreReporte = FechaUtils.formatearfechaConHoraGuion(Calendar.getInstance().getTime()) + "_"
+                    + newObject.getNombreEquipo();
+
+            enviarPDF(jasperPrint, nombreReporte);
             addMessage(FacesMessage.SEVERITY_INFO, "Se genero el informe");
         } catch (Exception e) {
             addMessage(FacesMessage.SEVERITY_ERROR, "Error al generar el informe");
         }
     }
-    
+
     /**
      * Retorna la plantilla del reporte en un objeto <code>InputStream</code>.
      * 
@@ -888,22 +884,16 @@ public class EquipoController implements Serializable {
      *             Se genera cuando se presenta un error al exportar el reporte como archivo xls.
      */
     private void enviarPDF(JasperPrint jasperPrint, String nombreReporte) throws Exception {
-		String fileName = ConvertidorUtils
-				.convertirEspaciosAUnderscore(reporteList
-						.get(ReporteConstants.RUTA)
-						+ newObject.getEmpresa().getRazonSocial()
-						+ "//"
-						+ newObject.getUbicacion()
-						+ "//");
-		boolean archvoCreado = false;
-		File archivo = new File(fileName);
-		if (!archivo.exists()) {
-			archvoCreado = archivo.mkdirs();
-		}
-		if (archvoCreado || archivo.exists()) {
-			JasperExportManager.exportReportToPdfFile(jasperPrint, fileName
-					+ nombreReporte + ".pdf");
-		}		
+        String fileName = ConvertidorUtils.convertirEspaciosAUnderscore(reporteList.get(ReporteConstants.RUTA)
+                + newObject.getEmpresa().getRazonSocial() + "//" + newObject.getUbicacion() + "//");
+        boolean archvoCreado = false;
+        File archivo = new File(fileName);
+        if (!archivo.exists()) {
+            archvoCreado = archivo.mkdirs();
+        }
+        if (archvoCreado || archivo.exists()) {
+            JasperExportManager.exportReportToPdfFile(jasperPrint, fileName + nombreReporte + ".pdf");
+        }
     }
 
     /**
@@ -1494,6 +1484,7 @@ public class EquipoController implements Serializable {
 
     /**
      * Devuelve el valor de decretoList
+     * 
      * @return El valor de decretoList
      */
     public List<String> getDecretoList() {
@@ -1502,7 +1493,9 @@ public class EquipoController implements Serializable {
 
     /**
      * Establece el valor de decretoList
-     * @param decretoList El valor por establecer para decretoList
+     * 
+     * @param decretoList
+     *            El valor por establecer para decretoList
      */
     public void setDecretoList(List<String> decretoList) {
         this.decretoList = decretoList;
@@ -1510,16 +1503,19 @@ public class EquipoController implements Serializable {
 
     /**
      * Devuelve el valor de listaSinInformacion
+     * 
      * @return El valor de listaSinInformacion
      */
     public List<SinInformacion> getListaSinInformacion() {
-        listaSinInformacion=Arrays.asList(SinInformacion.values());
+        listaSinInformacion = Arrays.asList(SinInformacion.values());
         return listaSinInformacion;
     }
 
     /**
      * Establece el valor de listaSinInformacion
-     * @param listaSinInformacion El valor por establecer para listaSinInformacion
+     * 
+     * @param listaSinInformacion
+     *            El valor por establecer para listaSinInformacion
      */
     public void setListaSinInformacion(List<SinInformacion> listaSinInformacion) {
         this.listaSinInformacion = listaSinInformacion;
@@ -1527,6 +1523,7 @@ public class EquipoController implements Serializable {
 
     /**
      * Devuelve el valor de nombreFoto
+     * 
      * @return El valor de nombreFoto
      */
     public String getNombreFoto() {
@@ -1535,26 +1532,30 @@ public class EquipoController implements Serializable {
 
     /**
      * Establece el valor de nombreFoto
-     * @param nombreFoto El valor por establecer para nombreFoto
+     * 
+     * @param nombreFoto
+     *            El valor por establecer para nombreFoto
      */
     public void setNombreFoto(String nombreFoto) {
         this.nombreFoto = nombreFoto;
     }
 
-    
-	/**
-	 * Metodo encargado de obtener el valor de la variable reporteList
-	 * @return el valor de la variable reporteList 
-	 */
-	public Map<String, String> getReporteList() {
-		return reporteList;
-	}
+    /**
+     * Metodo encargado de obtener el valor de la variable reporteList
+     * 
+     * @return el valor de la variable reporteList
+     */
+    public Map<String, String> getReporteList() {
+        return reporteList;
+    }
 
-	/**
-	 * Metodo encargado de asignar el valor de parametro reporteList a la variable reporteList 
-	 * @param reporteList valor a asignar a la variable almidon
-	 */
-	public void setReporteList(Map<String, String> reporteList) {
-		this.reporteList = reporteList;
-	}	
+    /**
+     * Metodo encargado de asignar el valor de parametro reporteList a la variable reporteList
+     * 
+     * @param reporteList
+     *            valor a asignar a la variable almidon
+     */
+    public void setReporteList(Map<String, String> reporteList) {
+        this.reporteList = reporteList;
+    }
 }
