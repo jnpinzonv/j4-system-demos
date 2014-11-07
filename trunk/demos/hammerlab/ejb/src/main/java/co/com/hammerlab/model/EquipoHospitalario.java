@@ -123,7 +123,7 @@ public class EquipoHospitalario implements Serializable {
     @Size(max=255, min=0)
     private String telefono;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Empresa empresa;
 
     /**

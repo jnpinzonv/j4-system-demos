@@ -57,6 +57,9 @@ public class EmpresaController implements Serializable {
 	 * Variable de control de conversacion
 	 */
 	private boolean bandera = Boolean.FALSE;
+	
+	@Inject
+	private EquipoController equipo;
 
 	/**
 	 * Devuelve el valor de newUsuario
@@ -103,6 +106,8 @@ public class EmpresaController implements Serializable {
 	 */
 	public String empresaSeleccionada() {
 		empresaSelect = selectEmpresas.get(0);
+		equipo.getNewObject().setEmpresa(empresaSelect);
+		equipo.getListaEmpresa().add(empresaSelect);
 		return ConstantesUtil.REFER;
 	}
 
