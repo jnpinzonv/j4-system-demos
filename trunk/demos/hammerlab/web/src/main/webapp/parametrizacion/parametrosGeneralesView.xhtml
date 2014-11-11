@@ -1,0 +1,43 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/default.xhtml">
+	<ui:define name="titulo">
+		<h:outputText value="Parametros Generales"></h:outputText>
+	</ui:define>
+	<ui:define name="content">
+		<h:form id="formParametrosViews">
+			<p:panel id="panParametro" styleClass="widthGeneral">
+				<f:facet name="header">
+					<h:outputLabel value="Detalle del Parametro General" />
+				</f:facet>
+				<h:panelGrid id="idForm" columns="4" styleClass="widthGeneral"
+					columnClasses="col4,col4,col4,col4">
+					<p:outputLabel for="outCategoria" value="Categoria:" />
+					<p:outputLabel id="outCategoria"
+						value="#{parametrosController.parametrosGenerales.categoria}" />
+					<p:outputLabel for="outPropiedad" value="Propiedad:" />
+					<p:outputLabel id="outPropiedad"
+						value="#{parametrosController.parametrosGenerales.propiedad}" />
+					<p:outputLabel for="outValorClave" value="Valor Clave:" />
+					<p:outputLabel id="outValorClave"
+						value="#{parametrosController.parametrosGenerales.valorClave}"></p:outputLabel>
+					<p:outputLabel for="outDescripcion" value="Descripcion:" />
+					<p:outputLabel id="outDescripcion"
+						value="#{parametrosController.parametrosGenerales.descripcion}"></p:outputLabel>
+				</h:panelGrid>
+				<p:panel id="groupButton" styleClass="panelBotonHI"
+					style="border: transparent;">
+					<p:commandButton id="cancel" styleClass="pButtonEnabled"
+						value="Cancelar" action="#{parametrosController.cancelar}"
+						immediate="true" />
+				</p:panel>
+			</p:panel>
+		</h:form>
+	</ui:define>
+</ui:composition>

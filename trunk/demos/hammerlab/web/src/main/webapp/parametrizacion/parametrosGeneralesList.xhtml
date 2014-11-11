@@ -1,0 +1,146 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j"
+	template="/WEB-INF/templates/default.xhtml">
+	<ui:define name="titulo">
+		<h:outputText value="Par\u00E1metros Generales"></h:outputText>
+	</ui:define>
+	<ui:define name="metadata">
+		<f:metadata>
+			<f:event type="preRenderView" listener="#{parametrosController.init}" />
+		</f:metadata>
+	</ui:define>
+	<ui:define name="content">
+		<h:form id="formParamGenerales">
+			<p:panel id="panelBusqueda" toggleable="true">
+				<f:facet name="header">
+					<h:outputLabel value="Búsqueda" />
+				</f:facet>
+				<h:panelGrid columns="4" styleClass="widthGeneral"
+					columnClasses="col4,col4,col4,col4">
+					<p:outputLabel for="menuCategoria" value="Categoria" />
+					<p:selectOneMenu id="menuCategoria"
+						value="#{parametrosController.parametrosGenerales.categoria}">
+						<f:selectItem itemLabel="Seleccione" itemValue="" />
+						<f:selectItems value="#{parametrosController.categoriaList}" />
+					</p:selectOneMenu>
+					<p:outputLabel for="inpPropiedad" value="Propiedad" />
+					<p:inputText id="inpPropiedad"
+						value="#{parametrosController.parametrosGenerales.propiedad}" />
+					<p:outputLabel for="inpValorClave" value="Valor Clave" />
+					<p:inputText id="inpValorClave"
+						value="#{parametrosController.parametrosGenerales.valorClave}" />
+					<p:outputLabel for="inpDescripcion" value="Descripcion" />
+					<p:inputText id="inpDescripcion"
+						value="#{parametrosController.parametrosGenerales.descripcion}" />
+				</h:panelGrid>
+				<p:panel id="panBotones" styleClass="panelBotonHI"
+					style="border: transparent;">
+					<p:commandButton id="search" value="Buscar"
+						action="#{parametrosController.busqueda()}"
+						update=":formParamGenerales" />
+					<p:commandButton id="reset" value="Reiniciar"
+						action="#{parametrosController.reiniciar()}" immediate="true"
+						update=":formParamGenerales" />
+				</p:panel>
+			</p:panel>
+			<p:spacer height="10" />
+			<p:panel id="panelParameros" styleClass="widthGeneral">
+				<f:facet name="header">
+					<h:outputLabel value="Lista de Parametros Generales" />
+				</f:facet>
+				<h:outputLabel
+					rendered="#{empty parametrosController.listaParametrosGenerales}"
+					value="No existen Parametros Generales" />
+				<p:panel id="groupButtonTop" styleClass="panelBotonHI"
+					style="border: transparent;">
+					<p:commandButton id="createButtonTop"
+						action="#{parametrosController.initCrearModo}" value="Crear"
+						immediate="true" />
+					<p:commandButton id="editButtonTop"
+						action="#{parametrosController.initEditarModo}" value="Editar"
+						immediate="true"
+						disabled="#{parametrosController.selectParametrosGenerales.size()!= 1}" />
+					<p:commandButton id="viewButtonTop"
+						action="#{parametrosController.initVistaModo}" value="Ver"
+						immediate="true"
+						disabled="#{parametrosController.selectParametrosGenerales.size() != 1}" />
+					<p:commandButton id="borrarTop" value="Borrar" immediate="true"
+						ajax="true"
+						update=":formParamGenerales:message,:formParamGenerales"
+						ignoreAutoUpdate="true" async="true"
+						action="#{parametrosController.eliminar}"
+						disabled="#{empty parametrosController.selectParametrosGenerales}">
+						<p:confirm header="Confirmation"
+							message="¿Desea Eliminar los registros seleccionados?"
+							icon="ui-icon-alert" />
+					</p:commandButton>
+				</p:panel>
+				<p:dataTable var="val"
+					value="#{parametrosController.listaParametrosGenerales}"
+					id="listaParametros" paginator="true" paginatorPosition="bottom"
+					rowKey="#{val.id}" styleClass="widthGeneral" rows="15"
+					selection="#{parametrosController.selectParametrosGenerales}"
+					rendered="#{not empty parametrosController.listaParametrosGenerales}">
+					<p:column id="c1" headerText="categoria">
+						<h:outputText value="#{val.categoria}" />
+					</p:column>
+					<p:column id="c2" headerText="propiedad">
+						<h:outputText value="#{val.propiedad}" />
+					</p:column>
+					<p:column id="c3" headerText="valor clave">
+						<h:outputText value="#{val.valorClave}" />
+					</p:column>
+					<p:column id="c4" headerText="descripcion">
+						<h:outputText value="#{val.descripcion}" />
+					</p:column>
+					<p:column selectionMode="multiple"
+						style="width:16px;text-align:center" />
+					<p:ajax event="rowSelectCheckbox" immediate="true"
+						update=":formParamGenerales:panelParameros,:formParamGenerales:groupButtonBottom" />
+					<p:ajax event="rowUnselectCheckbox" immediate="true"
+						update=":formParamGenerales:panelParameros,:formParamGenerales:groupButtonBottom" />
+				</p:dataTable>
+			</p:panel>
+			<p:panel id="groupButtonBottom" styleClass="panelBotonHI"
+				style="border: transparent;"
+				rendered="#{parametrosController.listaParametrosGenerales.size() > 10}">
+				<p:commandButton id="createButtonBottom"
+					action="#{parametrosController.initCrearModo}"
+					styleClass="pButtonEnabled" value="Crear" />
+				<p:commandButton id="editButtonBottom"
+					action="#{parametrosController.initEditarModo}" immediate="true"
+					value="Editar"
+					disabled="#{parametrosController.selectParametrosGenerales.size() != 1}" />
+				<p:commandButton id="viewButtonBottom"
+					action="#{parametrosController.initVistaModo}" immediate="true"
+					value="Ver"
+					disabled="#{parametrosController.selectParametrosGenerales.size()!= 1}" />
+				<p:commandButton id="deleteButtonBottom" value="Borrar"
+					immediate="true" ajax="true"
+					update=":formParamGenerales:message,:formParamGenerales"
+					ignoreAutoUpdate="true" async="true"
+					action="#{parametrosController.eliminar}"
+					disabled="#{empty parametrosController.selectParametrosGenerales.size()}">
+					<p:confirm header="Confirmación"
+						message="¿Desea Eliminar los registros seleccionados?"
+						icon="ui-icon-alert" />
+				</p:commandButton>
+			</p:panel>
+			<p:growl id="message" showDetail="true" />
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+				<p:commandButton value="Aceptar" type="button"
+					styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+				<p:commandButton value="Cancelar" type="button"
+					styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+			</p:confirmDialog>
+		</h:form>
+	</ui:define>
+</ui:composition>
