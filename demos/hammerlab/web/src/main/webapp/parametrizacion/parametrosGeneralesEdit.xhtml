@@ -1,0 +1,81 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j"
+	template="/WEB-INF/templates/default.xhtml">
+	<ui:define name="titulo">
+		<h:outputLabel value="Actualiza Parametro General"
+			rendered="#{parametrosController.editMode}" />
+		<h:outputLabel value="Crear Cliente"
+			rendered="#{not parametrosController.editMode}" />
+	</ui:define>
+	<ui:define name="content">
+		<h:form id="formEditParametro">
+			<p:panel id="panParametrolEdit" styleClass="widthGeneral">
+				<f:facet name="header">
+					<h:outputLabel value="Actualizar Cliente"
+						rendered="#{empresaController.editMode}" />
+					<h:outputLabel value="Crear Cliente"
+						rendered="#{not empresaController.editMode}" />
+				</f:facet>
+				<h:panelGrid id="idForm" columns="4" styleClass="widthGeneral"
+					columnClasses="col4,col4,col4,col4">
+					<p:outputLabel for="categoria" value="Categoria:" />
+					<h:panelGrid>
+						<p:selectOneMenu id="categoria" required="true"
+							value="#{parametrosController.parametrosGenerales.categoria}">
+							<f:selectItem itemLabel="Seleccione" itemValue="" />
+							<f:selectItems value="#{parametrosController.categoriaList}" />
+						</p:selectOneMenu>
+						<p:message for="categoria" />
+					</h:panelGrid>
+					<p:outputLabel for="propiedad" value="Propiedad:" />
+					<h:panelGrid>
+						<p:inputText id="propiedad"
+							value="#{parametrosController.parametrosGenerales.propiedad}"
+							required="true" maxlength="255" />
+						<p:message for="propiedad" />
+					</h:panelGrid>
+
+					<p:outputLabel for="valorClave" value="Valor Clave:" />
+					<h:panelGrid>
+						<p:inputText id="valorClave"
+							value="#{parametrosController.parametrosGenerales.valorClave}"
+							required="true" maxlength="255" />
+						<p:message for="valorClave" />
+					</h:panelGrid>
+
+					<p:outputLabel for="descripcion" value="Descripcion:" />
+					<h:panelGrid>
+						<p:inputText id="descripcion"
+							value="#{parametrosController.parametrosGenerales.descripcion}"
+							required="true" maxlength="255" />
+						<p:message for="descripcion" />
+					</h:panelGrid>
+
+				</h:panelGrid>
+
+				<p:panel id="groupButton" styleClass="panelBotonHI"
+					style="border: transparent;">
+					<p:commandButton id="create" styleClass="" value="Guardar"
+						action="#{parametrosController.crear}"
+						rendered="#{!parametrosController.editMode}" update="@form" />
+
+					<p:commandButton id="update" styleClass="" type="complex"
+						value="Actualizar" action="#{parametrosController.actualizar}"
+						rendered="#{parametrosController.editMode}" update="@form" />
+
+					<p:commandButton id="cancel" styleClass="" value="Cancelar"
+						action="#{parametrosController.cancelar}" immediate="true" />
+				</p:panel>
+
+			</p:panel>
+		</h:form>
+	</ui:define>
+</ui:composition>
