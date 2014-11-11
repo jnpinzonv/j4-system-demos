@@ -188,5 +188,37 @@
 			<redirect />
 		</navigation-case>
 	</navigation-rule>
+	
+	<navigation-rule>
+	    <from-view-id>/parametrizacion/parametrosGeneralesList.xhtml</from-view-id>
+	    <navigation-case>
+	        <from-outcome>ver</from-outcome>
+	        <to-view-id>/parametrizacion/parametrosGeneralesView.xhtml</to-view-id>
+	        <redirect/>
+	    </navigation-case>
+	    <navigation-case>
+	        <from-outcome>crear_actu</from-outcome>
+	        <to-view-id>/parametrizacion/parametrosGeneralesEdit.xhtml</to-view-id>
+	        <redirect/>
+	    </navigation-case>	    
+	</navigation-rule>
+	
+	<navigation-rule>
+	    <from-view-id>/parametrizacion/parametrosGeneralesView.xhtml</from-view-id>
+	    <navigation-case>
+	        <from-outcome>atras</from-outcome>
+	        <to-view-id>/parametrizacion/parametrosGeneralesList.xhtml</to-view-id>
+	        <redirect/>
+	    </navigation-case>	    
+	</navigation-rule>
+	
+	<navigation-rule>
+	    <from-view-id>/parametrizacion/parametrosGeneralesEdit.xhtml</from-view-id>
+	    <navigation-case>
+	        <from-outcome>atras</from-outcome>
+	        <to-view-id>/parametrizacion/parametrosGeneralesList.xhtml</to-view-id>
+	        <redirect/>
+	    </navigation-case>	    
+	</navigation-rule>
 
 </faces-config>
