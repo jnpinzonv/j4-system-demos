@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Biomedico_subreport2" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="8098f9e1-bd19-42f0-acf9-737d78f8b0d7">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="41"/>
 	<field name="fecha" class="java.lang.String"/>
 	<field name="reparacion" class="java.lang.String"/>
 	<field name="danio" class="java.lang.String"/>
@@ -18,21 +18,21 @@
 	<detail>
 		<band height="311" splitType="Stretch">
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="20" y="102" width="526" height="30" isPrintWhenDetailOverflows="true" uuid="965869b6-5575-4065-bd8b-95507b42d749"/>
+				<reportElement x="23" y="102" width="520" height="30" isPrintWhenDetailOverflows="true" uuid="965869b6-5575-4065-bd8b-95507b42d749"/>
 				<textElement>
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{reparacion} != null ? $F{reparacion} : "No Aplica"]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="20" y="55" width="526" height="30" isPrintWhenDetailOverflows="true" uuid="c651ff07-595a-45c1-a8fe-a5c77be3afb2"/>
+				<reportElement x="23" y="55" width="520" height="30" isPrintWhenDetailOverflows="true" uuid="c651ff07-595a-45c1-a8fe-a5c77be3afb2"/>
 				<textElement>
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{danio} != null ? $F{danio} : "No Aplica"]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="20" y="149" width="526" height="30" isPrintWhenDetailOverflows="true" uuid="a028bc0c-cd88-45c3-916b-357cef2db5b0"/>
+				<reportElement x="23" y="149" width="520" height="30" isPrintWhenDetailOverflows="true" uuid="a028bc0c-cd88-45c3-916b-357cef2db5b0"/>
 				<textElement>
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
@@ -53,7 +53,7 @@
 				<text><![CDATA[Daños, fallas o averías]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="20" y="85" width="195" height="17" backcolor="#FFFFFF" uuid="285aba10-35e7-4234-9b91-5654d9c6b2ee"/>
+				<reportElement mode="Transparent" x="20" y="85" width="221" height="17" backcolor="#FFFFFF" uuid="285aba10-35e7-4234-9b91-5654d9c6b2ee"/>
 				<textElement verticalAlignment="Top">
 					<font fontName="Times New Roman" size="14" isBold="true"/>
 				</textElement>
@@ -88,7 +88,7 @@
 				<text><![CDATA[Observaciones]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="20" y="196" width="526" height="30" isPrintWhenDetailOverflows="true" uuid="faf2ba89-b931-42a9-8c41-4482facbf589"/>
+				<reportElement x="23" y="196" width="520" height="30" isPrintWhenDetailOverflows="true" uuid="faf2ba89-b931-42a9-8c41-4482facbf589"/>
 				<textElement>
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
