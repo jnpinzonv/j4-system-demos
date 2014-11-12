@@ -10,9 +10,9 @@
 
 	<ui:define name="titulo">
 		<h:outputText rendered="#{mantenimientoController.editMode}"
-			value="Actualizar Equipo" />
+			value="Actualizar Mantenimiento" />
 		<h:outputText rendered="#{not mantenimientoController.editMode}"
-			value="Crear Equipo" />
+			value="Crear Mantenimiento" />
 	</ui:define>
 	<ui:define name="content">
 
@@ -20,9 +20,9 @@
 			<p:panel id="empresaPanelEdit" styleClass="widthGeneral">
 				<f:facet name="header">
 					<h:outputText rendered="#{mantenimientoController.editMode}"
-						value="Actualizar Equipo" />
+						value="Actualizar Mantenimiento" />
 					<h:outputText rendered="#{not mantenimientoController.editMode}"
-						value="Crear Equipo" />
+						value="Crear Mantenimiento" />
 				</f:facet>
 
 				<h:panelGrid columns="4" styleClass="widthGeneral"
@@ -38,7 +38,7 @@
 					<p:spacer />
 					<p:spacer />
 
-					<p:outputLabel for="danioFalla" value="Daño, Falla o Averias:" />
+					<p:outputLabel for="danioFalla" value="Daño, Falla o Avería:" />
 					<h:panelGrid>
 						<p:inputTextarea rows="6" cols="33" id="danioFalla"
 							value="#{mantenimientoController.newObject.danioFalla }"
@@ -70,7 +70,7 @@
 					</h:panelGrid>
 
 					<p:outputLabel for="hojaFisica"
-						value="Número de hoja de las firmas:" />
+						value="Número de la hoja de las firmas:" />
 					<p:inputText rows="6" cols="33" id="hojaFisica"
 						value="#{mantenimientoController.newObject.numeroHojaFisica }" />
 
@@ -78,21 +78,21 @@
 				</h:panelGrid>
 				<h:panelGrid columns="2" styleClass="widthGeneral"
 					columnClasses="col2,col2">
-					<p:outputLabel value="Firma Aprobación de Institución:" />
+					<p:outputLabel value="Firma de Aprobación de la Institución:" />
 					<p:fileUpload
 						fileUploadListener="#{mantenimientoController.firmaAprobacionFuncionario}"
 						mode="advanced" dragDropSupport="true" sizeLimit="100000"
 						allowTypes="/(\.|\/)(gif|jpe?g|png|jpg)$/"  />
 
 				
-					<p:outputLabel value="Firma Aprobación Ingeniero \ Tecnico:" />
+					<p:outputLabel value="Firma de Aprobación del Ingeniero \ Técnico:" />
 					<p:fileUpload
 						fileUploadListener="#{mantenimientoController.firmaAprobacionTecnico}"
 						mode="advanced" dragDropSupport="true" sizeLimit="100000"
 						allowTypes="/(\.|\/)(gif|jpe?g|png|jpg)$/" />
 					
 					
-					<p:outputLabel value="Firma Aprobación Contratista:" />
+					<p:outputLabel value="Firma de Aprobación del Contratista:" />
 					<p:fileUpload
 						fileUploadListener="#{mantenimientoController.firmaAprobacionContrato}"
 						mode="advanced" dragDropSupport="true" sizeLimit="100000"

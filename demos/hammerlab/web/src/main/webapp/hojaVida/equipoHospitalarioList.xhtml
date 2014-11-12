@@ -27,7 +27,7 @@
 					<h:outputLabel value="Busqueda" />
 				</f:facet>
 				<h:panelGrid columns="4" styleClass="widthGeneral" columnClasses="col4,col4,col4,col4">
-					<p:outputLabel for="razonSocial" value="Razón Social Cliente:" />
+					<p:outputLabel for="razonSocial" value="Razón Social del Cliente:" />
 					<p:inputText id="razonSocial" required="true"
 						value="#{equipoController.razonSocial}" />
 
@@ -107,35 +107,35 @@
 					rowKey="#{_object.id}" styleClass="widthGeneral" rows="15"
 					selection="#{equipoController.selectEquipos}">
 
-					<p:column id="c1" headerText="id">
+					<p:column id="c1" headerText="Id">
 						<h:outputText value="#{_object.id}" />
 					</p:column>					
 
-					<p:column id="c3" headerText="marca">
+					<p:column id="c3" headerText="Marca">
 						<h:outputText value=" #{_object.marca}" />
 					</p:column>
 
-					<p:column id="c4" headerText="modelo">
+					<p:column id="c4" headerText="Modelo">
 						<h:outputText value="#{_object.modelo}" />
 					</p:column>
 
-					<p:column id="c5" headerText="ubicacion">
+					<p:column id="c5" headerText="Ubicación">
 						<h:outputText value=" #{_object.ubicacion}" />
 					</p:column>
 
-					<p:column id="c6" headerText="fabricante">
+					<p:column id="c6" headerText="Fabricante">
 						<h:outputText value=" #{_object.fabricante}" />
 					</p:column>
 
-					<p:column id="c7" headerText="representanteCol">
+					<p:column id="c7" headerText="Representante en Colombia">
 						<h:outputText value="#{_object.representanteCol}" />
 					</p:column>
 
-					<p:column id="c8" headerText="direccion">
+					<p:column id="c8" headerText="Dirección">
 						<h:outputText value=" #{_object.direccion}" />
 					</p:column>
 
-					<p:column id="c9" headerText="telefono">
+					<p:column id="c9" headerText="Teléfono">
 						<h:outputText value=" #{_object.telefono}" />
 					</p:column>
 
