@@ -495,7 +495,9 @@ public class EquipoController implements Serializable {
                 }
             }
         }
-
+        if(newObject.getFotoEquipo()!=null){
+            nombreFoto="Ya existe un archivo cargado";
+        }
         listaEmpresa = new ArrayList<Empresa>();
         listaEmpresa.add(newObject.getEmpresa());
     }
@@ -637,7 +639,7 @@ public class EquipoController implements Serializable {
                 newObject.setInfoTecnica(infoTecnica);
                 newObject.setFuncionamientoEquipo(funcionamientoEquipo);
                 newObject.setPlanosEquipo(planosEquipo);
-                newObject.setEmpresa(listaEmpresa.get(0));
+                //newObject.setEmpresa(listaEmpresa.get(0));
                 equipoHospitalarioBean.update(newObject);
 
                 tipoManteEquipoCorr.setEquipoHospitalario(newObject);
@@ -1241,6 +1243,9 @@ public class EquipoController implements Serializable {
      * @return El valor de listaEmpresa
      */
     public List<Empresa> getListaEmpresa() {
+        if(listaEmpresa.size()==0){
+            listaEmpresa.add(newObject.getEmpresa());
+        }
         return listaEmpresa;
     }
 

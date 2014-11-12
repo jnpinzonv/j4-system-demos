@@ -36,7 +36,7 @@
 				<p:panel id="groupButtonTop" styleClass="panelBotonHI"
 					style="border: transparent;">
 					<p:commandButton id="createTop" value="Guardar"
-						action="#{equipoController.crear}"  update="@form"
+						action="#{equipoController.crear}" update="@form"
 						rendered="#{!equipoController.editMode}" />
 
 					<p:commandButton id="updateTop" value="Guardar"
@@ -60,18 +60,17 @@
 						<p:outputLabel value="Foto del Equipo:" />
 						<h:panelGrid>
 							<p:inputText id="nombreFoto" style="width: 210px;"
-								value="#{equipoController.nombreFoto}"
-								required="true" />
+								value="#{equipoController.nombreFoto}" required="true" />
 							<p:message for="nombreFoto" />
 						</h:panelGrid>
 						<p:outputPanel>
 							<p:fileUpload id="fotoequipo"
 								fileUploadListener="#{equipoController.cargarFotoEquipo}"
 								mode="advanced" dragDropSupport="true" sizeLimit="100000"
-								allowTypes="/(\.|\/)(gif|jpe?g|png|jpg)$/" update="nombreFoto"/>
-								<p:message for="fotoequipo" />
+								allowTypes="/(\.|\/)(gif|jpe?g|png|jpg)$/" update="nombreFoto" />
+							<p:message for="fotoequipo" />
 						</p:outputPanel>
-						
+
 
 						<p:outputLabel for="nombreEquipo" value="Nombre del Equipo:" />
 
@@ -125,11 +124,12 @@
 							<p:ajax event="change"
 								listener="#{equipoController.agregarComentario}" update="modelo" />
 						</p:selectOneMenu>
-						
-						<p:outputLabel for="numInventario" value="Numero Inventario:" />
+
+						<p:outputLabel for="numInventario" value="Número Inventario:" />
 						<h:panelGrid>
 							<p:inputText id="numInventario" style="width: 210px;"
-								value="#{equipoController.newObject.numInventario}" required="true" />
+								value="#{equipoController.newObject.numInventario}"
+								required="true" />
 							<p:message for="numInventario" />
 						</h:panelGrid>
 						<p:selectOneMenu id="console278"
@@ -174,7 +174,7 @@
 						</p:selectOneMenu>
 
 						<p:outputLabel for="representanteCol"
-							value="Representante Colombia:" />
+							value="Representante en Colombia:" />
 						<h:panelGrid>
 							<p:inputText id="representanteCol" style="width: 210px;"
 								value="#{equipoController.newObject.representanteCol }"
@@ -211,7 +211,7 @@
 								update="direccion" />
 						</p:selectOneMenu>
 
-						<p:outputLabel for="telefono" value="Telefono:" />
+						<p:outputLabel for="telefono" value="Teléfono:" />
 						<h:panelGrid>
 							<p:inputText id="telefono" style="width: 210px;"
 								value="#{equipoController.newObject.telefono }" required="true" />
@@ -334,7 +334,7 @@
 								update="capacidadTeorica" />
 						</p:selectOneMenu>
 
-						<p:outputLabel for="capacidadPractica" value="Capacidad Practica:" />
+						<p:outputLabel for="capacidadPractica" value="Capacidad Práctica:" />
 						<h:panelGrid>
 							<p:inputText id="capacidadPractica" style="width: 210px;"
 								value="#{equipoController.infoTecnica.capacidadPractica }"
@@ -527,7 +527,7 @@
 								update="garantia" />
 						</p:selectOneMenu>
 
-						<p:outputLabel for="peridoGarantia" value="Perido Garantía:" />
+						<p:outputLabel for="peridoGarantia" value="Periodo Garantía:" />
 						<h:panelGrid>
 							<p:inputText id="peridoGarantia" style="width: 210px;"
 								value="#{equipoController.adquisicionEquipo.peridoGarantia }"
@@ -547,7 +547,7 @@
 						</p:selectOneMenu>
 
 						<p:outputLabel for="cubrimientoGarantia"
-							value="Cubrimiento Garantía:" />
+							value="Cubrimiento de Garantía:" />
 						<h:panelGrid>
 							<p:inputTextarea rows="6" cols="33" id="cubrimientoGarantia"
 								value="#{equipoController.adquisicionEquipo.cubrimientoGarantia }"
@@ -579,7 +579,7 @@
 						</h:panelGrid>
 						<h:outputText value="" />
 
-						<p:outputLabel for="calibracionTipo" value="Calibración Tipo:" />
+						<p:outputLabel for="calibracionTipo" value="Tipo de Calibración:" />
 						<h:panelGrid>
 							<p:inputText id="calibracionTipo" style="width: 210px;"
 								value="#{equipoController.adquisicionEquipo.calibracionTipo }"
@@ -599,7 +599,7 @@
 						</p:selectOneMenu>
 
 						<p:outputLabel for="calibracionPeriocidad"
-							value="Calibración Periocidad:" />
+							value="Periocidad de Calibración:" />
 						<h:panelGrid>
 							<p:inputText id="calibracionPeriocidad" style="width: 210px;"
 								value="#{equipoController.adquisicionEquipo.calibracionPeriocidad }"
@@ -639,7 +639,7 @@
 						<h:outputText value="" />
 
 						<p:outputLabel for="instalacion_ubicacion"
-							value="Ubicación Intalación:" />
+							value="Ubicación de la Instalación:" />
 						<h:panelGrid>
 							<p:inputText id="instalacion_ubicacion" style="width: 210px;"
 								value="#{equipoController.planosEquipo.instalacionUbicacion }"
@@ -670,7 +670,8 @@
 
 
 
-						<p:outputLabel for="partes_ubicacion" value="Ubicación Partes:" />
+						<p:outputLabel for="partes_ubicacion"
+							value="Ubicación de las Partes:" />
 						<h:panelGrid>
 							<p:inputText id="partes_ubicacion" style="width: 210px;"
 								value="#{equipoController.planosEquipo.partesUbicacion }"
@@ -703,7 +704,7 @@
 
 
 						<p:outputLabel for="funcionamiento_ubicacion"
-							value="Ubicación Funcionamiento:" />
+							value="Ubicación del Funcionamiento:" />
 						<h:panelGrid>
 							<p:inputText id="funcionamiento_ubicacion" style="width: 210px;"
 								value="#{equipoController.planosEquipo.funcionamientoUbicacion }"
@@ -747,7 +748,8 @@
 
 
 
-						<p:outputLabel for="tecnico_ubicacion" value="Ubicacion Técnico:" />
+						<p:outputLabel for="tecnico_ubicacion"
+							value="Ubicacion del manual Técnico:" />
 						<h:panelGrid>
 							<p:inputText id="tecnico_ubicacion" style="width: 210px;"
 								value="#{equipoController.manualesEquipo.tecnicoUbicacion }"
@@ -780,7 +782,7 @@
 
 
 						<p:outputLabel for="servicio_ubicacion"
-							value="Ubicación Servicio:" />
+							value="Ubicación del manual de Servicio:" />
 						<h:panelGrid>
 							<p:inputText id="servicio_ubicacion" style="width: 210px;"
 								value="#{equipoController.manualesEquipo.servicioUbicacion }"
@@ -814,7 +816,8 @@
 
 
 
-						<p:outputLabel for="usuario_ubicacion" value="Ubicación Usuario:" />
+						<p:outputLabel for="usuario_ubicacion"
+							value="Ubicación del manual de Usuario:" />
 						<h:panelGrid>
 							<p:inputText id="usuario_ubicacion" style="width: 210px;"
 								value="#{equipoController.manualesEquipo.usuarioUbicacion }"
@@ -964,7 +967,7 @@
 								listener="#{equipoController.agregarComentario}" update="causa" />
 						</p:selectOneMenu>
 
-						<p:outputLabel for="fueraServicio" value="Fuera Servicio:" />
+						<p:outputLabel for="fueraServicio" value="Fuera de Servicio:" />
 						<h:panelGrid>
 							<p:selectBooleanButton id="fueraServicio"
 								value="#{equipoController.funcionamientoEquipo.fueraServicio }"
@@ -1058,39 +1061,44 @@
 						<h:outputText value="Empresa" />
 					</f:facet>
 
-					<h:outputLabel rendered="#{empty equipoController.listaEmpresa}"
+					<h:outputLabel
+						rendered="#{empty equipoController.newObject.empresa}"
 						value="No existen Empresas" />
 
-					<p:dataTable var="_object" value="#{equipoController.listaEmpresa}"
-						rendered="#{not empty equipoController.listaEmpresa}"
-						id="empresaList" paginator="true" paginatorPosition="bottom"
-						rowKey="#{_object.id}" styleClass="widthGeneral"
-						selection="#{empresaController.selectEmpresas}">
+					<h:panelGrid id="idForm" columns="4" styleClass="widthGeneral"
+						columnClasses="col4,col4,col4,col4" rendered="#{!(empty equipoController.newObject.empresa)}" >
 
-						<p:column id="c1" headerText="Razón Social">
-							<h:outputText value="#{_object.razonSocial}" />
-						</p:column>
+						<p:outputLabel for="razonSocial1" value="Razón Social:" />
+						<p:outputLabel id="razonSocial1"
+							value="#{equipoController.newObject.empresa.razonSocial}"
+							/>
 
-						<p:column id="c2" headerText="NIT">
-							<h:outputText value=" #{_object.nit}" />
-						</p:column>
+						<p:outputLabel for="nit1" value="NIT:" />
+						<p:outputLabel id="nit1"
+							value="#{equipoController.newObject.empresa.nit }"
+							 />
 
-						<p:column id="c3" headerText="Telefono">
-							<h:outputText value="#{_object.telefono}" />
-						</p:column>
+						<p:outputLabel for="telefono1" value="Teléfono:" />
+						<p:outputLabel id="telefono1"
+							value="#{equipoController.newObject.empresa.telefono }"
+							 />
 
-						<p:column id="c4" headerText="Dirección">
-							<h:outputText value="#{_object.direccion}" />
-						</p:column>
+						<p:outputLabel for="direccion1" value="Dirección:" />
+						<p:outputLabel id="direccion1"
+							value="#{equipoController.newObject.empresa.direccion }"
+							 />
 
-						<p:column id="c5" headerText="Correo Electronico">
-							<h:outputText value="#{_object.correoElectronico}" />
-						</p:column>
+						<p:outputLabel for="correoElectronico1" value="Correo Electrónico:" />
+						<p:outputLabel id="correoElectronico1"
+							value="#{equipoController.newObject.empresa.correoElectronico}"
+							 />
 
-						<p:column id="c6" headerText="Sitio Web">
-							<h:outputText value="#{_object.sitioWeb}" />
-						</p:column>
-					</p:dataTable>
+						<p:outputLabel for="sitioWeb1" value="Sitio Web:" />
+						<p:outputLabel id="sitioWeb1"
+							value="#{equipoController.newObject.empresa.sitioWeb }"
+							 />
+
+					</h:panelGrid>
 
 					<p:panel id="empreTabButton" styleClass="panelBotonHI"
 						style="border: transparent;">

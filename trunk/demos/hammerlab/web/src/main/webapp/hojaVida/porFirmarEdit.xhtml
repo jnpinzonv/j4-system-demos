@@ -19,12 +19,12 @@
 			<h:panelGrid columns="2" styleClass="widthGeneral"
 				columnClasses="col2,col2">
 				<p:outputLabel for="hojaFisica"
-					value="Número de hoja de las firmas:" />
+					value="Número de la hoja de las firmas:" />
 				<p:inputText rows="6" cols="33" id="hojaFisica" required="true"
 					value="#{firmasController.newObject.numeroHojaFisica }" />
 					<p:message for="hojaFisica" />
 
-				<p:outputLabel value="Firma Aprobación de Institución:" />
+				<p:outputLabel value="Firma de Aprobación de la Institución:" />
 				<p:fileUpload required="true" id="institucion"
 					fileUploadListener="#{firmasController.firmaAprobacionFuncionario}"
 					mode="advanced" dragDropSupport="true" sizeLimit="100000"
@@ -32,14 +32,14 @@
 				<p:message for="institucion" />
 
 
-				<p:outputLabel value="Firma Aprobación Ingeniero \ Tecnico:" />
+				<p:outputLabel value="Firma de Aprobación del Ingeniero \ Técnico:" />
 				<p:fileUpload required="true" id="tecnico"
 					fileUploadListener="#{firmasController.firmaAprobacionTecnico}"
 					mode="advanced" dragDropSupport="true" sizeLimit="100000"
 					allowTypes="/(\.|\/)(gif|jpe?g|png|jpg)$/" />
 				<p:message for="tecnico" />
 
-				<p:outputLabel value="Firma Aprobación Contratista:" />
+				<p:outputLabel value="Firma de Aprobación del Contratista:" />
 				<p:fileUpload required="true" id="contrarto"
 					fileUploadListener="#{firmasController.firmaAprobacionContrato}"
 					mode="advanced" dragDropSupport="true" sizeLimit="100000"

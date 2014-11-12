@@ -9,9 +9,9 @@
 	template="/WEB-INF/templates/default.xhtml">
 	<ui:define name="titulo">
 		<h:outputText rendered="#{mantenimientoController.editMode}"
-			value="Actualizar Equipo" />
+			value="Detalle del Mantenimiento" />
 		<h:outputText rendered="#{not mantenimientoController.editMode}"
-			value="Crear Equipo" />
+			value="Detalle del Mantenimiento" />
 	</ui:define>	
 
 	<ui:define name="content">
@@ -20,9 +20,9 @@
 			<p:panel id="empresaPanelEdit" styleClass="widthGeneral">
 				<f:facet name="header">
 					<h:outputText rendered="#{mantenimientoController.editMode}"
-						value="Actualizar Equipo" />
+						value="Detalle del Mantenimiento" />
 					<h:outputText rendered="#{not mantenimientoController.editMode}"
-						value="Crear Equipo" />
+						value="Detalle del Mantenimiento" />
 				</f:facet>
 
 				<h:panelGrid columns="4" styleClass="widthGeneral"
@@ -34,7 +34,7 @@
 					<p:spacer />
 					<p:spacer />
 
-					<p:outputLabel for="danioFalla" value="Daño, Falla o Averias:" />
+					<p:outputLabel for="danioFalla" value="Daño, Falla o Avería:" />
 					<p:outputLabel rows="6" cols="33" id="danioFalla"
 						value="#{mantenimientoController.newObject.danioFalla }"
 						 />
@@ -55,25 +55,25 @@
 						value="#{mantenimientoController.newObject.observaciones }"
 						 />
 					<p:outputLabel for="hojaFisica"
-						value="Número de hoja de las firmas:" />
+						value="Número de la hoja de las firmas:" />
 					<p:outputLabel rows="6" cols="33" id="hojaFisica"
 						value="#{mantenimientoController.newObject.numeroHojaFisica }" />
 				</h:panelGrid>
 				<h:panelGrid columns="2" styleClass="widthGeneral"
 					columnClasses="col2,col2">
-					<p:outputLabel value="Firma Aprobación de Institución:" />
+					<p:outputLabel value="Firma de Aprobación de la Institución:" />
 					<p:graphicImage id="idImagen" value="#{cargarImagenes.funcionario}"
 						width="200" height="171">
 						<f:param name="id" value="#{mantenimientoController.newObject.id}" />
 					</p:graphicImage>
 
-					<p:outputLabel value="Firma Aprobación Ingeniero/Tecnico:" />
+					<p:outputLabel value="Firma de Aprobación del Ingeniero/Técnico:" />
 					<p:graphicImage value="#{cargarImagenes.tecnico}" width="200"
 						height="171">
 						<f:param name="id" value="#{mantenimientoController.newObject.id}" />
 					</p:graphicImage>
 					
-					<p:outputLabel value="Firma Aprobación Contratista:" />
+					<p:outputLabel value="Firma de Aprobación del Contratista:" />
 					<p:graphicImage value="#{cargarImagenes.contratista}" width="200" height="171">
 						<f:param name="id" value="#{mantenimientoController.newObject.id}" />
 					</p:graphicImage>

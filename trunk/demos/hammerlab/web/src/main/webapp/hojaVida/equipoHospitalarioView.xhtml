@@ -9,7 +9,7 @@
 	template="/WEB-INF/templates/default.xhtml">
 
 	<ui:define name="titulo">
-		<h:outputText value="Detalle de Equipo Hospitalario" />
+		<h:outputText value="Detalle del Equipo Hospitalario" />
 	</ui:define>
 
 	<ui:define name="metadata">
@@ -25,7 +25,7 @@
 		<h:form id="empresaEdit">
 			<p:panel id="empresaPanelEdit" styleClass="widthGeneral">
 				<f:facet name="header">
-					<h:outputText value="Detalle de Equipo Hospitalario" />
+					<h:outputText value="Detalle del Equipo Hospitalario" />
 				</f:facet>
 
 				<p:panel id="basicalEdit" styleClass="widthGeneral"
@@ -37,7 +37,7 @@
 					<h:panelGrid columns="4" styleClass="widthGeneral" cellpadding="0"
 						cellspacing="0" columnClasses="col4,col4,col4,col4">
 
-						<p:outputLabel value="Foto Equipo:" />
+						<p:outputLabel value="Foto del Equipo:" />
 						<p:graphicImage id="idImagen" value="#{cargarImagenes.fotoEquipo}"
 							width="200" height="171">
 							<f:param name="id" value="#{equipoController.newObject.id}" />
@@ -55,7 +55,7 @@
 						<p:outputLabel id="modelo"
 							value="#{equipoController.newObject.modelo}" />
 
-						<p:outputLabel for="numInventario" value="Numero Inventario:" />
+						<p:outputLabel for="numInventario" value="Número de Inventario:" />
 						<p:outputLabel id="numInventario"
 							value="#{equipoController.newObject.numInventario}" />
 
@@ -69,7 +69,7 @@
 							value="#{equipoController.newObject.fabricante }" />
 
 						<p:outputLabel for="representanteCol"
-							value="Representante Colombia:" />
+							value="Representante en Colombia:" />
 						<p:outputLabel id="representanteCol"
 							value="#{equipoController.newObject.representanteCol }" />
 
@@ -77,7 +77,7 @@
 						<p:outputLabel id="direccion"
 							value="#{equipoController.newObject.direccion }" />
 
-						<p:outputLabel for="telefono" value="Telefono:" />
+						<p:outputLabel for="telefono" value="Teléfono:" />
 						<p:outputLabel id="telefono"
 							value="#{equipoController.newObject.telefono }" />
 
@@ -108,7 +108,7 @@
 						<p:outputLabel for="capacidadTeorica" value="Capacidad Teórica:" />
 						<p:outputLabel id="capacidadTeorica"
 							value="#{equipoController.infoTecnica.capacidadTeorica }" />
-						<p:outputLabel for="capacidadPractica" value="Capacidad Practica:" />
+						<p:outputLabel for="capacidadPractica" value="Capacidad Práctica:" />
 						<p:outputLabel id="capacidadPractica"
 							value="#{equipoController.infoTecnica.capacidadPractica }" />
 						<p:outputLabel for="tecnologia" value="Tecnología:" />
@@ -129,14 +129,16 @@
 					<h:panelGrid columns="4" styleClass="widthGeneral" cellpadding="0"
 						cellspacing="0" columnClasses="col4,col4,col4,col4">
 
-						<p:outputLabel for="fechaAdquisicion" value="Fecha Adquisición:" />
+						<p:outputLabel for="fechaAdquisicion"
+							value="Fecha de Adquisición:" />
 						<p:outputLabel id="fechaAdquisicion"
 							value="#{equipoController.adquisicionEquipo.fechaAdquisicion}" />
 
-						<p:outputLabel for="fechaInstalacion" value="Fecha Instalación:" />
+						<p:outputLabel for="fechaInstalacion"
+							value="Fecha de Instalación:" />
 						<p:outputLabel id="fechaInstalacion"
 							value="#{equipoController.adquisicionEquipo.fechaInstalacion }" />
-						<p:outputLabel for="aniosOperacion" value="Años Operación:" />
+						<p:outputLabel for="aniosOperacion" value="Años de Operación:" />
 						<p:outputLabel id="aniosOperacion"
 							value="#{equipoController.adquisicionEquipo.aniosOperacion }" />
 
@@ -159,19 +161,19 @@
 
 
 
-						<p:outputLabel for="garantia" value="garantia:" />
+						<p:outputLabel for="garantia" value="Garantía:" />
 						<p:outputLabel id="garantia"
 							value="#{equipoController.adquisicionEquipo.garantia }" />
 
 
 
-						<p:outputLabel for="peridoGarantia" value="Perido Garantia:" />
+						<p:outputLabel for="peridoGarantia" value="Período de Garantia:" />
 						<p:outputLabel id="peridoGarantia"
 							value="#{equipoController.adquisicionEquipo.peridoGarantia }" />
 
 
 						<p:outputLabel for="cubrimientoGarantia"
-							value="Cubrimiento Garantia:" />
+							value="Cubrimiento de la Garantía:" />
 						<p:outputLabel rows="6" cols="33" id="cubrimientoGarantia"
 							value="#{equipoController.adquisicionEquipo.cubrimientoGarantia }" />
 
@@ -182,12 +184,12 @@
 							value="#{equipoController.adquisicionEquipo.clasificacionDecreto }" />
 
 
-						<p:outputLabel for="calibracionTipo" value="Calibración Tipo:" />
+						<p:outputLabel for="calibracionTipo" value="Tipo de Calibración:" />
 						<p:outputLabel id="calibracionTipo"
 							value="#{equipoController.adquisicionEquipo.calibracionTipo }" />
 
 						<p:outputLabel for="calibracionPeriocidad"
-							value="Calibración Periocidad:" />
+							value=" Periocidad de Calibración:" />
 						<p:outputLabel id="calibracionPeriocidad"
 							value="#{equipoController.adquisicionEquipo.calibracionPeriocidad }" />
 
@@ -207,7 +209,7 @@
 							value="#{equipoController.planosEquipo.instalacionConfirmar }"
 							onLabel="SI" offLabel="NO" />
 						<p:outputLabel for="instalacion_ubicacion"
-							value="Ubicación Intalación:" />
+							value="Ubicación del manual de Intalación:" />
 						<p:outputLabel id="instalacion_ubicacion"
 							value="#{equipoController.planosEquipo.instalacionUbicacion }" />
 
@@ -216,7 +218,8 @@
 							value="#{equipoController.planosEquipo.partesConfirmar }"
 							onLabel="SI" offLabel="NO" />
 
-						<p:outputLabel for="partes_ubicacion" value="Ubicación Partes:" />
+						<p:outputLabel for="partes_ubicacion"
+							value="Ubicación de las Partes:" />
 						<p:outputLabel id="partes_ubicacion"
 							value="#{equipoController.planosEquipo.partesUbicacion }" />
 
@@ -227,7 +230,7 @@
 							onLabel="SI" offLabel="NO" />
 
 						<p:outputLabel for="funcionamiento_ubicacion"
-							value="Ubicación Funcionamiento:" />
+							value="Ubicación del manual de Funcionamiento:" />
 						<p:outputLabel id="funcionamiento_ubicacion"
 							value="#{equipoController.planosEquipo.funcionamientoUbicacion }" />
 					</h:panelGrid>
@@ -248,7 +251,8 @@
 							onLabel="SI" offLabel="NO" />
 
 
-						<p:outputLabel for="tecnico_ubicacion" value="Ubicacion Técnico:" />
+						<p:outputLabel for="tecnico_ubicacion"
+							value="Ubicacion del manual Técnico:" />
 						<p:outputLabel id="tecnico_ubicacion"
 							value="#{equipoController.manualesEquipo.tecnicoUbicacion }" />
 
@@ -258,7 +262,7 @@
 							onLabel="SI" offLabel="NO" />
 
 						<p:outputLabel for="servicio_ubicacion"
-							value="Ubicación Servicio:" />
+							value="Ubicación del manual de Servicio:" />
 						<p:outputLabel id="servicio_ubicacion"
 							value="#{equipoController.manualesEquipo.servicioUbicacion }" />
 
@@ -267,7 +271,8 @@
 							value="#{equipoController.manualesEquipo.usuarioConfirmar }"
 							onLabel="SI" offLabel="NO" />
 
-						<p:outputLabel for="usuario_ubicacion" value="Ubicación Usuario:" />
+						<p:outputLabel for="usuario_ubicacion"
+							value="Ubicación del manual de Usuario:" />
 						<p:outputLabel id="usuario_ubicacion"
 							value="#{equipoController.manualesEquipo.usuarioUbicacion }" />
 
@@ -326,7 +331,7 @@
 							value="#{equipoController.funcionamientoEquipo.funcionamientoConfirmar }" />
 
 						<p:outputLabel for="aniosFueraServicio"
-							value="Años Fuera Servicio:" />
+							value="Años Fuera de Servicio:" />
 						<p:outputLabel id="aniosFueraServicio"
 							value="#{equipoController.funcionamientoEquipo.anioFueraServicio }" />
 
@@ -334,7 +339,7 @@
 						<p:outputLabel rows="6" cols="33" id="causa"
 							value="#{equipoController.funcionamientoEquipo.causa }" />
 
-						<p:outputLabel for="fueraServicio" value="Fuera Servicio:" />
+						<p:outputLabel for="fueraServicio" value="Fuera de Servicio:" />
 						<p:outputLabel id="fueraServicio"
 							value="#{equipoController.funcionamientoEquipo.fueraServicio }"
 							onLabel="SI" offLabel="NO" />
@@ -378,39 +383,40 @@
 						<h:outputText value="Empresa" />
 					</f:facet>
 
-					<h:outputLabel rendered="#{empty equipoController.listaEmpresa}"
+					<h:outputLabel
+						rendered="#{empty equipoController.newObject.empresa}"
 						value="No existen Empresas" />
 
-					<p:dataTable var="_object" value="#{equipoController.listaEmpresa}"
-						rendered="#{not empty equipoController.listaEmpresa}"
-						id="empresaList" paginator="true" paginatorPosition="bottom"
-						rowKey="#{_object.id}"
-						selection="#{empresaController.selectEmpresas}">
+					<h:panelGrid id="idForm" columns="4" styleClass="widthGeneral"
+						columnClasses="col4,col4,col4,col4"
+						rendered="#{!(empty equipoController.newObject.empresa)}">
 
-						<p:column id="c1" headerText="Razón Social">
-							<h:outputText value="#{_object.razonSocial}" />
-						</p:column>
+						<p:outputLabel for="razonSocial1" value="Razón Social:" />
+						<p:outputLabel id="razonSocial1"
+							value="#{equipoController.newObject.empresa.razonSocial}" />
 
-						<p:column id="c2" headerText="NIT">
-							<h:outputText value=" #{_object.nit}" />
-						</p:column>
+						<p:outputLabel for="nit1" value="NIT:" />
+						<p:outputLabel id="nit1"
+							value="#{equipoController.newObject.empresa.nit }" />
 
-						<p:column id="c3" headerText="Telefono">
-							<h:outputText value="#{_object.telefono}" />
-						</p:column>
+						<p:outputLabel for="telefono1" value="Teléfono:" />
+						<p:outputLabel id="telefono1"
+							value="#{equipoController.newObject.empresa.telefono }" />
 
-						<p:column id="c4" headerText="Dirección">
-							<h:outputText value="#{_object.direccion}" />
-						</p:column>
+						<p:outputLabel for="direccion1" value="Dirección:" />
+						<p:outputLabel id="direccion1"
+							value="#{equipoController.newObject.empresa.direccion }" />
 
-						<p:column id="c5" headerText="Correo Electronico">
-							<h:outputText value="#{_object.correoElectronico}" />
-						</p:column>
+						<p:outputLabel for="correoElectronico1"
+							value="Correo Electrónico:" />
+						<p:outputLabel id="correoElectronico1"
+							value="#{equipoController.newObject.empresa.correoElectronico}" />
 
-						<p:column id="c6" headerText="Sitio Web">
-							<h:outputText value="#{_object.sitioWeb}" />
-						</p:column>
-					</p:dataTable>
+						<p:outputLabel for="sitioWeb1" value="Sitio Web:" />
+						<p:outputLabel id="sitioWeb1"
+							value="#{equipoController.newObject.empresa.sitioWeb }" />
+
+					</h:panelGrid>
 
 
 				</p:panel>

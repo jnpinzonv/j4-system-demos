@@ -24,7 +24,7 @@
 		<h:form id="formManteni">
 			<p:panel id="panelEmpresas" styleClass="widthGeneral">
 				<f:facet name="header">
-					<h:outputLabel value="Busqueda" />
+					<h:outputLabel value="Búsqueda" />
 				</f:facet>
 				<h:panelGrid columns="3" styleClass="widthGeneral"
 					columnClasses="col2,col2">
@@ -111,11 +111,11 @@
 					rowKey="#{_object.id}" styleClass="widthGeneral" rows="15"
 					selection="#{mantenimientoController.selectMantenimiento}">
 
-					<p:column id="c1" headerText="id">
+					<p:column id="c1" headerText="Id">
 						<h:outputText value="#{_object.id}" />
 					</p:column>
 
-					<p:column id="c2" headerText="fecha">
+					<p:column id="c2" headerText="Fecha">
 						<h:outputText value="#{_object.fecha}" />
 					</p:column>
 
@@ -123,11 +123,11 @@
 						<h:outputText value="#{_object.estadoMantenimiento}" />
 					</p:column>
 
-					<p:column id="c4" headerText="No. Hoja Fisica">
+					<p:column id="c4" headerText="No. Hoja Física">
 						<h:outputText value="#{_object.numeroHojaFisica}" />
 					</p:column>
 
-					<p:column id="c10" headerText="N° Transaccion">
+					<p:column id="c10" headerText="N° Transacción">
 						<h:outputText value=" #{_object.idTransaccion}" />
 					</p:column>
 					<p:column selectionMode="multiple"
